@@ -1,8 +1,5 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 메인 컬러
+    - 진한 남색 : rgb(22, 26, 48)
+    - 남색 : rgb(49, 48, 77)
+    - 베이지 : rgb(240, 236, 229)
+    - 연한 회색 : rgb(245, 245, 245)
