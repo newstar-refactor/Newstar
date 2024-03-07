@@ -1,6 +1,7 @@
+// 좋아요 버튼
 const test = () => {
   pass
-  retuen(
+  return(
     pass
   );
 };
