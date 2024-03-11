@@ -1,6 +1,17 @@
 // 검색 시 나오는 뉴스 리스트
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+
+// styled-components
+const BoxContainer = styled.div`
+  display: flex;
+  align-itmes: center;
+  border: 1px solid;
+  paddind: 10px;
+`
+
 
 // title, imageUrl 변수 수정
 const SerarchNewsList = ({ title, imageUrl }) => {
@@ -13,10 +24,10 @@ const SerarchNewsList = ({ title, imageUrl }) => {
   };
 
   return (
-    <div onClick={handleClick}>
+    <BoxContainer onClick={handleClick}>
       <div>{title}</div>
       <img src={imageUrl} alt="newsimage"/>
-    </div>
+    </BoxContainer>
   );
 };
 

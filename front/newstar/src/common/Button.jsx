@@ -7,7 +7,7 @@ const NextButton = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/main")}>다음</button>
+      <button onClick={() => navigate("/")}>다음</button>
     </div>
   );
 };
