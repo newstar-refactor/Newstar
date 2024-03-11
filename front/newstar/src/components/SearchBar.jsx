@@ -1,6 +1,6 @@
 // 검색바
 
-function SearchBar() {
+export default function SearchBar() {
   return (
     <div>
       <input 
