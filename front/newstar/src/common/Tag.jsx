@@ -5,7 +5,7 @@ const TagWrapper = styled.div`
   display: inline-block;
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 1rem;
+  font-size: ${(props) => props.fontSize || "1rem"};
   line-height: 1.5;
   // border: 1px solid lightgray;
 
@@ -15,10 +15,11 @@ const TagWrapper = styled.div`
   cursor: pointer;
 `
 
-export default function Tag({ children, color, $background, onClick }) {
+export default function Tag({ children, color, $background, onClick, fontSize }) {
   return (
     <TagWrapper 
       color={color} 
+      fontSize={fontSize}
       $background={$background}
       onClick={onClick}
       >

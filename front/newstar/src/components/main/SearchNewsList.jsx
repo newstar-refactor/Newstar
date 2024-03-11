@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // title, imageUrl 변수 수정
-const SerarchNewsList = ({ title, imageUrl }) => {
+const SearchNewsList = ({ title, imageUrl }) => {
 
   const navigate = useNavigate();
 
@@ -20,4 +20,4 @@ const SerarchNewsList = ({ title, imageUrl }) => {
   );
 };
 
-export default SerarchNewsList;
+export default SearchNewsList;
