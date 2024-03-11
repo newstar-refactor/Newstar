@@ -1,7 +1,7 @@
 function app() {
   return (
     <div>
-      main page
+      Jenkins Deploy Test
     </div>
   )
 }
