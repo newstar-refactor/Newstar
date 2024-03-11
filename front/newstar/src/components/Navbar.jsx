@@ -13,13 +13,24 @@ const NavContainer = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 45px;
+  height: 50px;
   border-top: 2px solid rgb(49, 48, 77);
   overflow: hidden;
-
+  background-color: white;
   padding: 10px;
+`
 
-
+const TopNavContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  overflow: hidden;
+  background-color: rgb(49, 48, 77);
+  display: flex;
+  padding: 0px 10px 5px;
+  align-items: center;
 `
 
 const NavContent = styled.div`
@@ -31,7 +42,7 @@ const NavContent = styled.div`
   line-height: 45px;
 `
 
-export default function Navbar() {
+function BottomNavbar() {
   return (
     <NavContainer>
       <NavContent>
@@ -46,3 +57,17 @@ export default function Navbar() {
     </NavContainer>
   )
 }
+
+function TopNavbar() {
+  return (
+    <TopNavContainer>
+      <img 
+        src="/logo_white.png" 
+        alt="newstar logo"
+        width="85"
+        height="45" />
+    </TopNavContainer>
+  )
+}
+
+export { BottomNavbar, TopNavbar }
