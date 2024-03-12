@@ -1,5 +1,3 @@
-from cgitb import text
-
 from fastapi import FastAPI
 from sqlalchemy import Table, select, MetaData
 from category_crawling import do_crawling
@@ -19,7 +17,7 @@ async def startup():
 
 @app.get("/crawling")
 async def start_crawling():
-  do_crawling()
+  do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   return {"message": "complete crawling"}
 
 # Path: category_cra

@@ -88,10 +88,10 @@ def do_crawling():
             break
 
           # 랜덤한 시간 동안 대기
-          time.sleep(random.uniform(0.1, 1.5))
+          time.sleep(random.uniform(0.01, 0.15))
 
   df = pandas.DataFrame(resultList)
   df.to_csv('category_articles.csv')
   df.to_excel('category_articles.xlsx')
-
-  return {"message": "complete crawling"}
+  print("complete crawling")
+  return df
