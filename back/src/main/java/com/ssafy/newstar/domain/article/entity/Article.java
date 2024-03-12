@@ -1,9 +1,7 @@
 package com.ssafy.newstar.domain.article.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,24 +14,22 @@ import lombok.ToString;
 @ToString
 public class Article {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "article_id")
   Long id;
 
   private String title;
 
-
-  private LocalDateTime writedDate;
-
   private String url;
 
-  private String img;
+  private LocalDateTime date;
 
   private int Bcategory;
 
   private int Scategory;
 
-  private String content;
+  private String imageUrl;
 
-  private String keyword;
+  @Column( length=10000 )
+  private String content;
 }
