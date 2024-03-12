@@ -35,6 +35,7 @@ def do_crawling():
         # 6개로 이뤄진 list 들의 반복
         for ar in articles:
           title = ar.select_one("a.sa_text_title").text
+          title = title.replace("\n", "")
           articleUrl = ar.select_one("a.sa_text_title")["href"]
           print(ar);
 
@@ -87,7 +88,7 @@ def do_crawling():
             break
 
           # 랜덤한 시간 동안 대기
-          time.sleep(random.uniform(0.1, 2.0))
+          time.sleep(random.uniform(0.1, 1.5))
 
   df = pandas.DataFrame(resultList)
   df.to_csv('category_articles.csv')
