@@ -8,6 +8,8 @@ import MyPage from "./pages/MyPage"
 import ChooseKeyword from "./pages/ChooseKeyword"
 import { BottomNavbar, TopNavbar } from "./components/Navbar"
 
+import SearchNewsList from "./components/main/SearchNewsList"
+
 const MainContent = styled.div`
   padding: 50px 0px;
 `
@@ -25,7 +27,8 @@ function app() {
             <Route path="/keywords" element={<ChooseKeyword/>} />
           </Routes>
         </MainContent>
-        <BottomNavbar />
+      <BottomNavbar />
+      <SearchNewsList />
     </BrowserRouter>
 
   )
