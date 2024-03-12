@@ -6,6 +6,9 @@ from category_crawling import do_crawling
 from database import get_db, engine
 from models import init_db
 
+from routers.recommend import recommend_router
+from routers.recode import recode_router
+
 app = FastAPI()
 # 메타데이터를 생성한다.
 metadata_obj = MetaData()
@@ -14,16 +17,16 @@ metadata_obj = MetaData()
 async def startup():
   init_db()
 
-@app.get("/")
-async def root():
-  return {"message": "Hello World"}
-
 @app.get("/crawling")
 async def start_crawling():
   do_crawling()
   return {"message": "complete crawling"}
 
 # Path: category_cra
+
+app.include_router(recommend_router.router)
+app.include_router(recode_router.router)
+
 
 @app.get("/member" )
 def read_items():
