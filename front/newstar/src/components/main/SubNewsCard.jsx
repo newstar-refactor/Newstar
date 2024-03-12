@@ -14,6 +14,7 @@ const BoxContainer = styled.div`
   cursor: pointer;
 `
 
+
 // title, imageUrl 변수 수정
 const SubNewsCard = ({ NewsData }) => {
   
