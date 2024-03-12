@@ -1,6 +1,5 @@
-from models import Recommend
 from sqlalchemy.orm import Session
-from news_recomm import recomm
+from services.learning.news_recommend import recomm
 
 def get_recommend_list(db: Session):
     li = []
