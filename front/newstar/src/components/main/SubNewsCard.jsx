@@ -22,24 +22,27 @@ const SubNewsCard = ({ NewsData }) => {
   const [isLiked, setIsLiked] = useState(false)
 
   // 좋아요 버튼 클릭 핸들러
-  const handleLikeButtonClick = () => {
-    setIsLiked(!isLiked);
-  };
+  const handleLikeButtonClick = () => { setIsLiked(!isLiked) };
 
 
   // 카드 클릭 시, 숏폼 NewsData.url로 이동
-  const handleClick = () => {
-    navigate(NewsData.url);
-  };
+  const handleClick = () => { navigate(NewsData.url) }
 
   return (
     <BoxContainer onClick={handleClick}>
-      <img src={NewsData.imageUrl} alt="news image" />
-      <div>{NewsData.title}</div>
-      {/* 좋아요 버튼에 onClick 이벤트 핸들러 지정 */}
-      <LikeButton onClick={handleLikeButtonClick} isLiked={isLiked} />
+      {NewsData.map(({ id, title, Bcategory }) => (
+        <div key={id}>
+          <Tag fontSize={'12px'}>{`# ${Bcategory}`}</Tag>
+          <h2>{title}</h2>
+          {/* Card click 이벤트 버블링 방지 */}
+          <LikeButton onClick={(e) =>
+            { e.stopPropagation(); handleLikeButtonClick(id); }}
+            isLiked={isLiked} />
+        </div>
+      ))}
     </BoxContainer>
   );
+
 };
 
 export default SubNewsCard;
