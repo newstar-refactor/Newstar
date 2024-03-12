@@ -28,7 +28,7 @@ function app() {
           </Routes>
         </MainContent>
       <BottomNavbar />
-      <SearchNewsList />
+      {/* <SearchNewsList /> */}
     </BrowserRouter>
 
   )
