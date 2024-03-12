@@ -7,26 +7,27 @@ import styled from "styled-components";
 // styled-components
 const BoxContainer = styled.div`
   display: flex;
-  align-itmes: center;
+  align-items: center;
   border: 1px solid;
-  paddind: 10px;
+  padding: 10px;
+  cursor: pointer;
 `
 
 
 // title, imageUrl 변수 수정
-const SearchNewsList = ({ title, imageUrl }) => {
+const SearchNewsList = ({ NewsData }) => {
 
   const navigate = useNavigate();
 
   // 리스트를 클릭하면 숏폼 url로 이동
   const handleClick = () => {
-    navigate(newsUrl)
+    navigate(NewsData.url)
   };
 
   return (
     <BoxContainer onClick={handleClick}>
-      <div>{title}</div>
-      <img src={imageUrl} alt="newsimage"/>
+      <div>{NewsData.title}</div>
+      <img src={NewsData.imageUrl} alt="news image" />
     </BoxContainer>
   );
 };
