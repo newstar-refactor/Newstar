@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { RecoilRoot } from "recoil"
 import styled from "styled-components"
 
 import Intro from "./pages/Intro"
@@ -14,20 +15,23 @@ const MainContent = styled.div`
 
 function app() {
   return (
-    <BrowserRouter>
-      <TopNavbar/>
-        <MainContent>
-          <Routes>
-            <Route path="/" element={<Main/>} />
-            <Route path="/intro" element={<Intro/>} />
-            <Route path="/search" element={<Search/>} />
-            <Route path="/mypage" element={<MyPage/>} />
-            <Route path="/keywords" element={<ChooseKeyword/>} />
-          </Routes>
-        </MainContent>
-        <BottomNavbar />
-    </BrowserRouter>
-
+    <>
+      <RecoilRoot>
+        <BrowserRouter>
+          <TopNavbar/>
+          <MainContent>
+            <Routes>
+              <Route path="/" element={<Main/>} />
+              <Route path="/intro" element={<Intro/>} />
+              <Route path="/search" element={<Search/>} />
+              <Route path="/mypage" element={<MyPage/>} />
+              <Route path="/keywords" element={<ChooseKeyword/>} />
+            </Routes>
+          </MainContent>
+          <BottomNavbar />
+        </BrowserRouter>
+      </RecoilRoot>
+    </>
   )
 }
 
