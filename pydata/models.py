@@ -19,13 +19,12 @@ class Article(Base):
   __tablename__ = "article"
   article_id = Column(Integer, primary_key=True, index=True)
   title = Column(String(255))
-  content = Column(String(255))
-  writed_date = Column(DateTime, default=func.now())
   url = Column(String(255))
-  category = Column(String(255))
-  img = Column(String(255))
-  keyword = Column(String(255))
-
+  date = Column(DateTime, default=func.now())
+  Bcategory = Column(Integer)
+  Scategory = Column(Integer)
+  image_url = Column(String(255))
+  content = Column(String(10000))
 
 class Recode(Base):
   __tablename__ = "recode"

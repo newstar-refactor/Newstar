@@ -6,10 +6,7 @@ from tqdm import tqdm
 import re
 from gensim.models import doc2vec
 
-def makeModel():
-    news_df = pd.read_csv('category_articles.csv')
-    news_df = news_df.dropna()
-
+def make_model(news_df):
     mecab = MeCab()
 
     tagged_corpus_list = []
@@ -18,7 +15,7 @@ def makeModel():
         text = row['content']
         # 본문 기호 제거
         text = re.sub('[-=+,#/\?:^.@*\"※~ㆍ!』‘|\(\)\[\]`\'…》\”\“\’·]', ' ', text)
-        tag = row['title']
+        tag = row['article_id']
         tagged_corpus_list.append(TaggedDocument(tags=[tag], words=mecab.nouns(text)))
 
     model = doc2vec.Doc2Vec(vector_size=300, alpha=0.025, min_alpha=0.025, workers=16, window=5)
@@ -27,9 +24,9 @@ def makeModel():
     model.build_vocab(tagged_corpus_list)
 
     # Doc2Vec 학습
-    model.train(tagged_corpus_list, total_examples=model.corpus_count, epochs=10)
+    model.train(tagged_corpus_list, total_examples=model.corpus_count, epochs=30)
 
     # 모델 저장
-    model.save('dart.doc2vec')
+    model.save('news.doc2vec')
 
     return {"message": "complete make model"}

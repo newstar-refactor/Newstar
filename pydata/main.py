@@ -6,7 +6,7 @@ from models import init_db
 
 from routers.recommend import recommend_router
 from routers.recode import recode_router
-from services.learning.news_doc2vec import makeModel
+
 
 app = FastAPI()
 # 메타데이터를 생성한다.
@@ -21,13 +21,6 @@ async def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   return {"message": "complete crawling"}
 
-@app.get("/makemodel")
-async def make_model():
-  makeModel()
-  return {"message" : "makeModel"}
-
-
-# Path: category_cra
 
 app.include_router(recommend_router.router)
 app.include_router(recode_router.router)

@@ -2,7 +2,12 @@ from gensim.models import Doc2Vec
 
 def recomm():
     # 모델 불러오기
-    model = Doc2Vec.load('dart.doc2vec')
+    model = Doc2Vec.load('news.doc2vec')
 
-    # 예시: 가장 유사한 문서들 찾기
-    return model.dv.most_similar(positive=[ '\n"오픈AI의 GPT-4, 저작권 보호 수준 최악"\n'],  topn=20)
+    # 가장 유사한 문서들의 ID 찾기
+    similar_docs = model.dv.most_similar(positive=[14], topn=20)
+
+    # 유사한 문서들의 ID만 추출
+    doc_ids = [doc_id for doc_id, _ in similar_docs]
+
+    return doc_ids
