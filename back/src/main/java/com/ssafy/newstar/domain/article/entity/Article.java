@@ -32,4 +32,16 @@ public class Article {
 
   @Column( length=10000 )
   private String content;
+
+  public static Article createArticle(String title, String url, LocalDateTime date, int Bcategory, int Scategory, String imageUrl, String content) {
+    Article article = new Article();
+    article.title = title;
+    article.url = url;
+    article.date = date;
+    article.Bcategory = Bcategory;
+    article.Scategory = Scategory;
+    article.imageUrl = imageUrl;
+    article.content = content;
+    return article;
+  }
 }
