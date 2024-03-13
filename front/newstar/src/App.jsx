@@ -18,7 +18,7 @@ function app() {
     <>
       <RecoilRoot>
         <BrowserRouter>
-          <TopNavbar/>
+          {/* <TopNavbar/> */}
           <MainContent>
             <Routes>
               <Route path="/" element={<Main/>} />

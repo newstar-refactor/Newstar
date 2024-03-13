@@ -14,9 +14,9 @@ const NavContainer = styled.div`
   left: 0;
   right: 0;
   height: 50px;
-  border-top: 2px solid rgb(49, 48, 77);
+  /* border-top: 2px solid rgb(136, 171, 142); */
   overflow: hidden;
-  background-color: white;
+  background-color: rgb(136, 171, 142);
   padding: 10px;
 `
 
@@ -46,13 +46,13 @@ function BottomNavbar() {
   return (
     <NavContainer>
       <NavContent>
-        <Link to={'/'}><FiHome color="rgb(49, 48, 77)" size="30" /></Link>
+        <Link to={'/'}><FiHome color="rgb(242, 241, 235)" size="30" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/search'}><IoSearch color="rgb(49, 48, 77)" size="30" /></Link>
+        <Link to={'/search'}><IoSearch color="rgb(242, 241, 235)" size="30" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/mypage'}><BsFillPersonFill color="rgb(49, 48, 77)" size="30" /></Link>
+        <Link to={'/mypage'}><BsFillPersonFill color="rgb(242, 241, 235)" size="30" /></Link>
       </NavContent>
     </NavContainer>
   )
