@@ -33,4 +33,12 @@ public class Recode {
   Article article;
 
   private Boolean likes;
+
+  public  static Recode createRecode(Member member, Article article, Boolean likes) {
+    Recode recode = new Recode();
+    recode.member = member;
+    recode.article = article;
+    recode.likes = likes;
+    return recode;
+  }
 }

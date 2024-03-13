@@ -1,4 +1,4 @@
-package com.ssafy.newstar.domain.keyword.entity;
+package com.ssafy.newstar.domain.category.entity;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
@@ -17,23 +17,23 @@ import lombok.ToString;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(exclude = "article")
-public class Keyword {
+@ToString(exclude = "member")
+public class Category {
   @Id
   @GeneratedValue
   @Column(name = "keyword_id")
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "article_id")
-  private Article article;
+  @JoinColumn(name = "member_id")
+  private Member member;
 
-  private String word;
+  private Integer number;
 
-  public static Keyword createKeyword(Article article, String word) {
-    Keyword keyword = new Keyword();
-    keyword.article = article;
-    keyword.word = word;
-    return keyword;
+  public static Category createCategory(Member member, Integer number) {
+    Category category = new Category();
+    category.member = member;
+    category.number = number;
+    return category;
   }
 }

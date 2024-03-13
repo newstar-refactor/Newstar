@@ -16,7 +16,7 @@ def do_crawling():
   prev_content = None  # 이전 뉴스의 내용을 저장할 변수
 
   # 현재 시간
-  current_hour = datetime.now().hour - 1;
+  current_hour = datetime.now().hour - 1
 
   for i in range(len(Bcategories)):
     for scategory in Scategories[i]:
@@ -37,7 +37,7 @@ def do_crawling():
           title = ar.select_one("a.sa_text_title").text
           title = title.replace("\n", "")
           articleUrl = ar.select_one("a.sa_text_title")["href"]
-          print(ar);
+          # print(ar);
 
           # 이미지 URL 추출 (못가져 오는 부분으로 if 처리로 특정 업체 날짜 가져오기)
           imageTag = ar.select_one("a.sa_thumb_link img._LAZY_LOADING")
@@ -88,7 +88,7 @@ def do_crawling():
             break
 
           # 랜덤한 시간 동안 대기
-          time.sleep(random.uniform(0.01, 0.15))
+          time.sleep(random.uniform(0.1, 1.5))
 
   df = pandas.DataFrame(resultList)
   df.to_csv('category_articles.csv')
