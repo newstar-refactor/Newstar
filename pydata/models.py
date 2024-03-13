@@ -8,11 +8,8 @@ from database import Base, engine
 class Member(Base):
   __tablename__ = "member"
   member_id = Column(Integer, primary_key=True, index=True)
-  email = Column(String(255))
-  gender = Column(String(255))
-  age = Column(String(255))
-  sign_data = Column(DateTime)
-  status = Column(Boolean)
+  sign_date = Column(DateTime)
+  pw = Column(String(255))
 
 
 class Article(Base):
@@ -31,23 +28,21 @@ class Recode(Base):
   recode_id = Column(Integer, primary_key=True, index=True)
   member_id = Column(Integer, ForeignKey("member.member_id"))
   article_id = Column(Integer, ForeignKey("article.article_id"))
-  like = Column(Boolean)
+  likes = Column(Boolean)
 
 
 class Keyword(Base):
   __tablename__ = "keyword"
   keyword_id = Column(Integer, primary_key=True, index=True)
-  member_id = Column(Integer, ForeignKey("member.member_id"))
+  article_id = Column(Integer, ForeignKey("article.article_id"))
   word = Column(String(255))
 
 
-class Recommend(Base):
-  __tablename__ = "recommend"
-  recommend_id = Column(Integer, primary_key=True, index=True)
+class Category(Base):
+  __tablename__ = "category"
+  keyword_id = Column(Integer, primary_key=True, index=True)
   member_id = Column(Integer, ForeignKey("member.member_id"))
-  article_id = Column(Integer, ForeignKey("article.article_id"))
-  score = Column(Integer)
-
+  number = Column(Integer)
 
 def init_db():
   Base.metadata.create_all(bind=engine)
