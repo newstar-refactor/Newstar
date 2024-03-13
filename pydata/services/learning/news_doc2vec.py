@@ -1,5 +1,4 @@
 import pandas as pd
-from konlpy.tag import Okt  # Okt로 변경
 from mecab import MeCab
 from gensim.models.doc2vec import TaggedDocument
 from tqdm import tqdm
@@ -8,7 +7,7 @@ import re
 from gensim.models import doc2vec
 
 def makeModel():
-    news_df = pd.read_csv('dataset/category_articles.csv')
+    news_df = pd.read_csv('category_articles.csv')
     news_df = news_df.dropna()
 
     mecab = MeCab()
@@ -33,4 +32,4 @@ def makeModel():
     # 모델 저장
     model.save('dart.doc2vec')
 
-    return {"message" : "model is ready"}
+    return {"message": "complete make model"}
