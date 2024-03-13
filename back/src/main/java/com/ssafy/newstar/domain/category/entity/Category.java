@@ -1,4 +1,4 @@
-package com.ssafy.newstar.domain.recommend.entity;
+package com.ssafy.newstar.domain.category.entity;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
@@ -18,7 +18,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = "member")
-public class Recommend {
+public class Category {
   @Id
   @GeneratedValue
   @Column(name = "keyword_id")
@@ -26,12 +26,14 @@ public class Recommend {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "member_id")
-  Member member;
+  private Member member;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "article_id")
-  Article article;
+  private Integer number;
 
-  private Integer score;
-
+  public static Category createCategory(Member member, Integer number) {
+    Category category = new Category();
+    category.member = member;
+    category.number = number;
+    return category;
+  }
 }
