@@ -6,6 +6,7 @@ from models import init_db
 
 from routers.recommend import recommend_router
 from routers.recode import recode_router
+from routers.elasticsearch import es_router
 
 
 app = FastAPI()
@@ -18,7 +19,13 @@ async def startup():
 
 @app.get("/crawling")
 async def start_crawling():
-  do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
+  # do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
+  article_id = es_router.last_article_id()
+  if article_id.loc[0]['article_id'] == 0:
+    es_router.init_es()
+  else:
+    print("b")
+  es_router.update_last_article_id()
   return {"message": "complete crawling"}
 
 

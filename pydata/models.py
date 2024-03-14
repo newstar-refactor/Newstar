@@ -44,5 +44,10 @@ class Category(Base):
   member_id = Column(Integer, ForeignKey("member.member_id"))
   number = Column(Integer)
 
+# class LastArticleId(Base):
+#   __tablename__ = "last_article_id"
+#   article_id = Column(Integer)
+
+
 def init_db():
   Base.metadata.create_all(bind=engine)
