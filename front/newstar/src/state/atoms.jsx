@@ -15,4 +15,9 @@ const recommendDataState = atom({
   default: ""
 })
 
-export { newsDataState, wordState, recommendDataState }
+const recordDataState = atom({
+  key: "recordState",
+  default: ""
+})
+
+export { newsDataState, wordState, recommendDataState, recordDataState }

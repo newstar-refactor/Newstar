@@ -11,26 +11,23 @@ import { IoSearch } from "react-icons/io5";
 const NavContainer = styled.div`
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
   height: 50px;
-  /* border-top: 2px solid rgb(136, 171, 142); */
   overflow: hidden;
   background-color: rgb(136, 171, 142);
   padding: 10px;
+  z-index: 10;
 `
 
 const TopNavContainer = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   height: 50px;
   overflow: hidden;
-  background-color: rgb(49, 48, 77);
+  background-color: rgb(136, 171, 142);
   display: flex;
   padding: 0px 10px 5px;
   align-items: center;
+  z-index: 10;
 `
 
 const NavContent = styled.div`
@@ -46,13 +43,13 @@ function BottomNavbar() {
   return (
     <NavContainer>
       <NavContent>
-        <Link to={'/'}><FiHome color="rgb(242, 241, 235)" size="30" /></Link>
+        <Link to={'/'}><FiHome color="rgb(242, 241, 235)" size="20" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/search'}><IoSearch color="rgb(242, 241, 235)" size="30" /></Link>
+        <Link to={'/search'}><IoSearch color="rgb(242, 241, 235)" size="20" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/mypage'}><BsFillPersonFill color="rgb(242, 241, 235)" size="30" /></Link>
+        <Link to={'/mypage'}><BsFillPersonFill color="rgb(242, 241, 235)" size="20" /></Link>
       </NavContent>
     </NavContainer>
   )
