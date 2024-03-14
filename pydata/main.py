@@ -7,6 +7,7 @@ from models import init_db
 from routers.elasticsearch import es_router
 from routers.recode import recode_router
 from routers.recommend import recommend_router
+from routers.search import search_router
 
 app = FastAPI()
 # 메타데이터를 생성한다.
@@ -32,6 +33,7 @@ async def start_crawling():
 
 app.include_router(recommend_router.router)
 app.include_router(recode_router.router)
+app.include_router(search_router.router)
 
 
 @app.get("/member" )
