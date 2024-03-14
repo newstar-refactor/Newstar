@@ -6,7 +6,7 @@ import time
 import random
 
 def do_crawling():
-
+  print("start crawling")
   Bcategories = [100, 101, 105]  # 정치, 경제, IT | 총 22개 | 6개씩 총 132개의 기사를 크롤링
   Scategories = [ [264, 265,  266, 267, 268, 269],
                   [258, 259, 260, 261, 262, 263, 310, 771],
@@ -17,6 +17,7 @@ def do_crawling():
 
   # 현재 시간
   current_hour = datetime.now().hour - 1
+  n = 0
 
   for i in range(len(Bcategories)):
     for scategory in Scategories[i]:
@@ -27,13 +28,15 @@ def do_crawling():
 
       # 모든 section_article _TEMPLATE 선택
       sections = html.select("div.section_article._TEMPLATE")
-
+      flag = True
       for section in sections:
         articles = section.select("ul.sa_list > li.sa_item")
 
 
         # 6개로 이뤄진 list 들의 반복
         for ar in articles:
+          n+=1
+          print(n)
           title = ar.select_one("a.sa_text_title").text
           title = title.replace("\n", "")
           articleUrl = ar.select_one("a.sa_text_title")["href"]
@@ -67,6 +70,8 @@ def do_crawling():
             else:
               temp_time = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
             article_hour = temp_time.hour
+            print("article : " + str(article_hour) )
+            print("article : " + str(current_hour) + "\n")
             # 24시간 형식으로 변환하여 저장
             date = temp_time.strftime("%Y-%m-%d %H:%M:%S")
           else:
@@ -76,7 +81,7 @@ def do_crawling():
           if prev_content and content and prev_content[:10] == content[:10]:
             continue
 
-          # 기사의 시간이 현재 시간과 같으면 resultList에 추가
+          # 기사의 시간이 현재 시간 -1 과 같으면 resultList에 추가
           if article_hour is not None and article_hour == current_hour:
             if content and len(content) > 0:
               res = {"title": title, "url": articleUrl,  "date": date, "Bcategory": Bcategories[i], "Scategory": scategory, "image_url": imageUrl, "content": content}
@@ -85,10 +90,15 @@ def do_crawling():
 
           # 기사의 시간이 현재 시간보다 이전이면 break
           elif article_hour is not None and article_hour < current_hour:
+            flag = False
             break
 
           # 랜덤한 시간 동안 대기
           time.sleep(random.uniform(0.1, 1.5))
+
+        # 이중포문 빠져나오기
+        if (flag == False):
+          break
 
   df = pandas.DataFrame(resultList)
   df.to_csv('category_articles.csv')
