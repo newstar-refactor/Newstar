@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
   private final MemberService memberService;
 
-  // 사용자가 LocalStorage 값을 잃어 버렸을때 이전의 UUID 값을 리턴해준다 !
-  @GetMapping("/member/{pw}")
-  public ResponseEntity<?> matchingMember(@PathVariable("pw") String pw) {
-    return getResponseEntity(SuccessCode.OK, memberService.getMember(pw));
+  // 사용자의 정보를 가져온다.
+  @GetMapping("/member")
+  public ResponseEntity<?> matchingMember() {
+    return getResponseEntity(SuccessCode.OK, memberService.getMember("a"));
   }
 
   // 회원가입 로직
