@@ -18,6 +18,11 @@ def get_max_article_id(db: Session):
     max = pd.read_sql("SELECT max(article_id) FROM article", con = engine)
     return max
 
+def get_recent_article(last: int, db: Session):
+    query = f"SELECT * FROM article WHERE article_id > {last}"
+    articles = pd.read_sql(query, con=engine)
+    return articles
+
 def update_last_article_id(max_value: int, db: Session):
     pd.DataFrame({'article_id': [max_value]}).to_sql('last_article_id', con=engine, if_exists='replace', index=False)
 
