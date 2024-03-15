@@ -21,7 +21,7 @@ def recommend(db: Session = Depends(get_db)):
     return get_recommend_info(db, recomm())
 
 # 모델 재생성
-@router.get("/makemodel")
+@router.post("/models")
 def makemodel(db: Session = Depends(get_db)):
     make_model(get_news_all(db))
     return {"message" : "makemodel"}
