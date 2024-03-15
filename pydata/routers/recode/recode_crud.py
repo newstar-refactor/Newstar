@@ -5,7 +5,7 @@ from services.learning.news_recommend import recomm
 from database import get_db, engine
 import pandas as pd
 
-def get_recommend_list(db: Session):
+def get_like_list(db: Session):
     recommend_list =  recomm()
     return recommend_list
 

@@ -18,7 +18,7 @@ async def startup():
 
 @app.get("/crawling")
 async def start_crawling():
-  do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
+  do_crawling().to_sql(name='article', con=engine, if_exists='append', index=False)
   return {"message": "complete crawling"}
 
 
