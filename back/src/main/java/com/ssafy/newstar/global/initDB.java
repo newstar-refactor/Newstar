@@ -28,7 +28,7 @@ public class initDB {
     private final EntityManager em;
 
     public void dbInit1() {
-      Member member1 = Member.createMember(String.valueOf(12345));
+      Member member1 = Member.createMember(String.valueOf("feb91399-aaf3-40ef-856d-35e6ddf8befb"));
       em.persist(member1);
 
       Article article1 = Article.createArticle("尹 “의료개혁, 원칙대로 신속 추진을”…의대교수 집단사직 땐 진료유지명령 검토 ",
