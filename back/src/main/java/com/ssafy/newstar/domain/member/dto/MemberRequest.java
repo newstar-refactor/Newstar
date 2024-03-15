@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class MemberRequest {
-  private Integer categories[];
+  private Integer[] categories;
 }
