@@ -42,7 +42,8 @@ EXIST_AFTER=$(docker compose -p deploy-${AFTER_COLOR} -f docker-compose.${AFTER_
 
 if [ -n "$EXIST_AFTER" ]; then
     echo "nginx Setting"
-    docker exec -i nginx /bin/bash -c "cd /etc/nginx/conf.d && cp service-url.inc service-url_cp.inc && sed -i 's/${BEFORE_SPRING_PORT}/${AFTER_SPRING_PORT}/' service-url_cp.inc && sed -i 's/${BEFORE_REACT_PORT}/${AFTER_REACT_PORT}/' service-url_cp.inc && cat service-url_cp.inc > service-url.inc && rm -rf service-url_cp.inc && nginx -s reload"
+    docker exec -i nginx /bin/bash -c "echo -e 'set \$spring_url http://172.17.0.1:${AFTER_SPRING_PORT};\nset \$react_url http://172.17.0.1:${AFTER_REACT_PORT};' | tee /etc/nginx/conf.d/service-url.inc && nginx -s reload"
+    
     echo "Completed Deploy!"
     echo "$BEFORE_COLOR server down(spring_port:${BEFORE_SPRING_PORT}, react_port:${BEFORE_REACT_PORT})"
     docker compose -p deploy-${BEFORE_COLOR} -f docker-compose.${BEFORE_COLOR}.yaml down

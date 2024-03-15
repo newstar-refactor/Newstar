@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains="j10b302.p.ssafy.io"
+domains="newstar.world"
 rsa_key_size=4096
 data_path="./data/certbot"
 email="chanhong9784@naver.com" # Adding a valid address is strongly recommended
