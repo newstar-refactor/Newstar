@@ -4,10 +4,11 @@ from sqlalchemy import Table, select, MetaData
 from category_crawling import do_crawling
 from database import get_db, engine
 from models import init_db
-from routers.elasticsearch import es_router
+from routers.elasticsearch import es_service
 from routers.recode import recode_router
 from routers.recommend import recommend_router
 from routers.search import search_router
+from routers.elasticsearch import es_router
 
 app = FastAPI()
 # 메타데이터를 생성한다.
@@ -20,20 +21,21 @@ async def startup():
 @app.get("/crawling")
 async def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
-  article_id = es_router.last_article_id()
+  article_id = es_service.last_article_id()
 
   if article_id.loc[0]['article_id'] == 0:
-    es_router.init_es()
+    es_service.init_es()
   else:
-    es_router.add_es(article_id.loc[0]['article_id'])
+    es_service.add_es(article_id.loc[0]['article_id'])
 
-  es_router.update_last_article_id()
+  es_service.update_last_article_id()
   return {"message": "complete crawling"}
 
 
 app.include_router(recommend_router.router)
 app.include_router(recode_router.router)
 app.include_router(search_router.router)
+app.include_router(es_router.router)
 
 
 @app.get("/member" )

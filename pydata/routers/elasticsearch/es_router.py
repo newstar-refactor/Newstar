@@ -1,33 +1,32 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from routers.elasticsearch import es_crud
-from elasticsearch import helpers, Elasticsearch
+import json
 
-from database import get_db
+from elasticsearch import Elasticsearch
+from fastapi import APIRouter
 
-def last_article_id(db: Session = Depends(get_db)):
-    article_id = es_crud.get_last_article_id(db)
-    return article_id
+router = APIRouter(
+    prefix="/inites",
+)
 
-def init_es(db: Session = Depends(get_db)):
-    articles = es_crud.get_article_all(db)
-    es = Elasticsearch("http://localhost:9200/")
+@router.get("")
+def init_es():
+    es = Elasticsearch("http://localhost:9200/")  # 환경에 맞게 바꿀 것
+    es.info()
 
-    for idx, row in articles.iterrows():
-        doc = {'article_id' : row['article_id'], 'title' : row['title'], 'content' : row['content'], 'image_url' : row['image_url']}
-        es.index(index='article', doc_type='_doc', body=doc)
-        es.indices.refresh(index='article')
+    # def make_index(es, index_name):
+    #     if es.indices.exists(index=index_name):
+    #         es.indices.delete(index=index_name)
+    #     print(es.indices.create(index=index_name))
 
-def add_es(article_id : int, db: Session = Depends(get_db())):
-    articles = es_crud.get_recent_article(article_id, db)
-    es = Elasticsearch("http://localhost:9200/")
+    with open('mapping.json', 'r') as f:
+        mapping = json.load(f)
+        settings = mapping.get("settings", {})
+    mappings = mapping.get("mappings", {})
 
-    for idx, row in articles.iterrows():
-        doc = {'article_id' : row['article_id'], 'title' : row['title'], 'content' : row['content'], 'image_url' : row['image_url']}
-        es.index(index='article', doc_type='_doc', body=doc)
-        es.indices.refresh(index='article')
+    # index 생성 요청
+    es.indices.create(index='article', body={"settings": settings, "mappings": mappings})
 
-def update_last_article_id(db: Session = Depends(get_db)):
-    max = es_crud.get_max_article_id(db)
-    max_id = max.loc[0]['max(article_id)']
-    es_crud.update_last_article_id(max_id, db)
+    #test data
+    doc1 = {'article_id': 0, 'title': 'test', 'content': '§', 'image_url': 'test'}
+    es.index(index='article', doc_type='_doc', body=doc1)
+
+    return {"message": "init es"}
