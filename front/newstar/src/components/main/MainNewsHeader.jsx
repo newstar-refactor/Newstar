@@ -1,43 +1,56 @@
-// 메인 숏폼 페이지
-// 뉴스 기사 좌우로 스크롤
+import { useState } from "react"
 
-import { useEffect } from 'react';
-import api from '../api/api'
-import { useRecoilState } from 'recoil'
-import { recommendDataState, recordDataState } from '../state/atoms'
+import styled from "styled-components"
 
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Tag from "../../common/Tag"
 
-import MainNewsCard from '../components/main/MainNewsCard'
+const MainNewsHeaderContainer = styled.div`
+  padding: 20px 20px 10px;
+`
 
+const NewsTagAndLike = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 
-export default function Main() {
-  // const [recommendDatas, setRecommendDatas] = useRecoilState(recommendDataState)
-  // const [recordDatas, setRecordDatas] = useRecoilState(recordDataState)
+const NewsTags = styled.div`
+  display: flex;
+  gap: 7px;
+`
 
-  // useEffect(() => {
-  //   axios.get(api.news, { headers: {'key': 'key값'} })
-  //     .then(res => {
-  //       setRecommendDatas(res.data)
-  //     })
-  //     .catch(err => {
-  //       console.error('Error fetching data:', err)
-  //     })
-  // })
+// 카테고리 번호
+const BigCategory = { 100: '정치', 101: '경제', 105: 'IT/과학' }
+const SmallCategory = {
+  264: '대통령실',
+  265: '국회/정당',
+  268: '북한',
+  266: '행정',
+  267: '국방/외교',
+  269: '정치일반',
+  
+  259: '금융',
+  258: '증권',
+  261: '산업/재계',
+  771: '중기/벤처',
+  260: '부동산',
+  262: '글로벌 경제',
+  310: '생활경제',
+  263: '경제 일반',
+  
+  731: '모바일',
+  226: '인터넷/SNS',
+  227: '통신/뉴미디어',
+  230: 'IT 일반',
+  732: '보안/해킹',
+  283: '컴퓨터',
+  229: '게임/리뷰',
+  228: '과학 일반',
+}
 
-  // useEffect(() => {
-  //   axios.get(api.record)
-  //     .then(res => {
-  //       setRecordDatas(res.data)
-  //     })
-  //     .catch(err => {
-  //       console.error('Error fetching data:', err)
-  //     })
-  // })
-
-  const recommendDatas = [
+// 뉴스 헤더 (제목, 날짜, 태그)
+export default function NewsHeader({ recommendData }) {
+  const recordDatas = [
     {
       id: 0,
       title: '유정복 시장과 악수하는 윤 대통령',
@@ -60,24 +73,48 @@ export default function Main() {
     }
   ]
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  // 좋아요 상태 관리
+  const [isLiked, setIsLiked] = useState(false)
+  function handleLikeButtonClick() {
+    setIsLiked(!isLiked)
+    toggleLike()
+  }
+
+  // 좋아요 상태 업데이트
+  // const [recordDatas, setRecordDatas] = useRecoilState(recordDataState)
+  const likeRecord = recordDatas.findIndex((record) => record === recommendData)
+
+  function toggleLike() {
+    const newRecord = replaceItemAtIndex(recordDatas, likeRecord, {
+      ...recommendData,
+      like: !recommendData.like
+    })
+
+    // setRecordDatas(newRecord)
   }
 
   return (
-    <>
-      <Slider {...sliderSettings}>
-        {recommendDatas.map((recommendData) => (
-          <MainNewsCard
-            key={recommendData.id}
-            recommendData={recommendData} />))
-        }
-      </Slider>
-    </>
-
-  )
-}
+    <MainNewsHeaderContainer>
+      <h2>{recommendData.title}</h2>
+      <br />
+      <div style={{color: 'gray'}}>{recommendData.date}</div>
+      <br />
+      
+      <NewsTagAndLike>
+        <NewsTags>
+          <Tag 
+            fontSize={'12px'}
+            >
+              {`# ${BigCategory[recommendData.Bcategory]}`}</Tag>
+          <Tag 
+            fontSize={'12px'}>
+              {`# ${SmallCategory[recommendData.Scategory]}`}</Tag>
+        </NewsTags>
+        {/* <LikeButton 
+          isLiked={isLiked}
+          handleLikeButtonClick={handleLikeButtonClick}
+            /> */}
+      </NewsTagAndLike>
+    </MainNewsHeaderContainer>
+    )
+  }

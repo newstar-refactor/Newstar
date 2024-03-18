@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASEAPI = 'https://i10b302.p.ssafy.io/api'
+const BASEAPI = 'https://www.newstar.world/'
 
 const api = {
   news: `${BASEAPI}/news`,
