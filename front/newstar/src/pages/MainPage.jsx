@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom"
 
-import ShortForm from "../pages/ShortForm"
-import Search from "../pages/Search"
-import MyPage from "../pages/MyPage"
-import CollectNews from "../pages/CollectNews"
-import ChooseKeyword from "../pages/ChooseKeyword"
+import ShortForm from "./ShortForm"
+import Search from "./Search"
+import MyPage from "./MyPage"
+import CategoryNews from "./CategoryNews"
+import ChooseKeyword from "./ChooseKeyword"
 
 import { TotalPageContainer } from "../styles/Container"
 import { TopNavbar, BottomNavbar } from "../components/Navbar";
@@ -18,7 +18,7 @@ function MainPage() {
           <Route path="/" element={<ShortForm/>} />
           <Route path="/search" element={<Search/>} />
           <Route path="/mypage" element={<MyPage/>} />
-          <Route path="/collect" element={<CollectNews/>} />
+          <Route path="/category" element={<CategoryNews/>} />
           <Route path="/keywords" element={<ChooseKeyword/>} />
         </Routes>
       </TotalPageContainer>

@@ -20,4 +20,15 @@ const recordDataState = atom({
   default: ""
 })
 
-export { newsDataState, wordState, recommendDataState, recordDataState }
+const categoryDataState = atom({
+  key: "categoryState",
+  default: ""
+})
+
+export { 
+  newsDataState, 
+  wordState, 
+  recommendDataState, 
+  recordDataState,
+  categoryDataState
+ }
