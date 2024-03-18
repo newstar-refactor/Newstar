@@ -1,8 +1,6 @@
 from sqlalchemy.orm import Session
 
-from models import Article
-from services.learning.news_recommend import recomm
-from database import get_db, engine
+from app.database import engine
 import pandas as pd
 
 async def get_like_list(db: Session, member_id):

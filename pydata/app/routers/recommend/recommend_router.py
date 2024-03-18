@@ -2,14 +2,14 @@ from fastapi import APIRouter, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
-from routers.recode.recode_crud import get_like_list
-from routers.recommend.recommend_crud import get_news_all, get_recommend_info
-from routers.recommend.recommend_schema import ArticleSchema
-from services.learning.news_doc2vec import make_model
-from services.learning.news_recommend import recomm
+from app.routers.recode.recode_crud import get_like_list
+from app.routers.recommend.recommend_crud import get_news_all, get_recommend_info
+from app.routers.recommend.recommend_schema import ArticleSchema
+from app.services.learning.news_doc2vec import make_model
+from app.services.learning.news_recommend import recomm
 
 
-from database import get_db
+from app.database import get_db
 
 router = APIRouter(
     prefix="/recommend",

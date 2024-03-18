@@ -2,8 +2,8 @@ from elasticsearch import Elasticsearch
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from database import get_db
-from routers.elasticsearch import es_crud
+from app.database import get_db
+from app.routers.elasticsearch import es_crud
 
 
 def last_article_id(db: Session = Depends(get_db)):

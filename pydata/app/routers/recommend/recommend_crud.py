@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from models import Article
-from database import get_db, engine
+from app.models import Article
+from app.database import engine
 import pandas as pd
 
 def get_news_all(db : Session):

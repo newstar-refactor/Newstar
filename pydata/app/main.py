@@ -1,17 +1,15 @@
 from fastapi import FastAPI, Request
-from sqlalchemy import Table, select, MetaData
+from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from category_crawling import do_crawling
-from database import get_db, engine, SessionLocal
-from models import init_db
-from routers.elasticsearch import es_service
-from routers.member.member_crud import get_user_by_pw
-from routers.recode import recode_router
-from routers.recommend import recommend_router
-from routers.search import search_router
-from routers.elasticsearch import es_router
+from app.category_crawling import do_crawling
+from app.database import engine
+from app.models import init_db
+from app.routers.elasticsearch import es_service, es_router
+from app.routers.member.member_crud import get_user_by_pw
+from app.routers.recode import recode_router
+from app.routers.recommend import recommend_router
+from app.routers.search import search_router
 
 app = FastAPI()
 # 메타데이터를 생성한다.

@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from models import Member
+from app.models import Member
 
 async def get_user_by_pw(db: Session, pw: str):
     result = db.query(Member).with_entities(Member.member_id).filter(Member.pw == pw).first()

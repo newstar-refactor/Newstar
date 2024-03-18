@@ -1,10 +1,7 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter
 from typing import List
-from routers.search.search_schema import Articles, Keyword
-from elasticsearch import helpers, Elasticsearch
-
-from database import get_db
+from app.routers.search.search_schema import Articles, Keyword
+from elasticsearch import Elasticsearch
 
 router = APIRouter(
     prefix="/news",
