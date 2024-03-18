@@ -42,18 +42,21 @@ def do_crawling():
           articleUrl = ar.select_one("a.sa_text_title")["href"]
           # print(ar);
 
-          # 이미지 URL 추출 (못가져 오는 부분으로 if 처리로 특정 업체 날짜 가져오기)
-          imageTag = ar.select_one("a.sa_thumb_link img._LAZY_LOADING")
-          if imageTag and "data-src" in imageTag.attrs:
-            imageUrl = imageTag["data-src"]
-          elif ar.select_one("a.sa_text_title"):
-            imageUrl = ar.select_one("a.sa_text_title")["href"]
-          else:
-            imageUrl = None
 
           # 기사 URL로 이동 (list 내부의)
           raw_article = requests.get(articleUrl, headers={'User-Agent': 'Mozilla/5.0'})
           html_article = BeautifulSoup(raw_article.text, "html.parser")
+
+          # 이미지 URL 추출 (못가져 오는 부분으로 if 처리로 특정 업체 날짜 가져오기)
+          imageTag = html_article.select_one("img#img1")
+          if imageTag and "data-src" in imageTag.attrs:
+            imageUrl = imageTag["data-src"]
+          elif html_article.select_one("a.sa_text_title"):
+            imageUrl = html_article.select_one("a.sa_text_title")["href"]
+          else:
+            continue
+
+
 
           # 본문 내용 추출
           article_content = html_article.select_one("article#dic_area")
