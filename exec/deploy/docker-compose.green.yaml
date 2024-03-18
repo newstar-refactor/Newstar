@@ -13,6 +13,12 @@ services:
         image: newstar_front
         ports:
           - 3001:3000
+    fastapi:
+        container_name: fastapi-blue
+        image: fastapi
+        ports:
+          - 8001:8000
+        restart: always
 networks:
   default:
     name: app-net
