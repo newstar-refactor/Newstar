@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    spring:
+        container_name: spring-blue
+        image: newstar_back
+        ports:
+          - 8080:8080
+        restart: always
+
+    react:
+        container_name: react-blue
+        image: newstar_front
+        ports:
+          - 3000:3000
+networks:
+  default:
+    name: app-net
+    external: true
+
