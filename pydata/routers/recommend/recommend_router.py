@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
+from routers.recode.recode_crud import get_like_list
 from routers.recommend.recommend_crud import get_news_all, get_recommend_info
 from routers.recommend.recommend_schema import ArticleSchema
 from services.learning.news_doc2vec import make_model
@@ -16,9 +17,14 @@ router = APIRouter(
 
 # 추천할 뉴스 뽑기
 @router.get("", response_model=List[ArticleSchema])
-def recommend(db: Session = Depends(get_db)):
+async def recommend(request: Request, db: Session = Depends(get_db)):
+    member_id = request.state.member_id
 
-    return get_recommend_info(db, recomm())
+    if member_id is None:
+        raise HTTPException(status_code=400, detail="member_id is missing in the header")
+    li = await get_like_list(db, member_id)
+
+    return get_recommend_info(db, recomm(li))
 
 # 모델 재생성
 @router.post("/models")
