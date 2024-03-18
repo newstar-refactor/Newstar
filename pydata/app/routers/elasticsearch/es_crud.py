@@ -1,9 +1,6 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import text
 
-from routers.elasticsearch import es_schema
-
-from database import get_db, engine
+from app.database import engine
 import pandas as pd
 
 def get_last_article_id(db: Session):

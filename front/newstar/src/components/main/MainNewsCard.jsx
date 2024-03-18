@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from "recoil"
 import styled from "styled-components"
 
 import LikeButton from "../../common/Like"
-import api from "../../api/api"
+import { api } from "../../api/api"
 import { recordDataState } from "../../state/atoms";
 
 import MainNewsHeader from "./MainNewsHeader"
@@ -14,6 +14,7 @@ import MainNewsBody from "./MainNewsBody"
 const MainNewsImage = styled.img`
   width: 100%;
   padding: 10px;
+  border-radius: 20px;
 `
 
 const NewsContainer = styled.div`

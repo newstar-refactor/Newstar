@@ -2,7 +2,7 @@
 // 뉴스 기사 좌우로 스크롤
 
 import { useEffect } from 'react';
-import api from '../api/api'
+import { api } from '../api/api'
 import { useRecoilState } from 'recoil'
 import { recommendDataState, recordDataState } from '../state/atoms'
 

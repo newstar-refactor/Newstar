@@ -1,12 +1,22 @@
 import axios from "axios"
 
-const BASEAPI = 'https://www.newstar.world/'
+const BASEAPI = 'https://www.newstar.world/api'
 
 const api = {
-  news: `${BASEAPI}/news`,
-  word: `${BASEAPI}/word`,
-  recommend: `${BASEAPI}/recommend`,
-  record: `${BASEAPI}/record`
+  news: '/data/news',
+  members: '/members',
+  recodes: '/recodes',
+  like: '/recodes/likes',
+  keywords: '/keywords',
+  category: '/category',
+  paging: '/category/paging'
 }
 
-export default api
+const axiosInstance = axios.create({
+  baseURL: `${BASEAPI}`,
+  headers: {
+    key: 'key'
+  }
+})
+
+export { api, axiosInstance }
