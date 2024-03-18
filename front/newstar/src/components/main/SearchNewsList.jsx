@@ -38,16 +38,22 @@ const BoxContainer = styled.div`
 
 
 const SearchNewsList = ({ NewsData }) => {
-
   const navigate = useNavigate();
-  // 리스트를 클릭하면 숏폼 url로 이동
-  const handleClick = (url) => { navigate(url) };
 
+    // 리스트를 클릭하면 숏폼 url로 이동
+  const handleClick = (url) => {
+    navigate({ pathname: url });
+  };
+
+  // date를 기준으로 뉴스 데이터를 최신순으로 정렬
+  // 데이터의 불변성을 ㄹ위해 slice로 복사본 만들기
+  const sortedNewsData = NewsData.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+  
   return (
     <div>
-      {NewsData.length > 0 ? (
-        NewsData.map((newsItem, index) => (
-          <BoxContainer key={index} onClick={() => handleClick(newsItem.url)}>
+      {sortedNewsData.length.length > 0 ? (
+        sortedNewsData.map((newsItem) => (
+          <BoxContainer key={newsItem.id} onClick={() => handleClick(newsItem.url)}>
             <h2>{newsItem.title}</h2>
             <img src={newsItem.imageUrl} alt="news image" />
           </BoxContainer>
