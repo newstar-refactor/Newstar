@@ -1,4 +1,7 @@
 import React from "react";
+import Lottie from "lottie-react"
+
+import likeLottie from "../assets/lottie/like.json"
 
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
@@ -10,12 +13,18 @@ const LikeButton = ({ handleLikeButtonClick, isLiked }) => {
       onClick={handleLikeButtonClick} 
       style={{cursor: 'pointer'}}
       size={30}
-       /> :
+       /> 
+    // <Lottie 
+    //   animationData={likeLottie}
+    //   onClick={handleLikeButtonClick}
+    //   style={{ width: 'auto', height: '80px'}} />
+       :
     <FaRegBookmark 
       onClick={handleLikeButtonClick} 
       style={{cursor: 'pointer'}}
       size={30}
        />
+    
 
 
   return (
