@@ -3,11 +3,9 @@ import { useState, useEffect } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
 import styled from "styled-components"
 
-
 import LikeButton from "../../common/Like"
 import api from "../../api/api"
 import { recordDataState } from "../../state/atoms";
-
 
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
@@ -31,9 +29,20 @@ const NewsContainer = styled.div`
 
 
 function MainNewsCard({ recommendData }) {
+
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleDoubleClick = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
-    <NewsContainer>
-      <MainNewsHeader recommendData={recommendData} />
+    <NewsContainer onDoubleClick={handleDoubleClick}>
+      <MainNewsHeader
+        recommendData={recommendData}
+        isLiked={isLiked}
+        setIsLiked={setIsLiked}
+      />
       <MainNewsImage
         src={recommendData.imageUrl}
         alt="news image"
