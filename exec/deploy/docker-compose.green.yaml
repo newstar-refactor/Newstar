@@ -14,7 +14,7 @@ services:
         ports:
           - 3001:3000
     fastapi:
-        container_name: fastapi-blue
+        container_name: fastapi-green
         image: fastapi
         ports:
           - 8001:8000
