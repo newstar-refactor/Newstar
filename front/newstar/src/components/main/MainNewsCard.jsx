@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 
 import LikeButton from "../../common/Like"
-import api from "../../api/api"
+import { api } from "../../api/api"
 import { recordDataState } from "../../state/atoms";
 
 
