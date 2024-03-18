@@ -15,7 +15,7 @@ services:
           - 3001:3000
     fastapi:
         container_name: fastapi-green
-        image: fastapi
+        image: fastapi_back
         ports:
           - 8001:8000
         restart: always
