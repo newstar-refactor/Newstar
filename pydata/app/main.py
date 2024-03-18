@@ -26,7 +26,8 @@ async def add_process(request: Request, call_next):
       # 요청 객체의 state 속성을 사용하여 user_id 저장
       request.state.member_id = member_id
       # 요청을 다음 단계로 전달
-
+    else:
+      request.state.member_id = ""
     response = await call_next(request)
     return response
 

@@ -14,6 +14,3 @@ class ArticleSchema(BaseModel):
     Scategory: int
     image_url: str
     content: str
-
-    class Config:
-        orm_mode = True
