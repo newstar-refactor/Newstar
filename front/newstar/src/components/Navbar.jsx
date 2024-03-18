@@ -68,7 +68,7 @@ function BottomNavbar() {
         <Link to={'/search'}><IoSearch size="20" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/collect'}><FaList size="20" /></Link>
+        <Link to={'/category'}><FaList size="20" /></Link>
       </NavContent>
       <NavContent>
         <Link to={'/mypage'}><BsFillPersonFill size="20" /></Link>
