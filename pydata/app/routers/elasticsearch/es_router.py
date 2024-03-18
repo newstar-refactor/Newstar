@@ -1,15 +1,24 @@
 import json
+import os
 
 from elasticsearch import Elasticsearch
 from fastapi import APIRouter
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
+SECRET_FILE = os.path.join(PARENT_DIR, 'secrets.json')
+
+with open(SECRET_FILE) as f:
+    secrets = json.load(f)
+
+ES = secrets['ES']
 router = APIRouter(
     prefix="/inites",
 )
 
 @router.get("")
 def init_es():
-    es = Elasticsearch("http://localhost:9200/")  # 환경에 맞게 바꿀 것
+    es = Elasticsearch(f"{ES['ES_BASE_URL']}")  # 환경에 맞게 바꿀 것
     es.info()
 
     # def make_index(es, index_name):

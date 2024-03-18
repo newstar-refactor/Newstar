@@ -1,7 +1,19 @@
+import os
+import json
+
 from fastapi import APIRouter
 from typing import List
 from app.routers.search.search_schema import Articles, Keyword
 from elasticsearch import Elasticsearch
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
+SECRET_FILE = os.path.join(PARENT_DIR, 'secrets.json')
+
+with open(SECRET_FILE) as f:
+    secrets = json.load(f)
+
+ES = secrets['ES']
 
 router = APIRouter(
     prefix="/news",
@@ -14,7 +26,7 @@ def search(keyword: Keyword):
     res = []
     index_name = 'article'
 
-    es = Elasticsearch("http://localhost:9200/")
+    es = Elasticsearch(f"{ES['ES_BASE_URL']}")
     results = es.search(index=index_name, body={'from': 0, 'size': 10, 'query': {'match': {'content': keyword}}})
     for result in results['hits']['hits']:
         article_id = result['_source']['article_id']
