@@ -1,8 +1,8 @@
 import { useState } from "react"
-
 import styled from "styled-components"
-
 import Tag from "../../common/Tag"
+import LikeButton from "../../common/Like"
+import { recordDataState } from "../../state/atoms"
 
 const MainNewsHeaderContainer = styled.div`
   padding: 20px 20px 10px;
@@ -49,7 +49,7 @@ const SmallCategory = {
 }
 
 // 뉴스 헤더 (제목, 날짜, 태그)
-export default function NewsHeader({ recommendData }) {
+export default function NewsHeader({ recommendData, isLiked, setIsLiked }) {
   const recordDatas = [
     {
       id: 0,
@@ -74,24 +74,24 @@ export default function NewsHeader({ recommendData }) {
   ]
 
   // 좋아요 상태 관리
-  const [isLiked, setIsLiked] = useState(false)
+  // const [recoilRecordDatas, setRecoilRecordDatas] = useRecoilState(recordDataState);
   function handleLikeButtonClick() {
     setIsLiked(!isLiked)
-    toggleLike()
+    // toggleLike()
   }
 
   // 좋아요 상태 업데이트
   // const [recordDatas, setRecordDatas] = useRecoilState(recordDataState)
-  const likeRecord = recordDatas.findIndex((record) => record === recommendData)
+  // const likeRecord = recordDatas.findIndex((record) => record === recommendData)
 
-  function toggleLike() {
-    const newRecord = replaceItemAtIndex(recordDatas, likeRecord, {
-      ...recommendData,
-      like: !recommendData.like
-    })
+  // function toggleLike() {
+  //   const newRecord = replaceItemAtIndex(recordDatas, likeRecord, {
+  //     ...recommendData,
+  //     like: !recommendData.like
+  //   })
 
     // setRecordDatas(newRecord)
-  }
+  // }
 
   return (
     <MainNewsHeaderContainer>
@@ -110,10 +110,10 @@ export default function NewsHeader({ recommendData }) {
             fontSize={'12px'}>
               {`# ${SmallCategory[recommendData.Scategory]}`}</Tag>
         </NewsTags>
-        {/* <LikeButton 
+        <LikeButton 
           isLiked={isLiked}
           handleLikeButtonClick={handleLikeButtonClick}
-            /> */}
+            />
       </NewsTagAndLike>
     </MainNewsHeaderContainer>
     )
