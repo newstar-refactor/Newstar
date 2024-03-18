@@ -20,13 +20,14 @@ public class Member {
   @Column(name = "member_id")
   private Long id;
 
-  private String email;
-
-  private String gender;
-
-  private int age;
+  private String pw;
 
   private LocalDateTime signDate;
 
-  private Boolean status;
+  public static Member createMember(String pw) {
+    Member member = new Member();
+    member.pw = pw;
+    member.signDate = LocalDateTime.now();
+    return member;
+  }
 }

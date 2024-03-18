@@ -1,3 +1,18 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  font-family: 'SUITE-Regular', sans-serif;
+}
+
+svg {
+  width: auto;
+}
+
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -10,6 +25,8 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+ 
+ 
   -moz-osx-font-smoothing: grayscale;
 }
 
