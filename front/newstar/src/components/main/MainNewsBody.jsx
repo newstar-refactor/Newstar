@@ -5,12 +5,12 @@ const MainNewsBodyWrapper = styled.div`
   padding: 20px;
 `
 
-export default function NewsBody({ recommendData }) {
+export default function NewsBody({ newsData }) {
   return (
     <MainNewsBodyWrapper>
-      <div>{recommendData.content}</div>
+      <div>{newsData.content}</div>
       <br />
-      <a href={recommendData.url}><BookMark recommendData={recommendData} /></a>
+      <a href={newsData.url}><BookMark newsData={newsData} /></a>
     </MainNewsBodyWrapper>
   )
 }

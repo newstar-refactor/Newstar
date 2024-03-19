@@ -1,11 +1,6 @@
 // 메인 페이지 뉴스 카드
 import { useState, useEffect } from "react"
-import { useRecoilState, useSetRecoilState } from "recoil"
 import styled from "styled-components"
-
-import LikeButton from "../../common/Like"
-import { api } from "../../api/api"
-import { recordDataState } from "../../state/atoms";
 
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
@@ -28,7 +23,7 @@ const NewsContainer = styled.div`
 
 
 
-function MainNewsCard({ recommendData }) {
+function MainNewsCard({ newsData }) {
 
   const [isLiked, setIsLiked] = useState(false);
 
@@ -39,19 +34,17 @@ function MainNewsCard({ recommendData }) {
   return (
     <NewsContainer onDoubleClick={handleDoubleClick}>
       <MainNewsHeader
-        recommendData={recommendData}
+        newsData={newsData}
         isLiked={isLiked}
         setIsLiked={setIsLiked}
       />
       <MainNewsImage
-        src={recommendData.imageUrl}
+        src={newsData.imageUrl}
         alt="news image"
         />
-      <MainNewsBody recommendData={recommendData} />
+      <MainNewsBody newsData={newsData} />
     </NewsContainer>
   )
-
-  
 }
 
 export default MainNewsCard
