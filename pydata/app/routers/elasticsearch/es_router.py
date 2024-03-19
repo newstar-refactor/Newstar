@@ -18,7 +18,7 @@ router = APIRouter(
 
 @router.get("")
 def init_es():
-    es = Elasticsearch(f"{ES['ES_BASE_URL']}")  # 환경에 맞게 바꿀 것
+    es = Elasticsearch(f"{ES['host']}")  # 환경에 맞게 바꿀 것
     es.info()
 
     # def make_index(es, index_name):
@@ -26,7 +26,7 @@ def init_es():
     #         es.indices.delete(index=index_name)
     #     print(es.indices.create(index=index_name))
 
-    with open('mapping.json', 'r') as f:
+    with open('./app/routers/elasticsearch/mapping.json', 'r') as f:
         mapping = json.load(f)
         settings = mapping.get("settings", {})
     mappings = mapping.get("mappings", {})
