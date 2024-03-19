@@ -9,6 +9,7 @@ from app.routers.elasticsearch import es_service, es_router
 from app.routers.member.member_crud import get_user_by_pw
 from app.routers.recode import recode_router
 from app.routers.recommend import recommend_router
+from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
 
 app = FastAPI()
@@ -38,6 +39,7 @@ async def startup():
 @app.get("/crawling")
 async def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
+  makemodel()
   article_id = es_service.last_article_id()
 
   if article_id.loc[0]['article_id'] == 0:
