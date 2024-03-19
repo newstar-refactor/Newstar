@@ -6,11 +6,15 @@ import styled from "styled-components";
 
 // styled-components
 const BoxContainer = styled.div`
+  // display: flex;
+  // align-items: center;
+  // border: 1px solid;
+  // padding: 10px;
+  // cursor: pointer;
   display: flex;
-  align-items: center;
-  border: 1px solid;
-  padding: 10px;
-  cursor: pointer;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 `
 // dummy data
 // const NewsData = [
