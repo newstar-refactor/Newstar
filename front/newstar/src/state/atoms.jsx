@@ -5,13 +5,8 @@ const newsDataState = atom({
   default: ""
 })
 
-const wordState = atom({
-  key: "atomState",
-  default: ""
-})
-
-const recommendDataState = atom({
-  key: "recommendState",
+const keywordState = atom({
+  key: "keywordState",
   default: ""
 })
 
@@ -27,8 +22,6 @@ const categoryDataState = atom({
 
 export { 
   newsDataState, 
-  wordState, 
-  recommendDataState, 
   recordDataState,
   categoryDataState
  }

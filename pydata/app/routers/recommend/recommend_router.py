@@ -12,7 +12,7 @@ from app.services.learning.news_recommend import recomm
 from app.database import get_db
 
 router = APIRouter(
-    prefix="/recommend",
+    prefix="/api/data/recommend",
 )
 
 # 추천할 뉴스 뽑기
@@ -22,7 +22,10 @@ async def recommend(request: Request, db: Session = Depends(get_db)):
 
     if member_id is None:
         raise HTTPException(status_code=400, detail="member_id is missing in the header")
-    li = await get_like_list(db, member_id)
+    elif member_id != "":
+        li = await get_like_list(db, member_id)
+    else:
+        li = ""
 
     return get_recommend_info(db, recomm(li))
 

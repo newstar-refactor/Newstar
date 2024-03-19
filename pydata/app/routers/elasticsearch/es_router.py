@@ -13,7 +13,7 @@ with open(SECRET_FILE) as f:
 
 ES = secrets['ES']
 router = APIRouter(
-    prefix="/inites",
+    prefix="/api/data/inites",
 )
 
 @router.get("")
@@ -26,7 +26,7 @@ def init_es():
     #         es.indices.delete(index=index_name)
     #     print(es.indices.create(index=index_name))
 
-    with open('mapping.json', 'r') as f:
+    with open('./app/routers/elasticsearch/mapping.json', 'r') as f:
         mapping = json.load(f)
         settings = mapping.get("settings", {})
     mappings = mapping.get("mappings", {})

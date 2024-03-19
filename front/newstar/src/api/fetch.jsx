@@ -22,15 +22,15 @@ function getMembers(success, fail) {
 }
 
 // 새로운 회원 등록
-function postMembers(data, success, fail) {
-  return axiosInstance.post(api.members, data)
+function postMembers(success, fail) {
+  return axiosInstance.post(api.members)
     .then(success)
     .catch(fail)
 }
 
 // 시청기록 조회
-function getRecodes(success, fail) {
-  return axiosInstance.get(api.recodes)
+function getRecords(success, fail) {
+  return axiosInstance.get(api.records)
     .then(success)
     .catch(fail)
 }
@@ -67,7 +67,7 @@ export { getNews,
   searchNews, 
   getMembers, 
   postMembers, 
-  getRecodes, 
+  getRecords, 
   getLikes,
   getKeyword,
   getCategoryNews,
