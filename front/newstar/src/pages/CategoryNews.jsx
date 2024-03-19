@@ -11,7 +11,7 @@ import CategoryNewsCard from '../components/main/CategoryNewsCard'
 const CategoryNewsCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
   padding: 20px;
 `
 

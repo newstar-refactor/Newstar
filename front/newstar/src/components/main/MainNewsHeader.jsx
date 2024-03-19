@@ -95,11 +95,6 @@ export default function NewsHeader({ recommendData, isLiked, setIsLiked }) {
 
   return (
     <MainNewsHeaderContainer>
-      <h2>{recommendData.title}</h2>
-      <br />
-      <div style={{color: 'gray'}}>{recommendData.date}</div>
-      <br />
-    
       <NewsTagAndLike>
         <NewsTags>
           <Tag 
@@ -115,6 +110,11 @@ export default function NewsHeader({ recommendData, isLiked, setIsLiked }) {
           handleLikeButtonClick={handleLikeButtonClick}
             />
       </NewsTagAndLike>
+      <br />
+      <h2>{recommendData.title}</h2>
+      <br />
+      <div style={{color: 'gray'}}>{recommendData.date}</div>
+      {/* <br /> */}
     </MainNewsHeaderContainer>
     )
   }
