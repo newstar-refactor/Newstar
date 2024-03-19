@@ -58,7 +58,7 @@ fi
 
 EXIST_NONE_IMAGES=$(docker images -f "dangling=true" -q)
 
-if [ -n "EXIST_NONE_IMAGE" ]; then
+if [ -n "$EXIST_NONE_IMAGE" ]; then
     docker rmi $EXIST_NONE_IMAGES
 fi
 
