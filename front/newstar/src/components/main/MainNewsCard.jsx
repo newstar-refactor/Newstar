@@ -35,7 +35,7 @@ function MainNewsCard({ newsData }) {
   return (
     <NewsContainer onDoubleClick={handleDoubleClick}>
       <MainNewsImage
-        src={recommendData.imageUrl}
+        src={newsData.imageUrl}
         alt="news image"
       />
 
@@ -44,7 +44,7 @@ function MainNewsCard({ newsData }) {
         isLiked={isLiked}
         setIsLiked={setIsLiked}
       />
-      <MainNewsBody recommendData={recommendData} />
+      <MainNewsBody newsData={newsData} />
     </NewsContainer>
   )
 }
