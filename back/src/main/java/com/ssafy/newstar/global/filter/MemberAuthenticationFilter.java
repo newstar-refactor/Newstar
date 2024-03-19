@@ -22,10 +22,11 @@ import org.springframework.http.MediaType;
 public class MemberAuthenticationFilter implements Filter {
   private final MemberRepository memberRepository;
 
-  private final static List<String> whiteList = new ArrayList<>();
+  private final static List<URLMethod> whiteList = new ArrayList<>();
   static {
-    // jwt 토큰이 필요 없는 곳은 uri 추가
-//    whiteList.add("/api/members");
+    //  key 값이 필요 없는 곳은 uri 추가
+    whiteList.add(new URLMethod("/api/members", "POST"));
+    whiteList.add(new URLMethod("/members", "POST"));
   }
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -33,7 +34,8 @@ public class MemberAuthenticationFilter implements Filter {
     HttpServletRequest servletRequest = (HttpServletRequest) request;
     HttpServletResponse servletResponse = (HttpServletResponse) response;
     String requestURI = servletRequest.getRequestURI();
-    if (requestURI.equals("/api") || checkWhiteList(requestURI)) {
+    String requestMethod = servletRequest.getMethod();
+    if (requestURI.equals("/api") || checkWhiteList(requestURI, requestMethod)) {
       chain.doFilter(request, response);
       return;
     }
@@ -42,10 +44,10 @@ public class MemberAuthenticationFilter implements Filter {
 
     try {
       // 회원을 선별하는 UUID 값
-      String key = servletRequest.getHeader("key");
-      log.info("key 값 : " + key);
+      String key = servletRequest.getHeader("X-User-Id");
+      log.info("X-User-Id 값 : " + key);
       if (key == "" || key == null ) {
-        log.info("key 값이 비어 있습니다.");
+        log.info("X-User-Id 값이 비어 있습니다.");
         throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
       }
 
@@ -55,7 +57,7 @@ public class MemberAuthenticationFilter implements Filter {
         throw new GlobalException(ErrorCode.MEMBER_NOT_FOUND);
       }
       servletRequest.setAttribute("memberId", member.getId());
-
+      log.info(" memberId : " + member.getId());
       // 다음 필터 없으면 컨트롤러로 가겠지
       chain.doFilter(request, response);
     } catch (GlobalException e) {
@@ -64,9 +66,9 @@ public class MemberAuthenticationFilter implements Filter {
     }
   }
 
-  private boolean checkWhiteList(String requestURI) {
-    for (String white : whiteList) {
-      if (requestURI.contains(white)) {
+  private boolean checkWhiteList(String requestURI, String requestMethod) {
+    for (URLMethod urlMethod : whiteList) {
+      if (requestURI.equals(urlMethod.getUrl()) && requestMethod.equals(urlMethod.getMethod()) ) {
         return true;
       }
     }
