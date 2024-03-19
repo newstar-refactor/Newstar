@@ -12,7 +12,7 @@ from app.services.learning.news_recommend import recomm
 from app.database import get_db
 
 router = APIRouter(
-    prefix="/recommend",
+    prefix="/api/data/recommend",
 )
 
 # 추천할 뉴스 뽑기
