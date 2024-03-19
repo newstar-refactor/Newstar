@@ -12,8 +12,8 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class SchedulerConfiguration {
 
-  private final WebClient webClient = WebClient.create("http://localhost:8000");
-  @Scheduled(cron = "0 30 * * * *") // 매일 매시 05분에 실행
+  private final WebClient webClient = WebClient.create("https://newstar.world/api/data");
+  @Scheduled(cron = "0 5 * * * *") // 매일 매시 05분에 실행
   public void doCrawling() {
     log.info("크롤링 ing");
 
