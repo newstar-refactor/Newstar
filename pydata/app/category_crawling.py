@@ -65,7 +65,13 @@ def do_crawling():
 
           # 본문 내용 추출
           article_content = html_article.select_one("article#dic_area")
+          # 이미지 설명 제거
+          for tag in article_content.find_all("em", {"class": "img_desc"}):
+            tag.decompose()
           content = article_content.get_text(" ", strip=True) if article_content else None
+          # 기사 본문의 글자가 400보다 적으면 넘기기
+          if len(content) < 400:
+            continue
 
           # 작성 날짜 추출
           date_element = html_article.select_one("div.media_end_head_info_datestamp_bunch span.media_end_head_info_datestamp_time")
@@ -78,8 +84,7 @@ def do_crawling():
             else:
               temp_time = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
             article_hour = temp_time.hour
-            print("article : " + str(article_hour) )
-            print("article : " + str(current_hour) + "\n")
+            print("시각 : " + str(article_hour) )
             # 24시간 형식으로 변환하여 저장
             date = temp_time.strftime("%Y-%m-%d %H:%M:%S")
           else:

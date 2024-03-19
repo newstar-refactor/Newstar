@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 
 router = APIRouter(
-    prefix="/recode",
+    prefix="/api/data/recode",
 )
 
 

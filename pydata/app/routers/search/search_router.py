@@ -16,7 +16,7 @@ with open(SECRET_FILE) as f:
 ES = secrets['ES']
 
 router = APIRouter(
-    prefix="/news",
+    prefix="/api/data/news",
 )
 
 @router.post("", response_model=List[Articles])

@@ -23,7 +23,7 @@ def last_article_id(db: Session = Depends(get_db)):
 
 def init_es(db: Session = Depends(get_db)):
     articles = es_crud.get_article_all(db)
-    es = Elasticsearch(f"{ES['ES_BASE_URL']}")
+    es = Elasticsearch(f"{ES['host']}")
 
     for idx, row in articles.iterrows():
         doc = {'article_id' : row['article_id'], 'title' : row['title'], 'content' : row['content'], 'image_url' : row['image_url']}
@@ -32,7 +32,7 @@ def init_es(db: Session = Depends(get_db)):
 
 def add_es(article_id : int, db: Session = Depends(get_db())):
     articles = es_crud.get_recent_article(article_id, db)
-    es = Elasticsearch("http://localhost:9200/")
+    es = Elasticsearch(f"{ES['host']}")
 
     for idx, row in articles.iterrows():
         doc = {'article_id' : row['article_id'], 'title' : row['title'], 'content' : row['content'], 'image_url' : row['image_url']}

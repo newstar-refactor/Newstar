@@ -29,15 +29,15 @@ const BookMarkImage = styled.img`
 `
 
 // 뉴스 북마크
-export default function BookMark({ recommendData }) {
+export default function BookMark({ newsData }) {
   return (
     <BookMarkWrapper>
       <BookMarkInfo>
-        <div>{recommendData.title}</div>
-        <div style={{color: 'gray'}}>{recommendData.content}</div>
-        <div style={{color: 'gray'}}>{recommendData.url}</div>
+        <div>{newsData.title}</div>
+        <div style={{color: 'gray'}}>{newsData.content}</div>
+        <div style={{color: 'gray'}}>{newsData.url}</div>
       </BookMarkInfo>
-      <BookMarkImage src={recommendData.imageUrl} alt="news image" />
+      <BookMarkImage src={newsData.imageUrl} alt="news image" />
     </BookMarkWrapper>
   )
 }

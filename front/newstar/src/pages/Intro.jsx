@@ -1,6 +1,8 @@
 // 앱 소개 및 설명 페이지
 // 아래로 스크롤
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { postMembers } from '../api/fetch'
 
 import styled from "styled-components"
 
@@ -68,6 +70,27 @@ const LottieStyle = {
 
 export default function Intro() {
   const navigate = useNavigate()
+
+  useState(() => {
+    postMembers(
+      ({ response }) => {
+
+        // 응답으로 받은 key
+        const key = response.data.X-USER-ID
+
+        if (!localStorage.getItem('X-USER-ID')) {
+          localStorage.setItem('X-USER-ID', key)
+          console.log('새로운 회원이 등록되었습니다.')
+        } else {
+          console.log('이미 등록된 회원입니다.')
+        }
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }, [])
+
   return (
     <IntroWrapper>
       <IntroBox1>

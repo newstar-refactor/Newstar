@@ -4,7 +4,8 @@
 import { useEffect } from 'react';
 import { api } from '../api/api'
 import { useRecoilState } from 'recoil'
-import { recommendDataState, recordDataState } from '../state/atoms'
+import { newsDataState, recordDataState } from '../state/atoms'
+import { getNews, getRecords } from '../api/fetch'
 
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
@@ -14,30 +15,32 @@ import MainNewsCard from '../components/main/MainNewsCard'
 
 
 export default function Main() {
-  // const [recommendDatas, setRecommendDatas] = useRecoilState(recommendDataState)
+  // const [newsDatas, setNewsDatas] = useRecoilState(newsDataState)
   // const [recordDatas, setRecordDatas] = useRecoilState(recordDataState)
 
-  // useEffect(() => {
-  //   axios.get(api.news, { headers: {'key': 'key값'} })
-  //     .then(res => {
-  //       setRecommendDatas(res.data)
-  //     })
-  //     .catch(err => {
-  //       console.error('Error fetching data:', err)
-  //     })
+  // useState(() => {
+  //   getNews(
+  //     ({ response }) => {
+  //       setNewsDatas(response.data)
+  //     },
+  //     (error) => {
+  //       console.log(error)
+  //     }
+  //   )
   // })
 
   // useEffect(() => {
-  //   axios.get(api.record)
-  //     .then(res => {
-  //       setRecordDatas(res.data)
-  //     })
-  //     .catch(err => {
-  //       console.error('Error fetching data:', err)
-  //     })
+  //   getRecords(
+  //     ({ response }) => {
+  //       setRecordDatas(response.data)
+  //     },
+  //     (error) => {
+  //       console.log(error)
+  //     }
+  //   )
   // })
 
-  const recommendDatas = [
+  const newsDatas = [
     {
       id: 0,
       title: '유정복 시장과 악수하는 윤 대통령',
@@ -71,10 +74,10 @@ export default function Main() {
   return (
     <>
       <Slider {...sliderSettings}>
-        {recommendDatas.map((recommendData) => (
+        {newsDatas.map((newsData) => (
           <MainNewsCard
-            key={recommendData.id}
-            recommendData={recommendData} />))
+            key={newsData.id}
+            newsData={newsData} />))
         }
       </Slider>
     </>

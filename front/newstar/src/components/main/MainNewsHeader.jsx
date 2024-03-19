@@ -49,7 +49,7 @@ const SmallCategory = {
 }
 
 // 뉴스 헤더 (제목, 날짜, 태그)
-export default function NewsHeader({ recommendData, isLiked, setIsLiked }) {
+export default function NewsHeader({ newsData, isLiked, setIsLiked }) {
   const recordDatas = [
     {
       id: 0,
@@ -100,10 +100,10 @@ export default function NewsHeader({ recommendData, isLiked, setIsLiked }) {
           <Tag 
             fontSize={'12px'}
             >
-              {`# ${BigCategory[recommendData.Bcategory]}`}</Tag>
+              {`# ${BigCategory[newsData.Bcategory]}`}</Tag>
           <Tag 
             fontSize={'12px'}>
-              {`# ${SmallCategory[recommendData.Scategory]}`}</Tag>
+              {`# ${SmallCategory[newsData.Scategory]}`}</Tag>
         </NewsTags>
         <LikeButton 
           isLiked={isLiked}
