@@ -30,6 +30,7 @@ services:
           - --collation-server=utf8mb4_unicode_ci
         volumes:
           - ./data/mysql/:/var/lib/mysql
+          - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
     jenkins:
         container_name: jenkins
         image: jenkins/custom
@@ -44,7 +45,7 @@ services:
             #JENKINS_OPTS: --httpPort=9999 --prefix=/jenkins
     elastic:
         container_name: elastic
-        image: docker.elastic.co/elasticsearch/elasticsearch:8.10.1
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
         restart: always
         ports:
           - 9200:9200
