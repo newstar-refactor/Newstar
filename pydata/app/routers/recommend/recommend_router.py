@@ -30,7 +30,7 @@ async def recommend(request: Request, db: Session = Depends(get_db)):
     return get_recommend_info(db, recomm(li))
 
 # 모델 재생성
-@router.post("/models")
+@router.post("/model")
 def makemodel(db: Session = Depends(get_db)):
     make_model(get_news_all(db))
     return {"message" : "makemodel"}
