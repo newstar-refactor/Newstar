@@ -13,7 +13,7 @@ with open(SECRET_FILE) as f:
 
 ES = secrets['ES']
 router = APIRouter(
-    prefix="/inites",
+    prefix="/api/data/inites",
 )
 
 @router.get("")

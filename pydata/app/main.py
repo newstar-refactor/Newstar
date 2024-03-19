@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, APIRouter
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
 
@@ -13,6 +13,9 @@ from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
 
 app = FastAPI()
+router = APIRouter(prefix="/api/data")
+
+
 # 메타데이터를 생성한다.
 metadata_obj = MetaData()
 
@@ -36,7 +39,7 @@ async def add_process(request: Request, call_next):
 async def startup():
   init_db()
 
-@app.get("/crawling")
+@router.get("/crawling")
 async def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   makemodel()
@@ -50,7 +53,7 @@ async def start_crawling():
   es_service.update_last_article_id()
   return {"message": "complete crawling"}
 
-
+app.include_router(router)
 app.include_router(recommend_router.router)
 app.include_router(recode_router.router)
 app.include_router(search_router.router)
