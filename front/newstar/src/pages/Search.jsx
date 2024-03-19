@@ -36,7 +36,6 @@ export default function Search() {
 
   return (
     <div>
-      <div>검색페이지</div>
       <SearchBar setKeyword={setKeyword} onSearch={fetchNews}/>
       <SearchNewsList NewsData={filteredNews} />
     </div>

@@ -12,6 +12,11 @@ def do_crawling():
                   [258, 259, 260, 261, 262, 263, 310, 771],
                   [731, 226, 227, 230, 732, 283, 229, 228] ]
 
+  # Bcategories = [100, 101, 105]  # 정치, 경제, IT | 총 22개 | 6개씩 총 132개의 기사를 크롤링
+  # Scategories = [ [264],
+  #                 [258],
+  #                 [731] ]
+
   resultList = []
   prev_content = None  # 이전 뉴스의 내용을 저장할 변수
 
@@ -60,7 +65,11 @@ def do_crawling():
 
           # 본문 내용 추출
           article_content = html_article.select_one("article#dic_area")
+          # 이미지 설명 제거
+          for tag in article_content.find_all("em", {"class": "img_desc"}):
+            tag.decompose()
           content = article_content.get_text(" ", strip=True) if article_content else None
+
 
           # 작성 날짜 추출
           date_element = html_article.select_one("div.media_end_head_info_datestamp_bunch span.media_end_head_info_datestamp_time")

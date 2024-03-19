@@ -1,10 +1,21 @@
+import json
+import os
+
 from elasticsearch import Elasticsearch
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from database import get_db
-from routers.elasticsearch import es_crud
+from app.database import get_db
+from app.routers.elasticsearch import es_crud
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
+SECRET_FILE = os.path.join(PARENT_DIR, 'secrets.json')
+
+with open(SECRET_FILE) as f:
+    secrets = json.load(f)
+
+ES = secrets['ES']
 
 def last_article_id(db: Session = Depends(get_db)):
     article_id = es_crud.get_last_article_id(db)
@@ -12,7 +23,7 @@ def last_article_id(db: Session = Depends(get_db)):
 
 def init_es(db: Session = Depends(get_db)):
     articles = es_crud.get_article_all(db)
-    es = Elasticsearch("http://localhost:9200/")
+    es = Elasticsearch(f"{ES['ES_BASE_URL']}")
 
     for idx, row in articles.iterrows():
         doc = {'article_id' : row['article_id'], 'title' : row['title'], 'content' : row['content'], 'image_url' : row['image_url']}

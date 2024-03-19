@@ -99,7 +99,7 @@ export default function NewsHeader({ newsData, isLiked, setIsLiked }) {
       <br />
       <div style={{color: 'gray'}}>{newsData.date}</div>
       <br />
-      
+    
       <NewsTagAndLike>
         <NewsTags>
           <Tag 
