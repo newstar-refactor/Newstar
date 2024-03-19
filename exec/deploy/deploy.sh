@@ -56,5 +56,9 @@ if [ -n "$EXIST_AFTER" ]; then
     docker compose -p deploy-${BEFORE_COLOR} -f docker-compose.${BEFORE_COLOR}.yaml down
 fi
 
-docker rmi $(docker images -f "dangling=true" -q)
+EXIST_NONE_IMAGES=$(docker images -f "dangling=true" -q)
+
+if [ -n "EXIST_NONE_IMAGE" ]; then
+    docker rmi $EXIST_NONE_IMAGES
+fi
 
