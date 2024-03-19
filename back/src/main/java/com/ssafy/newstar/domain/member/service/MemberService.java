@@ -17,8 +17,8 @@ public class MemberService {
 
   private final MemberRepository memberRepository;
   private final CategoryRepository categoryRepository;
-  public Member getMember(Long pw) {
-    return memberRepository.findById(pw).get();
+  public Member getMember(Long memberId) {
+    return memberRepository.findById(memberId).get();
   }
 
   public Member createMember(MemberRequest memberRequest) {
