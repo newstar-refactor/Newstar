@@ -18,7 +18,7 @@ router = APIRouter(
 
 @router.get("")
 def init_es():
-    es = Elasticsearch(f"{ES['ES_BASE_URL']}")  # 환경에 맞게 바꿀 것
+    es = Elasticsearch(f"{ES['host']}")  # 환경에 맞게 바꿀 것
     es.info()
 
     # def make_index(es, index_name):
