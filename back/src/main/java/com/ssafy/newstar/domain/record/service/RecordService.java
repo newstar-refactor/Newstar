@@ -1,18 +1,24 @@
 package com.ssafy.newstar.domain.record.service;
 
 import com.ssafy.newstar.domain.article.entity.Article;
+import com.ssafy.newstar.domain.member.entity.Member;
+import com.ssafy.newstar.domain.member.repository.MemberRepository;
+import com.ssafy.newstar.domain.record.dto.RecordLikeRequest;
 import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.repository.RecordRepository;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RecordService {
     private final RecordRepository recordRepository;
 
@@ -33,5 +39,10 @@ public class RecordService {
         return records.stream()
                 .map(Record::getArticle)
                 .toList();
+    }
+
+    public void updateRecordLikes(Long memberId, RecordLikeRequest request) {
+        Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticle_id());
+        record.updateLikes(request.getLikes());
     }
 }
