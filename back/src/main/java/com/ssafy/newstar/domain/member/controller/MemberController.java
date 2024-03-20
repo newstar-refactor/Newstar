@@ -6,8 +6,11 @@ import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseE
 import com.ssafy.newstar.domain.member.dto.MemberRequest;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.service.MemberService;
+import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
+import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +27,11 @@ public class MemberController {
   @GetMapping("/members")
   public ResponseEntity<?> matchingMember(HttpServletRequest request) {
     Long memberId = (Long) request.getAttribute("memberId");
-    Member member = memberService.getMember(memberId);
-    return getResponseEntity(SuccessCode.OK, createMemberResponse(member));
+    Optional<Member> member = memberService.getMember(memberId);
+    member.orElseThrow(
+        () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
+
+    return getResponseEntity(SuccessCode.OK, createMemberResponse(member.get()));
   }
 
   // 회원가입 로직
