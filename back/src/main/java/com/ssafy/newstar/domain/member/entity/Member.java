@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Member {
   @Column(name = "member_id")
   private Long id;
 
+  @Column(unique = true)
   private String pw;
 
   private LocalDateTime signDate;

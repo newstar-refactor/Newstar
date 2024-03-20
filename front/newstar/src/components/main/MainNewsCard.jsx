@@ -34,15 +34,16 @@ function MainNewsCard({ newsData }) {
 
   return (
     <NewsContainer onDoubleClick={handleDoubleClick}>
+      <MainNewsImage
+        src={newsData.imageUrl}
+        alt="news image"
+      />
+
       <MainNewsHeader
         newsData={newsData}
         isLiked={isLiked}
         setIsLiked={setIsLiked}
       />
-      <MainNewsImage
-        src={newsData.imageUrl}
-        alt="news image"
-        />
       <MainNewsBody newsData={newsData} />
     </NewsContainer>
   )
