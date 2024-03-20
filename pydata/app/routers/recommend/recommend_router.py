@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.routers.recode.recode_crud import get_like_list
-from app.routers.recommend.recommend_crud import get_news_all, get_recommend_info
+from app.routers.recommend.recommend_crud import get_news_all, get_recommend_info, get_article_count
 from app.routers.recommend.recommend_schema import ArticleSchema
 from app.services.learning.news_doc2vec import make_model
 from app.services.learning.news_recommend import recomm
@@ -27,7 +27,8 @@ async def recommend(request: Request, db: Session = Depends(get_db)):
     else:
         li = ""
 
-    return get_recommend_info(db, recomm(li))
+    maxsize = get_article_count(db)
+    return get_recommend_info(db, recomm(li, maxsize))
 
 # 모델 재생성
 @router.post("/model")
