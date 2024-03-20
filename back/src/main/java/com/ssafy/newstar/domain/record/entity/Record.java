@@ -13,6 +13,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -32,13 +33,14 @@ public class Record {
   @JoinColumn(name = "article_id")
   Article article;
 
+  @ColumnDefault("false")
   private Boolean likes;
 
-  public  static Record createRecode(Member member, Article article, Boolean likes) {
+  public  static Record createRecode(Member member, Article article) {
     Record record = new Record();
     record.member = member;
     record.article = article;
-    record.likes = likes;
+    record.likes = false;
     return record;
   }
 }

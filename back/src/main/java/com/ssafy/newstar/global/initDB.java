@@ -47,8 +47,8 @@ public class initDB {
       em.persist(article1);
       em.persist(article2);
 
-      Record record1 = Record.createRecode(member1, article1, true);
-      Record record2 = Record.createRecode(member1, article2, true);
+      Record record1 = Record.createRecode(member1, article1);
+      Record record2 = Record.createRecode(member1, article2);
       em.persist(record1);
       em.persist(record2);
     }
