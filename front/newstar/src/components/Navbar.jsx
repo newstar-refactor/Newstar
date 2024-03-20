@@ -62,16 +62,16 @@ function BottomNavbar() {
   return (
     <NavContainer>
       <NavContent>
-        <Link to={'/'}><FiHome size="20" /></Link>
+        <Link to={'/newstar'}><FiHome size="20" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/search'}><IoSearch size="20" /></Link>
+        <Link to={'/newstar/search'}><IoSearch size="20" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/category'}><FaList size="20" /></Link>
+        <Link to={'/newstar/category'}><FaList size="20" /></Link>
       </NavContent>
       <NavContent>
-        <Link to={'/mypage'}><BsFillPersonFill size="20" /></Link>
+        <Link to={'/newstar/mypage'}><BsFillPersonFill size="20" /></Link>
       </NavContent>
     </NavContainer>
   )

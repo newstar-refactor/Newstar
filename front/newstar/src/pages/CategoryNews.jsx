@@ -48,31 +48,31 @@ export default function CategoryNews() {
   const list100 = SmallCategory[100].map(small =>
     <SmallCategoryBox
       key={small.code} 
-      onClick={() => navigate(`/category/${small.code}`)}>
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
   const list101 = SmallCategory[101].map(small =>
     <SmallCategoryBox
       key={small.code} 
-      onClick={() => navigate(`/category/${small.code}`)}>
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
   const list105 = SmallCategory[105].map(small =>
     <SmallCategoryBox
       key={small.code} 
-      onClick={() => navigate(`/category/${small.code}`)}>
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
   return (
     <CategoryNewsContainer>
-      <BigCategoryBox onClick={() => navigate('/category/100')}>정치</BigCategoryBox>
+      <BigCategoryBox onClick={() => navigate('/newstar/category/100')}>정치</BigCategoryBox>
       {list100}
-      <BigCategoryBox onClick={() => navigate('/category/101')}>경제</BigCategoryBox>
+      <BigCategoryBox onClick={() => navigate('/newstar/category/101')}>경제</BigCategoryBox>
       {list101}
-      <BigCategoryBox onClick={() => navigate('/category/105')}>IT/과학</BigCategoryBox>
+      <BigCategoryBox onClick={() => navigate('/newstar/category/105')}>IT/과학</BigCategoryBox>
       {list105}
     </CategoryNewsContainer>
   )

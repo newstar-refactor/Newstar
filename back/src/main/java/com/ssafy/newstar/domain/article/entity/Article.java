@@ -24,9 +24,9 @@ public class Article {
 
   private LocalDateTime date;
 
-  private int Bcategory;
+  private int bcategory;
 
-  private int Scategory;
+  private int scategory;
 
   private String imageUrl;
 
@@ -38,8 +38,8 @@ public class Article {
     article.title = title;
     article.url = url;
     article.date = date;
-    article.Bcategory = Bcategory;
-    article.Scategory = Scategory;
+    article.bcategory = Bcategory;
+    article.scategory = Scategory;
     article.imageUrl = imageUrl;
     article.content = content;
     return article;

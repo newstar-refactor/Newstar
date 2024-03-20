@@ -2,9 +2,9 @@ package com.ssafy.newstar.domain.article.dto;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.domain.Slice;
 
 @Data
 @ToString
@@ -38,7 +38,7 @@ public class ArticleResponse {
     return articleResponse;
   }
 
-  public static List<ArticleResponse> createArticleResponse(List<Article> articles) {
-    return articles.stream().map(ArticleResponse::createArticleResponse).toList();
+  public static Slice<ArticleResponse> createArticleResponse(Slice<Article> articles) {
+    return articles.map(ArticleResponse::createArticleResponse);
   }
 }
