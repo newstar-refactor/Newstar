@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASEAPI = 'http://localhost:8080/api'
+const BASEAPI = '/api'
 
 const api = {
   news: '/data/news',
