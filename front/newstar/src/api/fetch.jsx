@@ -22,8 +22,8 @@ function getMembers(success, fail) {
 }
 
 // 새로운 회원 등록
-function postMembers(success, fail) {
-  return axiosInstance.post(api.members)
+function postMembers(cate, success, fail) {
+  return axiosInstance.post(api.members, cate)
     .then(success)
     .catch(fail)
 }

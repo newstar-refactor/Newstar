@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASEAPI = 'https://www.newstar.world/api'
+const BASEAPI = 'http://localhost:8080/api'
 
 const api = {
   news: '/data/news',
@@ -13,7 +13,7 @@ const api = {
 }
 
 const axiosInstance = axios.create({
-  baseURL: `${BASEAPI}`
+  baseURL: BASEAPI
 })
 
 axiosInstance.interceptors.request.use(

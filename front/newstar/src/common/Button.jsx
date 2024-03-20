@@ -2,12 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const NextButton = () => {
-  const navigate = useNavigate();
+const NextButton = ({onClick}) => {
 
   return (
     <div>
-      <button onClick={() => navigate("/")}>다음</button>
+      <button onClick={onClick}>다음</button>
     </div>
   );
 };
