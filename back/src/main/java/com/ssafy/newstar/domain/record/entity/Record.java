@@ -1,4 +1,4 @@
-package com.ssafy.newstar.domain.recode.entity;
+package com.ssafy.newstar.domain.record.entity;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
@@ -18,10 +18,10 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = {"member", "article"})
-public class Recode {
+public class Record {
   @Id
   @GeneratedValue
-  @Column(name = "recode_id")
+  @Column(name = "record_id")
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -34,11 +34,11 @@ public class Recode {
 
   private Boolean likes;
 
-  public  static Recode createRecode(Member member, Article article, Boolean likes) {
-    Recode recode = new Recode();
-    recode.member = member;
-    recode.article = article;
-    recode.likes = likes;
-    return recode;
+  public  static Record createRecode(Member member, Article article, Boolean likes) {
+    Record record = new Record();
+    record.member = member;
+    record.article = article;
+    record.likes = likes;
+    return record;
   }
 }

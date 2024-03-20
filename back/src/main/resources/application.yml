@@ -6,18 +6,19 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/newstar?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/newstar?serverTimezone=Asia/Seoul
     username: newstar
     password: newstar
 
   jpa:
     hibernate:
-      ddl-auto: none 
+      ddl-auto: none
     properties:
       hibernate:
         # show_sql: true # sysout 단계에서 쿼리문 show
         format_sql: true
         default_batch_fetch_size: 1000 # select 배치 조회 크기
+        dialect: org.hibernate.dialect.MySQLDialect
 
 logging:
   level:
