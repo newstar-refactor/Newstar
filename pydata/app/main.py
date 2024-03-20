@@ -39,7 +39,7 @@ async def add_process(request: Request, call_next):
 async def startup():
   init_db()
 
-@router.get("/crawling")
+@router.get("/api/data/crawling")
 async def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   makemodel()
