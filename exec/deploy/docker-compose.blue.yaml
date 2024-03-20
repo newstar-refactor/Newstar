@@ -7,12 +7,20 @@ services:
         ports:
           - 8080:8080
         restart: always
+        environment:
+          - TZ=Asia/Seoul
 
     react:
         container_name: react-blue
         image: newstar_front
         ports:
           - 3000:3000
+    fastapi:
+        container_name: fastapi-blue
+        image: fastapi_back
+        ports:
+          - 8000:8000
+        restart: always
 networks:
   default:
     name: app-net

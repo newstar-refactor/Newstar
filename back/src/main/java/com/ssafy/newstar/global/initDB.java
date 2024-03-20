@@ -2,7 +2,7 @@ package com.ssafy.newstar.global;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
-import com.ssafy.newstar.domain.recode.entity.Recode;
+import com.ssafy.newstar.domain.record.entity.Record;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -47,10 +47,10 @@ public class initDB {
       em.persist(article1);
       em.persist(article2);
 
-      Recode recode1 = Recode.createRecode(member1, article1, true);
-      Recode recode2 = Recode.createRecode(member1, article2, true);
-      em.persist(recode1);
-      em.persist(recode2);
+      Record record1 = Record.createRecode(member1, article1, true);
+      Record record2 = Record.createRecode(member1, article2, true);
+      em.persist(record1);
+      em.persist(record2);
     }
   }
 }

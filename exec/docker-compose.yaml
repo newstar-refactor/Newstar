@@ -24,11 +24,13 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
             TZ: Asia/Seoul
+            LC_ALL: C.UTF-8
         command:
           - --character-set-server=utf8mb4
           - --collation-server=utf8mb4_unicode_ci
         volumes:
           - ./data/mysql/:/var/lib/mysql
+          - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
     jenkins:
         container_name: jenkins
         image: jenkins/custom
@@ -44,10 +46,21 @@ services:
     elastic:
         container_name: elastic
         image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
-        expose:
-            - 9200
+        restart: always
+        ports:
+          - 9200:9200
         environment:
-            - discovery.type=single-node
+          - discovery.type=single-node
+            #kibana:
+            #container_name: kibana
+            #image: docker.elastic.co/kibana/kibana:8.10.1
+            #restart: always
+            #ports:
+            #- 5601:5601
+            #environment:
+            #ELASTICSEARCH_URL: http://elastic:9200
+            #ELASTICSEARCH_HOSTS: http://elastic:9200
+            #privileged: true
 
     certbot:
         container_name: certbot
