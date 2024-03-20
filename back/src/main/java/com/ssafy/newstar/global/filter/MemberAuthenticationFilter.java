@@ -49,7 +49,7 @@ public class MemberAuthenticationFilter implements Filter {
     // 회원을 선별하는 UUID 값
     String key = servletRequest.getHeader("X-User-Id");
     log.info("X-User-Id 값 : " + key);
-    if (StringUtils.hasText(key)) {
+    if (!StringUtils.hasText(key)) {
       log.info("X-User-Id 값이 비어 있습니다.");
       throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
     }
