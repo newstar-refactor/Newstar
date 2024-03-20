@@ -36,7 +36,6 @@ const IntroBox3 = styled.div`
   gap: 50px;
 `
 
-
 const StartBtn = styled.button`
   border: none;
   border-radius: 5px;
@@ -71,26 +70,6 @@ const LottieStyle = {
 export default function Intro() {
   const navigate = useNavigate()
 
-  useState(() => {
-    postMembers(
-      ({ response }) => {
-
-        // 응답으로 받은 key
-        const key = response.data.X-USER-ID
-
-        if (!localStorage.getItem('X-USER-ID')) {
-          localStorage.setItem('X-USER-ID', key)
-          console.log('새로운 회원이 등록되었습니다.')
-        } else {
-          console.log('이미 등록된 회원입니다.')
-        }
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
-  }, [])
-
   return (
     <IntroWrapper>
       <IntroBox1>
@@ -119,7 +98,7 @@ export default function Intro() {
             animationData={NewStart}
             style={LottieStyle} />
       </IntroBox3>
-      <StartBtn onClick={() => navigate("/")}>시작하기</StartBtn>
+      <StartBtn onClick={() => navigate("/choose")}>시작하기</StartBtn>
 
     </IntroWrapper>
   )
