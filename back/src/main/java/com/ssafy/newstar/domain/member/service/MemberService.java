@@ -6,6 +6,7 @@ import com.ssafy.newstar.domain.member.dto.MemberRequest;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class MemberService {
 
   private final MemberRepository memberRepository;
   private final CategoryRepository categoryRepository;
-  public Member getMember(Long memberId) {
-    return memberRepository.findById(memberId).get();
+  public Optional<Member> getMember(Long memberId) {
+    return memberRepository.findById(memberId);
   }
 
   public Member createMember(MemberRequest memberRequest) {
