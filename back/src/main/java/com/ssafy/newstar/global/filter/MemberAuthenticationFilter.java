@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,13 +54,11 @@ public class MemberAuthenticationFilter implements Filter {
       throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
     }
 
-    Optional<Member> member = memberRepository.findByPw(key);
+    Member member = memberRepository.findByPw(key).orElseThrow(
+        () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
 
-    member.orElseThrow(
-    () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
-
-    servletRequest.setAttribute("memberId", member.get().getId());
-    log.info(" memberId : " + member.get().getId());
+    servletRequest.setAttribute("memberId", member.getId());
+    log.info(" memberId : " + member.getId());
     // 다음 필터 없으면 컨트롤러로 가겠지
     chain.doFilter(request, response);
   }

@@ -27,11 +27,10 @@ public class MemberController {
   @GetMapping("/members")
   public ResponseEntity<?> matchingMember(HttpServletRequest request) {
     Long memberId = (Long) request.getAttribute("memberId");
-    Optional<Member> member = memberService.getMember(memberId);
-    member.orElseThrow(
+    Member member = memberService.getMember(memberId).orElseThrow(
         () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
 
-    return getResponseEntity(SuccessCode.OK, createMemberResponse(member.get()));
+    return getResponseEntity(SuccessCode.OK, createMemberResponse(member));
   }
 
   // 회원가입 로직
