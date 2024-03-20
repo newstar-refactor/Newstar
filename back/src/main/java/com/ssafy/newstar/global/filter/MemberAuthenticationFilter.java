@@ -11,11 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -48,18 +50,18 @@ public class MemberAuthenticationFilter implements Filter {
     // 회원을 선별하는 UUID 값
     String key = servletRequest.getHeader("X-User-Id");
     log.info("X-User-Id 값 : " + key);
-    if (key == "" || key == null) {
+    if (StringUtils.hasText(key)) {
       log.info("X-User-Id 값이 비어 있습니다.");
       throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
     }
 
-    Member member = memberRepository.findByPw(key);
-    if (member == null) {
-      log.info("key 값에 해당하는 회원이 없습니다.");
-      throw new GlobalException(ErrorCode.MEMBER_NOT_FOUND);
-    }
-    servletRequest.setAttribute("memberId", member.getId());
-    log.info(" memberId : " + member.getId());
+    Optional<Member> member = memberRepository.findByPw(key);
+
+    member.orElseThrow(
+    () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
+
+    servletRequest.setAttribute("memberId", member.get().getId());
+    log.info(" memberId : " + member.get().getId());
     // 다음 필터 없으면 컨트롤러로 가겠지
     chain.doFilter(request, response);
   }
