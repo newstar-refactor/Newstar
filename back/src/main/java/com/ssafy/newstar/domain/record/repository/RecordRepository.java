@@ -8,4 +8,5 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<Record, Long> {
     List<Record> findByMemberId(Long memberId);
     List<Record> findByMemberIdAndLikes(Long memberId, boolean likes);
+    Record findByMemberIdAndArticleId(Long memberId, Long articleId);
 }

@@ -2,13 +2,8 @@ package com.ssafy.newstar.domain.record.entity;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +35,9 @@ public class Record {
     record.article = article;
     record.likes = likes;
     return record;
+  }
+
+  public void updateLikes(boolean likes) {
+    this.likes = likes;
   }
 }
