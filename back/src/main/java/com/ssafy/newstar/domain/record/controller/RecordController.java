@@ -22,4 +22,11 @@ public class RecordController {
         Long memberId = (Long) request.getAttribute("memberId");
         return getResponseEntity(SuccessCode.OK, createRecordResponse(recordService.getRecords(memberId)));
     }
+
+    @GetMapping("/records/likes")
+    public ResponseEntity<?> getRecordLikes(HttpServletRequest request) {
+        Long memberId = (Long) request.getAttribute("memberId");
+
+        return getResponseEntity(SuccessCode.OK, createRecordResponse(recordService.getRecordLikes(memberId)));
+    }
 }

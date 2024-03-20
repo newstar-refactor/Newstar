@@ -16,9 +16,19 @@ import java.util.List;
 public class RecordService {
     private final RecordRepository recordRepository;
 
+    // 사용자 시청 기록 조회
     public List<Article> getRecords(Long memberId) {
         // 사용자 시청 기록 조회
         List<Record> records = recordRepository.findByMemberId(memberId);
+
+        return records.stream()
+                .map(Record::getArticle)
+                .toList();
+    }
+
+    // 사용자가 좋아요한 기사 조회
+    public List<Article> getRecordLikes(Long memberId) {
+        List<Record> records = recordRepository.findByMemberIdAndLikes(memberId, true);
 
         return records.stream()
                 .map(Record::getArticle)
