@@ -70,7 +70,7 @@ def do_crawling():
             tag.decompose()
           content = article_content.get_text(" ", strip=True) if article_content else None
           # 기사 본문의 글자가 400보다 적으면 넘기기
-          if len(content) < 400:
+          if len(content) < 400 or len(content) > 2000:
             continue
 
           # 작성 날짜 추출
