@@ -1,9 +1,7 @@
 package com.ssafy.newstar.domain.record.controller;
 
-import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.record.dto.CreateRecordRequest;
 import com.ssafy.newstar.domain.record.entity.Record;
-import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.record.dto.RecordLikeRequest;
 import com.ssafy.newstar.domain.record.service.RecordService;
 import com.ssafy.newstar.util.response.SuccessCode;
@@ -38,6 +36,7 @@ public class RecordController {
         Record record = recordService.createRecordEntity(memberId, createRecordRequest);
         recordService.createRecord(record);
         return getResponseEntity(SuccessCode.OK);
+    }
 
     @PatchMapping("/records")
     public ResponseEntity<?> updateRecordLikes(HttpServletRequest request, @RequestBody RecordLikeRequest recordLikeRequest) {
