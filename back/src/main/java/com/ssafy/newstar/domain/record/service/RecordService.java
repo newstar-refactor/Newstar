@@ -1,10 +1,16 @@
 package com.ssafy.newstar.domain.record.service;
 
 import com.ssafy.newstar.domain.article.entity.Article;
+<<<<<<< HEAD
 import com.ssafy.newstar.domain.article.repository.ArticleRepository;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.repository.MemberRepository;
 import com.ssafy.newstar.domain.record.dto.CreateRecordRequest;
+=======
+import com.ssafy.newstar.domain.member.entity.Member;
+import com.ssafy.newstar.domain.member.repository.MemberRepository;
+import com.ssafy.newstar.domain.record.dto.RecordLikeRequest;
+>>>>>>> b1af2347e6311103bc6ad9fb5d11e5e2f764c5ae
 import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.repository.RecordRepository;
 import com.ssafy.newstar.util.response.ErrorCode;
@@ -15,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +63,8 @@ public class RecordService {
                 .orElseThrow(() -> new GlobalException(ErrorCode.ARTICLE_NOT_FOUND));
 
         return Record.createRecode(member, article);
+    public void updateRecordLikes(Long memberId, RecordLikeRequest request) {
+        Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticle_id());
+        record.updateLikes(request.getLikes());
     }
 }
