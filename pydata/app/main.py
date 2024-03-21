@@ -13,6 +13,8 @@ from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
 
 app = FastAPI()
+# 307 redirect 에러 해결
+app.router.redirect_slashes = False
 router = APIRouter(prefix="/api/data")
 
 
@@ -38,6 +40,7 @@ async def add_process(request: Request, call_next):
 @app.on_event("startup")
 async def startup():
   init_db()
+  makemodel()
 
 @router.get("/crawling")
 def start_crawling():

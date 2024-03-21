@@ -1,5 +1,11 @@
 package com.ssafy.newstar.domain.category.service;
 
-public class CategoryService {
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class CategoryService {
 }

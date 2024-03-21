@@ -13,8 +13,9 @@ const LikeButton = ({ handleLikeButtonClick, isLiked }) => {
       onClick={handleLikeButtonClick} 
       style={{cursor: 'pointer'}}
       size={40}
-      color="pink"
-       /> 
+      color='#FFD4D4'
+      // color= 'pink'
+      />
     // <Lottie 
     //   animationData={likeLottie}
     //   onClick={handleLikeButtonClick}
