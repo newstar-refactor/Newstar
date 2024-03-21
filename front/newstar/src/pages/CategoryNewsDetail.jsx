@@ -29,16 +29,15 @@ export default function CategoryNewsDetail() {
 
   // category 별 데이터 불러오기
   useEffect(() => {
-
     setLoading(true)
 
     // 대분류일 경우
-    if ([100, 101, 105].includes(params.categoryId)) {
+    if (['100', '101', '105'].includes(params.categoryId)) {
       getCategoryNews(
         params.categoryId, '', 5, 0,
         ( response ) => {
-          setCategoryDatas(response.content)
-          setCategoryPaging(response.content)
+          setCategoryDatas(response.data.data.content)
+          setCategoryPaging(response.data.data.content)
           console.log(response)
         },
         ( error ) => {
@@ -47,10 +46,11 @@ export default function CategoryNewsDetail() {
       )
     } else { // 중분류가 들어온경우
       getCategoryNews(
-        100, params.categoryId, 5, 0,
+        '', params.categoryId, 5, 0,
         ( response ) => {
-          setCategoryDatas(response.content)
-          setCategoryPaging(response.content)
+          setCategoryDatas(response.data.data.content)
+          setCategoryPaging(response.data.data.content)
+          console.log(response)
         },
         ( error ) => {
           console.log(error)
@@ -69,7 +69,7 @@ export default function CategoryNewsDetail() {
       getCategoryNews(
         params.categoryId, '', 5, currentPage + 1,
         ( response ) => {
-          const fetchedData = response.content
+          const fetchedData = response.data.data.content
           const mergedData = categoryDatas.concat(...fetchedData)
           setCategoryDatas(mergedData)
           setCurrentPage(currentPage + 1)
@@ -84,7 +84,7 @@ export default function CategoryNewsDetail() {
       getCategoryNews(
         '', params.categoryId, 5, currentPage + 1,
         ( response ) => {
-          const fetchedData = response.content
+          const fetchedData = response.data.data.content
           const mergedData = categoryDatas.concat(...fetchedData)
           setCategoryDatas(mergedData)
           setCurrentPage(currentPage + 1)
@@ -120,14 +120,14 @@ export default function CategoryNewsDetail() {
   });
 
   return (
-    // <CategoryNewsCardContainer>
-    //   {categoryDatas.map((categoryData) => (
-    //     <CategoryNewsCard
-    //       key={`${categoryData.id}-${categoryData.title}`}
-    //       categoryData={categoryData}
-    //     />
-    //   ))}
-    // </CategoryNewsCardContainer>
-    <div></div>
+    <CategoryNewsCardContainer>
+      {categoryDatas && categoryDatas.map((categoryData, idx) => (
+        <CategoryNewsCard
+          key={`${idx}-${categoryData.id}`}
+          categoryData={categoryData}
+        />
+      ))}
+    </CategoryNewsCardContainer>
+  
   )
 }
