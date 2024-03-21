@@ -30,6 +30,8 @@ public class MemberAuthenticationFilter implements Filter {
     //  key 값이 필요 없는 곳은 uri 추가
     whiteList.add(new URLMethod("/api/members", "POST"));
     whiteList.add(new URLMethod("/members", "POST"));
+    whiteList.add(new URLMethod("/api/swagger-ui", "GET"));
+    whiteList.add(new URLMethod("/api/v3/api-docs", "GET"));
   }
 
   @Override
@@ -39,6 +41,7 @@ public class MemberAuthenticationFilter implements Filter {
     HttpServletResponse servletResponse = (HttpServletResponse) response;
     String requestURI = servletRequest.getRequestURI();
     String requestMethod = servletRequest.getMethod();
+    log.info(requestURI + " : " + requestMethod);
     if (requestURI.equals("/api") || checkWhiteList(requestURI, requestMethod)) {
       chain.doFilter(request, response);
       return;
@@ -65,7 +68,7 @@ public class MemberAuthenticationFilter implements Filter {
 
   private boolean checkWhiteList(String requestURI, String requestMethod) {
     for (URLMethod urlMethod : whiteList) {
-      if (requestURI.equals(urlMethod.getUrl()) && requestMethod.equals(urlMethod.getMethod())) {
+      if (requestURI.startsWith(urlMethod.getUrl()) && requestMethod.equals(urlMethod.getMethod())) {
         return true;
       }
     }
