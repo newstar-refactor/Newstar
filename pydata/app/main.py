@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
 
 from app.category_crawling import do_crawling
-from app.database import engine
+from app.database import engine, SessionLocal
 from app.models import init_db
 from app.routers.elasticsearch import es_service, es_router
 from app.routers.member.member_crud import get_user_by_pw
@@ -52,7 +52,7 @@ async def startup():
   makemodel()
 
 @router.get("/crawling")
-async def start_crawling():
+def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   makemodel()
   article_id = es_service.last_article_id()
