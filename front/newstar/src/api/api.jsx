@@ -10,6 +10,7 @@ const api = {
   like: '/recodes/likes',
   keywords: '/keywords',
   category: (cate, newsNum, pageNum) => `/articles/${cate}?size=${newsNum}&page=${pageNum}`,
+  search: '/data/search/',
 }
 
 const axiosInstance = axios.create({
