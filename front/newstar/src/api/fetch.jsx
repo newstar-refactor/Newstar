@@ -9,7 +9,10 @@ function getNews(success, fail) {
 
 // 검색어로 뉴스 조회
 function searchNews(searchWord, success, fail) {
-  return axiosInstance.post(api.search, searchWord)
+  const requestword = {
+    keyword: searchWord
+  }
+  return axiosInstance.post(api.search, requestword)
     .then(success)
     .catch(fail)
 }
