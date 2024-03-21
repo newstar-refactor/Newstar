@@ -8,7 +8,7 @@ def recomm(like_list, maxsize, views):
     if len(like_list) != 0:
         similar_docs = model.dv.most_similar(positive=[like_list], topn=maxsize)
     else:
-        similar_docs = model.dv.most_similar(positive=[20], topn=maxsize)
+        similar_docs = model.dv.most_similar(positive=[1], topn=maxsize)
     # 결과 문서들의 ID만 추출
     doc_ids = [doc_id for doc_id, _ in similar_docs]
     print(doc_ids)
