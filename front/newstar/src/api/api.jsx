@@ -3,18 +3,17 @@ import axios from "axios"
 const BASEAPI = '/api'
 
 const api = {
+  model: '/data/news/model',
   news: '/data/news',
   members: '/members',
   records: '/records',
   like: '/recodes/likes',
   keywords: '/keywords',
-  category: '/category',
-  paging: '/category/paging',
-  search: '/data/search',
+  category: (cate, newsNum, pageNum) => `/articles/${cate}?size=${newsNum}&page=${pageNum}`,
 }
 
 const axiosInstance = axios.create({
-  baseURL: `${BASEAPI}`
+  baseURL: BASEAPI
 })
 
 axiosInstance.interceptors.request.use(

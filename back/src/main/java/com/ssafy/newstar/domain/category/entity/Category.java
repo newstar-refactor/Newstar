@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Category {
   @Id
   @GeneratedValue
-  @Column(name = "keyword_id")
+  @Column(name = "category_id")
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)

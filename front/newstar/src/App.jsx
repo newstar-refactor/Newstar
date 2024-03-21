@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 
 
-import Intro from "./pages/Intro"
+import StartPage from "./pages/StartPage"
 import MainPage from "./pages/MainPage"
 
 function app() {
@@ -11,8 +11,8 @@ function app() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/intro" element={<Intro />} />
-            <Route path="/*" element={<MainPage />} />
+            <Route path="/*" element={<StartPage />} />
+            <Route path="/newstar/*" element={<MainPage />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

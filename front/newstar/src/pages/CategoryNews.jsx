@@ -8,35 +8,56 @@ const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 35px;
-  padding: 20px;
+  padding: 30px 60px;
+  /* background-color: #F5F5F5; */
+`
+
+const CategoryBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  border-radius: 10px;
+
 `
 
 const BigCategoryBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  height: 150px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px #d1d1d1;
-  color: white;
-  background-color: #a0c6d6;
-  font-size: 30px;
+  width: calc(90% / 2);
+  height: 60px;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  box-shadow: 2px 2px 7px 1px lightgray;
+  font-weight: 600;
   cursor: pointer;
+  &:hover {
+    background: rgb(138, 192, 56, 0.7);
+    color: white;
+    transition: 0.5s;
+  }
+
 `
 
 const SmallCategoryBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  height: 120px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px #d1d1d1;
-  color: white;
-  background-color: #dddddd;
-  font-size: 30px;
+  width: calc(90% / 2);
+  height: 45px;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  box-shadow: 2px 2px 7px 1px lightgray;
+  font-weight: 600;
   cursor: pointer;
+  &:hover {
+    background: rgb(138, 192, 56, 0.7);
+    color: white;
+    transition: 0.5s;
+  }
 `
 
 
@@ -48,32 +69,38 @@ export default function CategoryNews() {
   const list100 = SmallCategory[100].map(small =>
     <SmallCategoryBox
       key={small.code} 
-      onClick={() => navigate(`/category/${small.code}`)}>
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
   const list101 = SmallCategory[101].map(small =>
     <SmallCategoryBox
       key={small.code} 
-      onClick={() => navigate(`/category/${small.code}`)}>
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
   const list105 = SmallCategory[105].map(small =>
     <SmallCategoryBox
       key={small.code} 
-      onClick={() => navigate(`/category/${small.code}`)}>
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
   return (
     <CategoryNewsContainer>
-      <BigCategoryBox onClick={() => navigate('/category/100')}>정치</BigCategoryBox>
-      {list100}
-      <BigCategoryBox onClick={() => navigate('/category/101')}>경제</BigCategoryBox>
-      {list101}
-      <BigCategoryBox onClick={() => navigate('/category/105')}>IT/과학</BigCategoryBox>
-      {list105}
+      <CategoryBox>
+        <BigCategoryBox onClick={() => navigate('/newstar/category/100')}>정치 전체</BigCategoryBox>
+        {list100}
+      </CategoryBox>
+      <CategoryBox>
+        <BigCategoryBox onClick={() => navigate('/newstar/category/101')}>경제 전체</BigCategoryBox>
+        {list101}
+      </CategoryBox>
+      <CategoryBox>
+        <BigCategoryBox onClick={() => navigate('/newstar/category/105')}>IT/과학 전체</BigCategoryBox>
+        {list105}
+      </CategoryBox>
     </CategoryNewsContainer>
   )
 }

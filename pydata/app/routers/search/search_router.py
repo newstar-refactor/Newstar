@@ -16,7 +16,7 @@ with open(SECRET_FILE) as f:
 ES = secrets['ES']
 
 router = APIRouter(
-    prefix="/api/data/news",
+    prefix="/api/data/search",
 )
 
 @router.post("", response_model=List[Articles])
@@ -26,7 +26,7 @@ def search(keyword: Keyword):
     res = []
     index_name = 'article'
 
-    es = Elasticsearch(f"{ES['ES_BASE_URL']}")
+    es = Elasticsearch(f"{ES['host']}")
     results = es.search(index=index_name, body={'from': 0, 'size': 10, 'query': {'match': {'content': keyword}}})
     for result in results['hits']['hits']:
         article_id = result['_source']['article_id']
