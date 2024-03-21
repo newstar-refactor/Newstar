@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Request, APIRouter
+from fastapi import FastAPI, Request, APIRouter, HTTPException
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
 
 from app.category_crawling import do_crawling
 from app.database import engine
@@ -24,18 +25,28 @@ metadata_obj = MetaData()
 # 헤더 uuid추출
 @app.middleware("http")
 async def add_process(request: Request, call_next):
-  with Session(engine) as db:
-    # 요청 헤더로부터 user_id 추출
-    pw = request.headers.get("X-User-Id")
-    if(pw != None):
-      member_id = await get_user_by_pw(db, pw)
-      # 요청 객체의 state 속성을 사용하여 user_id 저장
-      request.state.member_id = member_id
-      # 요청을 다음 단계로 전달
-    else:
-      request.state.member_id = ""
-    response = await call_next(request)
-    return response
+  # 요청 URL 경로를 문자열로 얻기
+  request_path = str(request.url.path)
+
+  # 특정 경로에 대해서만 처리
+  if request_path.startswith('/api/data/news'):
+    with Session(engine) as db:
+      # 요청 헤더로부터 user_id 추출
+      pw = request.headers.get("X-User-Id")
+      if pw is not None:
+        try:
+          member_id = await get_user_by_pw(db, pw)
+          # 요청 객체의 state 속성을 사용하여 user_id 저장
+          request.state.member_id = member_id
+        except HTTPException as e:
+          # get_user_by_pw 함수에서 HTTPException이 발생한 경우 처리
+          return JSONResponse(status_code=e.status_code, content={"detail": e.detail})
+      else:
+        return JSONResponse(status_code=400, content={"detail": "X-User-Id 헤더가 필요합니다."})
+
+  response = await call_next(request)
+  return response
+
 
 @app.on_event("startup")
 async def startup():
