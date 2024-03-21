@@ -4,6 +4,8 @@ spring:
       on-profile: prod
   datasource:
     url: jdbc:mysql://mysql:3306/newstar?serverTimezone=Asia/Seoul
+    username: newstar
+    password: newstar!@
   jpa:
     hibernate:
       ddl-auto: none
