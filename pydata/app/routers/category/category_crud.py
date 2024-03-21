@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
@@ -5,9 +6,12 @@ from app.models import Category
 from app.database import engine
 import pandas as pd
 
-def get_category_list(db: Session, member_id):
-    category = db.query(Category).filter(Category.member_id(member_id))
-    return category
+def get_user_category(db: Session, member_id):
+    categories = db.query(Category.number).filter(Category.member_id == member_id).all()
+    categories = [item[0] for item in categories]
+    if len(categories) == 0:
+        categories = [100,101,105]
+    return categories
 
 # def get_news_all(db : Session):
 #     news_df = pd.read_sql("SELECT * FROM article", con = engine)

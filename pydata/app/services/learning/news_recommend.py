@@ -1,6 +1,6 @@
 from gensim.models import Doc2Vec
 
-def recomm(like_list, maxsize):
+def recomm(like_list, maxsize, views):
     # 모델 불러오기
     model = Doc2Vec.load('news.doc2vec')
     # 가장 유사한 문서들의 ID 찾기
