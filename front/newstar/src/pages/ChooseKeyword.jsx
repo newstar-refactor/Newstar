@@ -24,8 +24,6 @@ const KeywordPageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-
-  /* height: 100vh; */
   gap: 30px;
 `
 const KeywordPageHeader = styled.div`
@@ -84,8 +82,8 @@ function Keywords({ tagsActive, setTagsActive}) {
       {tagsActive.map((bigkeyword) => (
         <SelectBox 
           key={bigkeyword.id}
-          $background={bigkeyword.state ? 'lightgray' : ''}
-          color={bigkeyword.state ? 'white' : ''}
+          $background={bigkeyword.state ? 'rgb(138, 192, 56, 0.7)' : ''}
+          color={bigkeyword.state ? 'black' : ''}
           onClick={() => handleTagClick(bigkeyword)}
           >
           {selectIcon(bigkeyword.keyword)}

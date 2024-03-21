@@ -13,7 +13,10 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  
+  height: auto;
+  max-height: 86vh;
+  overflow-y: auto;
+  width: 100%;
 `
 
 
