@@ -1,6 +1,4 @@
 package com.ssafy.newstar.domain.article.entity;
-
-import com.ssafy.newstar.domain.summary.entity.Summary;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -34,8 +32,8 @@ public class Article {
   @Column( length=10000 )
   private String content;
 
-  @OneToOne(mappedBy = "article", fetch = FetchType.LAZY, optional = true)
-  private Summary summary;
+//  @OneToOne(fetch = FetchType.LAZY, optional = true)
+//  private Summary summary;
 
   public static Article createArticle(String title, String url, LocalDateTime date, int Bcategory, int Scategory, String imageUrl, String content) {
     Article article = new Article();
@@ -49,7 +47,7 @@ public class Article {
     return article;
   }
 
-  public boolean hasSummary() {
-    return this.summary != null;
-  }
+//  public boolean hasSummary() {
+//    return this.summary != null;
+//  }
 }
