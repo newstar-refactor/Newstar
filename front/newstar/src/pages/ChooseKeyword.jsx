@@ -31,6 +31,7 @@ const KeywordPageHeader = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 `
 
 const BigKeyWords = [
@@ -97,6 +98,10 @@ function Keywords({ tagsActive, setTagsActive}) {
 
 function ChooseKeyword() {
   const navigate = useNavigate()
+
+  // 모달 창 상태 관리
+  const [modalOpen, setModalOpen] = useState(false)
+  
 
   // 각 키워드 상태 관리
   const [tagsActive, setTagsActive] = useState(BigKeyWords)

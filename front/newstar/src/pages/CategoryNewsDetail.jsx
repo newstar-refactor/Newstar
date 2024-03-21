@@ -47,7 +47,7 @@ export default function CategoryNewsDetail() {
       )
     } else { // 중분류가 들어온경우
       getCategoryNews(
-        '', params.categoryId, 5, 0,
+        100, params.categoryId, 5, 0,
         ( response ) => {
           setCategoryDatas(response.content)
           setCategoryPaging(response.content)
