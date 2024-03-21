@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import { useRecoilState } from 'recoil'
 
-import { getCategoryNews, getPagingNews } from '../api/fetch'
+import { getCategoryNews } from '../api/fetch'
 import { categoryDataState } from '../state/atoms'
 import CategoryNewsCard from '../components/main/CategoryNewsCard'
 
@@ -16,35 +16,6 @@ const CategoryNewsCardContainer = styled.div`
   padding: 20px;
 `
 
-// 카테고리 번호
-const BigCategory = { 100: '정치', 101: '경제', 105: 'IT/과학' }
-const SmallCategory = {
-  264: '대통령실',
-  265: '국회/정당',
-  268: '북한',
-  266: '행정',
-  267: '국방/외교',
-  269: '정치일반',
-  
-  259: '금융',
-  258: '증권',
-  261: '산업/재계',
-  771: '중기/벤처',
-  260: '부동산',
-  262: '글로벌 경제',
-  310: '생활경제',
-  263: '경제 일반',
-  
-  731: '모바일',
-  226: '인터넷/SNS',
-  227: '통신/뉴미디어',
-  230: 'IT 일반',
-  732: '보안/해킹',
-  283: '컴퓨터',
-  229: '게임/리뷰',
-  228: '과학 일반',
-}
-
 
 export default function CategoryNewsDetail() {
   
@@ -53,26 +24,39 @@ export default function CategoryNewsDetail() {
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
   const [fetching, setFetching] = useState(false)
-  // const [categoryDatas, setCategoryDatas] = useRecoilState(categoryDataState)
-  const [categoryDatas, setCategoryDatas] = useState([])
-  // const [categoryPaging, setCategoryPaging] = useState({ next: undefined }); // API로부터 받아온 다음 페이지 데이터를 저장
-  const [categoryPaging, setCategoryPaging] = useState([]); // API로부터 받아온 다음 페이지 데이터를 저장
+  const [categoryDatas, setCategoryDatas] = useRecoilState(categoryDataState)
+  const [categoryPaging, setCategoryPaging] = useState({ next: undefined }); // API로부터 받아온 다음 페이지 데이터를 저장
 
   // category 별 데이터 불러오기
   useEffect(() => {
 
     setLoading(true)
 
-    getCategoryNews(
-      params.categoryId, 5, 1,
-      ({ response }) => {
-        setCategoryDatas(response.content)
-        setCategoryPaging(response.content)
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
+    // 대분류일 경우
+    if ([100, 101, 105].includes(params.categoryId)) {
+      getCategoryNews(
+        params.categoryId, '', 5, 0,
+        ( response ) => {
+          setCategoryDatas(response.content)
+          setCategoryPaging(response.content)
+          console.log(response)
+        },
+        ( error ) => {
+          console.log(error)
+        }
+      )
+    } else { // 중분류가 들어온경우
+      getCategoryNews(
+        '', params.categoryId, 5, 0,
+        ( response ) => {
+          setCategoryDatas(response.content)
+          setCategoryPaging(response.content)
+        },
+        ( error ) => {
+          console.log(error)
+        }
+      )
+    }
 
     setLoading(false)
   },[])
@@ -81,20 +65,37 @@ export default function CategoryNewsDetail() {
   function fetchMoreDatas() {
     setFetching(true)
 
-    getCategoryNews(
-      101, 5, currentPage + 1,
-      ({ response }) => {
-        const fetchedData = response.content
-        const mergedData = categoryDatas.concat(...fetchedData)
-        setCategoryDatas(mergedData)
-        setCurrentPage(currentPage + 1)
-        setFetching(false)
-      },
-      (error) => {
-        console.log(error)
-        setFetching(false)
-      }
-    )
+    if ([100, 101, 105].includes(params.categoryId)) {
+      getCategoryNews(
+        params.categoryId, '', 5, currentPage + 1,
+        ( response ) => {
+          const fetchedData = response.content
+          const mergedData = categoryDatas.concat(...fetchedData)
+          setCategoryDatas(mergedData)
+          setCurrentPage(currentPage + 1)
+          setFetching(false)
+        },
+        ( error ) => {
+          console.log(error)
+          setFetching(false)
+        }
+      )
+    } else {
+      getCategoryNews(
+        '', params.categoryId, 5, currentPage + 1,
+        ( response ) => {
+          const fetchedData = response.content
+          const mergedData = categoryDatas.concat(...fetchedData)
+          setCategoryDatas(mergedData)
+          setCurrentPage(currentPage + 1)
+          setFetching(false)
+        },
+        (error) => {
+          console.log(error)
+          setFetching(false)
+        }
+      )
+    }
 
 
   }
@@ -119,13 +120,14 @@ export default function CategoryNewsDetail() {
   });
 
   return (
-    <CategoryNewsCardContainer>
-      {categoryDatas.map((categoryData) => (
-        <CategoryNewsCard
-          key={`${categoryData.id}-${categoryData.title}`}
-          categoryData={categoryData}
-        />
-      ))}
-    </CategoryNewsCardContainer>
+    // <CategoryNewsCardContainer>
+    //   {categoryDatas.map((categoryData) => (
+    //     <CategoryNewsCard
+    //       key={`${categoryData.id}-${categoryData.title}`}
+    //       categoryData={categoryData}
+    //     />
+    //   ))}
+    // </CategoryNewsCardContainer>
+    <div></div>
   )
 }
