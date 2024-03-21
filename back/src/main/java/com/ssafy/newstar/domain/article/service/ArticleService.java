@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ArticleService {
   private final ArticleRepository articleRepository;
-  public Slice<Article> getArticlesByCategory(Pageable pageable, int category) {
-    return articleRepository.findByScategory(category, pageable);
+  public Slice<Article> getArticlesByCategory(Pageable pageable, String bcategory, String scategory) {
+    return articleRepository.getByCategory(pageable, bcategory, scategory);
   }
 }

@@ -13,16 +13,18 @@ import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 public class ArticleController {
   private final ArticleService articleService;
-  @GetMapping("/articles/{category}")
+  @GetMapping("/articles")
   public ResponseEntity<?> getArticlesByCategory(Pageable pageable,
-      @PathVariable("category") int category) {
-    Slice<ArticleResponse> response = createArticleResponse(articleService.getArticlesByCategory(pageable, category));
+      @RequestParam(value = "bcategory", required = false, defaultValue = "") String bcategory,
+      @RequestParam(value = "scategory", required = false, defaultValue = "") String scategory) {
+    Slice<ArticleResponse> response = createArticleResponse(articleService.getArticlesByCategory(pageable, bcategory, scategory));
     return getResponseEntity(SuccessCode.OK, response);
   }
 }
