@@ -1,11 +1,10 @@
 // 기사 검색 페이지
 // 키워드로 뉴스 실시간 검색
 
-import React, { useState, useEffect } from 'react';
-// import api from '../api/api'
-// import axios from 'axios';
-import SearchBar from '../components/SearchBar'
-import SearchNewsList from '../components/main/SearchNewsList'
+import React, { useState } from 'react';
+import { searchNews } from '../api/fetch';
+import SearchBar from '../components/SearchBar';
+import SearchNewsList from '../components/main/SearchNewsList';
 
 
 export default function Search() {
@@ -15,18 +14,19 @@ export default function Search() {
   // 필터링 된 뉴스 목록 상태관리
   const [filteredNews, setFilterdNews] = useState([]);
 
-  // 뉴스 데이터 가져오는 함수
-  const fetchNews = () => {
-    // 공백 제거 및 소문자 변환
-    const searchKeyword = keyword.trim().toLowerCase();
 
-    // 검색어가 비어있지 않은 경우에만 API 요청 수행
-    if (searchKeyword !== '') {
-      axios.get(`${api.news}?keyword=${searchKeyword}`)
-        .then(response => {
+  const fetchNews = () => {
+    const searchWord = keyword.trim().toLowerCase();
+
+    if (searchWord !== '') {
+      searchNews(searchWord, 
+        (response) => {
+          // 성공 콜백
           setFilterdNews(response.data);
-        })
-        .catch(error => {
+          console.log(response.data);
+        },
+        (error) => {
+          // 실패 콜백
           console.log("Error fetching Searchdata", error);
         });
     } else {
