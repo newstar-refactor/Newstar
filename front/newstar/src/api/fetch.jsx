@@ -53,19 +53,13 @@ function getKeyword(success, fail) {
 }
 
 // 카테고리별로 조회
-function getCategoryNews(cate, newsNum, pageNum, success, fail) {
-  const categoryUrl = api.category(cate, newsNum, pageNum)
+function getCategoryNews(bCate, sCate, newsNum, pageNum, success, fail) {
+  const categoryUrl = api.category(newsNum, pageNum, sCate, bCate)
   return axiosInstance.get(categoryUrl)
     .then(success)
     .catch(fail)
 }
 
-// 카테고리 페이징 데이터 조회
-function getPagingNews(cate, success, fail) {
-  return axiosInstance.get(`${api.paging}/${cate}`)
-    .then(success)
-    .catch(fail)
-}
 
 export { getNews,
   searchNews, 
@@ -75,5 +69,4 @@ export { getNews,
   getLikes,
   getKeyword,
   getCategoryNews,
-  getPagingNews
 }

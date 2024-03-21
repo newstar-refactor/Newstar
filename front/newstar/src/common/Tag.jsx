@@ -11,8 +11,14 @@ const TagWrapper = styled.div`
 
   color: ${(props) => props.color || "white"};
   background: ${(props) => props.$background || "lightgray"};
-
   cursor: pointer;
+
+  &:hover {
+    background: rgb(138, 192, 56, 0.7);
+    color: white;
+    transition: 0.5s;
+  }
+
 `
 
 export default function Tag({ children, color, $background, onClick, fontSize }) {

@@ -37,7 +37,7 @@ export default function BookMark({ newsData }) {
         <div style={{color: 'gray'}}>{newsData.content}</div>
         <div style={{color: 'gray'}}>{newsData.url}</div>
       </BookMarkInfo>
-      <BookMarkImage src={newsData.imageUrl} alt="news image" />
+      <BookMarkImage src={newsData.image_url} alt="news image" />
     </BookMarkWrapper>
   )
 }
