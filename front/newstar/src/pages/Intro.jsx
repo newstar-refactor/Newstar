@@ -42,8 +42,8 @@ const StartBtn = styled.button`
   width: auto;
   padding: 10px 30px;
   font-size: 20px;
-  background-color: rgb(136, 171, 142);
-  color: rgb(242, 241, 235);
+  background-color: rgb(100, 192, 86, 0.8);
+  color: white;
   margin: 20px;
   cursor: pointer;
 `

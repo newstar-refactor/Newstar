@@ -15,8 +15,8 @@ const NavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 50px;
-  max-width: 600px;
+  height: 7vh;
+  max-width: 500px;
   min-width: 200px;
   
   margin: 0 auto;
@@ -25,7 +25,6 @@ const NavContainer = styled.div`
   padding: 10px;
   z-index: 10;
   background-color: white;
-  /* border-top: 0.5px black solid; */
 `
 
 const TopNavContainer = styled.div`
@@ -34,28 +33,26 @@ const TopNavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 50px;
-  max-width: 600px;
+  height: 7vh;
+  max-width: 500px;
   min-width: 300px;
 
   display: flex;
   align-items: center;
-  /* overflow: hidden; */
   margin: 0 auto;
-  padding: 0px 10px 5px;
+  padding: 10px 10px 5px;
   z-index: 10;
   
   background-color: white;
-  /* border-bottom: 0.5px black solid; */
 `
 
 const NavContent = styled.div`
-  text-align: center;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
   float: left;
   width: calc(100%/4);
 
-  height: 45px;
-  line-height: 45px;
 `
 
 function BottomNavbar() {
@@ -80,11 +77,13 @@ function BottomNavbar() {
 function TopNavbar() {
   return (
     <TopNavContainer>
-      <img 
-        src="/logo_dark.png" 
-        alt="newstar logo"
-        width="80"
-        height="35" />
+      <Link to={'/newstar'}>
+        <img 
+          src="/logo_dark.png" 
+          alt="newstar logo"
+          width="80"
+          height="35" />
+      </Link>
     </TopNavContainer>
   )
 }

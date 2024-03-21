@@ -3,13 +3,13 @@ import axios from "axios"
 const BASEAPI = 'http://localhost:8080/api'
 
 const api = {
+  model: '/data/news/model',
   news: '/data/news',
   members: '/members',
   records: '/records',
   like: '/recodes/likes',
   keywords: '/keywords',
-  category: '/category',
-  paging: '/category/paging'
+  category: (cate, newsNum, pageNum) => `/articles/${cate}?size=${newsNum}&page=${pageNum}`,
 }
 
 const axiosInstance = axios.create({
