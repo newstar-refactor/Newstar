@@ -115,10 +115,10 @@ function ChooseKeyword() {
   function handleCreateMember() {
     postMembers(
       { "categories" : selectedKeywords },
-      ({ response }) => {
+      ( response ) => {
 
         // 응답으로 받은 key
-        const key = response.data.pw
+        const key = response?.data.data.pw
 
         if (!localStorage.getItem('X-USER-ID')) {
           localStorage.setItem('X-USER-ID', key)
