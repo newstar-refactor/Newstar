@@ -4,10 +4,10 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 
 router = APIRouter(
-    prefix="/api/data/recode",
+    prefix="/api/data/record",
 )
 
 
 @router.get("")
-def recode(db: Session = Depends(get_db)):
+def record(db: Session = Depends(get_db)):
     return

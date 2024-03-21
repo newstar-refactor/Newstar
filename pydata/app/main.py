@@ -7,7 +7,7 @@ from app.database import engine
 from app.models import init_db
 from app.routers.elasticsearch import es_service, es_router
 from app.routers.member.member_crud import get_user_by_pw
-from app.routers.recode import recode_router
+from app.routers.record import record_router
 from app.routers.recommend import recommend_router
 from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
@@ -55,6 +55,6 @@ def start_crawling():
 
 app.include_router(router)
 app.include_router(recommend_router.router)
-app.include_router(recode_router.router)
+app.include_router(record_router.router)
 app.include_router(search_router.router)
 app.include_router(es_router.router)

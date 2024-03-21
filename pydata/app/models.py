@@ -22,9 +22,9 @@ class Article(Base):
   image_url = Column(String(255))
   content = Column(String(10000))
 
-class Recode(Base):
-  __tablename__ = "recode"
-  recode_id = Column(Integer, primary_key=True, index=True)
+class Record(Base):
+  __tablename__ = "record"
+  record_id = Column(Integer, primary_key=True, index=True)
   member_id = Column(Integer, ForeignKey("member.member_id"))
   article_id = Column(Integer, ForeignKey("article.article_id"))
   likes = Column(Boolean)
