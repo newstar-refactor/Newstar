@@ -14,12 +14,7 @@ const LikeButton = ({ handleLikeButtonClick, isLiked }) => {
       style={{cursor: 'pointer'}}
       size={40}
       color='#FFD4D4'
-      // color= 'pink'
       />
-    // <Lottie 
-    //   animationData={likeLottie}
-    //   onClick={handleLikeButtonClick}
-    //   style={{ width: 'auto', height: '80px'}} />
        :
     <BiBookmarkHeart
       onClick={handleLikeButtonClick} 
