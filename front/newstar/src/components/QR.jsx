@@ -1,4 +1,19 @@
 import Modal from 'react-modal'
+import QRCode from 'qrcode.react'
+import styled from 'styled-components'
+
+import NextButton from '../common/Button'
+import { useNavigate } from 'react-router-dom'
+
+const QRWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+`
 
 const customModal =  Modal.Styles = {
   overlay: {
@@ -11,8 +26,8 @@ const customModal =  Modal.Styles = {
     left: "0",
   },
   content: {
-    width: "360px",
-    height: "180px",
+    width: "50%",
+    height: "50%",
     zIndex: "150",
     position: "absolute",
     top: "50%",
@@ -26,8 +41,30 @@ const customModal =  Modal.Styles = {
   },
 };
 
-function QRContent() {
-  
+function CreateQR() {
+  const navigate = useNavigate()
+  const key = localStorage.getItem('X-USER-ID')
+
+  function handleDownloadClick() {
+    const canvas = document.querySelector('canvas')
+    const url = canvas ? canvas.toDataURL('image/png') : ''
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `newstar-key.png`;
+    link.click();
+    console.log('저장완')
+
+    navigate('/newstar')
+  }
+
+  return (
+    <QRWrapper>
+      <div>QR코드를 저장하시면,</div> 
+      <div>추후 내 기록을 다시 볼 수 있습니다.</div>
+      <QRCode value={key} />
+      <NextButton onClick={handleDownloadClick}/>
+    </QRWrapper>
+  )
 }
 
 function QRModal({ modalOpen, setModalOpen }) {
@@ -36,12 +73,12 @@ function QRModal({ modalOpen, setModalOpen }) {
     <Modal
       isOpen={modalOpen}
       onRequestClose={() => setModalOpen(false)}
-      style={customModalStyles}
+      style={customModal}
       ariaHideApp={false}
-      contentLabel="Pop up Message"
+      contentLabel="user_key"
       shouldCloseOnOverlayClick={false}
     >
-    /*Modal창에 담을 컴포넌트 구성하기*/
+      <CreateQR/>
     </Modal>
   );
 }

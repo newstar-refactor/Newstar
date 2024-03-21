@@ -54,15 +54,15 @@ const SmallCategory = {
 
 // 뉴스 헤더 (제목, 날짜, 태그)
 export default function NewsHeader({ newsData, isLiked, handleLikeButtonClick }) {
-  const newsDate = newsData.date.replace('T', ' ')
+  const newsDate = newsData.date.replace('T', '\n')
 
   return (
     <MainNewsHeaderContainer>
       <NewsTagAndLike>
         <NewsTags>
-          <Link to={`newstar/category/${newsData.Bcategory}`}><Tag fontSize={'12px'}>
+          <Link to={`/newstar/category/${newsData.Bcategory}`}><Tag fontSize={'12px'}>
               {`# ${BigCategory[newsData.Bcategory]}`}</Tag></Link>
-          <Link to={`newstar/category/${newsData.Scategory}`}><Tag fontSize={'12px'}>
+          <Link to={`/newstar/category/${newsData.Scategory}`}><Tag fontSize={'12px'}>
               {`# ${SmallCategory[newsData.Scategory]}`}</Tag></Link>
         </NewsTags>
         <LikeButton 
