@@ -21,24 +21,36 @@ const NewsContainer = styled.div`
 
 
 // 좋아요 상태 변환 함수
-// function replaceItemAtIndex(arr, index, newValue) {
-//   return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-// }
+function replaceItemAtIndex(arr, index, newValue) {
+  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+}
 
-
-
-function MainNewsCard({ newsData }) {
-
+function MainNewsCard({ newsData, recordDatas, setRecordDatas }) {
+  
+  // 좋아요 상태 관리
   const [isLiked, setIsLiked] = useState(false);
 
-  const handleDoubleClick = () => {
-    setIsLiked(!isLiked);
-  };
+  function handleLikeButtonClick() {
+    setIsLiked(!isLiked)
+    toggleLike()
+  }
+
+  // 좋아요 상태 업데이트
+  
+  function toggleLike() {
+    const likeRecord = recordDatas.findIndex((record) => record.article_id === newsData.article_id)
+    const newRecords = replaceItemAtIndex(recordDatas, likeRecord, {
+      ...recordDatas[likeRecord],
+      like: !recordDatas[likeRecord].likes
+    })
+
+    setRecordDatas(newRecords)
+  }
 
   return (
-    <NewsContainer onDoubleClick={handleDoubleClick}>
+    <NewsContainer onDoubleClick={handleLikeButtonClick}>
       <MainNewsImage
-        src={newsData.imageUrl}
+        src={newsData.image_url}
         alt="news image"
       />
 
@@ -46,6 +58,7 @@ function MainNewsCard({ newsData }) {
         newsData={newsData}
         isLiked={isLiked}
         setIsLiked={setIsLiked}
+        handleLikeButtonClick={handleLikeButtonClick}
       />
       <MainNewsBody newsData={newsData} />
     </NewsContainer>

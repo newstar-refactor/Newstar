@@ -9,8 +9,9 @@ const api = {
   records: '/records',
   like: '/recodes/likes',
   keywords: '/keywords',
-  category: (cate, newsNum, pageNum) => `/articles/${cate}?size=${newsNum}&page=${pageNum}`,
-  search: '/data/search',
+  category: (newsNum, pageNum, sCate, bCate) => 
+    `/articles?size=${newsNum}&page=${pageNum}&scategory=${sCate}&bcategory=${bCate}`,
+  search: '/data/search/',
 }
 
 const axiosInstance = axios.create({
