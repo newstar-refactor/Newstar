@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASEAPI = 'https://www.newstar.world/api'
+const BASEAPI = '/api'
 
 const api = {
   news: '/data/news',
@@ -9,7 +9,8 @@ const api = {
   like: '/recodes/likes',
   keywords: '/keywords',
   category: '/category',
-  paging: '/category/paging'
+  paging: '/category/paging',
+  search: '/data/search',
 }
 
 const axiosInstance = axios.create({

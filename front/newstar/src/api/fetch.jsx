@@ -9,7 +9,7 @@ function getNews(success, fail) {
 
 // 검색어로 뉴스 조회
 function searchNews(searchWord, success, fail) {
-  return axiosInstance.post(api.news, searchWord)
+  return axiosInstance.post(api.search, searchWord)
     .then(success)
     .catch(fail)
 }
