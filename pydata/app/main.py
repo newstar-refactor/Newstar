@@ -38,6 +38,7 @@ async def add_process(request: Request, call_next):
 @app.on_event("startup")
 async def startup():
   init_db()
+  makemodel()
 
 @router.get("/crawling")
 async def start_crawling():

@@ -39,7 +39,7 @@ class Keyword(Base):
 
 class Category(Base):
   __tablename__ = "category"
-  keyword_id = Column(Integer, primary_key=True, index=True)
+  category_id = Column(Integer, primary_key=True, index=True)
   member_id = Column(Integer, ForeignKey("member.member_id"))
   number = Column(Integer)
 
