@@ -27,7 +27,15 @@ def search(keyword: Keyword):
     index_name = 'article'
 
     es = Elasticsearch(f"{ES['host']}")
-    results = es.search(index=index_name, body={'from': 0, 'size': 10, 'query': {'match': {'content': keyword}}})
+    results = es.search(
+        index=index_name,
+        body={
+            'from': 0,
+            'size': 10,
+            'query': {'match': {'content': keyword}},
+            'collapse': {'field': 'title'}
+        }
+    )
     for result in results['hits']['hits']:
         article_id = result['_source']['article_id']
         title = result['_source']['title']
