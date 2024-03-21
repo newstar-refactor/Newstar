@@ -35,13 +35,13 @@ public class RecordController {
         Long memberId = (Long) request.getAttribute("memberId");
         Record record = recordService.createRecordEntity(memberId, createRecordRequest);
         recordService.createRecord(record);
-        return getResponseEntity(SuccessCode.OK);
+        return getResponseEntity(SuccessCode.CREATED);
     }
 
     @PatchMapping("/records")
     public ResponseEntity<?> updateRecordLikes(HttpServletRequest request, @RequestBody RecordLikeRequest recordLikeRequest) {
         Long memberId = (Long) request.getAttribute("memberId");
         recordService.updateRecordLikes(memberId, recordLikeRequest);
-        return null;
+        return getResponseEntity(SuccessCode.OK);
     }
 }
