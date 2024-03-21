@@ -7,14 +7,14 @@ import CategoryNews from "./CategoryNews"
 import CategoryNewsDetail from "./CategoryNewsDetail"
 import ChooseKeyword from "./ChooseKeyword"
 
-import { TotalPageContainer } from "../styles/Container"
+import { ContainerWithNav } from "../styles/Container"
 import { TopNavbar, BottomNavbar } from "../components/Navbar";
 
 function MainPage() {
   return (
     <>
       <TopNavbar/>
-      <TotalPageContainer>
+      <ContainerWithNav>
         <Routes>
           <Route path="/" element={<ShortForm/>} />
           <Route path="/search" element={<Search/>} />
@@ -23,7 +23,7 @@ function MainPage() {
           <Route path="/category/:categoryId" element={<CategoryNewsDetail/>} />
           <Route path="/keywords" element={<ChooseKeyword/>} />
         </Routes>
-      </TotalPageContainer>
+      </ContainerWithNav>
       <BottomNavbar/>
     </>
   )

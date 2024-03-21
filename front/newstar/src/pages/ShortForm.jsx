@@ -2,16 +2,28 @@
 // 뉴스 기사 좌우로 스크롤
 
 import { useEffect } from 'react';
+import styled from 'styled-components';
 import { api } from '../api/api'
 import { useRecoilState } from 'recoil'
 import { newsDataState, recordDataState } from '../state/atoms'
 import { getNews, getRecords } from '../api/fetch'
+
 
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import MainNewsCard from '../components/main/MainNewsCard'
+
+const StyledSlider = styled(Slider)`
+  .slick-track {
+    overflow: auto;
+  }
+
+  .slick-slide {
+  }
+
+`;
 
 
 export default function Main() {
@@ -64,7 +76,7 @@ export default function Main() {
   ]
 
   const sliderSettings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -73,13 +85,13 @@ export default function Main() {
 
   return (
     <>
-      <Slider {...sliderSettings}>
+      <StyledSlider {...sliderSettings}>
         {newsDatas.map((newsData) => (
           <MainNewsCard
             key={newsData.id}
             newsData={newsData} />))
         }
-      </Slider>
+      </StyledSlider>
     </>
 
   )

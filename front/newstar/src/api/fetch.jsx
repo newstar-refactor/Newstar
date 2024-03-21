@@ -50,8 +50,9 @@ function getKeyword(success, fail) {
 }
 
 // 카테고리별로 조회
-function getCategoryNews(cate, success, fail) {
-  return axiosInstance.get(`${api.category}/${cate}`)
+function getCategoryNews(cate, newsNum, pageNum, success, fail) {
+  const categoryUrl = api.category(cate, newsNum, pageNum)
+  return axiosInstance.get(categoryUrl)
     .then(success)
     .catch(fail)
 }
