@@ -58,7 +58,7 @@ public class RecordService {
         return Record.createRecode(member, article);
     }
     public void updateRecordLikes(Long memberId, RecordLikeRequest request) {
-        Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticle_id());
+        Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticleId());
         record.updateLikes(request.getLikes());
     }
 }

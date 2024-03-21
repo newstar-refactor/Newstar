@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum SuccessCode {
   // 성공시
-  OK(HttpStatus.OK, "OK");
+  OK(HttpStatus.OK, "OK"),
+  CREATED(HttpStatus.CREATED, "Created Success");
 
   private final HttpStatus httpStatus;
   private final String message;
