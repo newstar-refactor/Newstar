@@ -6,19 +6,26 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
   width: auto;
-  padding: 10px 30px;
-  font-size: 20px;
-  background-color: rgba(100, 192, 86, 0.8); // rgb 대신 rgba 사용하여 투명도 적용
-  color: white;
-  margin: 20px;
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: white;
+  box-shadow: 2px 2px 7px 1px lightgray;
   cursor: pointer;
+  &:hover {
+    background-color: ${(props) => props.$background || "rgb(138, 192, 56, 0.6)"};
+    /* background-color: rgb(138, 192, 56, 0.6); */
+  }
 `;
 
 
-const NextButton = ({ onClick, content }) => {
+const NextButton = ({ onClick, content, $background }) => {
 
   return (
-      <StyledButton onClick={onClick}>{content}</StyledButton>
+      <StyledButton 
+        onClick={onClick}
+        $background={$background}
+        >{content}</StyledButton>
   );
 };
 

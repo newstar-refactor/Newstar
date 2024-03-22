@@ -5,6 +5,8 @@ import styled from "styled-components"
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
 
+import { likeNews } from "../../api/fetch"
+
 
 const MainNewsImage = styled.img`
   width: 100%;
@@ -25,32 +27,33 @@ function replaceItemAtIndex(arr, index, newValue) {
   return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
 }
 
-function MainNewsCard({ newsData, recordDatas, setRecordDatas }) {
+function MainNewsCard({ newsData }) {
   
   // 좋아요 상태 관리
   const [isLiked, setIsLiked] = useState(false);
 
-  function handleLikeButtonClick() {
-    setIsLiked(!isLiked)
-    if (recordDatas.length > 0) {
-      toggleLike()
-    }
-  }
-
   // 좋아요 상태 업데이트
   
-  function toggleLike() {
-    const likeRecord = recordDatas.findIndex((record) => record.article_id === newsData.article_id)
-    const newRecords = replaceItemAtIndex(recordDatas, likeRecord, {
-      ...recordDatas[likeRecord],
-      like: !recordDatas[likeRecord].likes
-    })
-
-    setRecordDatas(newRecords)
+  function handleLike() {
+    setIsLiked(!isLiked)
+    const data = {
+      article_id: newsData.article_id,
+      likes: !isLiked
+    }
+    likeNews(
+      data,
+      ( response ) => {
+        console.log(response)
+        isLiked ? console.log("좋습니다") : console.log("됐습니다")
+      },
+      ( error ) => {
+        console.log(error)
+      }
+    )
   }
 
   return (
-    <NewsContainer onDoubleClick={handleLikeButtonClick}>
+    <NewsContainer onDoubleClick={handleLike}>
       <MainNewsImage
         src={newsData.image_url}
         alt="news image"
@@ -60,7 +63,7 @@ function MainNewsCard({ newsData, recordDatas, setRecordDatas }) {
         newsData={newsData}
         isLiked={isLiked}
         setIsLiked={setIsLiked}
-        handleLikeButtonClick={handleLikeButtonClick}
+        handleLikeButtonClick={handleLike}
       />
       <MainNewsBody newsData={newsData} />
     </NewsContainer>

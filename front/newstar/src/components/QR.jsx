@@ -12,16 +12,32 @@ const QRWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  gap: 10px;
+  gap: 30px;
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 7px;
+`
+
+const WarningWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 `
 
 const Warning1 = styled.div`
+  display: flex;
+  justify-content: center;
   font-size: 12px;
   color: gray;
 `
 
 const Warning2 = styled.div`
+  display: flex;
+  justify-content: center;
   font-size: 15px;
+
 `
 
 const customModal =  Modal.Styles = {
@@ -35,7 +51,8 @@ const customModal =  Modal.Styles = {
     left: "0",
   },
   content: {
-    width: "50%",
+    minWidth: "350px",
+    maxWidth: "500px",
     height: "70%",
     zIndex: "150",
     position: "absolute",
@@ -50,7 +67,7 @@ const customModal =  Modal.Styles = {
   },
 };
 
-function CreateQR() {
+function CreateQR({setModalOpen}) {
   const navigate = useNavigate()
   const key = localStorage.getItem('X-USER-ID')
 
@@ -62,19 +79,21 @@ function CreateQR() {
     link.download = `newstar-key.png`;
     link.click();
     console.log('저장완')
-
-    navigate('/newstar')
   }
 
   return (
     <QRWrapper>
-      <Warning1>앱이 삭제되면 기록이 삭제됩니다!</Warning1>
-      <Warning2>QR코드를 저장하시면,
-        <br />앱이 삭제되더라도 내 기록을 불러올 수 있습니다.</Warning2> 
-      
+      <WarningWrapper>
+        <Warning2>앱이 삭제되면 기록이 삭제됩니다!</Warning2>
+        <Warning1>QR코드를 저장하시면,</Warning1> 
+        <Warning1>언제든지 내 기록을 불러올 수 있습니다.</Warning1> 
+      </WarningWrapper>
       <QRCode value={key} />
-      <NextButton onClick={handleDownloadClick} content={"다운로드 하고 시작하기"} />
-      <NextButton onClick={()=>navigate('/newstar')} content={"그냥 시작하기"} />
+      <ButtonWrapper>
+        <NextButton onClick={handleDownloadClick} content={"다운로드"} />
+        <NextButton onClick={()=>navigate('/newstar')} content={"시작하기"} />
+        <NextButton onClick={()=>setModalOpen(false)} content={"뒤로가기"}/>
+      </ButtonWrapper>
     </QRWrapper>
   )
 }
@@ -88,9 +107,8 @@ function QRModal({ modalOpen, setModalOpen }) {
       style={customModal}
       ariaHideApp={false}
       contentLabel="user_key"
-      shouldCloseOnOverlayClick={false}
     >
-      <CreateQR/>
+      <CreateQR setModalOpen={setModalOpen} />
     </Modal>
   );
 }
