@@ -15,6 +15,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ArticleController {
   private final ArticleService articleService;
-  @GetMapping("/articles")
+  @GetMapping("/articles/{articleId}")
+  public ResponseEntity<?> getArticles(@PathVariable("articleId") Long articleId) {
+    return getResponseEntity(SuccessCode.OK, createArticleResponse(articleService.getArticles(articleId)));
+  }
+
+  @GetMapping("/articles/category")
   public ResponseEntity<?> getArticlesByCategory(Pageable pageable,
       @RequestParam(value = "bcategory", required = false, defaultValue = "") String bcategory,
       @RequestParam(value = "scategory", required = false, defaultValue = "") String scategory) {
