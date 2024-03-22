@@ -35,7 +35,8 @@ def init_es():
     es.indices.create(index='article', body={"settings": settings, "mappings": mappings})
 
     #test data
-    doc1 = {'article_id': 0, 'title': 'test', 'content': '§', 'image_url': 'test'}
+    # doc1 = {'article_id': 0, 'title': 'test', 'content': '§', 'image_url': 'test'}
+    doc1 = {'article_id': -1, 'title': 't☆e☆s☆t', 'content': 't☆h☆i☆s i☆s j☆u☆s☆t t☆e☆s☆t d☆a☆t☆a', 'image_url': 't☆e☆s☆t'}
     es.index(index='article', doc_type='_doc', body=doc1)
 
     return {"message": "init es"}
