@@ -37,6 +37,6 @@ public class MemberController {
   @PostMapping("/members")
   public ResponseEntity<?> createMember(@RequestBody MemberRequest memberRequest) {
     Member member = memberService.createMember(memberRequest);
-    return getResponseEntity(SuccessCode.OK, createMemberResponse(member));
+    return getResponseEntity(SuccessCode.CREATED, createMemberResponse(member));
   }
 }

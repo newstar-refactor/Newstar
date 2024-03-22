@@ -50,11 +50,11 @@ class MemberControllerTest {
         .contentType(MediaType.APPLICATION_JSON) // Content-Type 헤더
         .content("{\"categories\":[100, 200, 300]}"))
         // then
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andExpect(content().contentType("application/json"))
-        .andExpect(jsonPath("$.statusCode").value(200))
-        .andExpect(jsonPath("$.statusName").value("OK"))
-        .andExpect(jsonPath("$.message").value("OK"))
+        .andExpect(jsonPath("$.statusCode").value(201))
+        .andExpect(jsonPath("$.statusName").value("CREATED"))
+        .andExpect(jsonPath("$.message").value("Created Success"))
         .andExpect(jsonPath("$.data.pw").exists())
         .andExpect(jsonPath("$.data.signDate").exists());
   }
