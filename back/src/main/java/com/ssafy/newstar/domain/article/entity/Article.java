@@ -32,10 +32,10 @@ public class Article {
   @Column( length=10000 )
   private String content;
 
-//  @OneToOne(fetch = FetchType.LAZY, optional = true)
-//  private Summary summary;
+  @Column( length=2000 )
+  private String summary;
 
-  public static Article createArticle(String title, String url, LocalDateTime date, int Bcategory, int Scategory, String imageUrl, String content) {
+  public static Article createArticle(String title, String url, LocalDateTime date, int Bcategory, int Scategory, String imageUrl, String content, String summary) {
     Article article = new Article();
     article.title = title;
     article.url = url;
@@ -44,10 +44,8 @@ public class Article {
     article.scategory = Scategory;
     article.imageUrl = imageUrl;
     article.content = content;
+    article.summary = summary;
     return article;
   }
 
-//  public boolean hasSummary() {
-//    return this.summary != null;
-//  }
 }

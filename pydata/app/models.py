@@ -21,6 +21,7 @@ class Article(Base):
   Scategory = Column(Integer)
   image_url = Column(String(255))
   content = Column(String(10000))
+  summary = Column(String(2000))
 
 class Record(Base):
   __tablename__ = "record"
