@@ -25,7 +25,6 @@ public class RecordService {
     private final ArticleRepository articleRepository;
     // 사용자 시청 기록 조회
     public List<Article> getRecords(Long memberId) {
-        // 사용자 시청 기록 조회
         List<Record> records = recordRepository.findByMemberId(memberId);
 
         return records.stream()
