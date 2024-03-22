@@ -29,7 +29,7 @@ async def add_process(request: Request, call_next):
   request_path = str(request.url.path)
 
   # 특정 경로에 대해서만 처리
-  if request_path.startswith('/api/data/news'):
+  if (request_path.startswith('/api/data/news')) or (request_path.startswith('/api/data/search')):
     with Session(engine) as db:
       # 요청 헤더로부터 user_id 추출
       pw = request.headers.get("X-User-Id")
