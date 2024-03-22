@@ -1,21 +1,12 @@
-import json
-import os
-
 from elasticsearch import Elasticsearch
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.routers.elasticsearch import es_crud
+from app.config import conf
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
-SECRET_FILE = os.path.join(PARENT_DIR, 'secrets.json')
-
-with open(SECRET_FILE) as f:
-    secrets = json.load(f)
-
-ES = secrets['ES']
+ES = conf['ES']
 
 def last_article_id(db: Session = Depends(get_db)):
     article_id = es_crud.get_last_article_id(db)

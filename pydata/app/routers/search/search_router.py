@@ -5,15 +5,9 @@ from fastapi import APIRouter
 from typing import List
 from app.routers.search.search_schema import Articles, Keyword
 from elasticsearch import Elasticsearch
+from app.config import conf
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
-SECRET_FILE = os.path.join(PARENT_DIR, 'secrets.json')
-
-with open(SECRET_FILE) as f:
-    secrets = json.load(f)
-
-ES = secrets['ES']
+ES = conf['ES']
 
 router = APIRouter(
     prefix="/api/data/search",

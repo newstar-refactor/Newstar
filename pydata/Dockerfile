@@ -11,4 +11,6 @@ RUN pip install -r requirements.txt
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN echo Asia/Seoul > /etc/timezone
 
+ENV APP_ENV=prod
+
 CMD uvicorn --host=0.0.0.0 --port 8000 app.main:app

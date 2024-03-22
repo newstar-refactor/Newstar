@@ -1,1 +1,3 @@
 venv/
+*.pyc
+*.doc2vec

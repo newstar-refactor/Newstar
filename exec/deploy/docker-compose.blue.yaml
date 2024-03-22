@@ -21,6 +21,8 @@ services:
         ports:
           - 8000:8000
         restart: always
+        environment:
+          - APP_ENV: prod
 networks:
   default:
     name: app-net
