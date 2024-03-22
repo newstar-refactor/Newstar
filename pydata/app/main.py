@@ -4,16 +4,15 @@ from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
 
 from app.category_crawling import do_crawling
-from app.database import engine, SessionLocal
+from app.database import engine
 from app.models import init_db
 from app.routers.elasticsearch import es_service, es_router
 from app.routers.member.member_crud import get_user_by_pw
-from app.routers.record import record_router
 from app.routers.recommend import recommend_router
 from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
 from app.services.learning.news_summary import make_news_summary
-from app.routers.verify_header import verify_header
+
 
 app = FastAPI(docs_url='/api/data/docs', redoc_url='/api/data/redoc')
 # 307 redirect 에러 해결
