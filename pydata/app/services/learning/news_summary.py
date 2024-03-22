@@ -10,7 +10,7 @@ def load_kobart_model_and_tokenizer():
 
 def summarize_text(text, model, tokenizer):
     # 입력 텍스트를 토크나이즈하여 모델에 입력 가능한 형태로 변환
-    ㄴraw_input_ids = tokenizer.encode(text)
+    raw_input_ids = tokenizer.encode(text)
 
     # 토크나이저 시작, 끝 처리
     input_ids = [tokenizer.bos_token_id] + raw_input_ids + [tokenizer.eos_token_id]
