@@ -42,10 +42,13 @@ const StartBtn = styled.button`
   width: auto;
   padding: 10px 30px;
   font-size: 20px;
-  background-color: rgb(100, 192, 86, 0.8);
-  color: white;
+  background-color: white;
   margin: 20px;
+  box-shadow: 2px 2px 7px 1px lightgray;
   cursor: pointer;
+  &:hover {
+    background-color: rgb(138, 192, 56, 0.7);
+  }
 `
 const LottieStyle = {
   display: 'flex',

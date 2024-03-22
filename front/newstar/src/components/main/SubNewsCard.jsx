@@ -19,21 +19,21 @@ const BoxContainer = styled.div`
 
 // title, imageUrl 변수 수정
 // const SubNewsCard = ({ NewsData }) => {
-const SubNewsCard = () => {
+const SubNewsCard = ({records}) => {
   const navigate = useNavigate();
-  const [records, setRecords] = useState([]);
+  // const [records, setRecords] = useState([]);
 
-  useEffect(() => {
-    getRecords(
-      (response) => {
-        setRecords(response.data);
-        console.log(response.data)
-      },
-      (error) => {
-        console.log("시청기록 데이터 조회 실패:", error);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   getRecords(
+  //     (response) => {
+  //       setRecords(response.data);
+  //       console.log(response.data)
+  //     },
+  //     (error) => {
+  //       console.log("시청기록 데이터 조회 실패:", error);
+  //     }
+  //   );
+  // }, []);
 
   // 카드 클릭 시, 숏폼 NewsData.url로 이동
   // const handleClick = () => { navigate(NewsData.url) }
@@ -63,10 +63,10 @@ const SubNewsCard = () => {
 
   return (
     <div>
-      {Array.isArray(records) ? records.map(({ id, title, Bcategory, url }) => (
-        <BoxContainer key={id} onClick={() => handleClick(url)}>
+      {Array.isArray(records) ? records.map((record) => (
+        <BoxContainer key={record.id} onClick={() => handleClick(url)}>
           {/* <Tag fontSize={'12px'}>{`# ${Bcategory}`}</Tag> */}
-          <h2>{title}</h2>
+          <h2>{record.title}</h2>
         </BoxContainer>
       )) : null}
     </div>

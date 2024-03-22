@@ -7,10 +7,10 @@ const api = {
   news: '/data/news',
   members: '/members',
   records: '/records',
-  like: '/recodes/likes',
+  like: '/records/likes',
   keywords: '/keywords',
   category: (newsNum, pageNum, sCate, bCate) => 
-    `/articles?size=${newsNum}&page=${pageNum}&scategory=${sCate}&bcategory=${bCate}`,
+    `/articles/category?size=${newsNum}&page=${pageNum}&scategory=${sCate}&bcategory=${bCate}`,
   search: '/data/search/',
 }
 

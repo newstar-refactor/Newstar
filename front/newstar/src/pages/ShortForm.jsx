@@ -27,7 +27,7 @@ const StyledSlider = styled(Slider)`
 
 export default function Main() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState)
-  const [recordDatas, setRecordDatas] = useRecoilState(recordDataState)
+  
 
   useEffect(() => {
     getNews(
@@ -40,20 +40,6 @@ export default function Main() {
       }
     )
   }, [])
-
-  useEffect(()=>{
-    getRecords(
-      ( response ) => {
-        // console.log(response.data.data)
-        setRecordDatas(response.data.data)
-      },
-      ( error ) => {
-        console.log(error)
-      }
-    )
-  },[])
-
-
 
   const sliderSettings = {
     dots: false,
@@ -87,8 +73,6 @@ export default function Main() {
         {newsDatas && newsDatas.map((newsData) => (
           <MainNewsCard
             key={newsData.article_id}
-            recordDatas={recordDatas}
-            setRecordDatas={setRecordDatas}
             newsData={newsData} />))
         }
       </StyledSlider>
