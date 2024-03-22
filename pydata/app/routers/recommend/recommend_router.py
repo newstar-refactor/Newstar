@@ -1,35 +1,31 @@
 import random
-
-from fastapi import APIRouter, Depends, Request, HTTPException
-from sqlalchemy.orm import Session
 from typing import List
 
-from starlette.responses import JSONResponse
+from fastapi import APIRouter, Depends, Request
+from sqlalchemy.orm import Session
 
+from app.database import get_db
 from app.routers.category.category_crud import get_user_category
-from app.routers.record.record_crud import get_like_list, get_user_view_list
 from app.routers.recommend.recommend_crud import get_news_all, get_recommend_info, get_article_count, \
     get_random_articles_by_categories
 from app.routers.recommend.recommend_schema import ArticleSchema
+from app.routers.record.record_crud import get_like_list, get_user_view_list
 from app.services.learning.news_doc2vec import make_model
 from app.services.learning.news_recommend import recomm
-
-
-from app.database import get_db
+from app.routers.verify_header import verify_header
 
 router = APIRouter(
     prefix="/api/data/news",
 )
 
 # 추천할 뉴스 뽑기
-@router.get("", response_model=List[ArticleSchema])
+@router.get("", response_model=List[ArticleSchema], dependencies=[verify_header()])
 async def recommend(request: Request, db: Session = Depends(get_db)):
     member_id = request.state.member_id
     # 시청 기록, 전체 기사의 수, 좋아요 기록 불러오기
     views = get_user_view_list(db, member_id)
     li = await get_like_list(db, member_id)
     maxsize = get_article_count(db)
-
     # 좋아요 기록 있을때 처리
     if len(li) != 0:
         recommend_list = recomm(li, maxsize, views)
