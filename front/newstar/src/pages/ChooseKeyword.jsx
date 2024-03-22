@@ -155,7 +155,7 @@ function ChooseKeyword() {
         tagsActive={tagsActive}
         setTagsActive={setTagsActive}
       />
-      { selectedKeywords.length > 0 && <NextButton onClick={handleCreateMember}/> }
+      { selectedKeywords.length > 0 && <NextButton onClick={handleCreateMember} content={"다음"}/> }
       <QRModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}

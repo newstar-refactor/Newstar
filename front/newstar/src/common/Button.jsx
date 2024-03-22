@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -16,12 +15,10 @@ const StyledButton = styled.button`
 `;
 
 
-const NextButton = ({onClick}) => {
+const NextButton = ({ onClick, content }) => {
 
   return (
-    <div>
-      <StyledButton onClick={onClick}>다음</StyledButton>
-    </div>
+      <StyledButton onClick={onClick}>{content}</StyledButton>
   );
 };
 

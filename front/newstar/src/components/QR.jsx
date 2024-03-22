@@ -15,6 +15,15 @@ const QRWrapper = styled.div`
   gap: 10px;
 `
 
+const Warning1 = styled.div`
+  font-size: 12px;
+  color: gray;
+`
+
+const Warning2 = styled.div`
+  font-size: 15px;
+`
+
 const customModal =  Modal.Styles = {
   overlay: {
     backgroundColor: " rgba(0, 0, 0, 0.4)",
@@ -27,7 +36,7 @@ const customModal =  Modal.Styles = {
   },
   content: {
     width: "50%",
-    height: "50%",
+    height: "70%",
     zIndex: "150",
     position: "absolute",
     top: "50%",
@@ -59,10 +68,13 @@ function CreateQR() {
 
   return (
     <QRWrapper>
-      <div>QR코드를 저장하시면,</div> 
-      <div>추후 내 기록을 다시 볼 수 있습니다.</div>
+      <Warning1>앱이 삭제되면 기록이 삭제됩니다!</Warning1>
+      <Warning2>QR코드를 저장하시면,
+        <br />앱이 삭제되더라도 내 기록을 불러올 수 있습니다.</Warning2> 
+      
       <QRCode value={key} />
-      <NextButton onClick={handleDownloadClick}/>
+      <NextButton onClick={handleDownloadClick} content={"다운로드 하고 시작하기"} />
+      <NextButton onClick={()=>navigate('/newstar')} content={"그냥 시작하기"} />
     </QRWrapper>
   )
 }
