@@ -33,8 +33,12 @@ public class RecordController {
     @PostMapping("/records")
     public ResponseEntity<?> createRecord(@RequestBody CreateRecordRequest createRecordRequest, HttpServletRequest request) {
         Long memberId = (Long) request.getAttribute("memberId");
-        Record record = recordService.createRecordEntity(memberId, createRecordRequest);
-        recordService.createRecord(record);
+
+        // 사용자가 이미 시청한 기록이 있는지 확인
+        if(recordService.confirmRecord(memberId, createRecordRequest)) {
+            Record record = recordService.createRecordEntity(memberId, createRecordRequest);
+            recordService.createRecord(record);
+        }
         return getResponseEntity(SuccessCode.CREATED);
     }
 
@@ -45,3 +49,6 @@ public class RecordController {
         return getResponseEntity(SuccessCode.OK);
     }
 }
+
+
+// 중복처리 코드를 제거하고, 각 메서드의 역할을 명확히 하였다. Post 요청 !

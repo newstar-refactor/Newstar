@@ -1,12 +1,9 @@
 package com.ssafy.newstar.domain.record.dto;
 
-import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.article.entity.Article;
-import com.ssafy.newstar.domain.record.entity.Record;
 import lombok.Data;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,13 +13,13 @@ public class RecordResponse {
 
     private String title;
 
-    private String content;
+    private Integer scategory;
 
     public static RecordResponse createRecordResponse(Article article) {
         RecordResponse recordResponse = new RecordResponse();
         recordResponse.id = article.getId();
         recordResponse.title = article.getTitle();
-        recordResponse.content = article.getContent();
+        recordResponse.scategory = article.getScategory();
         return recordResponse;
     }
 
