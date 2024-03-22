@@ -13,7 +13,7 @@ from app.routers.recommend import recommend_router
 from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
 
-app = FastAPI()
+app = FastAPI(docs_url='/api/data/docs', redoc_url='/api/data/redoc')
 # 307 redirect 에러 해결
 app.router.redirect_slashes = False
 router = APIRouter(prefix="/api/data")
