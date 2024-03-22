@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState, recordDataState  } from '../state/atoms'
-import { getNews, getRecords, postRecords } from '../api/fetch'
+import { getNews, postRecords } from '../api/fetch'
 
 
 import Slider from "react-slick"
@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import MainNewsCard from '../components/main/MainNewsCard'
+
 
 const StyledSlider = styled(Slider)`
   .slick-track {
@@ -26,8 +27,9 @@ const StyledSlider = styled(Slider)`
 
 
 export default function Main() {
-  const [newsDatas, setNewsDatas] = useRecoilState(newsDataState)
-  
+  const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
+  const [viewArticles, setViewArticles] = useState([]);
+
 
   useEffect(() => {
     getNews(
@@ -48,8 +50,15 @@ export default function Main() {
     slidesToShow: 1,
     slidesToScroll: 1,
     afterChange: (nowSlide) => {
+
       // 현재 슬라이드의 뉴스 데이터
       const nownewsData = newsDatas[nowSlide];
+      
+      // 중복 검사
+      if (viewArticles.includes(nownewsData.article_id)) {
+        return;
+      }
+      
       // 시청기록 생성
       const mynews = {
         articleId: nownewsData.article_id,
@@ -58,7 +67,7 @@ export default function Main() {
       postRecords(mynews,
         (response) => {
           console.log("시청 기록 생성 성공", response);
-          console.log(response)
+          setViewArticles(prev => [...prev, nownewsData.article_id]);
         },
         (error) => {
           console.log("시청 기록 생성 실패", error);

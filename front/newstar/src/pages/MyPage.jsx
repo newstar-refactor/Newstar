@@ -5,11 +5,22 @@ import { useState, useEffect } from "react"
 import MyCategory from "../components/user/MyCategory"
 import MyNews from "../components/user/MyNews"
 import LikeNews from "../components/user/LikeNews"
+import styled from "styled-components"
 
 import { recordDataState } from "../state/atoms"
 import { useRecoilState } from "recoil"
 
 import { getRecords } from "../api/fetch"
+
+
+const Container = styled.div`
+  padding: 10px;
+  
+  // 직접 자식 컴포넌트들 사이에 간격을 추가
+  & > * + * {
+    margin-top: 50px;
+  }
+`;
 
 
 export default function MyPage() {
@@ -18,7 +29,7 @@ export default function MyPage() {
   useEffect(()=>{
     getRecords(
       ( response ) => {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         setRecordDatas(response.data.data)
       },
       ( error ) => {
@@ -28,10 +39,10 @@ export default function MyPage() {
   },[])
 
   return (
-    <div>
+    <Container>
       <MyCategory/>
       <MyNews/>
       <LikeNews/>
-    </div>
+    </Container>
   )
 }
