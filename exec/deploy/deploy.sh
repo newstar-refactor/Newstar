@@ -53,7 +53,7 @@ if [ -n "$EXIST_AFTER" ]; then
     
     echo "Completed Deploy!"
     echo "$BEFORE_COLOR server down(spring_port:${BEFORE_SPRING_PORT}, react_port:${BEFORE_REACT_PORT}, fastapi_port:${BEFORE_FASTAPI_PORT})"
-    docker compose -p deploy-${BEFORE_COLOR} -f docker-compose.${BEFORE_COLOR}.yaml down
+    docker compose -p deploy-${BEFORE_COLOR} -f docker-compose.${BEFORE_COLOR}.yaml --env-file /env/.env down
 fi
 
 EXIST_NONE_IMAGES=$(docker images -f "dangling=true" -q)
