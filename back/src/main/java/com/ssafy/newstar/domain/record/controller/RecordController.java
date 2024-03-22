@@ -49,6 +49,3 @@ public class RecordController {
         return getResponseEntity(SuccessCode.OK);
     }
 }
-
-
-// 중복처리 코드를 제거하고, 각 메서드의 역할을 명확히 하였다. Post 요청 !
