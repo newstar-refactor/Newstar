@@ -18,5 +18,5 @@ def recomm(like_list, maxsize, views):
     views_set = set(views)
     filtered_doc_ids = [doc_id for doc_id in doc_ids if doc_id not in views_set]
 
-    # filtered_doc_ids = [_ ::200]
+    filtered_doc_ids = filtered_doc_ids[ :500]
     return filtered_doc_ids

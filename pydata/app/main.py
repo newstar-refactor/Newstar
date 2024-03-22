@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request, APIRouter, HTTPException
-from fastapi.testclient import TestClient
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
@@ -13,6 +12,7 @@ from app.routers.record import record_router
 from app.routers.recommend import recommend_router
 from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
+from app.services.learning.news_summary import make_news_summary
 from app.routers.verify_header import verify_header
 
 app = FastAPI(docs_url='/api/data/docs', redoc_url='/api/data/redoc')
@@ -20,7 +20,6 @@ app = FastAPI(docs_url='/api/data/docs', redoc_url='/api/data/redoc')
 app.router.redirect_slashes = False
 router = APIRouter(prefix="/api/data")
 
-client = TestClient(app)
 
 # 메타데이터를 생성한다.
 metadata_obj = MetaData()
@@ -58,8 +57,19 @@ async def startup():
 
 @router.get("/crawling", dependencies=[verify_header()])
 def start_crawling():
-  do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
+  # 크롤링
+  crawling_df = do_crawling()
+
+  # 각 본문에 대해 요약 생성
+  crawling_df = make_news_summary(crawling_df)
+
+  # DB 인서트
+  crawling_df.to_sql(name='article', con= engine, if_exists='append', index=False)
+
+  # 추천모델 생성
   makemodel()
+
+  # elasticsearch 생성
   article_id = es_service.last_article_id()
 
   if article_id.loc[0]['article_id'] == 0:
