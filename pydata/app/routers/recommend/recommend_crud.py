@@ -12,9 +12,13 @@ def get_news_all(db : Session):
     return news_df
 
 def get_recommend_info(db: Session, li):
+    if len(li) == 0:
+        return li
     recommended_ids = li
     articles = db.query(Article).filter(Article.article_id.in_(recommended_ids)).all()
-    return articles
+    articles = set(articles)
+    articles_sorted = sorted(articles, key=lambda x: li.index(x.article_id))
+    return articles_sorted
 
 def get_article_count(db: Session):
     count = db.query(func.count(Article.article_id)).scalar()

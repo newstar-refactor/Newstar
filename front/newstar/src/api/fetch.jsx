@@ -38,6 +38,13 @@ function getRecords(success, fail) {
     .catch(fail)
 }
 
+// 시청기록 생성
+function postRecords(mynews, success, fail) {
+  return axiosInstance.post(api.records, mynews)
+    .then(success)
+    .catch(fail)
+}
+
 // 좋아요 목록 조회
 function getLikes(success, fail) {
   return axiosInstance.get(api.like)
@@ -66,6 +73,7 @@ export { getNews,
   getMembers, 
   postMembers, 
   getRecords, 
+  postRecords,
   getLikes,
   getKeyword,
   getCategoryNews,

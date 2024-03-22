@@ -32,7 +32,9 @@ function MainNewsCard({ newsData, recordDatas, setRecordDatas }) {
 
   function handleLikeButtonClick() {
     setIsLiked(!isLiked)
-    toggleLike()
+    if (recordDatas.length > 0) {
+      toggleLike()
+    }
   }
 
   // 좋아요 상태 업데이트

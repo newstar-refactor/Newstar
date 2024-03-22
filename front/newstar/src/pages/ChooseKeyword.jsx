@@ -13,6 +13,8 @@ import { postMembers } from '../api/fetch';
 import SelectBox from '../common/SelectBox'
 import NextButton from '../common/Button';
 
+import QRModal from '../components/QR';
+
 const SelectBoxWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -124,7 +126,7 @@ function ChooseKeyword() {
 
         // 응답으로 받은 key
         const key = response?.data.data.pw
-
+        
         if (!localStorage.getItem('X-USER-ID')) {
           localStorage.setItem('X-USER-ID', key)
           console.log('새로운 회원이 등록되었습니다.')
@@ -135,8 +137,8 @@ function ChooseKeyword() {
       (error) => {
         console.log(error)
       }
-    )
-    navigate('/newstar')
+      )
+      setModalOpen(!modalOpen)
   }
 
   return (
@@ -154,6 +156,10 @@ function ChooseKeyword() {
         setTagsActive={setTagsActive}
       />
       { selectedKeywords.length > 0 && <NextButton onClick={handleCreateMember}/> }
+      <QRModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
     </KeywordPageWrapper>
   )
 }
