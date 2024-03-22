@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, APIRouter, HTTPException
+from fastapi.testclient import TestClient
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
@@ -12,12 +13,16 @@ from app.routers.record import record_router
 from app.routers.recommend import recommend_router
 from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
+from app.routers.verify_header import verify_header
+from app.config import conf
 
 app = FastAPI(docs_url='/api/data/docs', redoc_url='/api/data/redoc')
 # 307 redirect 에러 해결
 app.router.redirect_slashes = False
 router = APIRouter(prefix="/api/data")
 
+client = TestClient(app)
+PW = conf['TEST']
 
 # 메타데이터를 생성한다.
 metadata_obj = MetaData()
@@ -29,7 +34,7 @@ async def add_process(request: Request, call_next):
   request_path = str(request.url.path)
 
   # 특정 경로에 대해서만 처리
-  if request_path.startswith('/api/data/news'):
+  if (request_path.startswith('/api/data/news')) or (request_path.startswith('/api/data/search')):
     with Session(engine) as db:
       # 요청 헤더로부터 user_id 추출
       pw = request.headers.get("X-User-Id")
@@ -53,7 +58,7 @@ async def startup():
   init_db()
   makemodel()
 
-@router.get("/crawling")
+@router.get("/crawling", dependencies=[verify_header()])
 def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   makemodel()

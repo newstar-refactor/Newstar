@@ -7,11 +7,13 @@ const ContainerWithoutNav = styled.main`
   position: relative;
   max-width: 500px;
   min-width: 300px;
-  margin: 100px auto;
+  margin: 0px auto;
+  height: 100vh;
+  padding: 20px 20px 60px;
 `;
 
 // 네브바 있는 페이지
-const ContainerWithNav = styled.div`
+const ContainerWithNav = styled.main`
   right: 0;
   left: 0;
   position: relative;

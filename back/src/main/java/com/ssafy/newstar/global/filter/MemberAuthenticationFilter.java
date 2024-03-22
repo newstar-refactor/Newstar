@@ -43,33 +43,38 @@ public class MemberAuthenticationFilter implements Filter {
     String requestURI = servletRequest.getRequestURI();
     String requestMethod = servletRequest.getMethod();
     log.info(requestURI + " : " + requestMethod);
+
     if (requestURI.equals("/api") || checkWhiteList(requestURI, requestMethod)) {
       chain.doFilter(request, response);
       return;
     }
 
-    log.info("필터 지나간다 ~");
+    log.info("필터 진입");
+    try {
+      // 회원을 선별하는 UUID 값
+      String key = servletRequest.getHeader("X-User-Id");
+      log.info("X-User-Id 값 : " + key);
+      if (!StringUtils.hasText(key)) {
+        log.info("X-User-Id 값이 비어 있습니다.");
+        throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
+      }
 
-    // 회원을 선별하는 UUID 값
-    String key = servletRequest.getHeader("X-User-Id");
-    log.info("X-User-Id 값 : " + key);
-    if (!StringUtils.hasText(key)) {
-      log.info("X-User-Id 값이 비어 있습니다.");
-      throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
+      Member member = memberRepository.findByPw(key).orElseThrow(
+          () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
+
+      servletRequest.setAttribute("memberId", member.getId());
+      log.info(" memberId : " + member.getId());
+      // 다음 필터 없으면 컨트롤러로 가겠지
+      chain.doFilter(request, response);
+    } catch (GlobalException e) {
+      setErrorResponse(servletResponse, e.getErrorCode());
     }
-
-    Member member = memberRepository.findByPw(key).orElseThrow(
-        () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
-
-    servletRequest.setAttribute("memberId", member.getId());
-    log.info(" memberId : " + member.getId());
-    // 다음 필터 없으면 컨트롤러로 가겠지
-    chain.doFilter(request, response);
   }
 
   private boolean checkWhiteList(String requestURI, String requestMethod) {
     for (URLMethod urlMethod : whiteList) {
-      if (requestURI.startsWith(urlMethod.getUrl()) && requestMethod.equals(urlMethod.getMethod())) {
+      if (requestURI.startsWith(urlMethod.getUrl()) && requestMethod.equals(
+          urlMethod.getMethod())) {
         return true;
       }
     }

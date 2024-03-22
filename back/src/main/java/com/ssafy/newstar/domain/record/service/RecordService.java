@@ -25,7 +25,6 @@ public class RecordService {
     private final ArticleRepository articleRepository;
     // 사용자 시청 기록 조회
     public List<Article> getRecords(Long memberId) {
-        // 사용자 시청 기록 조회
         List<Record> records = recordRepository.findByMemberId(memberId);
 
         return records.stream()
@@ -60,5 +59,11 @@ public class RecordService {
     public void updateRecordLikes(Long memberId, RecordLikeRequest request) {
         Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticleId());
         record.updateLikes(request.getLikes());
+    }
+
+    public boolean confirmRecord(Long memberId, CreateRecordRequest createRecordRequest) {
+        Record record = recordRepository.findByMemberIdAndArticleId(memberId, createRecordRequest.getArticleId());
+        // null 이면 true 리턴
+        return record == null;
     }
 }

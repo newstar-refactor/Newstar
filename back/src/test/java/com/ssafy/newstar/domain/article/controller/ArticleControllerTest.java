@@ -22,6 +22,20 @@ class ArticleControllerTest {
   private MockMvc mockMvc;
 
   @Test
+  void getArticles() throws Exception {
+    // given
+    // when
+    mockMvc.perform(get("/articles/{articleId}", 1)
+            .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb"))
+        // then
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json"))
+        .andExpect(jsonPath("$.statusCode").value(200))
+        .andExpect(jsonPath("$.statusName").value("OK"))
+        .andExpect(jsonPath("$.message").value("OK"));
+  }
+
+  @Test
   void getArticlesByCategory() throws Exception {
     // given
     MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -30,7 +44,7 @@ class ArticleControllerTest {
     params.add("size", "10");
     params.add("page", "0");
     // when
-    mockMvc.perform(get("/articles")
+    mockMvc.perform(get("/articles/category")
             .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb")
             .params(params))
         // then

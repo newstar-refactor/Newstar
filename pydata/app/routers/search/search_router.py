@@ -6,6 +6,7 @@ from typing import List
 from app.routers.search.search_schema import Articles, Keyword
 from elasticsearch import Elasticsearch
 from app.config import conf
+from app.routers.verify_header import verify_header
 
 ES = conf['ES']
 
@@ -13,7 +14,7 @@ router = APIRouter(
     prefix="/api/data/search",
 )
 
-@router.post("", response_model=List[Articles])
+@router.post("", response_model=List[Articles], dependencies=[verify_header()])
 def search(keyword: Keyword):
     keyword = keyword.keyword
     print(keyword)

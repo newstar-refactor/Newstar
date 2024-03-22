@@ -2,7 +2,6 @@
 // 초기 추천을 위한 키워드를 선택
 // 키워드 선택 후, 회원가입 완료
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { FaRegChartBar } from "react-icons/fa";
@@ -15,18 +14,20 @@ import NextButton from '../common/Button';
 
 import QRModal from '../components/QR';
 
+
 const SelectBoxWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 25px;
 `
 
 const KeywordPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 30px;
+  justify-content: center;
+  height: 100%;
+  gap: 60px;
 `
 const KeywordPageHeader = styled.div`
   display: flex;
@@ -34,6 +35,12 @@ const KeywordPageHeader = styled.div`
   align-items: center;
   justify-content: center;
   gap: 20px;
+`
+
+const KeywordPageButton = styled.div`
+   display: flex;
+   justify-content: end;
+   height: 35px;
 `
 
 const BigKeyWords = [
@@ -99,7 +106,6 @@ function Keywords({ tagsActive, setTagsActive}) {
 
 
 function ChooseKeyword() {
-  const navigate = useNavigate()
 
   // 모달 창 상태 관리
   const [modalOpen, setModalOpen] = useState(false)
@@ -155,7 +161,12 @@ function ChooseKeyword() {
         tagsActive={tagsActive}
         setTagsActive={setTagsActive}
       />
-      { selectedKeywords.length > 0 && <NextButton onClick={handleCreateMember}/> }
+      <KeywordPageButton>
+        { selectedKeywords.length > 0 && <NextButton 
+          onClick={handleCreateMember} 
+          $background={"lightgray"}
+          content={"다음"}/> }
+      </KeywordPageButton>
       <QRModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}

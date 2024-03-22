@@ -1,19 +1,15 @@
 import json
-import os
 
 from elasticsearch import Elasticsearch
-from fastapi import APIRouter, Security
-from fastapi.security import APIKeyHeader
-from app.config import conf
+from fastapi import APIRouter
+from app.routers.verify_header import verify_header
 
+from app.config import conf
 
 ES = conf['ES']
 router = APIRouter(
     prefix="/api/data/inites",
 )
-
-def verify_header(access_token = Security(APIKeyHeader(name='X-User-ID'))):
-    return access_token
 
 @router.get("", dependencies=[verify_header()])
 def init_es():
