@@ -21,7 +21,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('X-USER-ID')
-    config.headers['X-USER-ID'] = accessToken
+    config.headers['X-User-Id'] = accessToken
     return config
   },
   (error) => {

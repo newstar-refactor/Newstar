@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState, recordDataState  } from '../state/atoms'
-import { getNews, getRecords } from '../api/fetch'
+import { getNews, getRecords, postRecords } from '../api/fetch'
 
 
 import Slider from "react-slick"
@@ -33,7 +33,7 @@ export default function Main() {
     getNews(
       ( response ) => {
         setNewsDatas(response.data)
-        console.log(response)
+        // console.log(response)
       },
       (error) => {
         console.log(error)
@@ -44,7 +44,7 @@ export default function Main() {
   useEffect(()=>{
     getRecords(
       ( response ) => {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         setRecordDatas(response.data.data)
       },
       ( error ) => {
@@ -61,7 +61,25 @@ export default function Main() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-  }
+    afterChange: (nowSlide) => {
+      // 현재 슬라이드의 뉴스 데이터
+      const nownewsData = newsDatas[nowSlide];
+      // 시청기록 생성
+      const mynews = {
+        articleId: nownewsData.article_id,
+      };
+
+      postRecords(mynews,
+        (response) => {
+          console.log("시청 기록 생성 성공", response);
+          console.log(response)
+        },
+        (error) => {
+          console.log("시청 기록 생성 실패", error);
+        }
+      );
+    }
+  };
 
   return (
     <>
