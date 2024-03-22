@@ -14,4 +14,3 @@ def test_recommend_test():
     expected_result = []
 
     assert first_result == expected_result
-
