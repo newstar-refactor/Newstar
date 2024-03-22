@@ -2,7 +2,8 @@ import json
 import os
 
 from elasticsearch import Elasticsearch
-from fastapi import APIRouter
+from fastapi import APIRouter, Security
+from fastapi.security import APIKeyHeader
 from app.config import conf
 
 
@@ -11,7 +12,10 @@ router = APIRouter(
     prefix="/api/data/inites",
 )
 
-@router.get("")
+def verify_header(access_token = Security(APIKeyHeader(name='X-User-ID'))):
+    return access_token
+
+@router.get("", dependencies=[verify_header()])
 def init_es():
     es = Elasticsearch(f"{ES['host']}")  # 환경에 맞게 바꿀 것
     es.info()
