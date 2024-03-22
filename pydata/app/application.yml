@@ -7,7 +7,8 @@ dev:
     database: "newstar"
   ES:
     host: "localhost:9200"
-
+  TEST:
+    member_pw: "feb91399-aaf3-40ef-856d-35e6ddf8befb"
 prod:
   DB:
     user: "newstar"
