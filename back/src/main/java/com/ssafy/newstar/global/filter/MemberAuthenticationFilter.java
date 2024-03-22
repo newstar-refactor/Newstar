@@ -32,6 +32,7 @@ public class MemberAuthenticationFilter implements Filter {
     whiteList.add(new URLMethod("/members", "POST"));
     whiteList.add(new URLMethod("/api/swagger-ui", "GET"));
     whiteList.add(new URLMethod("/api/v3/api-docs", "GET"));
+    whiteList.add(new URLMethod("/api/favicon.ico", "GET"));
   }
 
   @Override
