@@ -25,6 +25,8 @@ public class ArticleResponse {
 
   private String content;
 
+  private String summary;
+
   public static ArticleResponse createArticleResponse(Article article) {
     ArticleResponse articleResponse = new ArticleResponse();
     articleResponse.id = article.getId();
@@ -35,6 +37,7 @@ public class ArticleResponse {
     articleResponse.Scategory = article.getScategory();
     articleResponse.imageUrl = article.getImageUrl();
     articleResponse.content = article.getContent();
+    articleResponse.summary = article.getSummary();
     return articleResponse;
   }
 
