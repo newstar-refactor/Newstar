@@ -55,7 +55,7 @@ async def startup():
   init_db()
   makemodel()
 
-@router.get("/crawling", dependencies=[verify_header()])
+@router.get("/crawling")
 def start_crawling():
   # 크롤링
   crawling_df = do_crawling()
