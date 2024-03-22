@@ -1,3 +1,4 @@
+import axios from "axios"
 import { api, axiosInstance } from "./api"
 
 // 뉴스 데이터 조회
@@ -67,6 +68,13 @@ function getCategoryNews(bCate, sCate, newsNum, pageNum, success, fail) {
     .catch(fail)
 }
 
+// 좋아요
+function likeNews(like, success, fail) {
+  return axiosInstance.patch(api.records, like)
+    .then(success)
+    .catch(fail)
+}
+
 
 export { getNews,
   searchNews, 
@@ -77,4 +85,5 @@ export { getNews,
   getLikes,
   getKeyword,
   getCategoryNews,
+  likeNews
 }
