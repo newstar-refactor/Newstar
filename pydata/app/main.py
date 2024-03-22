@@ -56,7 +56,7 @@ async def startup():
   init_db()
   makemodel()
 
-@router.get("/crawling", dependencies=[verify_header()])
+@router.get("/crawling")
 def start_crawling():
   do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
   makemodel()
