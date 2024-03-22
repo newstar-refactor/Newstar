@@ -60,4 +60,10 @@ public class RecordService {
         Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticleId());
         record.updateLikes(request.getLikes());
     }
+
+    public boolean confirmRecord(Long memberId, CreateRecordRequest createRecordRequest) {
+        Record record = recordRepository.findByMemberIdAndArticleId(memberId, createRecordRequest.getArticleId());
+        // null 이면 true 리턴
+        return record == null;
+    }
 }
