@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil'
 import { getCategoryNews } from '../api/fetch'
 import { categoryDataState } from '../state/atoms'
 import CategoryNewsCard from '../components/main/CategoryNewsCard'
+import { BigCategory, SmallCategory } from '../state/categoryData'
 
 const CategoryNewsCardContainer = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ export default function CategoryNewsDetail() {
   
   const params = useParams()
 
+  let categoryTitle = ''
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
   const [fetching, setFetching] = useState(false)
@@ -33,8 +35,9 @@ export default function CategoryNewsDetail() {
 
     // 대분류일 경우
     if (['100', '101', '105'].includes(params.categoryId)) {
+      categoryTitle = BigCategory[params.categoryId]
       getCategoryNews(
-        params.categoryId, '', 5, 0,
+        params.categoryId, '', 7, 0,
         ( response ) => {
           setCategoryDatas(response.data.data.content)
           setCategoryPaging(response.data.data.content)
@@ -45,12 +48,13 @@ export default function CategoryNewsDetail() {
         }
       )
     } else { // 중분류가 들어온경우
+      categoryTitle = SmallCategory[params.categoryId]
       getCategoryNews(
-        '', params.categoryId, 5, 0,
+        '', params.categoryId, 7, 0,
         ( response ) => {
           setCategoryDatas(response.data.data.content)
           setCategoryPaging(response.data.data.content)
-          console.log(response)
+          console.log(response.data.data.content)
         },
         ( error ) => {
           console.log(error)
@@ -65,7 +69,7 @@ export default function CategoryNewsDetail() {
   function fetchMoreDatas() {
     setFetching(true)
 
-    if ([100, 101, 105].includes(params.categoryId)) {
+    if (['100', '101', '105'].includes(params.categoryId)) {
       getCategoryNews(
         params.categoryId, '', 5, currentPage + 1,
         ( response ) => {
@@ -119,8 +123,10 @@ export default function CategoryNewsDetail() {
     };
   });
 
+
   return (
     <CategoryNewsCardContainer>
+      {categoryTitle}
       {categoryDatas && categoryDatas.map((categoryData, idx) => (
         <CategoryNewsCard
           key={`${idx}-${categoryData.id}`}

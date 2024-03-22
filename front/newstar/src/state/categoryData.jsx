@@ -1,5 +1,5 @@
 // 카테고리 번호
-const BigCategory = [
+const BigCategoryData = [
   { 
     code: 100,
     name: '정치'
@@ -13,7 +13,7 @@ const BigCategory = [
     name: 'IT/과학'
   }]
 
-const SmallCategory = {
+const SmallCategoryData = {
   100: [
     {
       code: 264,
@@ -107,4 +107,39 @@ const SmallCategory = {
     },]
   }
 
-export { BigCategory, SmallCategory }
+const BigCategory = 
+  { 
+    100: '정치', 
+    101: '경제', 
+    105: 'IT/과학'
+  }
+
+const SmallCategory = {
+  264: '대통령실',
+  265: '국회/정당',
+  268: '북한',
+  266: '행정',
+  267: '국방/외교',
+  269: '정치일반',
+  
+  259: '금융',
+  258: '증권',
+  261: '산업/재계',
+  771: '중기/벤처',
+  260: '부동산',
+  262: '글로벌 경제',
+  310: '생활경제',
+  263: '경제 일반',
+  
+  731: '모바일',
+  226: '인터넷/SNS',
+  227: '통신/뉴미디어',
+  230: 'IT 일반',
+  732: '보안/해킹',
+  283: '컴퓨터',
+  229: '게임/리뷰',
+  228: '과학 일반',
+}
+
+
+export { BigCategory, SmallCategory, BigCategoryData, SmallCategoryData }

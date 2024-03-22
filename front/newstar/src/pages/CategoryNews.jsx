@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-import { BigCategory, SmallCategory } from '../state/categoryData'
+import { BigCategoryData, SmallCategoryData } from '../state/categoryData'
 
 
 const CategoryNewsContainer = styled.div`
@@ -66,21 +66,21 @@ const SmallCategoryBox = styled.div`
 export default function CategoryNews() {
   const navigate = useNavigate()
 
-  const list100 = SmallCategory[100].map(small =>
+  const list100 = SmallCategoryData[100].map(small =>
     <SmallCategoryBox
       key={small.code} 
       onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
-  const list101 = SmallCategory[101].map(small =>
+  const list101 = SmallCategoryData[101].map(small =>
     <SmallCategoryBox
       key={small.code} 
       onClick={() => navigate(`/newstar/category/${small.code}`)}>
       {small.name}</SmallCategoryBox>
   )
 
-  const list105 = SmallCategory[105].map(small =>
+  const list105 = SmallCategoryData[105].map(small =>
     <SmallCategoryBox
       key={small.code} 
       onClick={() => navigate(`/newstar/category/${small.code}`)}>
