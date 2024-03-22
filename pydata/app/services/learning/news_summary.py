@@ -18,14 +18,10 @@ def summarize_text(text, model, tokenizer):
     # 요약 수행
     summary_ids = model.generate(torch.tensor([input_ids]), max_length=256, min_length=64, length_penalty=2.0, num_beams=8, early_stopping=True)
 
-    # 토큰화 디코드
-    tokenizer.decode(summary_ids.squeeze().tolist(), skip_special_tokens=True)
+    # 토큰화 디코드 후, 개행문자 제거
+    summary_text = tokenizer.decode(summary_ids.squeeze().tolist(), skip_special_tokens=True).replace("\n", "")
 
-    # 개행문자 제거
-    summary_ids = summary_ids.replace("\n", "")
-
-    # 요약 결과 텍스트 반환
-    return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    return summary_text
 
 
 
@@ -43,8 +39,6 @@ def make_news_summary(news_df):
     # 모든 행에 대해 요약 생성
     for i in tqdm(range(len(news_df)), desc="Summarizing"):
         news_df.at[i, 'summary'] = summarize_text(news_df.at[i, 'content'], model, tokenizer)
-        print("본문 : " + str(news_df.at[i, 'content']))
-        print("요약 : " + str(news_df.at[i, 'summary']) + "\n")
 
     return news_df
 
