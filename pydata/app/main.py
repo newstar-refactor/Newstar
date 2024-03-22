@@ -82,6 +82,5 @@ def start_crawling():
 
 app.include_router(router)
 app.include_router(recommend_router.router)
-app.include_router(record_router.router)
 app.include_router(search_router.router)
 app.include_router(es_router.router)
