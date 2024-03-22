@@ -3,73 +3,86 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import LikeButton from "../../common/Like"
 import styled from "styled-components"
+import Slider from "react-slick";
 import Tag from "../../common/Tag"
-import { getRecords } from '../../api/fetch'
+import { getRecords, getArticles } from '../../api/fetch'
 
 
 // styled-components
-const BoxContainer = styled.div`
+const SlideWrapper = styled.div`
+  padding: 3px; // 좌우 패딩으로 카드 간격 조정
+  // padding-right: 15px;
+  gap: 20px;
+  display: flex;
+`;
+
+const Card = styled.div`
+  padding: 10px;
+  border-radius: 5px;
+  width: 120px;
+  min-height: 120px;
   display: flex;
   align-items: center;
-  border: 1px solid;
-  padding: 10px;
+  box-shadow: 2px 2px 7px 1px lightgray;
   cursor: pointer;
-`
+  background-color: white;
+  transition: background-color 0.3s ease; // 배경색 변화에 애니메이션 효과 적용
+
+  &:hover {
+    background-color: rgb(138, 192, 56); // 마우스를 올렸을 때의 배경색
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: calc(100% - 20px);
+  text-align: center; // 텍스트를 가운데 정렬
+  display: block; // 텍스트가 여러 줄일 경우를 고려하여 block으로 변경
+  `;
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    margin-right: -50px; // 오타 수정
+  }
+
+  .slick-slide > div {
+    margin: 0 10px; // 각 슬라이드 요소의 좌우에 여백 추가
+  }
+`;
 
 
-// title, imageUrl 변수 수정
 // const SubNewsCard = ({ NewsData }) => {
 const SubNewsCard = ({records}) => {
   const navigate = useNavigate();
-  // const [records, setRecords] = useState([]);
-
-  // useEffect(() => {
-  //   getRecords(
-  //     (response) => {
-  //       setRecords(response.data);
-  //       console.log(response.data)
-  //     },
-  //     (error) => {
-  //       console.log("시청기록 데이터 조회 실패:", error);
-  //     }
-  //   );
-  // }, []);
 
   // 카드 클릭 시, 숏폼 NewsData.url로 이동
   // const handleClick = () => { navigate(NewsData.url) }
   const handleClick = (url) => { navigate(url) }
 
-  // return (
-  //   <BoxContainer onClick={handleClick}>
-  //     {NewsData.map(({ id, title, Bcategory, url }) => (
-  //       <div key={id}>
-  //         <Tag fontSize={'12px'}>{`# ${Bcategory}`}</Tag>
-  //         <h2>{title}</h2>
-  //       </div>
-  //     ))}
-  //   </BoxContainer>
-  // );
 
-  // return (
-  //   <div>
-  //     {records.map(({ id, title, Bcategory, url }) => (
-  //       <BoxContainer key={id} onClick={() => handleClick(url)}>
-  //         <Tag fontSize={'12px'}>{`# ${Bcategory}`}</Tag>
-  //         <h2>{title}</h2>
-  //       </BoxContainer>
-  //     ))}
-  //   </div>
-  // );
+  const settings = {
+    dots: false,
+    infinite:false,
+    speed: 400,
+    slidesToShow: 4, // 한 번에 보여질 슬라이드 수
+    slidesToScroll: 4, // 스크롤할 때 넘어가는 슬라이드 수
+    initialSlide: 0,
+  };
+
 
   return (
-    <div>
+    <StyledSlider {...settings}>
       {Array.isArray(records) ? records.map((record) => (
-        <BoxContainer key={record.id} onClick={() => handleClick(url)}>
-          {/* <Tag fontSize={'12px'}>{`# ${Bcategory}`}</Tag> */}
-          <h2>{record.title}</h2>
-        </BoxContainer>
+        <SlideWrapper key={record.id}>
+          <Card onClick={() => navigate(record.url)}>
+            <Title>{record.title}</Title>
+          </Card>
+        </SlideWrapper>
       )) : null}
-    </div>
+    </StyledSlider>
   );
 
 };
