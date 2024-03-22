@@ -2,6 +2,8 @@
 // 초기 추천을 위한 키워드를 선택
 // 키워드 선택 후, 회원가입 완료
 import { useState, useEffect } from 'react'
+import { useSetRecoilState } from 'recoil';
+import { userKeyState } from '../state/atoms';
 import styled from 'styled-components';
 
 import { FaRegChartBar } from "react-icons/fa";
@@ -61,7 +63,7 @@ const BigKeyWords = [
   }]
 
 
-function Keywords({ tagsActive, setTagsActive}) {
+function Keywords({ tagsActive, setTagsActive }) {
 
   // 클릭 시 색 변화
   function handleTagClick(clickedKeyword) {
@@ -107,6 +109,9 @@ function Keywords({ tagsActive, setTagsActive}) {
 
 function ChooseKeyword() {
 
+  // userKey 상태 관리
+  const setUserKey = useSetRecoilState(userKeyState)
+
   // 모달 창 상태 관리
   const [modalOpen, setModalOpen] = useState(false)
   
@@ -135,6 +140,7 @@ function ChooseKeyword() {
         
         if (!localStorage.getItem('X-USER-ID')) {
           localStorage.setItem('X-USER-ID', key)
+          setUserKey(key)
           console.log('새로운 회원이 등록되었습니다.')
         } else {
           console.log('이미 등록된 회원입니다.')
@@ -147,6 +153,7 @@ function ChooseKeyword() {
       setModalOpen(!modalOpen)
   }
 
+  const newKey = localStorage.getItem('X-USER-ID')
   return (
     <KeywordPageWrapper>
       <KeywordPageHeader>

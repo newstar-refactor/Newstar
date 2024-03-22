@@ -22,11 +22,6 @@ const NewsContainer = styled.div`
 `
 
 
-// 좋아요 상태 변환 함수
-function replaceItemAtIndex(arr, index, newValue) {
-  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-}
-
 function MainNewsCard({ newsData }) {
   
   // 좋아요 상태 관리
@@ -37,14 +32,14 @@ function MainNewsCard({ newsData }) {
   function handleLike() {
     setIsLiked(!isLiked)
     const data = {
-      article_id: newsData.article_id,
+      articleId: newsData.article_id,
       likes: !isLiked
     }
     likeNews(
       data,
       ( response ) => {
         console.log(response)
-        isLiked ? console.log("좋습니다") : console.log("됐습니다")
+        isLiked ? console.log("됐습니다") : console.log("좋습니다")
       },
       ( error ) => {
         console.log(error)

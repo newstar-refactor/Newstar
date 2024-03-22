@@ -20,8 +20,21 @@ const categoryDataState = atom({
   default: ""
 })
 
+const likeDataState = atom({
+  key: "likeState",
+  default: ""
+})
+
+const userKeyState = atom({
+  key: "userKey",
+  default: ""
+
+})
+
 export { 
-  newsDataState, 
+  userKeyState,
+  newsDataState,
+  likeDataState, 
   recordDataState,
   categoryDataState
  }

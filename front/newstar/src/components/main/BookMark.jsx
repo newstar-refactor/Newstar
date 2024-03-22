@@ -18,6 +18,7 @@ const BookMarkInfo = styled.div`
   overflow: hidden;
   padding: 20px;
   width: 75%;
+  gap: 1px;
 
   font-size: 13px;
 `

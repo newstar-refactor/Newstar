@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { Axios } from "axios"
 import { api, axiosInstance } from "./api"
 
 // 뉴스 데이터 조회
@@ -75,8 +75,15 @@ function likeNews(like, success, fail) {
     .catch(fail)
 }
 
+// 시청기록 뉴스 데이터 전문
+function getArticles(success, fail) {
+  return axiosInstance.get(api.articles)
+    .then(success)
+    .catch(fail)
+}
 
-export { getNews,
+export {
+  getNews,
   searchNews, 
   getMembers, 
   postMembers, 
@@ -85,5 +92,6 @@ export { getNews,
   getLikes,
   getKeyword,
   getCategoryNews,
-  likeNews
+  likeNews,
+  getArticles
 }

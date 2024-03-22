@@ -1,17 +1,22 @@
 // 대분류, 중분류끼리 모은 뉴스
 import styled from 'styled-components'
-import Tag from "../../common/Tag"
-import { useRecoilState } from 'recoil'
-// import { collectDataState } from '../state/atoms'
+import { BigCategory, SmallCategory } from '../../state/categoryData'
+import SmallTag from "../../common/SmallTag"
+
+
+import { useParams } from 'react-router-dom'
+
+const TagsWrapper = styled.div`
+  display: flex;
+  gap: 7px;
+`
 
 const CategoryNewsCardWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 15px;
   // border: 0.5px solid gray;
-  border-radius: 8px;
   width: 100%;
-  height: 90px;
+  height: 70px;
+  cursor: pointer;
 `
 
 const CategoryNewsCardContent = styled.div`
@@ -23,6 +28,7 @@ const CategoryNewsCardContent = styled.div`
   padding: 20px;
   width: 75%;
   font-size: 18px;
+  gap: 3px;
 `
 
 const CategoryNewsCardImage = styled.img`
@@ -32,15 +38,30 @@ const CategoryNewsCardImage = styled.img`
   border-radius: 5px;
 `
 
+const CategoryNewsTitle = styled.div`
+  font-size: 13px;
+`
+const CategoryNewsContent = styled.div`
+  font-size: 11px;
+  color: gray;
+`
+
 export default function CategoryNewsCard({ categoryData }) {
+  const newsDate = categoryData.date.replace("T", ' ')
   return (
-    <CategoryNewsCardWrapper>
-      <CategoryNewsCardImage src= {categoryData.imageUrl} alt="news_image" />
-      <CategoryNewsCardContent>
-        <div>{categoryData.title}</div>
-        {/* <div>{categoryData.content}</div> */}
-        {/* <div>{categoryData.Scategory}</div> */}
-      </CategoryNewsCardContent>
-    </CategoryNewsCardWrapper>
+    <>
+      <CategoryNewsCardWrapper>
+        <CategoryNewsCardImage src= {categoryData.imageUrl} alt="news_image" />
+        <CategoryNewsCardContent>
+          {/* <TagsWrapper>
+            <SmallTag fontSize={'10px'} >{`# ${BigCategory[categoryData.bcategory]}`}</SmallTag>
+            <SmallTag fontSize={'10px'} >{`# ${SmallCategory[categoryData.scategory]}`}</SmallTag>
+          </TagsWrapper> */}
+          <CategoryNewsContent>{newsDate}</CategoryNewsContent>
+          <CategoryNewsTitle>{categoryData.title}</CategoryNewsTitle>
+          <CategoryNewsContent>{categoryData.content}</CategoryNewsContent>
+        </CategoryNewsCardContent>
+      </CategoryNewsCardWrapper>
+    </>
   )
 }

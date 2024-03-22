@@ -1,6 +1,8 @@
 import Modal from 'react-modal'
 import QRCode from 'qrcode.react'
 import styled from 'styled-components'
+import { useRecoilValue } from 'recoil'
+import { userKeyState } from '../state/atoms'
 
 import NextButton from '../common/Button'
 import { useNavigate } from 'react-router-dom'
@@ -51,8 +53,8 @@ const customModal =  Modal.Styles = {
     left: "0",
   },
   content: {
-    minWidth: "350px",
-    maxWidth: "500px",
+    minWidth: "400px",
+    maxWidth: "70%",
     height: "70%",
     zIndex: "150",
     position: "absolute",
@@ -67,9 +69,8 @@ const customModal =  Modal.Styles = {
   },
 };
 
-function CreateQR({setModalOpen}) {
+function CreateQR({ setModalOpen }) {
   const navigate = useNavigate()
-  const key = localStorage.getItem('X-USER-ID')
 
   function handleDownloadClick() {
     const canvas = document.querySelector('canvas')
@@ -81,6 +82,8 @@ function CreateQR({setModalOpen}) {
     console.log('저장완')
   }
 
+  const userKey = useRecoilValue(userKeyState)
+
   return (
     <QRWrapper>
       <WarningWrapper>
@@ -88,7 +91,7 @@ function CreateQR({setModalOpen}) {
         <Warning1>QR코드를 저장하시면,</Warning1> 
         <Warning1>언제든지 내 기록을 불러올 수 있습니다.</Warning1> 
       </WarningWrapper>
-      <QRCode value={key} />
+      <QRCode value={userKey} size={220} />
       <ButtonWrapper>
         <NextButton onClick={handleDownloadClick} content={"다운로드"} />
         <NextButton onClick={()=>navigate('/newstar')} content={"시작하기"} />
