@@ -7,7 +7,7 @@ def recomm(like_list, maxsize, views):
     # 가장 유사한 문서들의 ID 찾기
     # 좋아요한 갯수가 1이상이면 좋아요한 기사 기준 추천
     if len(like_list) != 0:
-        similar_docs = model.dv.most_similar(positive=[like_list], topn=maxsize)
+        similar_docs = model.dv.most_similar(positive=like_list, topn=maxsize)
     else:
         similar_docs = model.dv.most_similar(positive=[1], topn=maxsize)
 
