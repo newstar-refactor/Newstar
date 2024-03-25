@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 
-
 import { ContainerWithoutNav } from "../styles/Container"
 
 import Intro from "../pages/Intro"
@@ -13,9 +12,22 @@ function MainPage() {
         <Routes>
           <Route path="/" element={<Intro/>} />
           <Route path="/choose" element={<ChooseKeyword/>} />
-
         </Routes>
       </ContainerWithoutNav>
+    </>
+  )
+}
+
+import { Outlet } from "react-router-dom"
+
+const Home = () => {
+  return (
+    <>
+      <Header />
+      <Sidebar />
+      <ContentSection>
+        <Outlet />
+      </ContentSection>
     </>
   )
 }

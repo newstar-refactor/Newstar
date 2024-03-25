@@ -128,10 +128,10 @@ export default function CategoryNewsDetail() {
   return (
     <CategoryNewsCardContainer>
       {categoryTitle}
-      {categoryDatas && categoryDatas.map((categoryData, idx) => (
+      {categoryDatas && categoryDatas.map((categoryData) => (
         <div style={{ borderBottom: '1px solid #ccc'}}>
         <CategoryNewsCard
-          key={`${idx}-${categoryData.id}`}
+          key={`${categoryData.id}-${categoryData.title}`}
           categoryData={categoryData}
           />
           <br />

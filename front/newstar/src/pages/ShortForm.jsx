@@ -15,8 +15,11 @@ import "slick-carousel/slick/slick-theme.css";
 import MainNewsCard from '../components/main/MainNewsCard'
 
 const StyledSlider = styled(Slider)`
+  .slick-slider {
+  }
+  .slick-list {
+  }
   .slick-track {
-    overflow: auto;
   }
 `;
 
