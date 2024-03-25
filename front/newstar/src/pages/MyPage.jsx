@@ -33,7 +33,6 @@ export default function MyPage() {
   useEffect(()=>{
     getRecords(
       ( response ) => {
-        // console.log(response.data.data)
         setRecordDatas(response.data.data)
       },
       ( error ) => {

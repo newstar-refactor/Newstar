@@ -12,10 +12,12 @@ const BoxContainer = styled.div`
   gap: 20px;
   padding: 20px;
   cursor: pointer;
+  border-bottom: 1px solid #ccc;
   `
 
 const SearchNewsCardImage = styled.img`
-  width: 25%;
+  width: 112.5px; /* 너비를 115px로 고정 */
+  height: 70px; /* 높이를 90px로 고정 */
   border-radius: 5px;
   object-fit: cover;
 `
