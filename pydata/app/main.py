@@ -59,6 +59,9 @@ def start_crawling():
   # 크롤링
   crawling_df = do_crawling()
 
+  # url 중복 행 제거
+  crawling_df.drop_duplicates(subset=['url'], keep='first', inplace=True, ignore_index=True)
+
   # 각 본문에 대해 요약 생성
   crawling_df = make_news_summary(crawling_df)
 
