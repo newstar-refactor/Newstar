@@ -12,29 +12,35 @@ export default function Search() {
   // 키워드 상태 관리
   const [keyword, setKeyword] = useState('');
   // 필터링 된 뉴스 목록 상태관리
-  const [filteredNews, setFilterdNews] = useState([]);
+  const [filteredNews, setFilteredNews] = useState([]);
 
-  const fetchNews = () => {
-    const searchWord = keyword.trim().toLowerCase();
 
-    if (searchWord !== '') {
-      searchNews(searchWord,
-        (response) => {
+  useEffect(() => {
+    
+    const fetchNews = async () => {
+      const searchWord = keyword.trim().toLowerCase();
+
+      if (searchWord !== '') {
+        try {
           // 성공 콜백
-          setFilterdNews(response.data);
-        },
-        (error) => {
+          const response = await searchNews(searchWord);
+          setFilteredNews(response.data);
           // 실패 콜백
+        } catch (error) {
           console.log("Error fetching Searchdata", error);
-        });
-    } else {
-      setFilterdNews([]);
-    }
-  };
+        }
+      } else {
+        setFilteredNews([]);
+      }
+    };
 
+    fetchNews();
+  }, [keyword]);
+
+  
   return (
     <div>
-      <SearchBar setKeyword={setKeyword} onSearch={fetchNews}/>
+      <SearchBar setKeyword={setKeyword} />
       <SearchNewsList NewsData={filteredNews} />
     </div>
   )
