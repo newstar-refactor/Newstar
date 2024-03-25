@@ -1,11 +1,12 @@
-// // 메인 숏폼 페이지
-// // 뉴스 기사 좌우로 스크롤
+// 메인 숏폼 페이지
+// 뉴스 기사 좌우로 스크롤
 
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
 import { getNews, postRecords } from '../api/fetch'
+
 
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
@@ -26,8 +27,8 @@ export default function Main() {
   // 뉴스 데이터 로드
   useEffect(() => {
     getNews(
-      (response) => {
-        setNewsDatas(response.data);
+      ( response ) => {
+        setNewsDatas(response.data)
       },
       (error) => {
         console.log(error)

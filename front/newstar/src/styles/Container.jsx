@@ -10,6 +10,7 @@ const ContainerWithoutNav = styled.main`
   margin: 0px auto;
   height: 100vh;
   padding: 20px 20px 60px;
+  overflow-y: scroll;
 `;
 
 // 네브바 있는 페이지
@@ -20,6 +21,7 @@ const ContainerWithNav = styled.main`
   max-width: 500px;
   min-width: 300px;
   margin: 7vh auto;
+  overflow-y: scroll;
 `
 
 export { ContainerWithNav, ContainerWithoutNav }

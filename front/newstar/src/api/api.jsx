@@ -12,7 +12,7 @@ const api = {
   category: (newsNum, pageNum, sCate, bCate) => 
     `/articles/category?size=${newsNum}&page=${pageNum}&scategory=${sCate}&bcategory=${bCate}`,
   search: '/data/search',
-  articles: '/articles'
+  articles: (articleId) => `/articles/${articleId}`
 }
 
 const axiosInstance = axios.create({

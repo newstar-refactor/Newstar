@@ -15,6 +15,7 @@ const CategoryNewsCardContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+
 `
 
 
@@ -37,7 +38,7 @@ export default function CategoryNewsDetail() {
     if (['100', '101', '105'].includes(params.categoryId)) {
       categoryTitle = BigCategory[params.categoryId]
       getCategoryNews(
-        params.categoryId, '', 7, 0,
+        params.categoryId, '', 10, 0,
         ( response ) => {
           setCategoryDatas(response.data.data.content)
           setCategoryPaging(response.data.data.content)
@@ -50,7 +51,7 @@ export default function CategoryNewsDetail() {
     } else { // 중분류가 들어온경우
       categoryTitle = SmallCategory[params.categoryId]
       getCategoryNews(
-        '', params.categoryId, 7, 0,
+        '', params.categoryId, 10, 0,
         ( response ) => {
           setCategoryDatas(response.data.data.content)
           setCategoryPaging(response.data.data.content)
@@ -71,7 +72,7 @@ export default function CategoryNewsDetail() {
 
     if (['100', '101', '105'].includes(params.categoryId)) {
       getCategoryNews(
-        params.categoryId, '', 5, currentPage + 1,
+        params.categoryId, '', 10, currentPage + 1,
         ( response ) => {
           const fetchedData = response.data.data.content
           const mergedData = categoryDatas.concat(...fetchedData)
@@ -86,7 +87,7 @@ export default function CategoryNewsDetail() {
       )
     } else {
       getCategoryNews(
-        '', params.categoryId, 5, currentPage + 1,
+        '', params.categoryId, 10, currentPage + 1,
         ( response ) => {
           const fetchedData = response.data.data.content
           const mergedData = categoryDatas.concat(...fetchedData)
@@ -128,10 +129,13 @@ export default function CategoryNewsDetail() {
     <CategoryNewsCardContainer>
       {categoryTitle}
       {categoryDatas && categoryDatas.map((categoryData, idx) => (
+        <div style={{ borderBottom: '1px solid #ccc'}}>
         <CategoryNewsCard
           key={`${idx}-${categoryData.id}`}
           categoryData={categoryData}
-        />
+          />
+          <br />
+        </div>
       ))}
     </CategoryNewsCardContainer>
   

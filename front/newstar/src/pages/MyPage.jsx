@@ -55,7 +55,7 @@ export default function MyPage() {
 
   return (
     <Container>
-      <MyCategory/>
+      {/* <MyCategory/> */}
       <MyNews/>
       <LikeNews/>
     </Container>
