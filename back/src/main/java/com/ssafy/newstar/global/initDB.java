@@ -17,7 +17,8 @@ public class initDB {
     private final InitService initService;
     @PostConstruct
     public void init() {
-        //initService.dbInit1();
+//        initService.dbInit1();
+//        initService.dbInit2();
     }
 
     @Component
@@ -53,6 +54,19 @@ public class initDB {
             Record record2 = Record.createRecode(member1, article2);
             em.persist(record1);
             em.persist(record2);
+        }
+
+        // 테스트 init
+        public void dbInit2() {
+            Article article1 = Article.createArticle("DB 중복 테스트",
+                "https://n.news.naver.com/mnews/article/658/0000068425",
+                LocalDateTime.now(),
+                100, 200,
+                "https://mimgnews.pstatic.net/image/origin/658/2024/03/12/68425.jpg?type",
+                "감사합니다.",
+                null);
+
+            em.persist(article1);
         }
     }
 }
