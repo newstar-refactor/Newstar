@@ -59,17 +59,11 @@ def start_crawling():
   # 크롤링
   crawling_df = do_crawling()
 
-  # 각 본문에 대해 요약 생성
-  # crawling_df = make_news_summary(crawling_df)
-
-  # 중복되는 행들만 선택
-  duplicated_rows = crawling_df[crawling_df.duplicated(keep=False)]
-  # 중복되는 행들 출력
-  print(duplicated_rows)
-  crawling_df.to_excel('du1.xlsx')
   # url 중복 행 제거
   crawling_df.drop_duplicates(subset=['url'], keep='first', inplace=True, ignore_index=True)
-  crawling_df.to_excel('du2.xlsx')
+
+  # 각 본문에 대해 요약 생성
+  crawling_df = make_news_summary(crawling_df)
 
   # DB 인서트
   crawling_df.to_sql(name='article', con= engine, if_exists='append', index=False)
