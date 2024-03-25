@@ -66,7 +66,6 @@ def start_crawling():
   crawling_df = make_news_summary(crawling_df)
 
   # DB 인서트
-  crawling_df = crawling_df.drop_duplicates(subset=['url'])
   crawling_df.to_sql(name='article', con=engine, if_exists='append', index=False)
 
   # 추천모델 생성
