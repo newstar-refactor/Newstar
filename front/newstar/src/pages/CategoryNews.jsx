@@ -61,8 +61,6 @@ const SmallCategoryBox = styled.div`
 `
 
 
-
-
 export default function CategoryNews() {
   const navigate = useNavigate()
 

@@ -2,7 +2,7 @@ import { atom } from "recoil"
 
 const newsDataState = atom({
   key: "newsDataState",
-  default: ""
+  default: []
 })
 
 const keywordState = atom({

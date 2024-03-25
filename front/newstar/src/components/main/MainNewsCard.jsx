@@ -19,8 +19,10 @@ const NewsContainer = styled.div`
   max-height: 86vh;
   overflow-y: auto;
   width: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
-
 
 function MainNewsCard({ newsData }) {
   

@@ -33,7 +33,7 @@ export default function MyPage() {
   useEffect(()=>{
     getRecords(
       ( response ) => {
-        // console.log(response.data.data)
+        console.log(response)
         setRecordDatas(response.data.data)
       },
       ( error ) => {
@@ -56,7 +56,7 @@ export default function MyPage() {
 
   return (
     <Container>
-      <MyCategory/>
+      {/* <MyCategory/> */}
       <MyNews/>
       <LikeNews/>
     </Container>

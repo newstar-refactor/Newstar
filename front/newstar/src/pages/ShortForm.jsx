@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
-import { newsDataState, recordDataState  } from '../state/atoms'
+import { newsDataState } from '../state/atoms'
 import { getNews, postRecords } from '../api/fetch'
 
 
@@ -35,7 +35,7 @@ export default function Main() {
     getNews(
       ( response ) => {
         setNewsDatas(response.data)
-        // console.log(response)
+        console.log(response)
       },
       (error) => {
         console.log(error)

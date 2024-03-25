@@ -2,7 +2,20 @@
   box-sizing: border-box;
   margin: 0px;
   font-family: 'Pretendard-Regular';
+  /* -ms-overflow-style: none; */
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightgray; /* 스크롤바 막대 색상 */
+  border: 1px solid lightgray; /* 스크롤바 막대 테두리 설정  */
+  border-radius: 12px 12px 12px 12px;
+}
+
 
 a {
   text-decoration-line: none;
