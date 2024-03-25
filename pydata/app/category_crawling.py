@@ -7,15 +7,14 @@ import random
 
 def do_crawling():
   print("start crawling")
-  Bcategories = [100, 101, 105]  # 정치, 경제, IT | 총 22개 | 6개씩 총 132개의 기사를 크롤링
-  Scategories = [ [264, 265,  266, 267, 268, 269],
-                  [258, 259, 260, 261, 262, 263, 310, 771],
-                  [731, 226, 227, 230, 732, 283, 229, 228] ]
+  Bcategories = [100, 101, 102, 103, 104, 105]                  # 정치, 경제, 사회, 생활/문화, 세계, IT/과학
+  Scategories = [ [265, 266, 267, 268, 269],                    # 국회/정당, 북한, 행정, 국방/외교, 정치일반
+                              [259, 260, 262, 263, 310],                    # 금융, 부동산, 글로벌 경제, 경제 일반, 사회 경제
+                              [249, 251, 252, 255, 256],                    # 사건사고, 노동, 환경, 식품/의료, 지역
+                              [237, 238, 239, 240, 241, 376 ],         # 여행/레저, 음식/맛집, 자동차/시승기, 도로/교통, 건강정보, 패션/뷰티
+                              [231, 232, 233, 234, 322],                  # 아시아/호주, 미국/중남미, 유럽, 중동/아프리카, 세계 일반
+                              [731, 226, 227, 230, 732, 283, 229, 228] ] #모바일, 인터넷/sns, 통신/뉴미디어, IT일반, 보안/해킹, 컴퓨터, 게임/리뷰, 과학 일반
 
-  # Bcategories = [100, 101, 105]  # 정치, 경제, IT | 총 22개 | 6개씩 총 132개의 기사를 크롤링
-  # Scategories = [ [264],
-  #                 [258],
-  #                 [731] ]
 
   resultList = []
   prev_content = None  # 이전 뉴스의 내용을 저장할 변수
@@ -70,7 +69,7 @@ def do_crawling():
             tag.decompose()
           content = article_content.get_text(" ", strip=True) if article_content else None
           # 기사 본문의 글자가 400보다 적으면 넘기기
-          if len(content) < 400 or len(content) > 2000:
+          if len(content) < 400:
             continue
 
           # 작성 날짜 추출
@@ -84,7 +83,7 @@ def do_crawling():
             else:
               temp_time = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
             article_hour = temp_time.hour
-            print("시각 : " + str(article_hour) )
+            # print("시각 : " + str(article_hour) )
             # 24시간 형식으로 변환하여 저장
             date = temp_time.strftime("%Y-%m-%d %H:%M:%S")
           else:
