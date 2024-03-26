@@ -1,7 +1,7 @@
 // 메인 숏폼 페이지
 // 뉴스 기사 좌우로 스크롤
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
@@ -12,7 +12,9 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
+
 
 const StyledSlider = styled(Slider)`
   .slick-slider {
@@ -26,15 +28,18 @@ const StyledSlider = styled(Slider)`
 export default function Main() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // 뉴스 데이터 로드
   useEffect(() => {
     getNews(
       ( response ) => {
         setNewsDatas(response.data)
+        setLoading(false)
       },
       (error) => {
         console.log(error)
+        setLoading(false)
       }
     )
   }, [])
@@ -80,15 +85,19 @@ export default function Main() {
     }
   };
 
+  if (loading) {
+    return <Loading/>
+  }
+
   return (
-    <>
-      <StyledSlider {...sliderSettings}>
+        
+    <StyledSlider {...sliderSettings}>
         {newsDatas && newsDatas.map((newsData) => (
           <MainNewsCard
             key={newsData.article_id}
             newsData={newsData} />))
         }
       </StyledSlider>
-    </>
+    
   )
 }

@@ -31,7 +31,6 @@ function App() {
               <Route path="mypage" element={<MyPage/>} />
               <Route path="category" element={<CategoryNews/>} />
               <Route path="category/:categoryId" element={<CategoryNewsDetail/>} />
-              <Route path="keywords" element={<ChooseKeyword/>} />
             </Route>
           </Routes>
         </BrowserRouter>

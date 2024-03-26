@@ -15,13 +15,15 @@ const NavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 55px;
+  height: 50px;
   max-width: 500px;
-  min-width: 200px;
+  min-width: 280px;
   
   margin: 0 auto;
   
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+
   padding: 10px;
   z-index: 10;
   background-color: white;
@@ -48,27 +50,42 @@ const TopNavContainer = styled.div`
 
 const NavContent = styled.div`
   display: inline-flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   float: left;
   width: calc(100%/4);
-
 `
+
+
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 
 function BottomNavbar() {
   return (
     <NavContainer>
       <NavContent>
-        <Link to={'/newstar'}><FiHome size="20" /></Link>
+        <Link to={'/newstar'}>
+          <IconWrapper><FiHome size="20" /></IconWrapper>
+        </Link>
       </NavContent>
       <NavContent>
-        <Link to={'/newstar/search'}><IoSearch size="20" /></Link>
+        <Link to={'/newstar/search'}>
+          <IconWrapper><IoSearch size="20" /></IconWrapper>
+          </Link>
       </NavContent>
       <NavContent>
-        <Link to={'/newstar/category'}><FaList size="20" /></Link>
+        <Link to={'/newstar/category'}>
+          <IconWrapper><FaList size="20" /></IconWrapper>
+        </Link>
       </NavContent>
       <NavContent>
-        <Link to={'/newstar/mypage'}><BsFillPersonFill size="20" /></Link>
+        <Link to={'/newstar/mypage'}>
+          <IconWrapper><BsFillPersonFill size="20" /></IconWrapper>
+        </Link>
       </NavContent>
     </NavContainer>
   )
