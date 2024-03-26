@@ -55,11 +55,11 @@ export default function Main() {
     const mynews = { articleId };
     postRecords(mynews,
       (response) => {
-        console.log("시청 기록 생성 성공", response);
+        console.log("시청기록 성공", response);
         setViewArticles(prev => [...prev, articleId]);
       },
       (error) => {
-        console.log("시청 기록 생성 실패", error);
+        console.log("시청기록 실패", error);
       }
     );
   }

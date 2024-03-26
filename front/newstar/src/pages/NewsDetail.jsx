@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { useParams } from "react-router-dom"
-import { getArticle } from "../api/fetch"
+import { getArticle,  likeNews } from "../api/fetch"
 
 import MainNewsHeader from "../components/main/MainNewsHeader"
 import MainNewsBody from "../components/main/MainNewsBody"
@@ -25,6 +25,10 @@ function NewsDetailCard() {
   const params = useParams()
   const [article, setArticle] = useState([])
 
+  // 좋아요 상태 관리
+  const [isLiked, setIsLiked] = useState(false);
+
+
   useEffect(() => {
     getArticle(
       params.articleId,
@@ -35,6 +39,26 @@ function NewsDetailCard() {
     )
   }, [params.articleId])
 
+
+  // 좋아요 상태 업데이트
+  function handleLike() {
+    setIsLiked(!isLiked)
+    const data = {
+      articleId: article.article_id,
+      likes: !isLiked
+    }
+    likeNews(
+      data,
+      ( response ) => {
+        console.log(response)
+        isLiked ? console.log("됐습니다") : console.log("좋습니다")
+      },
+      ( error ) => {
+        console.log(error)
+      }
+    )
+  }
+
   return (
     <DetailNewsContainer>
       <DetailNewsImage
@@ -43,9 +67,9 @@ function NewsDetailCard() {
       />
       <MainNewsHeader
         newsData={article}
-        // isLiked={isLiked}
-        // setIsLiked={setIsLiked}
-        // handleLikeButtonClick={handleLike}
+        isLiked={isLiked}
+        setIsLiked={setIsLiked}
+        handleLikeButtonClick={handleLike}
       />
       <MainNewsBody newsData={article} />
     </DetailNewsContainer>
