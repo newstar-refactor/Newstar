@@ -12,10 +12,12 @@ const BoxContainer = styled.div`
   gap: 20px;
   padding: 20px;
   cursor: pointer;
+  border-bottom: 1px solid #ccc;
   `
 
 const SearchNewsCardImage = styled.img`
-  width: 25%;
+  width: 112.5px; /* 너비를 115px로 고정 */
+  height: 70px; /* 높이를 90px로 고정 */
   border-radius: 5px;
   object-fit: cover;
 `
@@ -28,17 +30,11 @@ const SearchTitle = styled.h3`
 const SearchNewsList = ({ NewsData }) => {
   const navigate = useNavigate();
   
-    // 리스트를 클릭하면 숏폼 url로 이동
-  const handleClick = (url) => {
-    navigate({ pathname: url });
-  };
-
-  
   return (
     <div>
       {NewsData.length > 0 ? (
         NewsData.map((newsItem) => (
-          <BoxContainer key={newsItem.article_id} onClick={() => handleClick(newsItem.url)}>
+          <BoxContainer key={newsItem.article_id} onClick={() => navigate(`/newstar/${newsItem.article_id}`)}>
             <SearchNewsCardImage src={newsItem.image_url} alt="news image" />
             <SearchTitle>{newsItem.title}</SearchTitle>
           </BoxContainer>

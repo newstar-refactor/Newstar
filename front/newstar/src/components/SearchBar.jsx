@@ -1,4 +1,5 @@
-// 검색바
+// // 검색바
+
 import React, { useState } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { FaRegPaperPlane } from "react-icons/fa";
@@ -20,6 +21,7 @@ const InputWrapper = styled.div`
   background-color: #F5F5F5;
   border-radius: 5px;
   padding-left: 10px; /* 좌측 패딩 추가 */
+  position: relative; /* 아이콘 절대 위치를 위해 추가 */
 `;
 
 // 입력 필드 스타일
@@ -47,9 +49,10 @@ const SearchIcon = styled(FaRegPaperPlane)`
   position: absolute;
   right: 10px;
   cursor: pointer;
+  z-index: 1;
 `;
 
-export default function SearchBar({ setKeyword, onSearch }) {
+export default function SearchBar({ setKeyword }) {
 
   const [input, setInput] = useState('');
 
@@ -59,7 +62,12 @@ export default function SearchBar({ setKeyword, onSearch }) {
 
   const handleSearchClick = () => {
     setKeyword(input);
-    onSearch();
+  }
+
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      handleSearchClick();
+    }
   }
 
   return (
@@ -72,9 +80,10 @@ export default function SearchBar({ setKeyword, onSearch }) {
           value={input}
           placeholder="키워드를 입력하세요."
           onChange={handleInputChange}
+          onKeyDown={(e) => activeEnter(e)}
         />
+        <SearchIcon onClick={handleSearchClick} />
       </InputWrapper>
-      <SearchIcon onClick={handleSearchClick} />
     </SearchBarContainer>
   );
 }

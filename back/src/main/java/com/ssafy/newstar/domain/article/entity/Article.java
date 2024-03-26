@@ -11,6 +11,11 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+//@Table(uniqueConstraints={
+//    @UniqueConstraint(
+//        name = "no_duplicate_url",
+//        columnNames = {"url"})
+//})
 public class Article {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

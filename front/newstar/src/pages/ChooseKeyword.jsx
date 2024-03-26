@@ -9,17 +9,22 @@ import styled from 'styled-components';
 import { FaRegChartBar } from "react-icons/fa";
 import { RiGovernmentLine } from "react-icons/ri";
 import { RiComputerLine } from "react-icons/ri";
+import { FaEarthAmericas } from "react-icons/fa6";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { MdOutlineFestival } from "react-icons/md";
 
 import { postMembers } from '../api/fetch';
 import SelectBox from '../common/SelectBox'
 import NextButton from '../common/Button';
+import { BigCategoryData } from '../state/categoryData';
 
 import QRModal from '../components/QR';
 
-
 const SelectBoxWrapper = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  max-width: 380px;
   gap: 25px;
 `
 
@@ -31,6 +36,7 @@ const KeywordPageWrapper = styled.div`
   height: 100%;
   gap: 60px;
 `
+
 const KeywordPageHeader = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,30 +51,12 @@ const KeywordPageButton = styled.div`
    height: 35px;
 `
 
-const BigKeyWords = [
-  { 
-    'id': 100,
-    'keyword': '정치',
-    'state': false
-  }, 
-  {
-    'id': 101,
-    'keyword': '경제',
-    'state': false
-  }, 
-  { 
-    'id': 105,
-    'keyword': 'IT/과학',
-    'state': false
-  }]
-
-
 function Keywords({ tagsActive, setTagsActive }) {
 
   // 클릭 시 색 변화
   function handleTagClick(clickedKeyword) {
     const updatedTags = tagsActive.map((tag) =>
-      tag.keyword === clickedKeyword.keyword
+      tag.code === clickedKeyword.code
         ? { ...tag, state: !tag.state } : tag
     )
     setTagsActive(updatedTags)
@@ -81,8 +69,15 @@ function Keywords({ tagsActive, setTagsActive }) {
             return <RiGovernmentLine size={20} />;
         case '경제':
             return <FaRegChartBar size={20} />;
+        case '사회':
+            return <FaPeopleGroup size={20} />;
+        case '생활/문화':
+            return <MdOutlineFestival size={20} />;
+        case '세계':
+            return <FaEarthAmericas size={20} />;
         case 'IT/과학':
             return <RiComputerLine size={20} />;
+
         default:
             return ;
     }
@@ -90,16 +85,15 @@ function Keywords({ tagsActive, setTagsActive }) {
 
   return (
     <SelectBoxWrapper>
-      
       {tagsActive.map((bigkeyword) => (
         <SelectBox 
-          key={bigkeyword.id}
+          key={bigkeyword.code}
           $background={bigkeyword.state ? 'rgb(138, 192, 56, 0.7)' : ''}
           color={bigkeyword.state ? 'black' : ''}
           onClick={() => handleTagClick(bigkeyword)}
           >
-          {selectIcon(bigkeyword.keyword)}
-          {bigkeyword.keyword}
+          {selectIcon(bigkeyword.name)}
+          {bigkeyword.name}
         </SelectBox>
       ))}
     </SelectBoxWrapper>
@@ -117,7 +111,7 @@ function ChooseKeyword() {
   
 
   // 각 키워드 상태 관리
-  const [tagsActive, setTagsActive] = useState(BigKeyWords)
+  const [tagsActive, setTagsActive] = useState(BigCategoryData)
 
   // 선택된 키워드 상태 관리
   const [selectedKeywords, setSelectedKeywords] = useState([]);

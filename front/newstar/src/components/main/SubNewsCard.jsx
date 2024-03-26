@@ -11,7 +11,6 @@ import { getRecords, getArticles } from '../../api/fetch'
 // styled-components
 const SlideWrapper = styled.div`
   padding: 3px; // 좌우 패딩으로 카드 간격 조정
-  // padding-right: 15px;
   gap: 20px;
   display: flex;
 `;
@@ -69,7 +68,7 @@ const SubNewsCard = ({records}) => {
     speed: 400,
     slidesToShow: 4, // 한 번에 보여질 슬라이드 수
     slidesToScroll: 4, // 스크롤할 때 넘어가는 슬라이드 수
-    initialSlide: 0,
+
   };
 
 

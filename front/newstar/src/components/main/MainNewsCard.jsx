@@ -15,12 +15,13 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  height: auto;
-  max-height: 86vh;
+  height: 100vh;
   overflow-y: auto;
   width: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
-
 
 function MainNewsCard({ newsData }) {
   

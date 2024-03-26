@@ -6,7 +6,6 @@ const ContainerWithoutNav = styled.main`
   left: 0;
   position: relative;
   max-width: 500px;
-  min-width: 300px;
   margin: 0px auto;
   height: 100vh;
   padding: 20px 20px 60px;
@@ -16,10 +15,12 @@ const ContainerWithoutNav = styled.main`
 const ContainerWithNav = styled.main`
   right: 0;
   left: 0;
-  position: relative;
+  top: 0;
+  bottom: 0;
+  position: absolute;
   max-width: 500px;
-  min-width: 300px;
-  margin: 7vh auto;
+  min-width: 280px;
+  margin: 0px auto;
 `
 
 export { ContainerWithNav, ContainerWithoutNav }

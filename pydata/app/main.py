@@ -59,11 +59,14 @@ def start_crawling():
   # 크롤링
   crawling_df = do_crawling()
 
+  # url 중복 행 제거
+  crawling_df.drop_duplicates(subset=['url'], keep='first', inplace=True, ignore_index=True)
+
   # 각 본문에 대해 요약 생성
   crawling_df = make_news_summary(crawling_df)
 
   # DB 인서트
-  crawling_df.to_sql(name='article', con= engine, if_exists='append', index=False)
+  crawling_df.to_sql(name='article', con=engine, if_exists='append', index=False)
 
   # 추천모델 생성
   makemodel()

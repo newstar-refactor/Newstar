@@ -15,7 +15,7 @@ const NavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 7vh;
+  height: 55px;
   max-width: 500px;
   min-width: 200px;
   
@@ -33,7 +33,7 @@ const TopNavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 7vh;
+  height: 55px;
   max-width: 500px;
   min-width: 300px;
 
