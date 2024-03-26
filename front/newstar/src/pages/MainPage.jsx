@@ -1,16 +1,16 @@
 import { Outlet } from "react-router-dom"
 
-import { ContainerWithNav } from "../styles/Container"
+import { ContainerWithNav, TotalContainer } from "../styles/Container"
 import { TopNavbar, BottomNavbar } from "../components/Navbar";
 
 function MainPage() {
   return (
-    <>
+    <TotalContainer>
       <ContainerWithNav>
         <Outlet/>
       </ContainerWithNav>
       <BottomNavbar/>
-    </>
+    </TotalContainer>
   )
 }
 

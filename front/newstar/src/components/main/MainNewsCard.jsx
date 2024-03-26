@@ -1,9 +1,10 @@
 // 메인 페이지 뉴스 카드
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import styled from "styled-components"
 
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
+import Loading from "../Loading"
 
 import { likeNews } from "../../api/fetch"
 
@@ -49,6 +50,7 @@ function MainNewsCard({ newsData }) {
   }
 
   return (
+    <Suspense fallback={<Loading />}>
     <NewsContainer onDoubleClick={handleLike}>
       <MainNewsImage
         src={newsData.image_url}
@@ -63,6 +65,7 @@ function MainNewsCard({ newsData }) {
       />
       <MainNewsBody newsData={newsData} />
     </NewsContainer>
+    </Suspense>
   )
 }
 

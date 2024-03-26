@@ -8,8 +8,7 @@ const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 35px;
-  padding: 30px 60px;
-  /* background-color: #F5F5F5; */
+  padding: 20px 60px;
 `
 
 const CategoryBox = styled.div`
