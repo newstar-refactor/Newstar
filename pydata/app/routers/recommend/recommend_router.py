@@ -20,11 +20,11 @@ router = APIRouter(
 
 # 추천할 뉴스 뽑기
 @router.get("", response_model=List[ArticleSchema], dependencies=[verify_header()])
-def recommend(request: Request, db: Session = Depends(get_db)):
+async def recommend(request: Request, db: Session = Depends(get_db)):
     member_id = request.state.member_id
     # 시청 기록, 전체 기사의 수, 좋아요 기록 불러오기
     views = get_user_view_list(db, member_id)
-    li = get_like_list(db, member_id)
+    li = await get_like_list(db, member_id)
     maxsize = get_article_count(db)
     # 좋아요 기록 있을때 처리
     if len(li) != 0:
