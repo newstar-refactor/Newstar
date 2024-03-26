@@ -23,7 +23,7 @@ const LikeNewsCards = styled.div`
 export default function LikeNews() {
   const likeNews = useRecoilValue(likeDataState)
   const newsData = useRecoilValue(newsDataState)
-  console.log(newsData)
+
 
   return (
     <div>
