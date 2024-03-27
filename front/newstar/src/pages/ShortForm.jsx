@@ -111,7 +111,7 @@ export default function ShortForm() {
 
   return (
     <>    
-      {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
+      <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button>
       <StyledSlider {...sliderSettings}>
           {newsDatas && newsDatas.map((newsData) => (
             <MainNewsCard
