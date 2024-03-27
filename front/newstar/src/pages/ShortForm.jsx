@@ -16,7 +16,7 @@ import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
 import Survey from './Survey';
 
-export default function Main() {
+export default function ShortForm() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -67,6 +67,7 @@ export default function Main() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
     afterChange: (nowSlide) => {
       const nownewsData = newsDatas[nowSlide];
       // 중복 검사
@@ -84,7 +85,7 @@ export default function Main() {
   return (
     <>    
       {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
-      <Slider {...sliderSettings} arrows={false}>
+      <Slider {...sliderSettings}>
           {newsDatas && newsDatas.map((newsData) => (
             <MainNewsCard
               key={newsData.article_id}
