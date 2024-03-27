@@ -16,19 +16,6 @@ import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
 import Survey from './Survey';
 
-
-const StyledSlider = styled(Slider)`
-  /* .slick-slider {
-    width: 100%;
-  }
-  .slick-list {
-    width: 100%;
-  }
-  .slick-track {
-    width: 100%;
-  } */
-`;
-
 export default function Main() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
@@ -97,13 +84,13 @@ export default function Main() {
   return (
     <>    
       {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
-      <StyledSlider {...sliderSettings}>
+      <Slider {...sliderSettings} arrows={false}>
           {newsDatas && newsDatas.map((newsData) => (
             <MainNewsCard
               key={newsData.article_id}
               newsData={newsData} />))
           }
-      </StyledSlider>
+      </Slider>
       <Survey 
         surveyModalOpen={surveyModalOpen}
         setSurveyModalOpen={setSurveyModalOpen}

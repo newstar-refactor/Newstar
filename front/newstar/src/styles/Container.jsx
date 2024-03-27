@@ -28,13 +28,12 @@ const ContainerWithNav = styled.main`
   max-width: 500px;
   min-width: 280px;
   margin: 0px auto;
-  height: calc(100vh - 50px);
-
+  
   overflow-y: auto;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
-  display: none;
-}
+    display: none;
+  }
 `
 
 
