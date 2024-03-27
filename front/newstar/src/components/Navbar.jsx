@@ -97,7 +97,7 @@ function TopNavbar() {
   const navigate = useNavigate()
   return (
     <TopNavContainer>
-      <IoArrowBack size={25} onClick={() => navigate(-1)} />
+      <IoArrowBack style={{ cursor: 'pointer'}} size={25} onClick={() => navigate(-1)} />
       <Link to={'/newstar'}>
         <img 
           src="/logo_dark.png" 

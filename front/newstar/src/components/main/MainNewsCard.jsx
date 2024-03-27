@@ -16,7 +16,7 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -24,7 +24,7 @@ const NewsContainer = styled.div`
 `
 
 function MainNewsCard({ newsData }) {
-  
+
   // 좋아요 상태 관리
   const [isLiked, setIsLiked] = useState(false);
 
