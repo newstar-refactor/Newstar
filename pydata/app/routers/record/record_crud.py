@@ -8,7 +8,7 @@ import pandas as pd
 from app.models import Record
 
 
-async def get_like_list(db: Session, member_id):
+def get_like_list(db: Session, member_id):
     query = f"SELECT article_id FROM record WHERE member_id = {member_id} AND likes = 1"
     like_list_df = pd.read_sql(query, con = engine)
     # DataFrame에서 article_id 컬럼의 값을 리스트로 변환
