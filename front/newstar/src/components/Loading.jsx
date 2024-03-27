@@ -4,7 +4,7 @@ import loading from "../assets/lottie/loading.json"
 
 const LoadingBox = styled.div`
   display: flex;
-  height: 100%;
+  margin-top: calc((100vh / 2) - 200px) ;
   flex-direction: column;
   justify-content: center;
   align-items: center;

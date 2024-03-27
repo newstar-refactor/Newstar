@@ -22,7 +22,7 @@ const BoxContainer = styled.div`
   flex-direction: row; 
   align-items: center; 
   justify-content: center;
-  height: calc(100vh - 150px);
+  margin-top: calc((100vh / 2) - 100px) ;
   padding: 20px;
   font-weight: 600;
 `

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 import { BigCategoryData, SmallCategoryData } from '../state/categoryData'
 
-
 const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
