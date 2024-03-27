@@ -118,6 +118,6 @@ export default function Main() {
               newsData={newsData} />))
           }
       </StyledSlider>
-    
+    </>
   )
 }
