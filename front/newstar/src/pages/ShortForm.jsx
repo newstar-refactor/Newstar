@@ -1,7 +1,7 @@
 // 메인 숏폼 페이지
 // 뉴스 기사 좌우로 스크롤
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
@@ -14,21 +14,26 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
+import Survey from './Survey';
 
 
 const StyledSlider = styled(Slider)`
-  .slick-slider {
+  /* .slick-slider {
+    width: 100%;
   }
   .slick-list {
+    width: 100%;
   }
   .slick-track {
-  }
+    width: 100%;
+  } */
 `;
 
 export default function Main() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [surveyModalOpen, setSurveyModalOpen] = useState(false)
 
   // 뉴스 데이터 로드
   useEffect(() => {
@@ -90,14 +95,20 @@ export default function Main() {
   }
 
   return (
-        
-    <StyledSlider {...sliderSettings}>
-        {newsDatas && newsDatas.map((newsData) => (
-          <MainNewsCard
-            key={newsData.article_id}
-            newsData={newsData} />))
-        }
+    <>    
+      {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
+      <StyledSlider {...sliderSettings}>
+          {newsDatas && newsDatas.map((newsData) => (
+            <MainNewsCard
+              key={newsData.article_id}
+              newsData={newsData} />))
+          }
       </StyledSlider>
+      <Survey 
+        surveyModalOpen={surveyModalOpen}
+        setSurveyModalOpen={setSurveyModalOpen}
+        />
+    </>
     
   )
 }

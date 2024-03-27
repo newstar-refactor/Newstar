@@ -30,7 +30,7 @@ function NewsDetailCard() {
       params.articleId,
       ( response ) => {
         setArticle(response?.data.data)
-        console.log(article)
+        console.log(response)
       }
     )
   }, [params.articleId])
@@ -38,8 +38,8 @@ function NewsDetailCard() {
   return (
     <DetailNewsContainer>
       <DetailNewsImage
-        src={article.imageUrl}
-        alt="news image"
+        src={article.image_url}
+        alt="news_image"
       />
       <MainNewsHeader
         newsData={article}

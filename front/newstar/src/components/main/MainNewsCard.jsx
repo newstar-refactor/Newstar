@@ -16,9 +16,8 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  height: 100vh;
+  height: calc(100vh - 110px);
   overflow-y: auto;
-  width: 100%;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -50,13 +49,11 @@ function MainNewsCard({ newsData }) {
   }
 
   return (
-    <Suspense fallback={<Loading />}>
     <NewsContainer onDoubleClick={handleLike}>
       <MainNewsImage
         src={newsData.image_url}
         alt="news image"
       />
-
       <MainNewsHeader
         newsData={newsData}
         isLiked={isLiked}
@@ -65,7 +62,6 @@ function MainNewsCard({ newsData }) {
       />
       <MainNewsBody newsData={newsData} />
     </NewsContainer>
-    </Suspense>
   )
 }
 

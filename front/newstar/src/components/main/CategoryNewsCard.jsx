@@ -45,8 +45,8 @@ export default function CategoryNewsCard({ categoryData }) {
 
   return (
     <>
-      <CategoryNewsCardWrapper onClick={() => navigate(`/newstar/${categoryData.id}`)}>
-        <CategoryNewsCardImage src= {categoryData.imageUrl} alt="news_image" />
+      <CategoryNewsCardWrapper onClick={() => navigate(`/newstar/${categoryData.article_id}`)}>
+        <CategoryNewsCardImage src= {categoryData.image_url} alt="news_image" />
         <CategoryNewsCardContent>
           <CategoryNewsContent>{newsDate}</CategoryNewsContent>
           <CategoryNewsTitle>{categoryData.title}</CategoryNewsTitle>

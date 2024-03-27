@@ -13,7 +13,6 @@ const ContainerWithoutNav = styled.main`
   position: relative;
   max-width: 500px;
   margin: 0px auto;
-  height: 100vh;
   padding: 20px 20px 60px;
 `;
 
@@ -24,12 +23,18 @@ const ContainerWithNav = styled.main`
   left: 0;
   top: 0;
 
+  padding-top: 50px;
+
   max-width: 500px;
   min-width: 280px;
   margin: 0px auto;
   height: calc(100vh - 50px);
 
   overflow-y: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+  display: none;
+}
 `
 
 

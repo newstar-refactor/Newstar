@@ -1,13 +1,14 @@
 // 하단 네비게이션 바
 // 홈, 마이페이지, 기사 검색
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
 
 import { FiHome } from "react-icons/fi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { IoSearch } from "react-icons/io5";
 import { FaList } from "react-icons/fa";
+import { IoArrowBack } from "react-icons/io5";
 
 const NavContainer = styled.div`
   position: fixed;
@@ -35,12 +36,13 @@ const TopNavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 55px;
+  height: 50px;
   max-width: 500px;
   min-width: 300px;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: 0 auto;
   padding: 10px 10px 5px;
   z-index: 10;
@@ -92,6 +94,22 @@ function BottomNavbar() {
 }
 
 function TopNavbar() {
+  const navigate = useNavigate()
+  return (
+    <TopNavContainer>
+      <IoArrowBack size={25} onClick={() => navigate(-1)} />
+      <Link to={'/newstar'}>
+        <img 
+          src="/logo_dark.png" 
+          alt="newstar logo"
+          width="80"
+          height="35" />
+      </Link>
+    </TopNavContainer>
+  )
+}
+
+function TopNavbarWithoutBack() {
   return (
     <TopNavContainer>
       <Link to={'/newstar'}>
@@ -105,4 +123,4 @@ function TopNavbar() {
   )
 }
 
-export { BottomNavbar, TopNavbar }
+export { BottomNavbar, TopNavbar, TopNavbarWithoutBack }
