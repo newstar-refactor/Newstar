@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import NotFoundImg from '../../assets/logo_dark.png'
 
 const BookMarkWrapper = styled.div`
   display: flex;
@@ -42,6 +43,9 @@ const BookMarkContent = styled.div`
 
 // 뉴스 북마크
 export default function BookMark({ newsData }) {
+  const onErrorImg = (e) => {
+    e.target.src = NotFoundImg;
+  }
   return (
     <BookMarkWrapper>
       <BookMarkInfo>
@@ -49,7 +53,7 @@ export default function BookMark({ newsData }) {
         <BookMarkContent>{newsData.content}</BookMarkContent>
         <BookMarkText style={{color: 'gray', marginTop: '5px'}}>{newsData.url}</BookMarkText>
       </BookMarkInfo>
-      <BookMarkImage src={newsData.image_url} alt="news image" />
+      <BookMarkImage src={newsData.image_url} alt="news image" onError={onErrorImg} />
     </BookMarkWrapper>
   )
 }
