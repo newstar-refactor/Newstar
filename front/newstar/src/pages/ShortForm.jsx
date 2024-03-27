@@ -1,7 +1,7 @@
 // 메인 숏폼 페이지
 // 뉴스 기사 좌우로 스크롤
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
@@ -14,21 +14,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
+import Survey from './Survey';
 
-
-const StyledSlider = styled(Slider)`
-  .slick-slider {
-  }
-  .slick-list {
-  }
-  .slick-track {
-  }
-`;
-
-export default function Main() {
+export default function ShortForm() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [surveyModalOpen, setSurveyModalOpen] = useState(false)
 
   // 뉴스 데이터 로드
   useEffect(() => {
@@ -60,11 +52,11 @@ export default function Main() {
     const mynews = { articleId };
     postRecords(mynews,
       (response) => {
-        console.log("시청 기록 생성 성공", response);
+        console.log("시청기록 성공", response);
         setViewArticles(prev => [...prev, articleId]);
       },
       (error) => {
-        console.log("시청 기록 생성 실패", error);
+        console.log("시청기록 실패", error);
       }
     );
   }
@@ -75,6 +67,7 @@ export default function Main() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
     afterChange: (nowSlide) => {
       const nownewsData = newsDatas[nowSlide];
       // 중복 검사
@@ -90,14 +83,20 @@ export default function Main() {
   }
 
   return (
-        
-    <StyledSlider {...sliderSettings}>
-        {newsDatas && newsDatas.map((newsData) => (
-          <MainNewsCard
-            key={newsData.article_id}
-            newsData={newsData} />))
-        }
-      </StyledSlider>
+    <>    
+      {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
+      <Slider {...sliderSettings}>
+          {newsDatas && newsDatas.map((newsData) => (
+            <MainNewsCard
+              key={newsData.article_id}
+              newsData={newsData} />))
+          }
+      </Slider>
+      <Survey 
+        surveyModalOpen={surveyModalOpen}
+        setSurveyModalOpen={setSurveyModalOpen}
+        />
+    </>
     
   )
 }

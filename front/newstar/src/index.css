@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0px;
   font-family: 'Pretendard-Regular';
-  /* -ms-overflow-style: none; */
+  -ms-overflow-style: none;
 }
 
 /* body {
