@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Modal from 'react-modal'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -13,9 +15,8 @@ const customModal =  Modal.Styles = {
     left: "0",
   },
   content: {
-    minWidth: "400px",
-    maxWidth: "70%",
-    height: "70%",
+    width: "80%",
+    height: "90%",
     zIndex: "150",
     position: "absolute",
     top: "50%",
@@ -28,6 +29,13 @@ const customModal =  Modal.Styles = {
     overflow: "auto",
   },
 };
+
+
+const SurveyForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+`
 
 const SurveyTitle = styled.h2`
   display: flex;
@@ -75,11 +83,19 @@ function SelectAnswer({ qId, qName }) {
 
 
 
-function SurveyContent() {
+function SurveyContent({ setSurveyModalOpen }) {
   const navigate = useNavigate()
 
+  const [surveyValue, setSurveyValue] = useState({
+
+  })
+
+  function handleSubmit(e) {
+    e.preventDefault()
+  }
+
   return (
-    <SurveyContents>
+    <SurveyForm onSubmit={handleSubmit}>
       <SurveyTitle>깜짝설문 !</SurveyTitle>
       <SurveyDescription>참여해주신 분들께 추첨을 통해 커피쿠폰을 드립니다!</SurveyDescription>
       <br />
@@ -117,9 +133,13 @@ function SurveyContent() {
       <SelectAnswer qId={'loading'} qName={'loading'}/>
       <SurveyQuestion>웹 사이트 사용자 경험(페이지 이동의 편의성, 버튼 및 링트의 명확성 등)에 만족하십니까?</SurveyQuestion>
       <SelectAnswer qId={'user'} qName={'user'}/>
+      
+      <br />
+      <SurveyQuestion>개선할 점이 있다면 적어주세요.</SurveyQuestion>
+      <input type="text" />
       </SurveyContents>
-      <button>참여완료</button>
-    </SurveyContents>
+      <button onClick={() => setSurveyModalOpen(false)}>참여완료</button>
+    </SurveyForm>
   )
 }
 
@@ -127,12 +147,13 @@ function Survey({ surveyModalOpen, setSurveyModalOpen }) {
   return (
     <Modal
       isOpen={surveyModalOpen}
-      onRequestClose={() => setSurveyModalOpen}
+      onRequestClose={() => setSurveyModalOpen(false)}
       style={customModal}
-      ariaHideApp={false}
+      ariaHideApp={true}
+      shouldCloseOnOverlayClick={true}
       contentLabel="user_survey"
     >
-      <SurveyContent />
+      <SurveyContent setSurveyModalOpen={setSurveyModalOpen} />
     </Modal>
   )
 }
