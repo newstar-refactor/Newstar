@@ -8,8 +8,9 @@ import { postRecords } from "../../api/fetch";
 // styled-components
 const BoxContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: center;
   gap: 20px;
   padding: 20px;
   cursor: pointer;
@@ -55,7 +56,7 @@ const SearchNewsList = ({ NewsData }) => {
           </BoxContainer>
         ))
       ) : (
-        <p>검색 결과가 없습니다.</p>
+        <BoxContainer>검색 결과가 없습니다.</BoxContainer>
       )}
     </div>
   );

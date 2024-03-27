@@ -9,7 +9,8 @@ import LikeNewsCard from "../main/LikeNewsCard"
 const LikeNewsContainer = styled.div`
   width: 100%;
   overflow-x: auto;
-  padding: 15px;
+  overflow-y: hidden;
+  padding: 10px;
   position: relative;
   
 `
