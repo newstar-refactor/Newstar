@@ -4,7 +4,6 @@ import styled from "styled-components"
 
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
-import Loading from "../Loading"
 
 import { likeNews } from "../../api/fetch"
 
