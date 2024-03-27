@@ -8,7 +8,9 @@ const CategoryNewsCardWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 70px;
+  padding-bottom: 15px;
   cursor: pointer;
+  border-bottom: 1px solid #ccc;
 `
 
 const CategoryNewsCardContent = styled.div`

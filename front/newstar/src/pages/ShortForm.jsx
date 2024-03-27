@@ -16,6 +16,15 @@ import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
 import Survey from './Survey';
 
+const StyledSlider = styled(Slider)`
+    .slick-slide {
+      height: 0px!important;
+    }
+    .slick-slide.slick-active {
+      height: 100% !important;  
+    }
+  `
+
 export default function ShortForm() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
@@ -85,13 +94,13 @@ export default function ShortForm() {
   return (
     <>    
       {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
-      <Slider {...sliderSettings}>
+      <StyledSlider {...sliderSettings}>
           {newsDatas && newsDatas.map((newsData) => (
             <MainNewsCard
               key={newsData.article_id}
               newsData={newsData} />))
           }
-      </Slider>
+      </StyledSlider>
       <Survey 
         surveyModalOpen={surveyModalOpen}
         setSurveyModalOpen={setSurveyModalOpen}

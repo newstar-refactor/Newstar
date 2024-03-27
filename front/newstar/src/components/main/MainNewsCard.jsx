@@ -16,7 +16,7 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  height: calc(100vh - 110px);
+  margin-bottom: 30px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
