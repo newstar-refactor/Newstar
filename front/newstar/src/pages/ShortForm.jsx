@@ -1,7 +1,7 @@
 // 메인 숏폼 페이지
 // 뉴스 기사 좌우로 스크롤
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
@@ -14,22 +14,21 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
-import Survey from './Survey';
+
 
 const StyledSlider = styled(Slider)`
-    .slick-slide {
-      height: 0px!important;
-    }
-    .slick-slide.slick-active {
-      height: 100% !important;  
-    }
-  `
+  .slick-slider {
+  }
+  .slick-list {
+  }
+  .slick-track {
+  }
+`;
 
-export default function ShortForm() {
+export default function Main() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [surveyModalOpen, setSurveyModalOpen] = useState(false)
   const [slideIndex, setSlideIndex] = useState(0);
 
   // 뉴스 데이터 로드
@@ -75,6 +74,7 @@ export default function ShortForm() {
     getNews(
       (response) => {
         setNewsDatas(prevNews => [...prevNews, ...response.data]);
+        console.log("추가 데이터 생성")
       },
       (error) => {
         console.log("추가 데이터가 안들어와요ㅜㅜ", error)
@@ -89,7 +89,6 @@ export default function ShortForm() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
     afterChange: (currentSlide) => {
       setSlideIndex(currentSlide);
       const nownewsData = newsDatas[currentSlide];
@@ -119,11 +118,6 @@ export default function ShortForm() {
               newsData={newsData} />))
           }
       </StyledSlider>
-      <Survey 
-        surveyModalOpen={surveyModalOpen}
-        setSurveyModalOpen={setSurveyModalOpen}
-        />
-    </>
     
   )
 }
