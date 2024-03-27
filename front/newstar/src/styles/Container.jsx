@@ -8,8 +8,6 @@ const TotalContainer = styled.div`
 
 // 네브바 없는 페이지
 const ContainerWithoutNav = styled.main`
-  right: 0;
-  left: 0;
   position: relative;
   max-width: 500px;
   margin: 0px auto;
@@ -18,18 +16,12 @@ const ContainerWithoutNav = styled.main`
 
 // 네브바 있는 페이지
 const ContainerWithNav = styled.main`
-  position: relative;
-  right: 0;
-  left: 0;
-  top: 0;
-
   padding-top: 50px;
 
   max-width: 500px;
   min-width: 280px;
   margin: 0px auto;
   
-  overflow-y: auto;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;

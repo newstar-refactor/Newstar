@@ -16,11 +16,21 @@ import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
 import Survey from './Survey';
 
+const StyledSlider = styled(Slider)`
+    .slick-slide {
+      height: 0px!important;
+    }
+    .slick-slide.slick-active {
+      height: 100% !important;  
+    }
+  `
+
 export default function ShortForm() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [surveyModalOpen, setSurveyModalOpen] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0);
 
   // 뉴스 데이터 로드
   useEffect(() => {
@@ -61,19 +71,36 @@ export default function ShortForm() {
     );
   }
 
+  const loadMoreNews = () => {
+    getNews(
+      (response) => {
+        setNewsDatas(prevNews => [...prevNews, ...response.data]);
+      },
+      (error) => {
+        console.log("추가 데이터가 안들어와요ㅜㅜ", error)
+      }
+    );
+  };
+
+
   const sliderSettings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    afterChange: (nowSlide) => {
-      const nownewsData = newsDatas[nowSlide];
+    afterChange: (currentSlide) => {
+      setSlideIndex(currentSlide);
+      const nownewsData = newsDatas[currentSlide];
       // 중복 검사
       // 현재 보여지는 뉴스 기사의 article_id가 viewArticles 배열에 이미 존재하는지 확인
       if (!viewArticles.includes(nownewsData.article_id)) {
         postRecordForNews(nownewsData.article_id);
+      }
+      // 마지막 슬라이드인 경우 추가 데이터 로드
+      if (currentSlide === newsDatas.length - 1) {
+        loadMoreNews();
       }
     }
   };
@@ -85,13 +112,13 @@ export default function ShortForm() {
   return (
     <>    
       {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
-      <Slider {...sliderSettings}>
+      <StyledSlider {...sliderSettings}>
           {newsDatas && newsDatas.map((newsData) => (
             <MainNewsCard
               key={newsData.article_id}
               newsData={newsData} />))
           }
-      </Slider>
+      </StyledSlider>
       <Survey 
         surveyModalOpen={surveyModalOpen}
         setSurveyModalOpen={setSurveyModalOpen}

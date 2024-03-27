@@ -15,7 +15,16 @@ const CategoryNewsCardContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+`
 
+const BoxContainer = styled.div`
+  display: flex;
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: center;
+  height: calc(100vh - 150px);
+  padding: 20px;
+  font-weight: 600;
 `
 
 
@@ -128,15 +137,12 @@ export default function CategoryNewsDetail() {
   return (
     <CategoryNewsCardContainer>
       {categoryTitle}
-      {categoryDatas && categoryDatas.map((categoryData) => (
-        <div style={{ borderBottom: '1px solid #ccc'}}>
-        <CategoryNewsCard
-          key={`${categoryData.id}-${categoryData.title}`}
-          categoryData={categoryData}
+      {categoryDatas.length > 0 ? categoryDatas.map((categoryData) => (
+          <CategoryNewsCard
+            key={`${categoryData.id}-${categoryData.title}`}
+            categoryData={categoryData}
           />
-          <br />
-        </div>
-      ))}
+      )) : <BoxContainer>검색 결과가 존재하지 않습니다.</BoxContainer>}
     </CategoryNewsCardContainer>
   
   )
