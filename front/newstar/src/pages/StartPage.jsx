@@ -2,7 +2,7 @@ import { Routes, Route, Outlet } from "react-router-dom"
 
 import { ContainerWithoutNav } from "../styles/Container"
 
-function MainPage() {
+function StartPage() {
   return (
     <>
       <ContainerWithoutNav>
@@ -12,4 +12,4 @@ function MainPage() {
   )
 }
 
-export default MainPage
+export default StartPage
