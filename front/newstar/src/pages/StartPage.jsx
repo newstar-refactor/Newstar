@@ -1,14 +1,14 @@
 import { Routes, Route, Outlet } from "react-router-dom"
 
-import { ContainerWithoutNav } from "../styles/Container"
+import { ContainerWithoutNav, TotalContainer } from "../styles/Container"
 
 function StartPage() {
   return (
-    <>
+    <TotalContainer>
       <ContainerWithoutNav>
         <Outlet/>
       </ContainerWithoutNav>
-    </>
+    </TotalContainer>
   )
 }
 

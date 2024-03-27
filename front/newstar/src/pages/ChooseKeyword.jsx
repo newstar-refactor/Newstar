@@ -135,9 +135,6 @@ function ChooseKeyword() {
         if (!localStorage.getItem('X-USER-ID')) {
           localStorage.setItem('X-USER-ID', key)
           setUserKey(key)
-          console.log('새로운 회원이 등록되었습니다.')
-        } else {
-          console.log('이미 등록된 회원입니다.')
         }
       },
       (error) => {
@@ -147,7 +144,6 @@ function ChooseKeyword() {
       setModalOpen(!modalOpen)
   }
 
-  const newKey = localStorage.getItem('X-USER-ID')
   return (
     <KeywordPageWrapper>
       <KeywordPageHeader>
