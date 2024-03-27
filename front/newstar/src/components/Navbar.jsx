@@ -16,7 +16,7 @@ const NavContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: 50px;
+  height: 80px;
   max-width: 500px;
   min-width: 280px;
   
