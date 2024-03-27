@@ -6,7 +6,7 @@ import { getArticle,  likeNews } from "../api/fetch"
 
 import MainNewsHeader from "../components/main/MainNewsHeader"
 import MainNewsBody from "../components/main/MainNewsBody"
-
+import NotfoundImg from "../assets/logo_dark.png"
 
 const DetailNewsImage = styled.img`
   width: 100%;
@@ -58,12 +58,16 @@ function NewsDetailCard() {
       }
     )
   }
+  const onErrorImg = (e) => {
+    e.target.src = NotfoundImg;
+  }
 
   return (
     <DetailNewsContainer>
       <DetailNewsImage
         src={article.image_url}
         alt="news_image"
+        onError={onErrorImg}
       />
       <MainNewsHeader
         newsData={article}

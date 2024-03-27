@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
+import NotFoundImg from '../../assets/logo_dark.png'
 
 import { likeNews } from "../../api/fetch"
 
@@ -15,7 +16,7 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 80px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -46,12 +47,16 @@ function MainNewsCard({ newsData }) {
       }
     )
   }
+  const onErrorImg = (e) => {
+    e.target.src = NotFoundImg;
+  }
 
   return (
     <NewsContainer onDoubleClick={handleLike}>
       <MainNewsImage
         src={newsData.image_url}
         alt="news image"
+        onError={onErrorImg}
       />
       <MainNewsHeader
         newsData={newsData}

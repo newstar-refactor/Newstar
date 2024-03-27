@@ -7,7 +7,7 @@ const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 35px;
-  padding: 20px 50px 60px;
+  padding: 20px 50px 90px;
 `
 
 const CategoryBox = styled.div`

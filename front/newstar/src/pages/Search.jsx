@@ -8,7 +8,7 @@ import SearchBar from '../components/SearchBar';
 import SearchNewsList from '../components/main/SearchNewsList';
 
 const SearchContainer = styled.div`
-  padding: 10px 20px;;
+  padding: 10px 20px 70px;
 `
 
 export default function Search() {
