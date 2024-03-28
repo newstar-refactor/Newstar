@@ -7,6 +7,7 @@ import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseE
 import com.ssafy.newstar.domain.article.dto.ArticleDetailResponse;
 import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.article.service.ArticleService;
+import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.service.RecordService;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
@@ -35,7 +36,10 @@ public class ArticleController {
 
     boolean isNotExist = recordService.confirmRecord(articleId, memberId);
 
-    if(isNotExist) recordService.createRecordEntity(articleId, memberId);
+    if(isNotExist) {
+      Record record = recordService.createRecordEntity(articleId, memberId);
+      recordService.createRecord(record);
+    }
 
     return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId, memberId)));
   }
