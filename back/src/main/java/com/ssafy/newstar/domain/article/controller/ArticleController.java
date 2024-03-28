@@ -34,10 +34,10 @@ public class ArticleController {
           @PathVariable("articleId") Long articleId) {
     Long memberId = (Long) request.getAttribute("memberId");
 
-    boolean isNotExist = recordService.confirmRecord(articleId, memberId);
+    boolean isNotExist = recordService.confirmRecord(memberId, articleId);
 
     if(isNotExist) {
-      Record record = recordService.createRecordEntity(articleId, memberId);
+      Record record = recordService.createRecordEntity(memberId, articleId);
       recordService.createRecord(record);
     }
 
