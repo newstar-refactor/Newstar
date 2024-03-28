@@ -7,6 +7,7 @@ import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseE
 import com.ssafy.newstar.domain.article.dto.ArticleDetailResponse;
 import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.article.service.ArticleService;
+import com.ssafy.newstar.domain.record.service.RecordService;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
@@ -26,10 +27,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ArticleController {
   private final ArticleService articleService;
+  private final RecordService recordService;
   @GetMapping("/articles/{articleId}")
   public ResponseEntity<?> getArticles(HttpServletRequest request,
           @PathVariable("articleId") Long articleId) {
     Long memberId = (Long) request.getAttribute("memberId");
+
+    boolean isNotExist = recordService.confirmRecord(articleId, memberId);
+
+    if(isNotExist) recordService.createRecordEntity(articleId, memberId);
+
     return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId, memberId)));
   }
 

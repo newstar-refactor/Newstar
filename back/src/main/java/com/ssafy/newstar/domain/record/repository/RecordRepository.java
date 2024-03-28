@@ -13,7 +13,7 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
     @EntityGraph(attributePaths = {"article"})
     List<Record> findByMemberId(Long memberId);
     List<Record> findByMemberIdAndLikes(Long memberId, boolean likes);
-    Record findByMemberIdAndArticleId(Long memberId, Long articleId);
+    Optional<Record> findByMemberAndArticle(Member member, Article article);
 
     @EntityGraph(attributePaths = {"article"})
     Optional<Record> findByArticleAndMember(Article article, Member member);
