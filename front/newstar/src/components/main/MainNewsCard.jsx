@@ -15,7 +15,6 @@ const MainNewsImage = styled.img`
 `;
 
 const NewsContainer = styled.div`
-    margin-bottom: 80px;
     overflow-y: auto;
     ::-webkit-scrollbar {
         display: none;
