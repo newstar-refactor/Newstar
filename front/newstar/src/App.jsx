@@ -14,6 +14,7 @@ import CategoryNewsDetail from "./pages/CategoryNewsDetail"
 import ChooseKeyword from "./pages/ChooseKeyword"
 import NewsDetail from "./pages/NewsDetail"
 import Modal from 'react-modal'
+import { ResponseInterceptor } from "./utils/ResponseInterceptor"
 function App() {
   Modal.setAppElement('#root')
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="category/:categoryId" element={<CategoryNewsDetail/>} />
             </Route>
           </Routes>
+          <ResponseInterceptor />
         </BrowserRouter>
       </RecoilRoot>
     </>
