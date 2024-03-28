@@ -9,9 +9,11 @@ import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +34,7 @@ public class AnswerController {
 
   @PostMapping("/answers")
   public ResponseEntity<?> createAnswer(HttpServletRequest request,
-      @RequestBody AnswerRequest[] answerRequest, BindingResult bindingResult) {
+    @Valid @RequestBody AnswerRequest[] answerRequest, BindingResult bindingResult) {
     Long memberId = (Long) request.getAttribute("memberId");
     if (bindingResult.hasErrors()) throw new GlobalException(ErrorCode.INVALID_INPUT_VALUE);
 
