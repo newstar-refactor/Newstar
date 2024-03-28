@@ -13,9 +13,7 @@ const LoadingBox = styled.div`
 export default function Loading() {
   return (
     <LoadingBox>
-      <Lottie 
-          animationData={loading}
-          style={{ width: 'auto', height: '250px' }} />
+      <img src="/newsCharacter.gif" alt="" width="200px"/>
       <div style={{fontSize: '20px', fontWeight: 'bold'}}>로딩중 입니당</div>
     </LoadingBox>
   )

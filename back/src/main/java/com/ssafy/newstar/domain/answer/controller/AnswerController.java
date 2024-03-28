@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnswerController {
 
   private final AnswerService answerService;
-  @GetMapping("/answer")
+  @GetMapping("/answers")
   public ResponseEntity<?> haveAnswer(HttpServletRequest request) {
     Long memberId = (Long) request.getAttribute("memberId");
     boolean b = answerService.haveAnswer(memberId);
@@ -30,7 +30,7 @@ public class AnswerController {
     return getResponseEntity(SuccessCode.OK, getCheckResponse(b));
   }
 
-  @PostMapping("/answer")
+  @PostMapping("/answers")
   public ResponseEntity<?> createAnswer(HttpServletRequest request,
       @RequestBody AnswerRequest[] answerRequest, BindingResult bindingResult) {
     Long memberId = (Long) request.getAttribute("memberId");
