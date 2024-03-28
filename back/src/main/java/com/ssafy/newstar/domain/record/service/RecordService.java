@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,23 +48,27 @@ public class RecordService {
     }
 
     // Record Entity 생성
-    public Record createRecordEntity(Long memberId, CreateRecordRequest createRecordRequest) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
-
-        Article article = articleRepository.findById(createRecordRequest.getArticleId())
-                .orElseThrow(() -> new GlobalException(ErrorCode.ARTICLE_NOT_FOUND));
+    public Record createRecordEntity(Long memberId, Long articleId) {
+        Member member = memberRepository.getReferenceById(memberId);
+        Article article = articleRepository.getReferenceById(articleId);
 
         return Record.createRecode(member, article);
     }
     public void updateRecordLikes(Long memberId, RecordLikeRequest request) {
-        Record record = recordRepository.findByMemberIdAndArticleId(memberId, request.getArticleId());
-        record.updateLikes(request.getLikes());
+        Member member = memberRepository.getReferenceById(memberId);
+        Article article = articleRepository.getReferenceById(request.getArticleId());
+
+        Optional<Record> record = recordRepository.findByMemberAndArticle(member, article);
+        record.orElseThrow(() -> new GlobalException(ErrorCode.RECORD_NOT_FOUND))
+                .updateLikes(request.getLikes());
     }
 
-    public boolean confirmRecord(Long memberId, CreateRecordRequest createRecordRequest) {
-        Record record = recordRepository.findByMemberIdAndArticleId(memberId, createRecordRequest.getArticleId());
-        // null 이면 true 리턴
-        return record == null;
+    public boolean confirmRecord(Long memberId, Long articleId) {
+        Member member = memberRepository.getReferenceById(memberId);
+        Article article = articleRepository.getReferenceById(articleId);
+
+        Optional<Record> record = recordRepository.findByMemberAndArticle(member, article);
+        // null 이면 true 리턴eRecordRequest.getArticleId());
+        return record.isEmpty();
     }
 }
