@@ -1,6 +1,7 @@
 package com.ssafy.newstar.domain.record.repository;
 
 import com.ssafy.newstar.domain.article.entity.Article;
+import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.record.entity.Record;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -15,5 +16,5 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
     Record findByMemberIdAndArticleId(Long memberId, Long articleId);
 
     @EntityGraph(attributePaths = {"article"})
-    Optional<Record> findByArticle(Article article);
+    Optional<Record> findByArticleAndMember(Article article, Member member);
 }

@@ -1,6 +1,8 @@
 package com.ssafy.newstar.domain.article.service;
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.article.repository.ArticleRepository;
+import com.ssafy.newstar.domain.member.entity.Member;
+import com.ssafy.newstar.domain.member.repository.MemberRepository;
 import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.repository.RecordRepository;
 import com.ssafy.newstar.util.response.ErrorCode;
@@ -17,10 +19,12 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class ArticleService {
   private final ArticleRepository articleRepository;
+  private final MemberRepository memberRepository;
   private final RecordRepository recordRepository;
-  public Record getArticles(Long articleId) {
+  public Record getArticles(Long articleId, Long memberId) {
     Article article = articleRepository.getReferenceById(articleId);
-    return recordRepository.findByArticle(article).orElseThrow(
+    Member member = memberRepository.getReferenceById(memberId);
+    return recordRepository.findByArticleAndMember(article, member).orElseThrow(
         () -> new GlobalException(ErrorCode.ARTICLE_NOT_FOUND));
 
   }

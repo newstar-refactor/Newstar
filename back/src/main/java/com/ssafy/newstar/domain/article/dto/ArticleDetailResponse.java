@@ -32,7 +32,7 @@ public class ArticleDetailResponse {
     articleResponse.Bcategory = record.getArticle().getBcategory();
     articleResponse.Scategory = record.getArticle().getScategory();
     articleResponse.image_url = record.getArticle().getImageUrl();
-    articleResponse.content = record.getArticle().getContent();
+    articleResponse.content = record.getArticle().getSummary();
     articleResponse.likes = record.getLikes();
 
     return articleResponse;
