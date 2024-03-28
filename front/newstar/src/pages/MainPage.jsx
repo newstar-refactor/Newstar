@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom"
 
 import { ContainerWithNav, TotalContainer } from "../styles/Container"
 import { TopNavbar, TopNavbarWithoutBack, BottomNavbar } from "../components/Navbar";
+import ScrollToTop from "../common/ScrollToTop";
 
 function MainPage() {
   const location = useLocation()
@@ -16,11 +17,13 @@ function MainPage() {
 
   return (
     <TotalContainer>
-      {renderTopNavbar()}
-      <ContainerWithNav>
-        <Outlet/>
-      </ContainerWithNav>
-      <BottomNavbar/>
+      <ScrollToTop>
+        {renderTopNavbar()}
+        <ContainerWithNav>
+          <Outlet/>
+        </ContainerWithNav>
+        <BottomNavbar/>
+      </ScrollToTop>
     </TotalContainer>
   )
 }
