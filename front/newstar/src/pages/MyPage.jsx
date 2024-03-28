@@ -2,7 +2,6 @@
 // 내 정보, 내 선호도(워드 클라우드), 내가 본 기사, 좋아요 한 기사, 
 import { useState, useEffect } from "react"
 
-import MyCategory from "../components/user/MyCategory"
 import MyNews from "../components/user/MyNews"
 import LikeNews from "../components/user/LikeNews"
 import styled from "styled-components"
@@ -33,7 +32,7 @@ export default function MyPage() {
   useEffect(()=>{
     getRecords(
       ( response ) => {
-        setRecordDatas(response.data.data)
+        setRecordDatas(response.data.data.reverse())
       },
       ( error ) => {
         console.log(error)

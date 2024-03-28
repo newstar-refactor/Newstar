@@ -6,14 +6,16 @@ export const ResponseInterceptor = () => {
   const navigate = useNavigate()
 
   const interceptorId = useRef(null);
-
   useEffect(() => {
     interceptorId.current = axiosInstance.interceptors.response.use(undefined, (error) => {
       switch (error.response.status) {
-        case 401:
+        case 401: {
+          localStorage.removeItem("X-USER-ID")
           navigate('/');
           break;
+        }
       }
+      return Promise.reject(error);
     });
 
     return () => {

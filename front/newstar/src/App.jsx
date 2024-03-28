@@ -15,6 +15,8 @@ import ChooseKeyword from "./pages/ChooseKeyword"
 import NewsDetail from "./pages/NewsDetail"
 import Modal from 'react-modal'
 import { ResponseInterceptor } from "./utils/ResponseInterceptor"
+import ScrollToTop from "./common/ScrollToTop"
+
 function App() {
   Modal.setAppElement('#root')
   return (
