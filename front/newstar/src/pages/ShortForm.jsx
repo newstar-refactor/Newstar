@@ -5,7 +5,7 @@ import { useEffect, useState, Suspense } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
-import { getNews, postRecords } from '../api/fetch'
+import { checkAnswer, getNews, postRecords } from '../api/fetch'
 
 
 import Slider from "react-slick"
@@ -30,7 +30,7 @@ export default function ShortForm() {
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [surveyModalOpen, setSurveyModalOpen] = useState(false)
-  const [slideIndex, setSlideIndex] = useState(0);
+  const [checkSurvey, setCheckSurvey] = useState(false)
   
   // 뉴스 데이터 로드
   useEffect(() => {
@@ -42,6 +42,18 @@ export default function ShortForm() {
       (error) => {
         console.log(error)
         setLoading(false)
+      }
+    )
+  }, [])
+
+  // 설문 여부 확인
+  useEffect(()=> {
+    checkAnswer(
+      (response) => {
+        setCheckSurvey(response.data.data)
+      },
+      (error) => {
+        console.log(error)
       }
     )
   }, [])
@@ -59,15 +71,13 @@ export default function ShortForm() {
   }, [newsDatas]) // newsDatas 상태가 변경될 때마다 실행
 
   const postRecordForNews = (articleId) => {
-    console.log("post", articleId)
     const mynews = { articleId };
     postRecords(mynews,
       (response) => {
-        console.log("시청기록 성공", response);
         setViewArticles(prev => [...prev, articleId]);
       },
       (error) => {
-        console.log("시청기록 실패", error);
+        console.log( error);
       }
     );
   }
@@ -76,13 +86,15 @@ export default function ShortForm() {
     getNews(
       (response) => {
         setNewsDatas(prevNews => [...prevNews, ...response.data]);
-        console.log("추가 데이터 생성")
       },
       (error) => {
-        console.log("추가 데이터가 안들어와요ㅜㅜ", error)
+        console.log(error)
       }
     );
   };
+
+  const randomNum1 = Math.floor(Math.random()*(15-9)) + 8
+  const randomNum2 = Math.floor(Math.random()*(30-25)) + 24
 
   const sliderSettings = {
     dots: false,
@@ -102,6 +114,14 @@ export default function ShortForm() {
       if (next === newsDatas.length - 1) {
         loadMoreNews();
       }
+
+      if (next === randomNum1 && checkSurvey.haveAnswer === false) {
+        setSurveyModalOpen(true)
+      }
+      
+      if (next === randomNum2 && checkSurvey.haveAnswer === false) {
+        setSurveyModalOpen(true)
+      }
     }
   };
 
@@ -111,7 +131,6 @@ export default function ShortForm() {
 
   return (
     <>    
-      {/* <button onClick={() => setSurveyModalOpen(true)}>설문조사를 해보아요</button> */}
       <StyledSlider {...sliderSettings}>
           {newsDatas && newsDatas.map((newsData) => (
             <MainNewsCard

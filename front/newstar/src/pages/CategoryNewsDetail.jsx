@@ -51,7 +51,6 @@ export default function CategoryNewsDetail() {
         ( response ) => {
           setCategoryDatas(response.data.data.content)
           setCategoryPaging(response.data.data.content)
-          console.log(response)
         },
         ( error ) => {
           console.log(error)
@@ -64,7 +63,6 @@ export default function CategoryNewsDetail() {
         ( response ) => {
           setCategoryDatas(response.data.data.content)
           setCategoryPaging(response.data.data.content)
-          console.log(response.data.data.content)
         },
         ( error ) => {
           console.log(error)
