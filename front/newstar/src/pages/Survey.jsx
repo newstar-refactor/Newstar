@@ -50,6 +50,12 @@ const SurveyQuestion = styled.div`
   font-weight: 700;
 `
 
+const SurveyText = styled.span`
+  font-size: 10px;
+  margin-left: 15px;
+  color: gray;
+`
+
 const SurveyDescription = styled.div`
   display: flex;
   justify-content: center;
@@ -112,12 +118,17 @@ function SurveyContent({ setSurveyModalOpen }) {
     read: "",
     loading: "",
     user: "",
-    text: "",
+    text: "없는디?",
     phone: "",
   })
 
   useEffect(() => {
-    if(surveyValue.category && surveyValue.read && surveyValue.loading && surveyValue.user && surveyValue.phone && isValidPhone) {
+    if(surveyValue.category && 
+      surveyValue.read && 
+      surveyValue.loading &&
+       surveyValue.user && 
+       surveyValue.phone && 
+       isValidPhone) {
       setIsValid(true)
     } else {
       setIsValid(false)
@@ -154,9 +165,15 @@ function SurveyContent({ setSurveyModalOpen }) {
     user: e.target.value
   }))
 
+  // Text onChange Handler
+  const onChangeText = (e) => setSurveyValue(prev => ({
+    ...prev,
+    text: e.target.value
+  }))
+
   // Phone onChange Handler
   const onChangePhone = (e) => {
-    const regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    const regExp = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
 
     setSurveyValue(prev => ({
       ...prev,
@@ -187,9 +204,11 @@ function SurveyContent({ setSurveyModalOpen }) {
       }
       setAnswer(data, 
         (response) => {
+          console.log(response)
           setSurveyModalOpen(false);
         },
         (error) => {
+          console.log(error)
           console.log(error)
         })
     }
@@ -226,8 +245,11 @@ function SurveyContent({ setSurveyModalOpen }) {
         <SelectAnswer qId={'loading'} qName={'loading'} onChangeHandler={onChangeLoading}/>
         <SurveyQuestion>5. 웹 사이트 사용자 경험(페이지 이동의 편의성, 버튼 및 링크의 명확성 등)에 만족하십니까?</SurveyQuestion>
         <SelectAnswer qId={'user'} qName={'user'} onChangeHandler={onChangeUser}/>
-        <SurveyQuestion>6. 개선할 점이 있다면 적어주세요.</SurveyQuestion>
-        <textarea rows={5} name="text"/>
+        <SurveyQuestion>
+          6. 개선할 점이 있다면 적어주세요.<br />
+          <SurveyText>(작성하시면 당첨 확률이 올라갑니다!)</SurveyText>
+        </SurveyQuestion>
+        <textarea rows={5} name="text" onChange={onChangeText}/>
         <SurveyQuestion>7. 기프티콘 전송을 위해 휴대폰 번호를 입력해주세요. ex) 000-0000-0000</SurveyQuestion>
         <input type="tel" id="phone" name="phone" onChange={onChangePhone}/>
         <label htmlFor="phone" style={{fontSize: '13px', fontWeight: 700, color: '#8AC038'}}>{errorMessage}</label>
