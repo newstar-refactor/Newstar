@@ -147,7 +147,6 @@ function ChooseKeyword() {
       setModalOpen(!modalOpen)
   }
 
-  const newKey = localStorage.getItem('X-USER-ID')
   return (
     <KeywordPageWrapper>
       <KeywordPageHeader>
