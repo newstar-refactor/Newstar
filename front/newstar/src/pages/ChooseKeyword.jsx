@@ -109,7 +109,6 @@ function ChooseKeyword() {
   // 모달 창 상태 관리
   const [modalOpen, setModalOpen] = useState(false)
   
-
   // 각 키워드 상태 관리
   const [tagsActive, setTagsActive] = useState(BigCategoryData)
 

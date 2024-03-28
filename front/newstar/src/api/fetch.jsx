@@ -93,6 +93,15 @@ function getArticle(articleId, success, fail) {
     .catch(fail)
 }
 
+
+// 설문 여부 확인
+function checkAnswer(success, fail) {
+  return axiosInstance.get(api.answer)
+    .then(success)
+    .catch(fail)
+}
+
+
 // 설문 답변 저장하기
 function setAnswer(data, success, fail) {
   return axiosInstance.post(api.answer, data)
@@ -113,5 +122,6 @@ export {
   getCategoryNews,
   likeNews,
   getArticle,
-  setAnswer
+  setAnswer,
+  checkAnswer
 }

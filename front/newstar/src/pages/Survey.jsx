@@ -204,11 +204,9 @@ function SurveyContent({ setSurveyModalOpen }) {
       }
       setAnswer(data, 
         (response) => {
-          console.log(response)
           setSurveyModalOpen(false);
         },
         (error) => {
-          console.log(error)
           console.log(error)
         })
     }

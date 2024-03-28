@@ -38,9 +38,7 @@ function MainNewsCard({ newsData }) {
     }
     likeNews(
       data,
-      ( response ) => {
-        console.log(response)
-        isLiked ? console.log("됐습니다") : console.log("좋습니다")
+      (response) => {
       },
       ( error ) => {
         console.log(error)

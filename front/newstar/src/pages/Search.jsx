@@ -31,7 +31,7 @@ export default function Search() {
           setFilteredNews(response.data);
           // 실패 콜백
         } catch (error) {
-          console.log("Error fetching Searchdata", error);
+          console.log(error);
         }
       } else {
         setFilteredNews([]);

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-import { BigCategoryData, SmallCategoryData } from '../state/categoryData'
+import { SmallCategoryData } from '../state/categoryData'
 
 const CategoryNewsContainer = styled.div`
   display: flex;
