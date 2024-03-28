@@ -30,8 +30,7 @@ export default function ShortForm() {
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [surveyModalOpen, setSurveyModalOpen] = useState(false)
-  const [slideIndex, setSlideIndex] = useState(0);
-  
+ 
   // 뉴스 데이터 로드
   useEffect(() => {
     getNews(
