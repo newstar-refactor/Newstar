@@ -20,6 +20,8 @@ public class RecordController {
     @GetMapping("/records")
     public ResponseEntity<?> getRecords(HttpServletRequest request) {
         Long memberId = (Long) request.getAttribute("memberId");
+
+
         return getResponseEntity(SuccessCode.OK, createRecordResponse(recordService.getRecords(memberId)));
     }
 
