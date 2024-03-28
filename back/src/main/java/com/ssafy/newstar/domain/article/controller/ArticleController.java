@@ -1,8 +1,10 @@
 package com.ssafy.newstar.domain.article.controller;
 
+import static com.ssafy.newstar.domain.article.dto.ArticleDetailResponse.*;
 import static com.ssafy.newstar.domain.article.dto.ArticleResponse.createArticleResponse;
 import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseEntity;
 
+import com.ssafy.newstar.domain.article.dto.ArticleDetailResponse;
 import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.article.service.ArticleService;
 import com.ssafy.newstar.util.response.ErrorCode;
@@ -25,7 +27,7 @@ public class ArticleController {
   private final ArticleService articleService;
   @GetMapping("/articles/{articleId}")
   public ResponseEntity<?> getArticles(@PathVariable("articleId") Long articleId) {
-    return getResponseEntity(SuccessCode.OK, createArticleResponse(articleService.getArticles(articleId)));
+    return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId)));
   }
 
   @GetMapping("/articles/category")
