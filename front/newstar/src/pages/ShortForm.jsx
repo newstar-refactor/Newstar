@@ -46,7 +46,7 @@ export default function ShortForm() {
     )
   }, [])
 
-  // 첫 페이지 로드 시 시청 기록 생성
+  // 첫 페이지 로드 시 시청 기록 생성호우
   useEffect(() => {
     if (newsDatas.length > 0) {
       const firstNewsData = newsDatas[0];
