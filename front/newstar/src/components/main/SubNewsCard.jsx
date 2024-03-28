@@ -57,10 +57,6 @@ const StyledSlider = styled(Slider)`
 const SubNewsCard = ({records}) => {
   const navigate = useNavigate();
 
-  // 카드 클릭 시, 숏폼 NewsData.url로 이동
-  // const handleClick = () => { navigate(NewsData.url) }
-  const handleClick = (url) => { navigate(url) }
-
 
   const settings = {
     dots: false,

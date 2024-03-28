@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 
 import { ContainerWithoutNav, TotalContainer } from "../styles/Container"
 

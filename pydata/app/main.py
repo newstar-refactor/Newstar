@@ -25,7 +25,7 @@ metadata_obj = MetaData()
 
 # 헤더 uuid추출
 @app.middleware("http")
-def add_process(request: Request, call_next):
+async def add_process(request: Request, call_next):
   # 요청 URL 경로를 문자열로 얻기
   request_path = str(request.url.path)
 
@@ -34,6 +34,7 @@ def add_process(request: Request, call_next):
     with Session(engine) as db:
       # 요청 헤더로부터 user_id 추출
       pw = request.headers.get("X-User-Id")
+      print(pw)
       if pw is not None:
         try:
           member_id = get_user_by_pw(db, pw)
@@ -43,9 +44,9 @@ def add_process(request: Request, call_next):
           # get_user_by_pw 함수에서 HTTPException이 발생한 경우 처리
           return JSONResponse(status_code=e.status_code, content={"detail": e.detail})
       else:
-        return JSONResponse(status_code=400, content={"detail": "X-User-Id 헤더가 필요합니다."})
+        return JSONResponse(status_code=401, content={"detail": "키가 존재하지 않습니다."})
 
-  response = call_next(request)
+  response = await call_next(request)
   return response
 
 

@@ -33,7 +33,6 @@ function NewsDetailCard() {
       params.articleId,
       ( response ) => {
         setArticle(response?.data.data)
-        console.log(response)
       }
     )
   }, [params.articleId])
@@ -49,8 +48,7 @@ function NewsDetailCard() {
     likeNews(
       data,
       ( response ) => {
-        console.log(response)
-        isLiked ? console.log("됐습니다") : console.log("좋습니다")
+      
       },
       ( error ) => {
         console.log(error)
