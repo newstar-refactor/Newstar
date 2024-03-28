@@ -13,8 +13,9 @@ import CategoryNews from "./pages/CategoryNews"
 import CategoryNewsDetail from "./pages/CategoryNewsDetail"
 import ChooseKeyword from "./pages/ChooseKeyword"
 import NewsDetail from "./pages/NewsDetail"
-
+import Modal from 'react-modal'
 function App() {
+  Modal.setAppElement('#root')
   return (
     <>
       <RecoilRoot>

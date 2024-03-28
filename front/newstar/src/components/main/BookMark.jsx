@@ -7,7 +7,7 @@ const BookMarkWrapper = styled.div`
   border: 0.5px solid gray;
   border-radius: 8px;
   width: 100%;
-  height: 90px;
+  height: 100px;
 `
 
 const BookMarkInfo = styled.div`
