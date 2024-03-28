@@ -118,7 +118,7 @@ function ChooseKeyword() {
 
   // 클릭 시 키워드 담기
   useEffect(() => {
-    const newSelectedKeywords = tagsActive.filter(word => word.state).map(word => word.id);
+    const newSelectedKeywords = tagsActive.filter(word => word.state).map(word => word.code);
     setSelectedKeywords(newSelectedKeywords);
   }, [tagsActive]);
 
