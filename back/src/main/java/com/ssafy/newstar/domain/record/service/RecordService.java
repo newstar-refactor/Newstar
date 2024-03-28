@@ -52,7 +52,9 @@ public class RecordService {
         Member member = memberRepository.getReferenceById(memberId);
         Article article = articleRepository.getReferenceById(articleId);
 
-        return Record.createRecode(member, article);
+        Record recode = Record.createRecode(member, article);
+
+        return recordRepository.save(recode);
     }
     public void updateRecordLikes(Long memberId, RecordLikeRequest request) {
         Member member = memberRepository.getReferenceById(memberId);
