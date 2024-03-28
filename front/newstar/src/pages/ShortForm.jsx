@@ -1,7 +1,7 @@
 // 메인 숏폼 페이지
 // 뉴스 기사 좌우로 스크롤
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil'
 import { newsDataState } from '../state/atoms'
@@ -14,22 +14,22 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Loading from '../components/Loading'
 import MainNewsCard from '../components/main/MainNewsCard'
-
+import Survey from './Survey';
 
 const StyledSlider = styled(Slider)`
-  .slick-slider {
-  }
-  .slick-list {
-  }
-  .slick-track {
-  }
-`;
+    .slick-slide {
+      height: 0px!important;
+    }
+    .slick-slide.slick-active {
+      height: 100% !important;  
+    }
+  `
 
-export default function Main() {
+export default function ShortForm() {
   const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
   const [viewArticles, setViewArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [slideIndex, setSlideIndex] = useState(0);
+  const [surveyModalOpen, setSurveyModalOpen] = useState(false)
 
   // 뉴스 데이터 로드
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Main() {
     )
   }, [])
 
-  // 첫 페이지 로드 시 시청 기록 생성
+  // 첫 페이지 로드 시 시청 기록 생성호우
   useEffect(() => {
     if (newsDatas.length > 0) {
       const firstNewsData = newsDatas[0];
@@ -70,36 +70,19 @@ export default function Main() {
     );
   }
 
-  const loadMoreNews = () => {
-    getNews(
-      (response) => {
-        setNewsDatas(prevNews => [...prevNews, ...response.data]);
-        console.log("추가 데이터 생성")
-      },
-      (error) => {
-        console.log("추가 데이터가 안들어와요ㅜㅜ", error)
-      }
-    );
-  };
-
-
   const sliderSettings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    afterChange: (currentSlide) => {
-      setSlideIndex(currentSlide);
-      const nownewsData = newsDatas[currentSlide];
+    arrows: false,
+    afterChange: (nowSlide) => {
+      const nownewsData = newsDatas[nowSlide];
       // 중복 검사
       // 현재 보여지는 뉴스 기사의 article_id가 viewArticles 배열에 이미 존재하는지 확인
       if (!viewArticles.includes(nownewsData.article_id)) {
         postRecordForNews(nownewsData.article_id);
-      }
-      // 마지막 슬라이드인 경우 추가 데이터 로드
-      if (currentSlide === newsDatas.length - 1) {
-        loadMoreNews();
       }
     }
   };
@@ -118,6 +101,11 @@ export default function Main() {
               newsData={newsData} />))
           }
       </StyledSlider>
+      <Survey 
+        surveyModalOpen={surveyModalOpen}
+        setSurveyModalOpen={setSurveyModalOpen}
+        />
     </>
+    
   )
 }
