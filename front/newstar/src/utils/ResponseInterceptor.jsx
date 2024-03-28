@@ -14,6 +14,8 @@ export const ResponseInterceptor = () => {
           navigate('/');
           break;
         }
+        default:
+          break;
       }
       return Promise.reject(error);
     });
