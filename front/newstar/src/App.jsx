@@ -15,10 +15,20 @@ import ChooseKeyword from "./pages/ChooseKeyword"
 import NewsDetail from "./pages/NewsDetail"
 import Modal from 'react-modal'
 import { ResponseInterceptor } from "./utils/ResponseInterceptor"
-import ScrollToTop from "./common/ScrollToTop"
+import { getMembers } from "./api/fetch"
 
 function App() {
   Modal.setAppElement('#root')
+
+  useEffect(() => {
+    const userId = localStorage.getItem('X-USER-ID');
+    if (userId) {
+      console.log("hihi")
+      getMembers(undefined, (error) => {
+        window.location.href('/')
+      })
+    }
+  }, [])
   return (
     <>
       <RecoilRoot>
