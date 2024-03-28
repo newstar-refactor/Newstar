@@ -16,7 +16,7 @@ public class makeSurvey {
   private final InitService initService;
   @PostConstruct
   public void init() {
-    initService.surveyOne();
+    //initService.surveyOne();
   }
 
   @Component
