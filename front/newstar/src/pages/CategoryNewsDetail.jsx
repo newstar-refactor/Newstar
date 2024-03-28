@@ -44,7 +44,7 @@ export default function CategoryNewsDetail() {
     setLoading(true)
 
     // 대분류일 경우
-    if (['100', '101', '105'].includes(params.categoryId)) {
+    if (['100', '102', '103', '104', '101', '105'].includes(params.categoryId)) {
       categoryTitle = BigCategory[params.categoryId]
       getCategoryNews(
         params.categoryId, '', 10, 0,
@@ -69,7 +69,6 @@ export default function CategoryNewsDetail() {
         }
       )
     }
-
     setLoading(false)
   },[])
 
@@ -77,7 +76,7 @@ export default function CategoryNewsDetail() {
   function fetchMoreDatas() {
     setFetching(true)
 
-    if (['100', '101', '105'].includes(params.categoryId)) {
+    if (['100', '101', '105', '102', '103', '104',].includes(params.categoryId)) {
       getCategoryNews(
         params.categoryId, '', 10, currentPage + 1,
         ( response ) => {
@@ -140,7 +139,7 @@ export default function CategoryNewsDetail() {
             key={`${categoryData.id}-${categoryData.title}`}
             categoryData={categoryData}
           />
-      )) : <BoxContainer>검색 결과가 존재하지 않습니다.</BoxContainer>}
+      )) : <BoxContainer>결과가 존재하지 않습니다.</BoxContainer>}
     </CategoryNewsCardContainer>
   
   )
