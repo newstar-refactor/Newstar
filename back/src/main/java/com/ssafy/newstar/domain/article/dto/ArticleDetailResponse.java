@@ -1,7 +1,10 @@
 package com.ssafy.newstar.domain.article.dto;
 import com.ssafy.newstar.domain.record.entity.Record;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 public class ArticleDetailResponse {
   Long article_id;
 
