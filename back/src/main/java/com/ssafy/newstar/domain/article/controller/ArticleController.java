@@ -10,6 +10,7 @@ import com.ssafy.newstar.domain.article.service.ArticleService;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Pageable;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
   private final ArticleService articleService;
   @GetMapping("/articles/{articleId}")
-  public ResponseEntity<?> getArticles(@PathVariable("articleId") Long articleId) {
-    return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId)));
+  public ResponseEntity<?> getArticles(HttpServletRequest request,
+          @PathVariable("articleId") Long articleId) {
+    Long memberId = (Long) request.getAttribute("memberId");
+    return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId, memberId)));
   }
 
   @GetMapping("/articles/category")
