@@ -1,81 +1,69 @@
 // 메인 페이지 뉴스 카드
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-import { useParams } from "react-router-dom"
-import { getArticle,  likeNews } from "../api/fetch"
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { getArticle, likeNews } from '../api/fetch';
 
-import MainNewsHeader from "../components/main/MainNewsHeader"
-import MainNewsBody from "../components/main/MainNewsBody"
-import NotfoundImg from "../assets/logo_dark.png"
+import MainNewsHeader from '../components/main/MainNewsHeader';
+import MainNewsBody from '../components/main/MainNewsBody';
+import NotfoundImg from '../assets/logo_dark.png';
 
 const DetailNewsImage = styled.img`
-  width: 100%;
-  padding: 10px;
-  border-radius: 20px;
-`
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+`;
 
 const DetailNewsContainer = styled.div`
-  min-height: 100vh;
-  margin-bottom: 80px;
-  overflow-y: auto;
-  width: 100%;
-`
+    overflow-y: auto;
+    width: 100%;
+`;
 
 function NewsDetailCard() {
-  const params = useParams()
-  const [article, setArticle] = useState([])
+    const params = useParams();
+    const [article, setArticle] = useState([]);
 
-  // 좋아요 상태 관리
-  const [isLiked, setIsLiked] = useState(false);
+    // 좋아요 상태 관리
+    const [isLiked, setIsLiked] = useState(false);
 
+    useEffect(() => {
+        getArticle(params.articleId, (response) => {
+            setArticle(response?.data.data);
+            setIsLiked(response?.data.data.likes);
+        });
+    }, [params.articleId]);
 
-  useEffect(() => {
-    getArticle(
-      params.articleId,
-      ( response ) => {
-        setArticle(response?.data.data)
-      }
-    )
-  }, [params.articleId])
-
-
-  // 좋아요 상태 업데이트
-  function handleLike() {
-    setIsLiked(!isLiked)
-    const data = {
-      articleId: article.article_id,
-      likes: !isLiked
+    // 좋아요 상태 업데이트
+    function handleLike() {
+        setIsLiked(!isLiked);
+        const data = {
+            articleId: article.article_id,
+            likes: !isLiked,
+        };
+        likeNews(
+            data,
+            (response) => {},
+            (error) => {
+                console.log(error);
+            }
+        );
     }
-    likeNews(
-      data,
-      ( response ) => {
-      
-      },
-      ( error ) => {
-        console.log(error)
-      }
-    )
-  }
-  const onErrorImg = (e) => {
-    e.target.src = NotfoundImg;
-  }
+    const onErrorImg = (e) => {
+        e.target.src = NotfoundImg;
+    };
 
-  return (
-    <DetailNewsContainer>
-      <DetailNewsImage
-        src={article.image_url}
-        alt="news_image"
-        onError={onErrorImg}
-      />
-      <MainNewsHeader
-        newsData={article}
-        isLiked={isLiked}
-        setIsLiked={setIsLiked}
-        handleLikeButtonClick={handleLike}
-      />
-      <MainNewsBody newsData={article} />
-    </DetailNewsContainer>
-  )
+    return (
+        <DetailNewsContainer>
+            <DetailNewsImage src={article.image_url} alt="news_image" onError={onErrorImg} />
+            <MainNewsHeader
+                newsData={article}
+                isLiked={isLiked}
+                setIsLiked={setIsLiked}
+                handleLikeButtonClick={handleLike}
+            />
+            <MainNewsBody newsData={article} />
+        </DetailNewsContainer>
+    );
 }
 
-export default NewsDetailCard
+export default NewsDetailCard;
