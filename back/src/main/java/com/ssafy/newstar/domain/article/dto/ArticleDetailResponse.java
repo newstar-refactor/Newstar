@@ -1,5 +1,7 @@
 package com.ssafy.newstar.domain.article.dto;
 import com.ssafy.newstar.domain.record.entity.Record;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import lombok.Data;
 
