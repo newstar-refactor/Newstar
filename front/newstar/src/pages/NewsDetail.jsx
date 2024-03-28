@@ -15,8 +15,7 @@ const DetailNewsImage = styled.img`
 `
 
 const DetailNewsContainer = styled.div`
-  height: auto;
-  max-height: 86vh;
+  margin-bottom: 80px;
   overflow-y: auto;
   width: 100%;
 `

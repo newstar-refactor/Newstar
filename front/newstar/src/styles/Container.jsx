@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // 전체 페이지
 const TotalContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
 `
 
 // 네브바 없는 페이지
