@@ -38,22 +38,18 @@ export default function ShortForm() {
       ( response ) => {
         setNewsDatas(response.data)
         setLoading(false)
+        checkAnswer(
+          (response) => {
+            setCheckSurvey(response.data.data)
+          },
+          (error) => {
+            console.log(error)
+          }
+        )
       },
       (error) => {
         console.log(error)
         setLoading(false)
-      }
-    )
-  }, [])
-
-  // 설문 여부 확인
-  useEffect(()=> {
-    checkAnswer(
-      (response) => {
-        setCheckSurvey(response.data.data)
-      },
-      (error) => {
-        console.log(error)
       }
     )
   }, [])
