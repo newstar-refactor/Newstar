@@ -14,7 +14,7 @@ const NavContainer = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
-
+    right: 0;
     width: 100%;
     height: 70px;
     max-width: 500px;
@@ -37,7 +37,7 @@ const TopNavContainer = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-
+    right: 0;
     width: 100%;
     height: 50px;
     max-width: 500px;
