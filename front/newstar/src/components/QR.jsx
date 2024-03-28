@@ -79,7 +79,6 @@ function CreateQR({ setModalOpen }) {
     link.href = url;
     link.download = `newstar-key.png`;
     link.click();
-    console.log('저장완')
   }
 
   const userKey = useRecoilValue(userKeyState)

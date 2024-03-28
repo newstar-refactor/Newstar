@@ -37,11 +37,10 @@ const SearchNewsList = ({ NewsData }) => {
     postRecords(
       mynews,
       (response) => {
-        console.log("시청 기록 생성 성공", response);
         navigate(`/newstar/${articleId}`);
       },
       (error) => {
-        console.log("시청 기록 생성 실패", error);
+        console.log(error);
       }
     );
   };

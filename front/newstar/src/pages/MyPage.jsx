@@ -44,7 +44,6 @@ export default function MyPage() {
   useEffect(()=>{
     getLikes(
       ( response ) => {
-        console.log(response)
         setLikeDatas(response.data.data)
       },
       ( error ) => {
@@ -55,7 +54,6 @@ export default function MyPage() {
 
   return (
     <MyPageContainer>
-      {/* <MyCategory/> */}
       <MyNews/>
       <LikeNews/>
     </MyPageContainer>
