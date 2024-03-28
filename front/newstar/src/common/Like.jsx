@@ -1,7 +1,4 @@
-import React from 'react';
-import Lottie from 'lottie-react';
-
-import likeLottie from '../assets/lottie/like.json';
+import React from "react"
 
 import { BiBookmarkHeart, BiSolidBookmarkHeart } from 'react-icons/bi';
 

@@ -1,30 +1,28 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { SmallCategoryData } from '../state/categoryData'
+import { BigCategoryData, SmallCategoryData } from '../state/categoryData'
 
 const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 35px;
   padding: 20px 50px 90px;
 `
 
 const CategoryBox = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: space-between;
+  flex-direction: column;
   border-radius: 10px;
+  box-shadow: 2px 2px 7px 1px lightgray;
 `
 
 const BigCategoryBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(90% / 2);
   height: 60px;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
   color: black;
   background-color: white;
   box-shadow: 2px 2px 7px 1px lightgray;
@@ -42,12 +40,10 @@ const SmallCategoryBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(90% / 2);
   height: 45px;
-  border-radius: 5px;
   color: black;
   background-color: white;
-  box-shadow: 2px 2px 7px 1px lightgray;
+  border-bottom: 0.5px solid gray;
   font-weight: 600;
   cursor: pointer;
   &:hover {
@@ -60,75 +56,43 @@ const SmallCategoryBox = styled.div`
 
 export default function CategoryNews() {
   const navigate = useNavigate()
+  const BigData = BigCategoryData
+  
+  const initialHideState = BigData.reduce((acc, cur) => {
+    acc[cur.code] = false
+    return acc
+  }, {})
 
-  const list100 = SmallCategoryData[100].map(small =>
-    <SmallCategoryBox
-      key={small.code} 
-      onClick={() => navigate(`/newstar/category/${small.code}`)}>
-      {small.name}</SmallCategoryBox>
-  )
+  const [hide, setHide] = useState(initialHideState)
 
-  const list101 = SmallCategoryData[101].map(small =>
-    <SmallCategoryBox
-      key={small.code} 
-      onClick={() => navigate(`/newstar/category/${small.code}`)}>
-      {small.name}</SmallCategoryBox>
-  )
+  function mouseEvent(code, bool) {
+    setHide(prev => ({ ...prev, [code]: bool}))
+  }
 
-  const list102 = SmallCategoryData[102].map(small =>
-    <SmallCategoryBox
-      key={small.code} 
-      onClick={() => navigate(`/newstar/category/${small.code}`)}>
-      {small.name}</SmallCategoryBox>
-  )
-
-  const list103 = SmallCategoryData[103].map(small =>
-    <SmallCategoryBox
-      key={small.code} 
-      onClick={() => navigate(`/newstar/category/${small.code}`)}>
-      {small.name}</SmallCategoryBox>
-  )
-
-  const list104 = SmallCategoryData[104].map(small =>
-    <SmallCategoryBox
-      key={small.code} 
-      onClick={() => navigate(`/newstar/category/${small.code}`)}>
-      {small.name}</SmallCategoryBox>
-  )
-
-  const list105 = SmallCategoryData[105].map(small =>
-    <SmallCategoryBox
-      key={small.code} 
-      onClick={() => navigate(`/newstar/category/${small.code}`)}>
-      {small.name}</SmallCategoryBox>
-  )
+  function renderSmallCategory(bigCategoryCode) {
+    return SmallCategoryData[bigCategoryCode]?.map(small => (
+      <SmallCategoryBox 
+        key={small.code}
+        onMouseEnter={() => mouseEvent(small.code, true)}
+        onMouseLeave={() => mouseEvent(small.code, false)}
+        onClick={() => navigate(`/newstar/category/${small.code}`)}>
+          {small.name}
+      </SmallCategoryBox>
+    ))
+  }
 
   return (
     <CategoryNewsContainer>
-      <CategoryBox>
-        <BigCategoryBox onClick={() => navigate('/newstar/category/100')}>정치 전체</BigCategoryBox>
-        {list100}
-      </CategoryBox>
-      <CategoryBox>
-        <BigCategoryBox onClick={() => navigate('/newstar/category/101')}>경제 전체</BigCategoryBox>
-        {list101}
-      </CategoryBox>
-      <CategoryBox>
-        <BigCategoryBox onClick={() => navigate('/newstar/category/102')}>사회 전체</BigCategoryBox>
-        {list102}
-      </CategoryBox>
-      <CategoryBox>
-        <BigCategoryBox onClick={() => navigate('/newstar/category/103')}>생활/문화 전체</BigCategoryBox>
-        {list103}
-      </CategoryBox>
-      <CategoryBox>
-        <BigCategoryBox onClick={() => navigate('/newstar/category/104')}>세계 전체</BigCategoryBox>
-        {list104}
-      </CategoryBox>
-      <CategoryBox>
-        <BigCategoryBox onClick={() => navigate('/newstar/category/105')}>IT/과학 전체</BigCategoryBox>
-        {list105}
-      </CategoryBox>
+      {BigData.map((big) => (
+        <CategoryBox key={big}
+          onMouseEnter={() => mouseEvent(big.code, true)}
+          onMouseLeave={() => mouseEvent(big.code, false)}>
+          <BigCategoryBox
+          onClick={() => navigate(`/newstar/category/${big.code}`)}
+        >{big.name} 전체</BigCategoryBox>
+          {hide[big.code] && renderSmallCategory(big.code)}
+        </CategoryBox>
+      ))}
     </CategoryNewsContainer>
   )
 }
