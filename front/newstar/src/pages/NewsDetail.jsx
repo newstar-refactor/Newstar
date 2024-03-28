@@ -15,8 +15,6 @@ const DetailNewsImage = styled.img`
 `;
 
 const DetailNewsContainer = styled.div`
-    min-height: 100vh;
-    margin-bottom: 80px;
     overflow-y: auto;
     width: 100%;
 `;
