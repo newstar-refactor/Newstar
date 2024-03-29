@@ -174,13 +174,14 @@ function SurveyContent({ setSurveyModalOpen, setCheckSurvey }) {
   // Phone onChange Handler
   const onChangePhone = (e) => {
     const regExp = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
-
+    const replaceValue = e.target.value.replace(/[^0-9]/g, '')
+                               .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
     setSurveyValue(prev => ({
       ...prev,
-      phone: e.target.value
+      phone: replaceValue,
     }))
 
-    if(regExp.test(e.target.value)) {
+    if(regExp.test(replaceValue)) {
       setIsValidPhone(true)
       setErrorMessage("")
     } else {
@@ -256,8 +257,8 @@ function SurveyContent({ setSurveyModalOpen, setCheckSurvey }) {
           <SurveyText>(작성하시면 당첨 확률이 올라갑니다!)</SurveyText>
         </SurveyQuestion>
         <textarea rows={5} name="text" onChange={onChangeText}/>
-        <SurveyQuestion>7. 기프티콘 전송을 위해 휴대폰 번호를 입력해주세요. ex) 000-0000-0000</SurveyQuestion>
-        <input type="text" id="phone" name="phone" onChange={onChangePhone}/>
+        <SurveyQuestion>7. 기프티콘 전송을 위해 휴대폰 번호를 입력해주세요.</SurveyQuestion>
+        <input type="text" id="phone" name="phone" onChange={onChangePhone} value={surveyValue.phone}/>
         <label htmlFor="phone" style={{fontSize: '13px', fontWeight: 700, color: '#8AC038'}}>{errorMessage}</label>
       </SurveyContents>
       <SurveyButton style={{ backgroundColor: isValid ? '#8AC038' : 'lightgray' }}>참여완료</SurveyButton>
