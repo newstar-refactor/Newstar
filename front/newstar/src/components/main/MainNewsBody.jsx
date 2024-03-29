@@ -10,7 +10,7 @@ export default function NewsBody({ newsData }) {
       <MainNewsBodyWrapper>
           <div>{newsData.content}</div>
           <br />
-          <a href={newsData.url}>
+          <a href={newsData.url} data-tour="link">
               <BookMark newsData={newsData} />
           </a>
       </MainNewsBodyWrapper>

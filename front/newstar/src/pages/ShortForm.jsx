@@ -4,16 +4,19 @@
 import { useEffect, useState, Suspense } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { newsDataState } from '../state/atoms';
+import { isStartState, newsDataState } from '../state/atoms';
 import { checkAnswer, getNews, postRecords } from '../api/fetch';
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import Logo from '../assets/logo_dark.png'
 import Loading from '../components/Loading';
 import MainNewsCard from '../components/main/MainNewsCard';
 import Survey from './Survey';
+import { useTour } from "@reactour/tour";
+import TourExample from '../components/main/TourExample'
 
 const StyledSlider = styled(Slider)`
     .slick-slide {
@@ -24,8 +27,20 @@ const StyledSlider = styled(Slider)`
     }
 `;
 
+const tourData = {
+    article_id: 0,
+    bcategory: 100,
+    content: "바쁜 현대인을 위한 플랫폼인 뉴스타를 출시했습니다. 해당 플랫폼은 개인 맞춤형 뉴스를 추천해주며, 숏폼 형식으로 사용자 경험을 향상시켰습니다.",
+    date: "2024-03-27T21:21:01",
+    image_url: Logo,
+    scategory: 267,
+    title: "한손으로 읽는 숏폼 트렌드 짧은 NEWS, 뉴스타",
+    url: "https://newstar.world"
+}
+
 export default function ShortForm() {
     const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
+    const [isStarted, setIsStarted] = useRecoilState(isStartState)
     const [viewArticles, setViewArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     // news data 2번 Fetch 되는 거 방지
@@ -36,9 +51,18 @@ export default function ShortForm() {
     const [checkSurvey, setCheckSurvey] = useState(false);
     const [surveyNumber, setSurveyNumber] = useState(Math.floor(Math.random() * 9) + 7);
     const [sliceIndex, setSliceIndex] = useState(0);
+    const [isImageLoad, setIsImageLoad] = useState(false);
+    const { setIsOpen, isOpen } = useTour();
 
+    useEffect(() => {
+        if(isImageLoad) {
+            setIsOpen(true)
+        }
+    }, [isImageLoad])
+    
     // 뉴스 데이터 로드
     useEffect(() => {
+        setLoading(true)
         getNews(
             (response) => {
                 setNewsDatas(response.data);
@@ -132,16 +156,17 @@ export default function ShortForm() {
         },
     };
 
-    if (!isEnter && loading) {
+    if (!isEnter && loading && !isStarted) {
         return <Loading />;
     }
 
     return (
         <>
-            <StyledSlider {...sliderSettings}>
+            {isStarted && <TourExample newsData={tourData} setIsImageLoad={setIsImageLoad} />}
+            {!isStarted && <StyledSlider {...sliderSettings}>
                 {newsDatas &&
                     newsDatas.map((newsData) => <MainNewsCard key={newsData.article_id} newsData={newsData} />)}
-            </StyledSlider>
+            </StyledSlider> }
             <Survey setCheckSurvey={setCheckSurvey} surveyModalOpen={surveyModalOpen} setSurveyModalOpen={setSurveyModalOpen} />
         </>
     );

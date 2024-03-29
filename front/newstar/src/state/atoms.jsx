@@ -31,10 +31,16 @@ const userKeyState = atom({
 
 })
 
+const isStartState = atom({
+  key: "isStart",
+  default: false,
+})
+
 export { 
   userKeyState,
   newsDataState,
   likeDataState, 
   recordDataState,
-  categoryDataState
+  categoryDataState,
+  isStartState
  }

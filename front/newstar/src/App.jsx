@@ -28,7 +28,6 @@ function App() {
     }, []);
     return (
         <>
-            <RecoilRoot>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<StartPageWrapper />}>
@@ -46,7 +45,6 @@ function App() {
                     </Routes>
                     <ResponseInterceptor />
                 </BrowserRouter>
-            </RecoilRoot>
         </>
     );
 }
