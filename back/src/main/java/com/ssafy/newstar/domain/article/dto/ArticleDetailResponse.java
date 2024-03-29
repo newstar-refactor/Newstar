@@ -3,6 +3,7 @@ import com.ssafy.newstar.domain.record.entity.Record;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.Data;
 
 @Data
 public class ArticleDetailResponse {

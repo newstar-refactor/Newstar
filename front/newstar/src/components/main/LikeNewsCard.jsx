@@ -6,9 +6,9 @@ const LikeNewsCardWrappr = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 3px;
-    min-width: 110px;
-    max-width: 110px;
-    height: 110px;
+    min-width: 120px;
+    max-width: 120px;
+    height: 120px;
     padding: 10px;
     gap: 7px;
 
