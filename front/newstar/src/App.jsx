@@ -16,6 +16,7 @@ import NewsDetail from './pages/NewsDetail';
 import Modal from 'react-modal';
 import { ResponseInterceptor } from './utils/ResponseInterceptor';
 import { getMembers } from './api/fetch';
+import ErrorPage from './pages/errorPage';
 
 function App() {
     Modal.setAppElement('#root');
@@ -43,6 +44,7 @@ function App() {
                             <Route path="category" element={<CategoryNews />} />
                             <Route path="category/:categoryId" element={<CategoryNewsDetail />} />
                         </Route>
+                        <Route path="*" element={<ErrorPage />} />
                     </Routes>
                     <ResponseInterceptor />
                 </BrowserRouter>
