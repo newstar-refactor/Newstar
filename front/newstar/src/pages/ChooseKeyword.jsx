@@ -147,15 +147,15 @@ function ChooseKeyword() {
 
     return (
         <KeywordPageWrapper>
-            <KeywordPageHeader>
-                <img src="/logo_dark.png" alt="logo" width="100px" />
-                <h3>선호하는 분야를 선택해주세요 !</h3>
-            </KeywordPageHeader>
-            <Keywords tagsActive={tagsActive} setTagsActive={setTagsActive} />
-            <KeywordPageButton>
-                {selectedKeywords.length > 0 && <NextButton onClick={handleCreateMember} content={'다음'} />}
-            </KeywordPageButton>
-            <QRModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+          <KeywordPageHeader>
+              <img src="/logo_dark.png" alt="logo" width="100px" />
+              <h3>선호하는 분야를 선택해주세요 !</h3>
+          </KeywordPageHeader>
+          <Keywords tagsActive={tagsActive} setTagsActive={setTagsActive} />
+          <KeywordPageButton>
+              {selectedKeywords.length > 0 && <NextButton onClick={handleCreateMember} content={'다음'} />}
+          </KeywordPageButton>
+          <QRModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
         </KeywordPageWrapper>
     );
 }

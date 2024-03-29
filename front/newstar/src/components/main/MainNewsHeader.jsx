@@ -10,7 +10,7 @@ import { getRecords } from '../../api/fetch';
 import { BigCategory, SmallCategory } from '../../state/categoryData';
 
 const MainNewsHeaderContainer = styled.div`
-    padding: 5px 20px;
+    padding: 20px;
 `;
 
 const NewsTagAndLike = styled.div`
@@ -25,8 +25,8 @@ const NewsTags = styled.div`
 `;
 
 const LikeBox = styled.div`
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -54,9 +54,9 @@ export default function NewsHeader({ newsData, isLiked, handleLikeButtonClick })
                 </LikeBox>
             </NewsTagAndLike>
             <br />
-            <h2>{newsData.title}</h2>
+            <h3>{newsData.title}</h3>
             <br />
-            <div style={{ color: 'gray' }}>{newsDate}</div>
+            <div style={{ fontSize: '15px', color: 'gray' }}>{newsDate}</div>
         </MainNewsHeaderContainer>
     );
 }
