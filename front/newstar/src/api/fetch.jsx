@@ -37,8 +37,9 @@ function postMembers(cate, success, fail) {
 
 
 // 시청기록 조회
-function getRecords(success, fail) {
-  return axiosInstance.get(api.records)
+function getRecords(recordNum, pageNum, success, fail) {
+  const recordUrl = api.records(recordNum, pageNum)
+  return axiosInstance.get(recordUrl)
     .then(success)
     .catch(fail)
 }
@@ -46,15 +47,16 @@ function getRecords(success, fail) {
 
 // 시청기록 생성
 function postRecords(mynews, success, fail) {
-  return axiosInstance.post(api.records, mynews)
+  return axiosInstance.post(api.makeRecords, mynews)
     .then(success)
     .catch(fail)
 }
 
 
 // 좋아요 목록 조회
-function getLikes(success, fail) {
-  return axiosInstance.get(api.like)
+function getLikes(likeNum, pageNum, success, fail) {
+  const likeUrl = api.like(likeNum, pageNum)
+  return axiosInstance.get(likeUrl)
     .then(success)
     .catch(fail)
 }
@@ -79,7 +81,7 @@ function getCategoryNews(bCate, sCate, newsNum, pageNum, success, fail) {
 
 // 좋아요
 function likeNews(like, success, fail) {
-  return axiosInstance.patch(api.records, like)
+  return axiosInstance.patch(api.makeRecords, like)
     .then(success)
     .catch(fail)
 }
