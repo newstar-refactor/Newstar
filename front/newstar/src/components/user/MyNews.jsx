@@ -19,16 +19,10 @@ const MyNewsCards = styled.div`
   gap: 10px;
 `
 
-export default function MyNews() {
+export default function MyNews({ recordRef }) {
   const records = useRecoilValue(recordDataState)
 
   return (
-    // <div>
-    //   <h2>최근 본 뉴스</h2>
-    //   <br />
-    //   <SubNewsCard records={records} />
-    // </div>
-    // <div>
     <div>
       <h2>최근 본 뉴스</h2>
         <MyNewsContainer>
@@ -41,6 +35,7 @@ export default function MyNews() {
             ))}
           </MyNewsCards>
         </MyNewsContainer>
+        <div ref={ recordRef }></div>
     </div>
   )
 }

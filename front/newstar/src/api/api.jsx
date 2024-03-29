@@ -6,8 +6,8 @@ const api = {
     model: '/data/news/model',
     news: '/data/news',
     members: '/members',
-    records: '/records',
-    like: '/records/likes',
+    records: (recordNum, pageNum) => `/records?size=${recordNum}&page=${pageNum}`,
+    like: (likeNum, pageNum) => `/records/likes?size=${likeNum}&page=${pageNum}`,
     keywords: '/keywords',
     category: (newsNum, pageNum, sCate, bCate) =>
         `/articles/category?size=${newsNum}&page=${pageNum}&scategory=${sCate}&bcategory=${bCate}`,
