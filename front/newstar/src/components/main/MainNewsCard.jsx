@@ -1,18 +1,23 @@
 // 메인 페이지 뉴스 카드
-import { useState, useEffect, Suspense } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import MainNewsHeader from './MainNewsHeader';
 import MainNewsBody from './MainNewsBody';
 import NotFoundImg from '../../assets/logo_dark.png';
+import LikeButton from '../../common/Like';
+
+import { BigCategory, SmallCategory } from '../../state/categoryData';
 
 import { likeNews } from '../../api/fetch';
 
 const MainNewsImage = styled.img`
     width: 100%;
-    padding: 15px;
-    border-radius: 20px;
+    padding: 0px 15px;
+    /* border-radius: 20px; */
 `;
+
 
 const NewsContainer = styled.div`
     margin-bottom: 80px;
@@ -22,12 +27,18 @@ const NewsContainer = styled.div`
     }
 `;
 
+const MainNewsHeaderContainer = styled.div`
+    padding: 20px 20px;
+    display: flex;
+    flex-direction:column;
+    gap: 10px;
+`;
+
 function MainNewsCard({ newsData }) {
     // 좋아요 상태 관리
     const [isLiked, setIsLiked] = useState(false);
 
     // 좋아요 상태 업데이트
-
     function handleLike() {
         setIsLiked(!isLiked);
         const data = {
@@ -47,8 +58,8 @@ function MainNewsCard({ newsData }) {
     };
 
     return (
-        <NewsContainer onDoubleClick={handleLike}>
-            <MainNewsImage src={newsData.image_url} alt="news image" onError={onErrorImg} />
+        <NewsContainer onDoubleClick={handleLike}>    
+            <MainNewsImage src={newsData.image_url} alt="news image" onError={onErrorImg} />  
             <MainNewsHeader
                 newsData={newsData}
                 isLiked={isLiked}

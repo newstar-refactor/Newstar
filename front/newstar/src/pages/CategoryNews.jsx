@@ -2,30 +2,30 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { BigCategoryData, SmallCategoryData } from '../state/categoryData'
+import { BigCategory, BigCategoryData, SmallCategoryData } from '../state/categoryData'
 
 const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 50px 90px;
+  padding: 30px;
+  height: 100%;
 `
 
 const CategoryBox = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  box-shadow: 2px 2px 7px 1px lightgray;
+  border-bottom: 0.5px solid lightgray;
 `
 
 const BigCategoryBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 60px;
-  border-radius: 5px 5px 0px 0px;
+  /* border-radius: 5px 5px 0px 0px; */
   color: black;
   background-color: white;
-  box-shadow: 2px 2px 7px 1px lightgray;
   font-weight: 600;
   cursor: pointer;
   &:hover {
@@ -40,14 +40,14 @@ const SmallCategoryBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 45px;
+  height: 55px;
   color: black;
   background-color: white;
-  border-bottom: 0.5px solid gray;
-  font-weight: 600;
+  border-bottom: 0.5px solid lightgray;
+  font-weight: 500;
   cursor: pointer;
   &:hover {
-    background: rgb(138, 192, 56, 0.7);
+    background: rgb(138, 192, 56, 0.6);
     color: white;
     transition: 0.5s;
   }
@@ -65,31 +65,35 @@ export default function CategoryNews() {
 
   const [hide, setHide] = useState(initialHideState)
 
-  function mouseEvent(code, bool) {
-    setHide(prev => ({ ...prev, [code]: bool}))
+  function mouseEvent(code) {
+    setHide(prev => ({ ...prev, [code]: !prev[code]}))
   }
 
   function renderSmallCategory(bigCategoryCode) {
-    return SmallCategoryData[bigCategoryCode]?.map(small => (
-      <SmallCategoryBox 
-        key={small.code}
-        onMouseEnter={() => mouseEvent(small.code, true)}
-        onMouseLeave={() => mouseEvent(small.code, false)}
-        onClick={() => navigate(`/newstar/category/${small.code}`)}>
-          {small.name}
-      </SmallCategoryBox>
+    return (
+      <>
+        <SmallCategoryBox 
+        onClick={() => navigate(`/newstar/category/${bigCategoryCode}`)}>
+          {BigCategory[bigCategoryCode]} 전체
+        </SmallCategoryBox>
+      {SmallCategoryData[bigCategoryCode]?.map(small => (
+        <SmallCategoryBox 
+          key={small.code}
+          onClick={() => navigate(`/newstar/category/${small.code}`)}>
+            {small.name}
+        </SmallCategoryBox>
     ))
+  }
+  </>)
   }
 
   return (
     <CategoryNewsContainer>
       {BigData.map((big) => (
-        <CategoryBox key={big}
-          onMouseEnter={() => mouseEvent(big.code, true)}
-          onMouseLeave={() => mouseEvent(big.code, false)}>
+        <CategoryBox key={big.code}>
           <BigCategoryBox
-          onClick={() => navigate(`/newstar/category/${big.code}`)}
-        >{big.name} 전체</BigCategoryBox>
+          onClick={() => mouseEvent(big.code)}
+        >{big.name}</BigCategoryBox>
           {hide[big.code] && renderSmallCategory(big.code)}
         </CategoryBox>
       ))}

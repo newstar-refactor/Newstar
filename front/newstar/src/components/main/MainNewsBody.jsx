@@ -7,12 +7,12 @@ const MainNewsBodyWrapper = styled.div`
 
 export default function NewsBody({ newsData }) {
     return (
-        <MainNewsBodyWrapper>
-            <div>{newsData.content}</div>
-            <br />
-            <a href={newsData.url}>
-                <BookMark newsData={newsData} />
-            </a>
-        </MainNewsBodyWrapper>
+      <MainNewsBodyWrapper>
+          <div>{newsData.content}</div>
+          <br />
+          <a href={newsData.url}>
+              <BookMark newsData={newsData} />
+          </a>
+      </MainNewsBodyWrapper>
     );
 }
