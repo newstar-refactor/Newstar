@@ -28,8 +28,14 @@ export default function ShortForm() {
     const [newsDatas, setNewsDatas] = useRecoilState(newsDataState);
     const [viewArticles, setViewArticles] = useState([]);
     const [loading, setLoading] = useState(true);
+    // news data 2번 Fetch 되는 거 방지
+    const [isEnter, setIsEnter] = useState(false);
+    // 하나의 news fetch에 3번 이상 설문 안되게 방지
+    const [isSurvey, setIsSurvey] = useState(false);
     const [surveyModalOpen, setSurveyModalOpen] = useState(false);
     const [checkSurvey, setCheckSurvey] = useState(false);
+    const [surveyNumber, setSurveyNumber] = useState(Math.floor(Math.random() * 9) + 7);
+    const [sliceIndex, setSliceIndex] = useState(0);
 
     // 뉴스 데이터 로드
     useEffect(() => {
@@ -37,9 +43,10 @@ export default function ShortForm() {
             (response) => {
                 setNewsDatas(response.data);
                 setLoading(false);
+                setIsEnter(true)
                 checkAnswer(
                     (response) => {
-                        setCheckSurvey(response.data.data);
+                        setCheckSurvey(response.data.data.haveAnswer);
                     },
                     (error) => {
                         console.log(error);
@@ -79,19 +86,18 @@ export default function ShortForm() {
     };
 
     const loadMoreNews = () => {
+        setLoading(true)
         getNews(
             (response) => {
+                setLoading(false)
                 setNewsDatas((prevNews) => [...prevNews, ...response.data]);
             },
             (error) => {
                 console.log(error);
+                setLoading(false)
             }
         );
     };
-
-    const randomNum1 = Math.floor(Math.random() * (15 - 9)) + 8;
-    const randomNum2 = Math.floor(Math.random() * (30 - 25)) + 24;
-
     const sliderSettings = {
         dots: false,
         infinite: false,
@@ -99,7 +105,7 @@ export default function ShortForm() {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        beforeChange: (curr, next) => {
+        beforeChange: async (curr, next) => {
             // 중복 검사
             // 현재 보여지는 뉴스 기사의 article_id가 viewArticles 배열에 이미 존재하는지 확인
             if (!viewArticles.includes(newsDatas[next].article_id)) {
@@ -107,21 +113,26 @@ export default function ShortForm() {
             }
 
             // 마지막 슬라이드인 경우 추가 데이터 로드
-            if (next === newsDatas.length - 1) {
-                loadMoreNews();
+            if (next === newsDatas.length - 1 && !loading) {
+                await loadMoreNews();
+                if(!checkSurvey) {
+                    setSurveyNumber(sliceIndex * 30 + Math.floor(Math.random() * 9) + 7);
+                    setIsSurvey(false)
+                }
             }
 
-            if (next === randomNum1 && checkSurvey.haveAnswer === false) {
-                setSurveyModalOpen(true);
-            }
-
-            if (next === randomNum2 && checkSurvey.haveAnswer === false) {
+            if (next === surveyNumber && !checkSurvey) {
+                if(!isSurvey) {
+                    setSliceIndex(prev => prev + 1)
+                    setSurveyNumber(sliceIndex * 30 + Math.floor(Math.random() * 9) + 20);
+                    setIsSurvey(true)
+                }
                 setSurveyModalOpen(true);
             }
         },
     };
 
-    if (loading) {
+    if (!isEnter && loading) {
         return <Loading />;
     }
 
@@ -131,7 +142,7 @@ export default function ShortForm() {
                 {newsDatas &&
                     newsDatas.map((newsData) => <MainNewsCard key={newsData.article_id} newsData={newsData} />)}
             </StyledSlider>
-            <Survey surveyModalOpen={surveyModalOpen} setSurveyModalOpen={setSurveyModalOpen} />
+            <Survey setCheckSurvey={setCheckSurvey} surveyModalOpen={surveyModalOpen} setSurveyModalOpen={setSurveyModalOpen} />
         </>
     );
 }

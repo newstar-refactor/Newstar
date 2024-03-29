@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import Select from 'react-select';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { setAnswer } from '../api/fetch';
+import { checkAnswer, setAnswer } from '../api/fetch';
 
 const customModal =  Modal.Styles = {
   overlay: {
@@ -100,7 +100,7 @@ function SelectAnswer({ qId, qName, onChangeHandler }) {
 
 
 
-function SurveyContent({ setSurveyModalOpen }) {
+function SurveyContent({ setSurveyModalOpen, setCheckSurvey }) {
   const navigate = useNavigate()
 
   const options = [
@@ -205,6 +205,14 @@ function SurveyContent({ setSurveyModalOpen }) {
       setAnswer(data, 
         (response) => {
           setSurveyModalOpen(false);
+          checkAnswer(
+            (response) => {
+                setCheckSurvey(response.data.data.haveAnswer);
+            },
+            (error) => {
+                console.log(error);
+            }
+          );
         },
         (error) => {
           console.log(error)
@@ -257,7 +265,7 @@ function SurveyContent({ setSurveyModalOpen }) {
   )
 }
 
-function Survey({ surveyModalOpen, setSurveyModalOpen }) {
+function Survey({ setCheckSurvey, surveyModalOpen, setSurveyModalOpen }) {
   return (
     <Modal
       isOpen={surveyModalOpen}
@@ -267,7 +275,7 @@ function Survey({ surveyModalOpen, setSurveyModalOpen }) {
       shouldCloseOnOverlayClick={true}
       contentLabel="user_survey"
     >
-      <SurveyContent setSurveyModalOpen={setSurveyModalOpen} />
+      <SurveyContent setCheckSurvey={setCheckSurvey} setSurveyModalOpen={setSurveyModalOpen} />
     </Modal>
   )
 }
