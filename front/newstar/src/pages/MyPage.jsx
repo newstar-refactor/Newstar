@@ -4,6 +4,7 @@
 import MyNews from '../components/user/MyNews';
 import LikeNews from '../components/user/LikeNews';
 import styled from 'styled-components';
+import AddQR from '../components/user/AddQR';
 
 const MyPageContainer = styled.div`
   padding: 50px 30px 20px;
@@ -21,6 +22,7 @@ export default function MyPage() {
       <MyPageContainer>
           <MyNews />
           <LikeNews />
+          {/* <AddQR /> */}
       </MyPageContainer>
   );
 }
