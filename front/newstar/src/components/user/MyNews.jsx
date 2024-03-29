@@ -34,8 +34,7 @@ export default function MyNews() {
       getRecords(
         5, recordPage,
         (response) => {
-          setRecords(response.data.data.reverse());
-          console.log(response)
+          setRecords(response.data.data);
           setRecordPage((recordPage) => recordPage + 1)
         },
         (error) => {
