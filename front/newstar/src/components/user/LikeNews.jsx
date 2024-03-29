@@ -21,10 +21,9 @@ const LikeNewsCards = styled.div`
   gap: 10px;
 `
 
-export default function LikeNews() {
+export default function LikeNews({ likeRef }) {
   const likeNews = useRecoilValue(likeDataState)
   const newsData = useRecoilValue(newsDataState)
-
 
   return (
     <div>
@@ -39,6 +38,7 @@ export default function LikeNews() {
           ))}
         </LikeNewsCards>
       </LikeNewsContainer>
+      <div ref={likeRef}></div>
     </div>
   )
 }
