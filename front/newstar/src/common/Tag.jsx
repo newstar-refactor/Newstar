@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 const TagWrapper = styled.div`
     display: inline-block;
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
     font-size: ${(props) => props.fontSize || '1rem'};
+    border: solid 1.5px rgb(138, 192, 56, 0.7);
     line-height: 1.5;
-    // border: 1px solid lightgray;
     font-weight: 600;
-    color: ${(props) => props.color || 'white'};
-    background: ${(props) => props.$background || 'rgb(138, 192, 56, 0.7)'};
+    color: ${(props) => props.color || 'rgb(138, 192, 56, 0.7)'};
+    background: ${(props) => props.$background || 'white'};
     cursor: pointer;
 
     &:hover {

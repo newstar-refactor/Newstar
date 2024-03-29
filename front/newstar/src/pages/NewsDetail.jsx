@@ -53,7 +53,7 @@ function NewsDetailCard() {
     };
 
     return (
-        <DetailNewsContainer>
+        <DetailNewsContainer onDoubleClick={handleLike}>
             <DetailNewsImage src={article.image_url} alt="news_image" onError={onErrorImg} />
             <MainNewsHeader
                 newsData={article}

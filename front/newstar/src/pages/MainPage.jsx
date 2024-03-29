@@ -2,7 +2,7 @@ import { Outlet, useLocation } from "react-router-dom"
 
 import { ContainerWithNav, TotalContainer } from "../styles/Container"
 import { TopNavbar, TopNavbarWithoutBack, BottomNavbar } from "../components/Navbar";
-import ScrollToTop from "../common/ScrollToTop";
+import ScrollToTop from "../Hooks/ScrollToTop";
 
 function MainPage() {
   const location = useLocation()

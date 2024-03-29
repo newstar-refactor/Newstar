@@ -1,24 +1,21 @@
-import React from 'react';
-import Lottie from 'lottie-react';
+import React from "react"
 
-import likeLottie from '../assets/lottie/like.json';
-
-import { BiBookmarkHeart, BiSolidBookmarkHeart } from 'react-icons/bi';
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 const LikeButton = ({ handleLikeButtonClick, isLiked }) => {
     // isLiked가 true이면, 채워진 북마크 / false면, 빈 북마크 활성화
     const likeBtn = isLiked ? (
-        <BiSolidBookmarkHeart onClick={handleLikeButtonClick} style={{ cursor: 'pointer' }} size={45} color="#FFD4D4" />
+        <IoHeart onClick={handleLikeButtonClick} style={{ cursor: 'pointer' }} size={43} color="red" />
     ) : (
-        <BiBookmarkHeart
+        <IoHeartOutline
             onClick={handleLikeButtonClick}
-            style={{ cursor: 'pointer', marginRight: '2px' }}
-            size={40}
-            color="lightgray"
+            style={{ cursor: 'pointer', TextShadow: '1px 1px 4px black' }}
+            size={43}
+            color="rgb(138, 192, 56, 0.7)"
         />
     );
 
-    return <div>{likeBtn}</div>;
+    return likeBtn
 };
 
 export default LikeButton;

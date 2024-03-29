@@ -1,126 +1,102 @@
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { SmallCategoryData } from '../state/categoryData';
+import { BigCategory, BigCategoryData, SmallCategoryData } from '../state/categoryData'
 
 const CategoryNewsContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-    padding: 20px 50px 50px;
-`;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  height: 100%;
+`
 
 const CategoryBox = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-between;
-    border-radius: 10px;
-`;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border-bottom: 0.5px solid lightgray;
+`
 
 const BigCategoryBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(90% / 2);
-    height: 60px;
-    border-radius: 5px;
-    color: black;
-    background-color: white;
-    box-shadow: 2px 2px 7px 1px lightgray;
-    font-weight: 600;
-    cursor: pointer;
-    &:hover {
-        background: rgb(138, 192, 56, 0.7);
-        color: white;
-        transition: 0.5s;
-    }
-`;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 60px;
+  /* border-radius: 5px 5px 0px 0px; */
+  color: black;
+  background-color: white;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    background: rgb(138, 192, 56, 0.7);
+    color: white;
+    transition: 0.5s;
+  }
+
+`
 
 const SmallCategoryBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(90% / 2);
-    height: 45px;
-    border-radius: 5px;
-    color: black;
-    background-color: white;
-    box-shadow: 2px 2px 7px 1px lightgray;
-    font-weight: 600;
-    cursor: pointer;
-    &:hover {
-        background: rgb(138, 192, 56, 0.7);
-        color: white;
-        transition: 0.5s;
-    }
-`;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+  color: black;
+  background-color: white;
+  border-bottom: 0.5px solid lightgray;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover {
+    background: rgb(138, 192, 56, 0.6);
+    color: white;
+    transition: 0.5s;
+  }
+`
+
 
 export default function CategoryNews() {
-    const navigate = useNavigate();
+  const navigate = useNavigate()
+  const BigData = BigCategoryData
+  
+  const initialHideState = BigData.reduce((acc, cur) => {
+    acc[cur.code] = false
+    return acc
+  }, {})
 
-    const list100 = SmallCategoryData[100].map((small) => (
-        <SmallCategoryBox key={small.code} onClick={() => navigate(`/newstar/category/${small.code}`)}>
-            {small.name}
-        </SmallCategoryBox>
-    ));
+  const [hide, setHide] = useState(initialHideState)
 
-    const list101 = SmallCategoryData[101].map((small) => (
-        <SmallCategoryBox key={small.code} onClick={() => navigate(`/newstar/category/${small.code}`)}>
-            {small.name}
-        </SmallCategoryBox>
-    ));
+  function mouseEvent(code) {
+    setHide(prev => ({ ...prev, [code]: !prev[code]}))
+  }
 
-    const list102 = SmallCategoryData[102].map((small) => (
-        <SmallCategoryBox key={small.code} onClick={() => navigate(`/newstar/category/${small.code}`)}>
-            {small.name}
-        </SmallCategoryBox>
-    ));
-
-    const list103 = SmallCategoryData[103].map((small) => (
-        <SmallCategoryBox key={small.code} onClick={() => navigate(`/newstar/category/${small.code}`)}>
-            {small.name}
-        </SmallCategoryBox>
-    ));
-
-    const list104 = SmallCategoryData[104].map((small) => (
-        <SmallCategoryBox key={small.code} onClick={() => navigate(`/newstar/category/${small.code}`)}>
-            {small.name}
-        </SmallCategoryBox>
-    ));
-
-    const list105 = SmallCategoryData[105].map((small) => (
-        <SmallCategoryBox key={small.code} onClick={() => navigate(`/newstar/category/${small.code}`)}>
-            {small.name}
-        </SmallCategoryBox>
-    ));
-
+  function renderSmallCategory(bigCategoryCode) {
     return (
-        <CategoryNewsContainer>
-            <CategoryBox>
-                <BigCategoryBox onClick={() => navigate('/newstar/category/100')}>정치 전체</BigCategoryBox>
-                {list100}
-            </CategoryBox>
-            <CategoryBox>
-                <BigCategoryBox onClick={() => navigate('/newstar/category/101')}>경제 전체</BigCategoryBox>
-                {list101}
-            </CategoryBox>
-            <CategoryBox>
-                <BigCategoryBox onClick={() => navigate('/newstar/category/102')}>사회 전체</BigCategoryBox>
-                {list102}
-            </CategoryBox>
-            <CategoryBox>
-                <BigCategoryBox onClick={() => navigate('/newstar/category/103')}>생활/문화 전체</BigCategoryBox>
-                {list103}
-            </CategoryBox>
-            <CategoryBox>
-                <BigCategoryBox onClick={() => navigate('/newstar/category/104')}>세계 전체</BigCategoryBox>
-                {list104}
-            </CategoryBox>
-            <CategoryBox>
-                <BigCategoryBox onClick={() => navigate('/newstar/category/105')}>IT/과학 전체</BigCategoryBox>
-                {list105}
-            </CategoryBox>
-        </CategoryNewsContainer>
-    );
+      <>
+        <SmallCategoryBox 
+        onClick={() => navigate(`/newstar/category/${bigCategoryCode}`)}>
+          {BigCategory[bigCategoryCode]} 전체
+        </SmallCategoryBox>
+      {SmallCategoryData[bigCategoryCode]?.map(small => (
+        <SmallCategoryBox 
+          key={small.code}
+          onClick={() => navigate(`/newstar/category/${small.code}`)}>
+            {small.name}
+        </SmallCategoryBox>
+    ))
+  }
+  </>)
+  }
+
+  return (
+    <CategoryNewsContainer>
+      {BigData.map((big) => (
+        <CategoryBox key={big.code}>
+          <BigCategoryBox
+          onClick={() => mouseEvent(big.code)}
+        >{big.name}</BigCategoryBox>
+          {hide[big.code] && renderSmallCategory(big.code)}
+        </CategoryBox>
+      ))}
+    </CategoryNewsContainer>
+  )
 }
