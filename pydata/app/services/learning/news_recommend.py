@@ -43,7 +43,7 @@ def linear_weight(id, max_id):
     return id / max_id
 
 # 지수 스케일 가중치 계산 함수
-def exp_weight(id, max_id,factor=20):
+def exp_weight(id, max_id,factor=7):
     normalized_value = id / max_id
     # 정규화된 값에 factor를 곱한 후, 이 값을 지수 함수에 적용합니다.
     # factor 값은 가중치 증가율을 조절.
