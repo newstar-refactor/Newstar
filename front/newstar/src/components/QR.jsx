@@ -19,7 +19,7 @@ const QRWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  gap: 7px;
+  gap: 20px;
 `
 
 const WarningWrapper = styled.div`
@@ -94,7 +94,6 @@ function CreateQR({ setModalOpen }) {
       <ButtonWrapper>
         <NextButton onClick={handleDownloadClick} content={"다운로드"} />
         <NextButton onClick={()=>navigate('/newstar')} content={"시작하기"} />
-        <NextButton onClick={()=>setModalOpen(false)} content={"뒤로가기"}/>
       </ButtonWrapper>
     </QRWrapper>
   )
@@ -108,6 +107,7 @@ function QRModal({ modalOpen, setModalOpen }) {
       onRequestClose={() => setModalOpen(false)}
       style={customModal}
       ariaHideApp={false}
+      shouldCloseOnOverlayClick={false}
       contentLabel="user_key"
     >
       <CreateQR setModalOpen={setModalOpen} />

@@ -136,7 +136,7 @@ export default function Intro() {
                 <Fade bottom>
                     <IntroBox2>
                         <img src="/logo_dark.png" alt="newstar_logo" width={150} />
-                        <div>지금 시작해보세요!</div>
+                        <h4>지금 시작해보세요!</h4>
                     </IntroBox2>
                     <Lottie animationData={NewStart} style={{ width: '250px', height: '250px' }} />
                 </Fade>
