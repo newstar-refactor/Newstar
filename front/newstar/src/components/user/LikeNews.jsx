@@ -36,8 +36,8 @@ export default function LikeNews() {
     getLikes(
       5, likePage,
       (response) => {
-        setLikeNews(response.data.data.reverse());
-        console.log(response)
+        setLikeNews(response.data.data);
+        console.log(response.data.data)
         setLikePage((likePage) => likePage + 1)
       },
       (error) => {
