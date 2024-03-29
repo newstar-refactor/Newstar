@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil'
 import { getCategoryNews } from '../api/fetch'
 import { categoryDataState } from '../state/atoms'
 import CategoryNewsCard from '../components/main/CategoryNewsCard'
+import { BigCategory, SmallCategory } from '../state/categoryData'
 
 const CategoryNewsCardContainer = styled.div`
   display: flex;
@@ -30,21 +31,20 @@ const BoxContainer = styled.div`
 export default function CategoryNewsDetail() {
   const params = useParams()
 
-  let categoryTitle = ''
-  const [currentPage, setCurrentPage] = useState(1)
-  const [loading, setLoading] = useState(true)
-  const [fetching, setFetching] = useState(false)
-  const [categoryDatas, setCategoryDatas] = useRecoilState(categoryDataState)
-  const [categoryPaging, setCategoryPaging] = useState({ next: undefined }); // API로부터 받아온 다음 페이지 데이터를 저장
+  // 뉴스 데이터
+  const [categoryData, setCategoryData] = useRecoilState(categoryDataState)
+  const [categoryTitle, setCategoryTitle] = useState('')
+  
+  const [page, setPage] = useState(1)
+  const [ref, inView] = useInView()
 
-  // category 별 데이터 불러오기
   useEffect(() => {
     if (['100', '102', '103', '104', '101', '105'].includes(params.categoryId)) {
       getCategoryNews(
         params.categoryId, '', 10, 0,
-        ( response ) => {
-          setCategoryDatas(response.data.data.content)
-          setCategoryPaging(response.data.data.content)
+        (response) => {
+          setCategoryData(response.data.data.content)
+          setCategoryTitle(BigCategory[params.categoryId])
         },
         ( error ) => {
           console.log(error)
@@ -54,8 +54,8 @@ export default function CategoryNewsDetail() {
       getCategoryNews(
         '', params.categoryId, 10, 0,
         ( response ) => {
-          setCategoryDatas(response.data.data.content)
-          setCategoryPaging(response.data.data.content)
+          setCategoryData(response.data.data.content)
+          setCategoryTitle(SmallCategory[params.categoryId])
         },
         ( error ) => {
           console.log(error)
@@ -96,8 +96,8 @@ export default function CategoryNewsDetail() {
 
   return (
     <CategoryNewsCardContainer>
-      {categoryTitle}
-      {categoryDatas.length > 0 ? categoryDatas.map((categoryData) => (
+      <div style={{ fontWeight: 900, fontSize: 20, textAlign: 'center' }}>{categoryTitle}</div>
+      {categoryData.length > 0 ? categoryData.map((data) => (
           <CategoryNewsCard
             key={`${data.article_id}-${data.title}`}
             categoryData={data}
