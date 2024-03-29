@@ -27,12 +27,11 @@ const BoxContainer = styled.div`
   font-weight: 600;
 `
 
-
 export default function CategoryNewsDetail() {
   
   const params = useParams()
 
-  let categoryTitle = ''
+  const [categoryTitle, setCategoryTitle] = useState('');
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
   const [fetching, setFetching] = useState(false)
@@ -45,7 +44,7 @@ export default function CategoryNewsDetail() {
 
     // 대분류일 경우
     if (['100', '102', '103', '104', '101', '105'].includes(params.categoryId)) {
-      categoryTitle = BigCategory[params.categoryId]
+      setCategoryTitle(BigCategory[params.categoryId])
       getCategoryNews(
         params.categoryId, '', 10, 0,
         ( response ) => {
@@ -57,7 +56,7 @@ export default function CategoryNewsDetail() {
         }
       )
     } else { // 중분류가 들어온경우
-      categoryTitle = SmallCategory[params.categoryId]
+      setCategoryTitle(SmallCategory[params.categoryId])
       getCategoryNews(
         '', params.categoryId, 10, 0,
         ( response ) => {
@@ -133,7 +132,7 @@ export default function CategoryNewsDetail() {
 
   return (
     <CategoryNewsCardContainer>
-      {categoryTitle}
+      <div style={{ fontWeight: 900, fontSize: 20, textAlign: 'center' }}>{categoryTitle}</div>
       {categoryDatas.length > 0 ? categoryDatas.map((categoryData) => (
           <CategoryNewsCard
             key={`${categoryData.id}-${categoryData.title}`}
