@@ -66,7 +66,7 @@ const SearchNewsList = ({ NewsData }) => {
                     </BoxContainer>
                 ))
             ) : (
-                <EmptyContainer>찾으시는 뉴스를 검색해주세요 🔍</EmptyContainer>
+                <EmptyContainer>찾으시는 기사가 없습니다 😅</EmptyContainer>
             )}
         </div>
     );
