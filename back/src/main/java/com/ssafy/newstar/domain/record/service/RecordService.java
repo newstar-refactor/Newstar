@@ -4,7 +4,6 @@ import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.article.repository.ArticleRepository;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.repository.MemberRepository;
-import com.ssafy.newstar.domain.record.dto.CreateRecordRequest;
 import com.ssafy.newstar.domain.record.dto.RecordLikeRequest;
 import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.repository.RecordRepository;
@@ -12,6 +11,8 @@ import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,21 +26,17 @@ public class RecordService {
     private final MemberRepository memberRepository;
     private final ArticleRepository articleRepository;
     // 사용자 시청 기록 조회
-    public List<Article> getRecords(Long memberId) {
-        List<Record> records = recordRepository.findByMemberId(memberId);
+    public Slice<Article> getRecords(Long memberId, Pageable pageable) {
+        Slice<Record> records = recordRepository.findByMemberIdOrderByIdDesc(memberId, pageable);
 
-        return records.stream()
-                .map(Record::getArticle)
-                .toList();
+        return records.map(Record::getArticle);
     }
 
     // 사용자가 좋아요한 기사 조회
-    public List<Article> getRecordLikes(Long memberId) {
-        List<Record> records = recordRepository.findByMemberIdAndLikes(memberId, true);
+    public Slice<Article> getRecordLikes(Long memberId, Pageable pageable) {
+        Slice<Record> records = recordRepository.findByMemberIdAndLikesOrderByIdDesc(memberId, true, pageable);
 
-        return records.stream()
-                .map(Record::getArticle)
-                .toList();
+        return records.map(Record::getArticle);
     }
 
     // 사용자 시청 기록 생성
