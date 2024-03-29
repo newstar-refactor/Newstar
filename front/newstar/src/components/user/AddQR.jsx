@@ -41,8 +41,7 @@ export default function AddQR() {
 
   return (
     <div>
-      <h3>내정보 불러오기 </h3>
-
+      <h2>내정보 불러오기 </h2>
       <div>
         <input type="file" onChange={handleReadQr} />
         <p>QR 코드 내용: {qrText}</p>
