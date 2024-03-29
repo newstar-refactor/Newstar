@@ -73,16 +73,16 @@ export default function ShortForm() {
     }, [newsDatas]); // newsDatas 상태가 변경될 때마다 실행
 
     const postRecordForNews = (articleId) => {
-        const mynews = { articleId };
-        postRecords(
-            mynews,
-            (response) => {
-                setViewArticles((prev) => [...prev, articleId]);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+      const mynews = { articleId };
+      postRecords(
+          mynews,
+          (response) => {
+              setViewArticles((prev) => [...prev, articleId]);
+          },
+          (error) => {
+              console.log(error);
+          }
+      );
     };
 
     const loadMoreNews = () => {

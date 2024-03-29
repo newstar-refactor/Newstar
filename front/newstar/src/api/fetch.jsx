@@ -47,7 +47,7 @@ function getRecords(recordNum, pageNum, success, fail) {
 
 // 시청기록 생성
 function postRecords(mynews, success, fail) {
-  return axiosInstance.post(api.records, mynews)
+  return axiosInstance.post(api.makeRecords, mynews)
     .then(success)
     .catch(fail)
 }
@@ -81,7 +81,7 @@ function getCategoryNews(bCate, sCate, newsNum, pageNum, success, fail) {
 
 // 좋아요
 function likeNews(like, success, fail) {
-  return axiosInstance.patch(api.records, like)
+  return axiosInstance.patch(api.makeRecords, like)
     .then(success)
     .catch(fail)
 }

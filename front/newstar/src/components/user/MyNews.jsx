@@ -2,8 +2,12 @@
 import styled from "styled-components"
 import LikeNewsCard from "../main/LikeNewsCard"
 
-import { useRecoilValue } from "recoil"
+import { useState, useEffect } from "react"
+import { useRecoilState } from "recoil"
+import { useInView } from 'react-intersection-observer'
+
 import { recordDataState } from "../../state/atoms"
+import { getRecords } from "../../api/fetch"
 
 const MyNewsContainer = styled.div`
   width: 100%;
@@ -19,8 +23,27 @@ const MyNewsCards = styled.div`
   gap: 10px;
 `
 
-export default function MyNews({ recordRef }) {
-  const records = useRecoilValue(recordDataState)
+export default function MyNews() {
+  // 최근 본 뉴스 기록
+  const [records, setRecords] = useRecoilState(recordDataState);
+  const [recordPage, setRecordPage] = useState(0)
+  const [ref, inView] = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      getRecords(
+        5, recordPage,
+        (response) => {
+          setRecords(response.data.data.reverse());
+          console.log(response)
+          setRecordPage((recordPage) => recordPage + 1)
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }, [inView])
 
   return (
     <div>
@@ -35,7 +58,7 @@ export default function MyNews({ recordRef }) {
             ))}
           </MyNewsCards>
         </MyNewsContainer>
-        <div ref={ recordRef }></div>
+        <div ref={ref}></div>
     </div>
   )
 }
