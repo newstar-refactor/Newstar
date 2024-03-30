@@ -26,7 +26,7 @@ const MyNewsCards = styled.div`
 export default function MyNews() {
   // 최근 본 뉴스 기록
   const [records, setRecords] = useRecoilState(recordDataState);
-  const [recordPage, setRecordPage] = useState(0)
+  const [recordPage, setRecordPage] = useState(1)
   const [ref, inView] = useInView()
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function MyNews() {
       getRecords(
         5, recordPage,
         (response) => {
-          setRecords(response.data.data);
+          setRecords([...records, ...response.data.data.content]);
           setRecordPage((recordPage) => recordPage + 1)
         },
         (error) => {
@@ -55,9 +55,9 @@ export default function MyNews() {
                 $background={'lightgray'}
                 likeData={likeData} />
             ))}
+          <div style={{ color: 'white'}} ref={ref}>next</div>
           </MyNewsCards>
         </MyNewsContainer>
-        <div ref={ref}></div>
     </div>
   )
 }

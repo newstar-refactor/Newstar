@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer'
 import { likeDataState } from "../../state/atoms"
 import { getLikes } from "../../api/fetch"
 
+
 import LikeNewsCard from "../main/LikeNewsCard"
 
 const LikeNewsContainer = styled.div`
@@ -15,7 +16,6 @@ const LikeNewsContainer = styled.div`
   overflow-y: hidden;
   padding: 10px;
   position: relative;
-  
 `
 
 const LikeNewsCards = styled.div`
@@ -29,21 +29,24 @@ export default function LikeNews() {
 
   // 좋아요 한 뉴스 기록
   const [likeNews, setLikeNews] = useRecoilState(likeDataState);
-  const [likePage, setLikePage] = useState(0)
+  const [likePage, setLikePage] = useState(1)
   const [ref, inView] = useInView()
 
   useEffect(() => {
-    getLikes(
-      5, likePage,
-      (response) => {
-        setLikeNews(response.data.data);
-        console.log(response.data.data)
-        setLikePage((likePage) => likePage + 1)
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (inView) {
+      getLikes(
+        5, likePage,
+        (response) => {
+          setLikeNews([...likeNews, ...response.data.data.content]);
+          console.log(response.data.data)
+          setLikePage((likePage) => likePage + 1)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    }
   }, [inView]);
 
   return (
@@ -57,9 +60,9 @@ export default function LikeNews() {
               $background={idx % 2 === 0 ? "rgb(138, 192, 56)" : "rgb(100, 192, 86)"}
               likeData={likeData} />
           ))}
+        <div style={{ color: 'white' }} ref={ref}>next</div>
         </LikeNewsCards>
       </LikeNewsContainer>
-      <div ref={ref}></div>
     </div>
   )
 }

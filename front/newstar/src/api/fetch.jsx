@@ -1,4 +1,4 @@
-import axios, { Axios } from "axios"
+
 import { api, axiosInstance } from "./api"
 
 // 뉴스 데이터 조회
