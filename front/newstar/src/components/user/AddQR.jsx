@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { useState, useEffect } from 'react';
 import jsQR from "jsqr";
+import "./AddQR.css";
 
-const FileBox = styled.div`
-    
-`
+const FileContainer = styled.div `
+  margin: 10px 0px;
+`;
 
 export default function AddQR() {
   const [qrText, setQrText] = useState("");
@@ -30,7 +31,11 @@ export default function AddQR() {
           const code = jsQR(imageData.data, imageData.width, imageData.height);
           
           if (code) {
-            setQrText(code.data);
+            if(code.data == "null") {
+              setQrText("인식할 수 없습니다");
+            } else {
+              setQrText(code.data);
+            }
             setKeyValue(code.data);
           } else {
             alert("QR 코드를 인식할 수 없습니다.");
@@ -51,11 +56,14 @@ export default function AddQR() {
   return (
     <div>
       <h2>내정보 불러오기 </h2>
-      <FileBox>
-        <input type="file" onChange={handleReadQr} />
-      </FileBox>
-      <p>복구 코드: {qrText}</p>
-      <button onClick={registKey}>등록</button>
+      <FileContainer>
+        <label className="input-file-button" for="input-file">
+          파일선택
+        </label>
+        <input type="file" id="input-file" style={{display:"none"}} onChange={handleReadQr}/>
+      </FileContainer>
+      <p style={{marginTop: "15px"}}>복구 코드: {qrText}</p>
+      <button className="file-btn" onClick={registKey}>등록</button>
     </div>
   );
 }
