@@ -57,7 +57,7 @@ export default function MyPage() {
       <MyPageContainer>
           <MyNews />
           <LikeNews />
-          {/* <AddQR /> */}
+          <AddQR />
       </MyPageContainer>
   );
 }

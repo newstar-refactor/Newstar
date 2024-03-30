@@ -86,11 +86,12 @@ function CreateQR({ setModalOpen }) {
   return (
     <QRWrapper>
       <WarningWrapper>
-        <Warning2>앱이 삭제되면 기록이 삭제됩니다!</Warning2>
-        <Warning1>QR코드를 저장하시면,</Warning1> 
-        <Warning1>언제든지 내 기록을 불러올 수 있습니다.</Warning1> 
+        <h2 style={{textAlign: 'center', marginBottom: '20px'}}>복구키 저장</h2>
+        <Warning2><span style={{color: 'red'}}>복구키</span>를 다운로드하면</Warning2>
+        <Warning2>언제든지 내 기록을 불러올 수 있습니다.</Warning2> 
+        <Warning2>복구키는 <span style={{color: 'red'}}>마이페이지</span>에서 등록할 수 있습니다.</Warning2>
       </WarningWrapper>
-      <QRCode value={userKey} size={220} />
+      <QRCode value={userKey} size={220} style={{visibility: 'hidden', position: 'absolute'}}/>
       <ButtonWrapper>
         <NextButton onClick={handleDownloadClick} content={"다운로드"} />
         <NextButton onClick={()=>navigate('/newstar')} content={"시작하기"} />

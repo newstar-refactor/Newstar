@@ -4,8 +4,13 @@ import { useRecoilValue } from "recoil";
 import { useState, useEffect } from 'react';
 import jsQR from "jsqr";
 
+const FileBox = styled.div`
+    
+`
+
 export default function AddQR() {
   const [qrText, setQrText] = useState("");
+  const [keyValue, setKeyValue] = useState("");
 
   const handleReadQr = (event) => {
     const file = event.target.files[0];
@@ -18,7 +23,6 @@ export default function AddQR() {
         const image = new Image();
 
         image.onload = () => {
-          
           canvas.width = image.width;
           canvas.height = image.height;
           ctx.drawImage(image, 0, 0);
@@ -27,8 +31,7 @@ export default function AddQR() {
           
           if (code) {
             setQrText(code.data);
-            localStorage.setItem("X-USER-ID", code.data);
-            window.location.reload();
+            setKeyValue(code.data);
           } else {
             alert("QR 코드를 인식할 수 없습니다.");
           }
@@ -39,14 +42,20 @@ export default function AddQR() {
     }
   };
 
+  const registKey = (event) => {
+    // spring에서 키값 검사
+        localStorage.setItem("X-USER-ID", keyValue);
+        window.location.reload();
+  }
+
   return (
     <div>
-      <h3>내정보 불러오기 </h3>
-
-      <div>
+      <h2>내정보 불러오기 </h2>
+      <FileBox>
         <input type="file" onChange={handleReadQr} />
-        <p>QR 코드 내용: {qrText}</p>
-      </div>
+      </FileBox>
+      <p>복구 코드: {qrText}</p>
+      <button onClick={registKey}>등록</button>
     </div>
   );
 }

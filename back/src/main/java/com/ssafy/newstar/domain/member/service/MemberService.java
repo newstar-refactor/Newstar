@@ -2,6 +2,7 @@ package com.ssafy.newstar.domain.member.service;
 
 import com.ssafy.newstar.domain.category.entity.Category;
 import com.ssafy.newstar.domain.category.repository.CategoryRepository;
+import com.ssafy.newstar.domain.member.dto.MemberCheckRequest;
 import com.ssafy.newstar.domain.member.dto.MemberRequest;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.repository.MemberRepository;
@@ -34,5 +35,9 @@ public class MemberService {
     }
 
     return member;
+  }
+
+  public Optional<Member> checkMember(MemberCheckRequest memberCheckRequest) {
+    return memberRepository.findByPw(memberCheckRequest.getPw());
   }
 }
