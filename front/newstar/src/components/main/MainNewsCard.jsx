@@ -11,6 +11,7 @@ import LikeButton from '../../common/Like';
 import { BigCategory, SmallCategory } from '../../state/categoryData';
 
 import { likeNews } from '../../api/fetch';
+import { useTour } from "@reactour/tour";
 
 const MainNewsImage = styled.img`
     width: 100%;
@@ -59,8 +60,8 @@ function MainNewsCard({ newsData }) {
     };
 
     return (
-        <NewsContainer onDoubleClick={handleLike}>    
-            <MainNewsImage src={newsData.image_url} alt="news image" onError={onErrorImg} />  
+        <NewsContainer onDoubleClick={handleLike}>
+            <MainNewsImage src={newsData.image_url} alt="news image" onError={onErrorImg} />
             <MainNewsHeader
                 newsData={newsData}
                 isLiked={isLiked}

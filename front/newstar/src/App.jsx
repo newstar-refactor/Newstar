@@ -16,7 +16,7 @@ import NewsDetail from './pages/NewsDetail';
 import Modal from 'react-modal';
 import { ResponseInterceptor } from './utils/ResponseInterceptor';
 import { getMembers } from './api/fetch';
-import ErrorPage from './pages/errorPage';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
     Modal.setAppElement('#root');
@@ -29,26 +29,24 @@ function App() {
     }, []);
     return (
         <>
-            <RecoilRoot>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<StartPageWrapper />}>
-                            <Route index element={<Intro />} />
-                            <Route path="choose" element={<ChooseKeyword />} />
-                        </Route>
-                        <Route path="/newstar" element={<MainPageWrapper />}>
-                            <Route index element={<ShortForm />} />
-                            <Route path=":articleId" element={<NewsDetail />} />
-                            <Route path="search" element={<Search />} />
-                            <Route path="mypage" element={<MyPage />} />
-                            <Route path="category" element={<CategoryNews />} />
-                            <Route path="category/:categoryId" element={<CategoryNewsDetail />} />
-                        </Route>
-                        <Route path="*" element={<ErrorPage />} />
-                    </Routes>
-                    <ResponseInterceptor />
-                </BrowserRouter>
-            </RecoilRoot>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<StartPageWrapper />}>
+                        <Route index element={<Intro />} />
+                        <Route path="choose" element={<ChooseKeyword />} />
+                    </Route>
+                    <Route path="/newstar" element={<MainPageWrapper />}>
+                        <Route index element={<ShortForm />} />
+                        <Route path=":articleId" element={<NewsDetail />} />
+                        <Route path="search" element={<Search />} />
+                        <Route path="mypage" element={<MyPage />} />
+                        <Route path="category" element={<CategoryNews />} />
+                        <Route path="category/:categoryId" element={<CategoryNewsDetail />} />
+                    </Route>
+                    <Route path="*" element={<ErrorPage />} />
+                </Routes>
+                <ResponseInterceptor />
+            </BrowserRouter>
         </>
     );
 }

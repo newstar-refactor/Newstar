@@ -8,7 +8,6 @@ import LikeButton from '../../common/Like';
 
 import { getRecords } from '../../api/fetch';
 import { BigCategory, SmallCategory } from '../../state/categoryData';
-
 const MainNewsHeaderContainer = styled.div`
     padding: 20px;
 `;
@@ -35,11 +34,10 @@ const LikeBox = styled.div`
 // 뉴스 헤더 (제목, 날짜, 태그)
 export default function NewsHeader({ newsData, isLiked, handleLikeButtonClick }) {
     const newsDate = newsData.date?.replace('T', '\n');
-
     return (
         <MainNewsHeaderContainer>
             <NewsTagAndLike>
-                <NewsTags>
+                <NewsTags data-tour="tag">
                     <Link to={`/newstar/category/${newsData.bcategory}`}>
                         <Tag fontSize={'12px'}>{`# ${BigCategory[newsData.bcategory]}`}</Tag>
                     </Link>
@@ -49,7 +47,7 @@ export default function NewsHeader({ newsData, isLiked, handleLikeButtonClick })
                         </Link>
                     )}
                 </NewsTags>
-                <LikeBox>
+                <LikeBox data-tour="like">
                     <LikeButton isLiked={isLiked} handleLikeButtonClick={handleLikeButtonClick} />
                 </LikeBox>
             </NewsTagAndLike>
