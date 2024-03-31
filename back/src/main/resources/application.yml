@@ -8,6 +8,11 @@ spring:
     username: newstar
     password: newstar
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   jpa:
     properties:
       hibernate:
@@ -15,6 +20,7 @@ spring:
         # show_sql: true # sysout 단계에서 쿼리문 show
         format_sql: true
         default_batch_fetch_size: 1000 # select 배치 조회 크기
+
 server:
   servlet:
     context-path: '/api'
