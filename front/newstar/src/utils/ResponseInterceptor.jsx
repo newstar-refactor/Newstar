@@ -8,7 +8,6 @@ export const ResponseInterceptor = () => {
     const interceptorId = useRef(null);
     useEffect(() => {
         interceptorId.current = axiosInstance.interceptors.response.use(undefined, (error) => {
-            console.log(error);
             switch (error.response.status) {
                 case 401: {
                     localStorage.removeItem('X-USER-ID');
