@@ -11,33 +11,12 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { TourProvider } from '@reactour/tour';
-
 import Logo from '../assets/logo_dark.png';
 import Loading from '../components/Loading';
 import MainNewsCard from '../components/main/MainNewsCard';
 import Survey from './Survey';
 import { useTour } from '@reactour/tour';
 import TourExample from '../components/main/TourExample';
-
-const steps = [
-    {
-        selector: '[data-tour="tag"]',
-        content: '해시태그를 선택하면 동일한 카테고리의 뉴스를 볼 수 있어요!',
-    },
-    {
-        selector: '[data-tour="like"]',
-        content: '좋아요를 누르면 선호하는 뉴스를 모아볼 수 있어요!',
-    },
-    {
-        selector: '[data-tour="link"]',
-        content: '북마크를 누르면 기사를 상세하게 읽어볼 수 있어요!',
-    },
-    {
-        selector: '[data-tour="slider"]',
-        content: '뉴스 숏폼을 양쪽으로 슬라이딩하여 넘길 수 있어요!',
-    },
-];
 
 const StyledSlider = styled(Slider)`
     .slick-slide {
@@ -77,28 +56,28 @@ export default function ShortForm() {
     const [isImageLoad, setIsImageLoad] = useState(false);
     const { setIsOpen, isOpen } = useTour();
 
-    // 뉴스 데이터 로드
-    // useEffect(() => {
-    //     setLoading(true);
-    //     getNews(
-    //         (response) => {
-    //             setNewsDatas(response.data);
-    //             setLoading(false);
-    //             checkAnswer(
-    //                 (response) => {
-    //                     setCheckSurvey(response.data.data.haveAnswer);
-    //                 },
-    //                 (error) => {
-    //                     console.log(error);
-    //                 }
-    //             );
-    //         },
-    //         (error) => {
-    //             console.log(error);
-    //             setLoading(false);
-    //         }
-    //     );
-    // }, []);
+    //뉴스 데이터 로드
+    useEffect(() => {
+        setLoading(true);
+        getNews(
+            (response) => {
+                setNewsDatas(response.data);
+                setLoading(false);
+                checkAnswer(
+                    (response) => {
+                        setCheckSurvey(response.data.data.haveAnswer);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            },
+            (error) => {
+                console.log(error);
+                setLoading(false);
+            }
+        );
+    }, []);
 
     // 첫 페이지 로드 시 시청 기록 생성
     useEffect(() => {

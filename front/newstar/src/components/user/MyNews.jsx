@@ -2,8 +2,12 @@
 import styled from "styled-components"
 import LikeNewsCard from "../main/LikeNewsCard"
 
-import { useRecoilValue } from "recoil"
+import { useState, useEffect } from "react"
+import { useRecoilState } from "recoil"
+import { useInView } from 'react-intersection-observer'
+
 import { recordDataState } from "../../state/atoms"
+import { getRecords } from "../../api/fetch"
 
 const MyNewsContainer = styled.div`
   width: 100%;
@@ -20,15 +24,27 @@ const MyNewsCards = styled.div`
 `
 
 export default function MyNews() {
-  const records = useRecoilValue(recordDataState)
+  // 최근 본 뉴스 기록
+  const [records, setRecords] = useRecoilState(recordDataState);
+  const [recordPage, setRecordPage] = useState(1)
+  const [ref, inView] = useInView()
+
+  useEffect(() => {
+    if (inView) {
+      getRecords(
+        5, recordPage,
+        (response) => {
+          setRecords([...records, ...response.data.data.content]);
+          setRecordPage((recordPage) => recordPage + 1)
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }, [inView])
 
   return (
-    // <div>
-    //   <h2>최근 본 뉴스</h2>
-    //   <br />
-    //   <SubNewsCard records={records} />
-    // </div>
-    // <div>
     <div>
       <h2>최근 본 뉴스</h2>
         <MyNewsContainer>
@@ -39,6 +55,7 @@ export default function MyNews() {
                 $background={'lightgray'}
                 likeData={likeData} />
             ))}
+          <div style={{ color: 'white'}} ref={ref}>next</div>
           </MyNewsCards>
         </MyNewsContainer>
     </div>

@@ -47,7 +47,9 @@ function MainNewsCard({ newsData }) {
         };
         likeNews(
             data,
-            (response) => {},
+            (response) => {
+              console.log(response)
+            },
             (error) => {
                 console.log(error);
             }

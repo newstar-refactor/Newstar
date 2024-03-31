@@ -7,10 +7,11 @@ import com.ssafy.newstar.domain.record.service.RecordService;
 import com.ssafy.newstar.util.response.SuccessCode;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.ssafy.newstar.domain.record.dto.RecordResponse.createRecordResponse;
+import static com.ssafy.newstar.domain.article.dto.ArticleResponse.createArticleResponse;
 import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseEntity;
 
 @RestController
@@ -18,18 +19,17 @@ import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseE
 public class RecordController {
     private final RecordService recordService;
     @GetMapping("/records")
-    public ResponseEntity<?> getRecords(HttpServletRequest request) {
+    public ResponseEntity<?> getRecords(HttpServletRequest request, Pageable pageable) {
         Long memberId = (Long) request.getAttribute("memberId");
 
-
-        return getResponseEntity(SuccessCode.OK, createRecordResponse(recordService.getRecords(memberId)));
+        return getResponseEntity(SuccessCode.OK, createArticleResponse(recordService.getRecords(memberId, pageable)));
     }
 
     @GetMapping("/records/likes")
-    public ResponseEntity<?> getRecordLikes(HttpServletRequest request) {
+    public ResponseEntity<?> getRecordLikes(HttpServletRequest request, Pageable pageable) {
         Long memberId = (Long) request.getAttribute("memberId");
 
-        return getResponseEntity(SuccessCode.OK, createRecordResponse(recordService.getRecordLikes(memberId)));
+        return getResponseEntity(SuccessCode.OK, createArticleResponse(recordService.getRecordLikes(memberId, pageable)));
     }
 
     @PostMapping("/records")
