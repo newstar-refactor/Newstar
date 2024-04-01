@@ -29,18 +29,34 @@ export default function LikeNews() {
 
   // 좋아요 한 뉴스 기록
   const [likeNews, setLikeNews] = useRecoilState(likeDataState);
-  const [likePage, setLikePage] = useState(1)
+  const [likePage, setLikePage] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isEnd, setIsEnd] = useState(false)
   const [ref, inView] = useInView()
 
   useEffect(() => {
-    if (inView) {
+    setIsLoading(false)
+    setIsEnd(false)
+    setLikeNews([])
+    setLikePage(0)
+  }, [])
+
+  useEffect(() => {
+    if (inView && !isLoading && !isEnd) {
+      setIsLoading(true)
       getLikes(
         5, likePage,
         (response) => {
+          const data = response.data.data.content
+          if(data.length < 5) {
+            setIsEnd(true)
+          }
           setLikeNews([...likeNews, ...response.data.data.content]);
           setLikePage((likePage) => likePage + 1)
+          setIsLoading(false)
         },
         (error) => {
+          setIsLoading(false)
           console.log(error);
         }
       );

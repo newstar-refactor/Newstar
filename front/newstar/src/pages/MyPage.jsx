@@ -21,36 +21,6 @@ const MyPageContainer = styled.div`
 `;
 
 export default function MyPage() {
-  const [likeNews, setLikeNews] = useRecoilState(likeDataState);
-  const [records, setRecords] = useRecoilState(recordDataState);
-
-  useEffect(() => {
-    getRecords(
-      5, 0,
-      (response) => {
-        setRecords(response.data.data.content);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-
-  }, [])
-
-  useEffect(() => {
-      getLikes(
-        5, 0,
-        (response) => {
-          setLikeNews(response.data.data.content);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }, []);
-  
-
-
   return (
       <MyPageContainer>
           <MyNews />
