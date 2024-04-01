@@ -23,7 +23,7 @@ const MyPageContainer = styled.div`
 export default function MyPage() {
   const [likeNews, setLikeNews] = useRecoilState(likeDataState);
   const [records, setRecords] = useRecoilState(recordDataState);
-
+  console.log("hhihi")
   useEffect(() => {
     getRecords(
       5, 0,
@@ -32,6 +32,7 @@ export default function MyPage() {
         console.log(response.data.data.content)
       },
       (error) => {
+        console.log("hihi")
         console.log(error);
       }
     )

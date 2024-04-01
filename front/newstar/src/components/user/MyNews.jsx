@@ -28,7 +28,6 @@ export default function MyNews() {
   const [records, setRecords] = useRecoilState(recordDataState);
   const [recordPage, setRecordPage] = useState(1)
   const [ref, inView] = useInView()
-
   useEffect(() => {
     if (inView) {
       getRecords(

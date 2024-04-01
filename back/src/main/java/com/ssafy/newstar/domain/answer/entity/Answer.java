@@ -18,7 +18,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(exclude = {"question, member"})
+@ToString(exclude = {"question", "member"})
 public class Answer {
   @Id
   @GeneratedValue
