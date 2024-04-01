@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 
@@ -23,6 +25,7 @@ import org.springframework.util.StringUtils;
 public class MemberAuthenticationFilter implements Filter {
 
   private final MemberRepository memberRepository;
+  private final RedisTemplate<String, Long> redisTemplate;
 
   private final static List<URLMethod> whiteList = new ArrayList<>();
 
@@ -52,18 +55,29 @@ public class MemberAuthenticationFilter implements Filter {
     log.info("필터 진입");
     try {
       // 회원을 선별하는 UUID 값
-      String key = servletRequest.getHeader("X-User-Id");
-      log.info("X-User-Id 값 : " + key);
-      if (!StringUtils.hasText(key)) {
+      String pw = servletRequest.getHeader("X-User-Id");
+      log.info("X-User-Id 값 : " + pw);
+      if (!StringUtils.hasText(pw)) {
         log.info("X-User-Id 값이 비어 있습니다.");
         throw new GlobalException(ErrorCode.KEY_NOT_FOUND);
       }
 
-      Member member = memberRepository.findByPw(key).orElseThrow(
-          () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
+      Long memberId;
+      // redis 접근
+      memberId = redisTemplate.opsForValue().get(pw);
 
-      servletRequest.setAttribute("memberId", member.getId());
-      log.info(" memberId : " + member.getId());
+      // DB 접근 (redis에 UUID로 만든 key가 없으면 DB에서 찾아오기 + redis에 저장하기)
+      if(memberId == null) {
+        log.info("redis에 UUID 가 존재하지 않아 DB를 탐색합니다");
+        Member member = memberRepository.findByPw(pw).orElseThrow(
+            () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
+
+        memberId = member.getId();
+        redisTemplate.opsForValue().set(pw, memberId);
+      }
+
+      servletRequest.setAttribute("memberId", memberId);
+      log.info(" memberId : " + memberId);
       // 다음 필터 없으면 컨트롤러로 가겠지
       chain.doFilter(request, response);
     } catch (GlobalException e) {
