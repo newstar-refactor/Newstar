@@ -2,8 +2,8 @@
 // 초기 추천을 위한 키워드를 선택
 // 키워드 선택 후, 회원가입 완료
 import { useState, useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { userKeyState } from '../state/atoms';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { isStartState, userKeyState } from '../state/atoms';
 import styled from 'styled-components';
 
 import { FaRegChartBar } from 'react-icons/fa';
@@ -119,6 +119,9 @@ function ChooseKeyword() {
     // 선택된 키워드 상태 관리
     const [selectedKeywords, setSelectedKeywords] = useState([]);
 
+    // 초기 유저인지 체크
+    const [isStart, setIsStart] = useRecoilState(isStartState);
+
     // 클릭 시 키워드 담기
     useEffect(() => {
         const newSelectedKeywords = tagsActive.filter((word) => word.state).map((word) => word.code);
@@ -130,6 +133,7 @@ function ChooseKeyword() {
         postMembers(
             { categories: selectedKeywords },
             (response) => {
+                setIsStart(true);
                 // 응답으로 받은 key
                 const key = response?.data.data.pw;
 

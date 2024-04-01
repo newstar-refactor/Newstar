@@ -7,8 +7,7 @@ import { BigCategory, BigCategoryData, SmallCategoryData } from '../state/catego
 const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px;
-  height: 100%;
+  padding: 60px 30px 20px;
 `
 
 const CategoryBox = styled.div`

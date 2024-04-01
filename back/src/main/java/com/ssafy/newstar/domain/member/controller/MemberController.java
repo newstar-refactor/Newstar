@@ -1,8 +1,6 @@
 package com.ssafy.newstar.domain.member.controller;
 
-import static com.ssafy.newstar.domain.member.dto.MemberResponse.createMemberResponse;
-import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseEntity;
-
+import com.ssafy.newstar.domain.member.dto.MemberCheckRequest;
 import com.ssafy.newstar.domain.member.dto.MemberRequest;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.service.MemberService;
@@ -10,13 +8,15 @@ import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.ssafy.newstar.domain.member.dto.MemberResponse.createMemberResponse;
+import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseEntity;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,5 +38,11 @@ public class MemberController {
   public ResponseEntity<?> createMember(@RequestBody MemberRequest memberRequest) {
     Member member = memberService.createMember(memberRequest);
     return getResponseEntity(SuccessCode.CREATED, createMemberResponse(member));
+  }
+
+  //QR 등록 시 존재하는 회원인지 확인
+  @PostMapping("/checkmember")
+  public ResponseEntity<?> getMember(@RequestBody MemberCheckRequest memberCheckRequest) {
+    return getResponseEntity(SuccessCode.OK, memberService.checkMember(memberCheckRequest).isPresent());
   }
 }

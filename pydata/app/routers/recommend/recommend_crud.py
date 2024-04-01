@@ -52,7 +52,7 @@ def get_recommend_info(db: Session, li):
     return articles_sorted
 
 def get_article_count(db: Session):
-    count = db.query(func.count(Article.article_id)).scalar()
+    count = db.query(func.max(Article.article_id)).scalar()
     return count
 
 def get_random_articles_by_categories(db: Session, user_categories: List[int]) -> List[int]:

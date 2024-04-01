@@ -34,7 +34,7 @@ async def add_process(request: Request, call_next):
     with Session(engine) as db:
       # 요청 헤더로부터 user_id 추출
       pw = request.headers.get("X-User-Id")
-      print(pw)
+
       if pw is not None:
         try:
           member_id = get_user_by_pw(db, pw)
