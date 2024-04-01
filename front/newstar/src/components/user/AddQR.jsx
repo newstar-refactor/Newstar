@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { useState, useEffect } from 'react';
 import jsQR from "jsqr";
-import "./AddQR.css";
 
 const FileContainer = styled.div `
   margin: 10px 0px;

@@ -96,7 +96,7 @@ export default function ShortForm() {
             setIsStarted(false);
         }
     }, [isOpen]);
-
+    
     useEffect(() => {
         if (isImageLoad) {
             setIsOpen(true);
