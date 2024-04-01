@@ -38,8 +38,8 @@ const SliderImage = styled.img`
 `
 
 const LottieStyle = {
-  height: '150px',
-  width: '150px',
+  height: '170px',
+  width: '170px',
 };
 
 function TourExample({ newsData, setIsImageLoad }) {
