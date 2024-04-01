@@ -7,8 +7,6 @@ services:
         ports:
           - 8080:8080
         restart: always
-        env_file:
-          - /env/.env
         environment:
           TZ: Asia/Seoul
           MYSQL_USER_PROD_ID: ${MYSQL_USER_PROD_ID}
