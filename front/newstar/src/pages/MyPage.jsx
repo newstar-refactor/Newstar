@@ -23,16 +23,14 @@ const MyPageContainer = styled.div`
 export default function MyPage() {
   const [likeNews, setLikeNews] = useRecoilState(likeDataState);
   const [records, setRecords] = useRecoilState(recordDataState);
-  console.log("hhihi")
+
   useEffect(() => {
     getRecords(
       5, 0,
       (response) => {
         setRecords(response.data.data.content);
-        console.log(response.data.data.content)
       },
       (error) => {
-        console.log("hihi")
         console.log(error);
       }
     )
@@ -44,7 +42,6 @@ export default function MyPage() {
         5, 0,
         (response) => {
           setLikeNews(response.data.data.content);
-          console.log(response.data.data.content)
         },
         (error) => {
           console.log(error);

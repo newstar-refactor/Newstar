@@ -32,7 +32,6 @@ const BigCategoryBox = styled.div`
     color: white;
     transition: 0.5s;
   }
-
 `
 
 const SmallCategoryBox = styled.div`

@@ -136,7 +136,6 @@ function ChooseKeyword() {
           setIsStart(true);
           // 응답으로 받은 key
           const key = response?.data.data.pw;
-          console.log(response)
 
           if (!localStorage.getItem('X-USER-ID')) {
               localStorage.setItem('X-USER-ID', key);
