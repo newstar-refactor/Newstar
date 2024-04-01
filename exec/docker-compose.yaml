@@ -31,6 +31,21 @@ services:
         volumes:
           - /mysql/:/var/lib/mysql
           - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
+
+    redis:
+        container_name: redis
+        image: redis:latest
+        restart: always
+        expose:
+          - 6397
+        environment:
+          TZ: Asia/Seoul
+        labels:
+          - "name=redis"
+          - "mode=standalone"
+        
+
+
     jenkins:
         container_name: jenkins
         image: jenkins/custom
