@@ -5,8 +5,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/newstar?serverTimezone=Asia/Seoul
-    username: newstar
-    password: newstar
+    username: ${MYSQL_USER_DEV_ID}
+    password: ${MYSQL_USER_DEV_PASSWORD}
 
   jpa:
     properties:
