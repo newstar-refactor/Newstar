@@ -5,9 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { FiHome } from 'react-icons/fi';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { FaRegUser } from "react-icons/fa";
 import { IoSearch } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
+import { FaRegUserCircle } from "react-icons/fa";
 import { IoArrowBack } from 'react-icons/io5';
 
 const NavContainer = styled.div`
@@ -95,7 +96,7 @@ function BottomNavbar() {
             <NavContent>
                 <Link to={'/newstar/mypage'}>
                     <IconWrapper>
-                        <BsFillPersonFill size="20" />
+                        <FaRegUserCircle size="20" />
                     </IconWrapper>
                 </Link>
             </NavContent>

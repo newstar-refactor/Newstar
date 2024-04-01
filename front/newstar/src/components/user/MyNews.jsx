@@ -55,7 +55,7 @@ export default function MyNews() {
                 $background={'lightgray'}
                 likeData={likeData} />
             ))}
-          <div style={{ color: 'white'}} ref={ref}>next</div>
+          <div style={{ color: 'white'}} ref={ref}>n</div>
           </MyNewsCards>
         </MyNewsContainer>
     </div>

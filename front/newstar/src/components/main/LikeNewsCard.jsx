@@ -35,7 +35,7 @@ const LikeNewsTitle = styled.div`
 export default function LikeNewsCard({ likeData, $background }) {
     const navigate = useNavigate();
     return (
-        <LikeNewsCardWrappr $background={$background} onClick={() => navigate(`/newstar/${likeData.id}`)}>
+        <LikeNewsCardWrappr $background={$background} onClick={() => navigate(`/newstar/${likeData.article_id}`)}>
             <LikeNewsScate>{`# ${SmallCategory[likeData.scategory]}`}</LikeNewsScate>
             <LikeNewsTitle>{likeData.title}</LikeNewsTitle>
         </LikeNewsCardWrappr>

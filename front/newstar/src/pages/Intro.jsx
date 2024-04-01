@@ -1,5 +1,6 @@
 // 앱 소개 및 설명 페이지
 // 아래로 스크롤
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -11,6 +12,8 @@ import NewsLottie from '../assets/lottie/News.json';
 import NewStart from '../assets/lottie/NewStart.json';
 import SelectLottie from '../assets/lottie/Select.json';
 import LikeLottie from '../assets/lottie/like.json';
+
+import OldUserModal from '../components/OldUser';
 
 const IntroWrapper = styled.div`
     display: flex;
@@ -32,12 +35,14 @@ const IntroBox1 = styled.div`
     gap: 15px;
     padding-top: 70px;
 `;
+
 const IntroBox2 = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 `;
+
 const IntroBox3 = styled.div`
     display: flex;
     flex-direction: column;
@@ -57,16 +62,26 @@ const UseBox2 = styled.div`
     align-items: flex-start;
 `;
 
+const OldUser = styled.div`
+  font-size: 13px;
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+    transition: background-color 0.5s ease;
+  }
+`
+
 const StartBtn = styled.button`
     border: none;
     border-radius: 5px;
-    width: auto;
+    width: 90%;
     padding: 10px 30px;
     font-size: 20px;
     color: white;
-    font-weight: 600;
+    font-weight: 550;
     background-color: rgb(138, 192, 56, 0.7);
-    margin: 20px;
+    margin: 5px;
     box-shadow: 2px 2px 7px 1px lightgray;
     cursor: pointer;
     &:hover {
@@ -106,6 +121,7 @@ function HowToUse() {
 
 export default function Intro() {
     const navigate = useNavigate();
+    const [isOldUserModalOpen, setIsOldUserModalOpen] = useState(false)
 
     return (
         <IntroWrapper>
@@ -141,7 +157,14 @@ export default function Intro() {
                     <Lottie animationData={NewStart} style={{ width: '250px', height: '250px' }} />
                 </Fade>
             </IntroBox3>
-            <StartBtn onClick={() => navigate('/choose')}>시작하기</StartBtn>
+            <IntroBox2>
+            <StartBtn onClick={() => navigate('/choose')}>시 작 하 기</StartBtn>
+            <OldUser onClick={() => setIsOldUserModalOpen(true)}>newstar 를 이용해 보신 적이 있으신가요?</OldUser>
+            </IntroBox2>
+            <OldUserModal 
+              isOldUserModalOpen={isOldUserModalOpen}
+              setIsOldUserModalOpen={setIsOldUserModalOpen}
+               />
         </IntroWrapper>
     );
 }

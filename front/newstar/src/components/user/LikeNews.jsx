@@ -60,7 +60,7 @@ export default function LikeNews() {
               $background={idx % 2 === 0 ? "rgb(138, 192, 56)" : "rgb(100, 192, 86)"}
               likeData={likeData} />
           ))}
-        <div style={{ color: 'white' }} ref={ref}>next</div>
+        <div style={{ color: 'white' }} ref={ref}>n</div>
         </LikeNewsCards>
       </LikeNewsContainer>
     </div>
