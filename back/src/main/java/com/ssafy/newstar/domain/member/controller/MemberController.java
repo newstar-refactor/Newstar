@@ -46,7 +46,7 @@ public class MemberController {
 
   //QR 등록 시 존재하는 회원인지 확인
   @PostMapping("/checkmember")
-  public ResponseEntity<?> getMember(@RequestBody MemberCheckRequest memberCheckRequest) {
+  public ResponseEntity<?> checkMember(@RequestBody MemberCheckRequest memberCheckRequest) {
     return getResponseEntity(SuccessCode.OK, memberService.checkMember(memberCheckRequest).isPresent());
   }
 }
