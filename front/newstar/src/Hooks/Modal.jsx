@@ -11,9 +11,9 @@ const customModalStyles = ( height ) => ({
     left: "0",
   },
   content: {
-    minWidth: "400px",
+    minWidth: "350px",
     maxWidth: "70%",
-    height: "90%",
+    height: height,
     zIndex: "150",
     position: "absolute",
     top: "50%",
@@ -32,8 +32,8 @@ export default function ModalComponent({ isOpen, setIsOpen, height, modalContent
 
   return (
     <Modal
-      isOpen={surveyModalOpen}
-      onRequestClose={() => setSurveyModalOpen(false)}
+      isOpen={isOpen}
+      onRequestClose={() => setIsOpen(false)}
       style={customStyles}
       ariaHideApp={true}
       shouldCloseOnOverlayClick={true}
