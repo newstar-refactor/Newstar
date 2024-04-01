@@ -12,7 +12,7 @@ const keywordState = atom({
 
 const recordDataState = atom({
   key: "recordState",
-  default: ""
+  default: []
 })
 
 const categoryDataState = atom({
@@ -22,7 +22,7 @@ const categoryDataState = atom({
 
 const likeDataState = atom({
   key: "likeState",
-  default: ""
+  default: []
 })
 
 const userKeyState = atom({
