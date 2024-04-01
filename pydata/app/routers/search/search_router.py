@@ -1,11 +1,16 @@
 from typing import List
 
 from elasticsearch import Elasticsearch
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Request
+from sqlalchemy.orm import Session
+
+from app.database import get_db
 
 from app.config import conf
 from app.routers.search.search_schema import Articles, Keyword
 from app.routers.verify_header import verify_header
+
+from app.routers.search.search_crud import get_search_news
 
 ES = conf['ES']
 
@@ -54,4 +59,15 @@ def search(keyword: Keyword):
         image_url = result['_source']['image_url']
         article = Articles(article_id=article_id, title=title, image_url=image_url)
         res.append(article)
+    return res
+
+@router.post("/indb", response_model=List[Articles])
+def search(keyword: Keyword, db: Session = Depends(get_db)):
+    keyword = keyword.keyword
+    print(keyword)
+    res = []
+    articles = get_search_news(keyword)
+    for index, row in articles.iterrows():
+        a = Articles(article_id=row['article_id'], title=row['title'], image_url=row['image_url'])
+        res.append(a)
     return res
