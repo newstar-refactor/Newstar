@@ -35,6 +35,13 @@ function postMembers(cate, success, fail) {
     .catch(fail)
 }
 
+// DB에 회원이 있는지 확인
+function postCheckmember(cate, success, fail) {
+  return axiosInstance.post(api.checkmember, cate)
+    .then(success)
+    .catch(fail)
+}
+
 
 // 시청기록 조회
 function getRecords(recordNum, pageNum, success, fail) {
@@ -117,6 +124,7 @@ export {
   searchNews, 
   getMembers, 
   postMembers, 
+  postCheckmember,
   getRecords, 
   postRecords,
   getLikes,

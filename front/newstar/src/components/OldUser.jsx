@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import jsQR from "jsqr";
 
+import { postCheckmember } from "../api/fetch";
 
 const AddQRContainer = styled.div`
   display: flex;
@@ -99,11 +100,24 @@ function AddQR() {
   };
 
   const registKey = (event) => {
-    // spring에서 키값 검사
-    localStorage.setItem("X-USER-ID", keyValue);
-    window.location.reload();
-    navigate('/newstar')
+    postCheckmember(
+      {pw: keyValue},
+      (response) => {
+        const isKey = response?.data.data
+        console.log(isKey)
 
+        if(isKey) {
+          localStorage.setItem("X-USER-ID", keyValue);
+          window.location.reload();
+          navigate('/newstar')
+        } else {
+          alert("유효하지 않는 QR코드 입니다.")
+        }
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   return (
