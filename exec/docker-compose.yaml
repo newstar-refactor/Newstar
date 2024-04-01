@@ -34,11 +34,10 @@ services:
     jenkins:
         container_name: jenkins
         image: jenkins/custom
-        env_file:
-          - /env/.env
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
           - /jenkins:/var/jenkins_home
+          - /env/.env:/env/.env
         ports:
           - 9999:8080
             #expose:
