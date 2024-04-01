@@ -130,23 +130,24 @@ function ChooseKeyword() {
 
     // 새로운 user 진입 시 key 값 로컬스토리지에 저장
     function handleCreateMember() {
-        postMembers(
-            { categories: selectedKeywords },
-            (response) => {
-                setIsStart(true);
-                // 응답으로 받은 key
-                const key = response?.data.data.pw;
+      postMembers(
+        { categories: selectedKeywords },
+        (response) => {
+          setIsStart(true);
+          // 응답으로 받은 key
+          const key = response?.data.data.pw;
+          console.log(response)
 
-                if (!localStorage.getItem('X-USER-ID')) {
-                    localStorage.setItem('X-USER-ID', key);
-                    setUserKey(key);
-                }
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-        setModalOpen(!modalOpen);
+          if (!localStorage.getItem('X-USER-ID')) {
+              localStorage.setItem('X-USER-ID', key);
+              setUserKey(key);
+          }
+        },
+        (error) => {
+            console.log(error);
+        }
+      );
+      setModalOpen(!modalOpen);
     }
 
     return (

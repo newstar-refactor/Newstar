@@ -20,7 +20,7 @@ const InputWrapper = styled.div`
   width: 100%;
   background-color: #F5F5F5;
   border-radius: 5px;
-  padding-left: 10px; /* 좌측 패딩 추가 */
+  padding-left: 15px; /* 좌측 패딩 추가 */
   position: relative; /* 아이콘 절대 위치를 위해 추가 */
 `;
 

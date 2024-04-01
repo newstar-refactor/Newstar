@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import Lottie from 'lottie-react';
 
 import MainNewsHeader from './MainNewsHeader';
 import MainNewsBody from './MainNewsBody';
-import SliderImg from '../../assets/slider.png'
+import swipeLottie from '../../assets/lottie/swipe.json'
 
 import { useTour } from "@reactour/tour";
 
@@ -32,9 +33,14 @@ const ImageBox = styled.div`
 `
 
 const SliderImage = styled.img`
-    width: 150px;
-    height: 150px;
+  width: 150px;
+  height: 150px;
 `
+
+const LottieStyle = {
+  height: '150px',
+  width: '150px',
+};
 
 function TourExample({ newsData, setIsImageLoad }) {
     const { currentStep } = useTour();
@@ -43,7 +49,7 @@ function TourExample({ newsData, setIsImageLoad }) {
         <NewsContainer>
             <MainNewsImage src={newsData.image_url} alt="news image" onLoad={() => setIsImageLoad(true)}/>
             {currentStep === 3 && <ImageBox data-tour="slider">
-                <SliderImage src={SliderImg} alt="slider"/>
+                <Lottie animationData={swipeLottie} style={LottieStyle} />
             </ImageBox>}
             <MainNewsHeader
                 newsData={newsData}
