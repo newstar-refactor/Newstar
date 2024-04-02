@@ -46,7 +46,7 @@ fi
 # Spring Server health checking
 for retry_count in {1...60};
 do
-    response=$(curl -s http://localhost:${AFTER_SPRING_PORT}/api/actuator/health)
+    response=$(curl -s http://172.17.0.1:${AFTER_SPRING_PORT}/api/actuator/health)
     up_count=$(echo $response | grep 'UP' | wc - l)
 
     if [ $up_count -ge 1]
@@ -69,7 +69,7 @@ done
 # Fastapi Server health checking
 for retry_count in {1...60};
 do
-    response=$(curl -s http://localhost:${AFTER_FASTAPI_PORT}/api/data/health)
+    response=$(curl -s http://172.17.0.1:${AFTER_FASTAPI_PORT}/api/data/health)
     up_count=$(echo $response | grep 'UP' | wc - l)
 
     if [ $up_count -ge 1]
@@ -89,6 +89,7 @@ do
     sleep 10
 done
 
+# 실패시 다운 시켜야 할듯
 
 echo "${AFTER_COLOR} server up(spring_port:${AFTER_SPRING_PORT}, react_port:${AFTER_REACT_PORT}, fastapi_port:${AFTER_FASTAPI_PORT})"
 
