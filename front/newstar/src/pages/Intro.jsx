@@ -63,8 +63,8 @@ const UseBox2 = styled.div`
 `;
 
 const OldUser = styled.div`
-  font-size: 13px;
-  color: gray;
+  font-size: 15px;
+  color: #454545;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -159,7 +159,7 @@ export default function Intro() {
             </IntroBox3>
             <IntroBox2>
             <StartBtn onClick={() => navigate('/choose')}>시 작 하 기</StartBtn>
-            <OldUser onClick={() => setIsOldUserModalOpen(true)}>newstar 를 이용해 보신 적이 있으신가요?</OldUser>
+            <OldUser onClick={() => setIsOldUserModalOpen(true)}>newstar를 이용해 보신 적이 있으신가요?</OldUser>
             </IntroBox2>
             <OldUserModal 
               isOldUserModalOpen={isOldUserModalOpen}

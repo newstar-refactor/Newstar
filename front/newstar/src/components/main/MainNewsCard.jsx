@@ -11,9 +11,9 @@ import { likeNews } from '../../api/fetch';
 const MainNewsImage = styled.img`
     width: 100%;
     height: 300px;
-    padding: 15px;
-    border-radius: 20px;
+    padding: 15px 15px 0px 15px;
     object-fit: contain;
+    margin: 0 auto;
 `;
 
 
