@@ -1,3 +1,5 @@
+import os.path
+
 from fastapi import FastAPI, Request, APIRouter, HTTPException
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
@@ -54,6 +56,14 @@ async def add_process(request: Request, call_next):
 def startup():
   init_db()
   makemodel()
+
+# 서버 상태 체크
+@router.get("/health")
+def health_check():
+  if os.path.isfile("news.doc2vec"):
+    return { "status" : "UP" }
+  else:
+    return { "status" : "DOWN" }
 
 @router.get("/crawling")
 def start_crawling():
