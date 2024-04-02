@@ -49,7 +49,7 @@ do
     response=$(curl -s http://172.17.0.1:${AFTER_SPRING_PORT}/api/actuator/health)
     up_count=$(echo $response | grep 'UP' | wc - l)
 
-    if [ $up_count -ge 1]
+    if [ $up_count -ge 1 ]
     then
         echo "> Spring Server is working"
         break
@@ -57,7 +57,7 @@ do
         echo "> Spring Health is not working: ${response}"
     fi
     # about 10 minuetes
-    if [ $retry_count -eq 60]
+    if [ $retry_count -eq 60 ]
     then
         echo "> Spring Server working failed"
         exit 1;
@@ -72,7 +72,7 @@ do
     response=$(curl -s http://172.17.0.1:${AFTER_FASTAPI_PORT}/api/data/health)
     up_count=$(echo $response | grep 'UP' | wc - l)
 
-    if [ $up_count -ge 1]
+    if [ $up_count -ge 1 ]
     then
         echo "> Fastapi Server is working"
         break
@@ -80,7 +80,7 @@ do
         echo "> Fastapi Health is not working: ${response}"
     fi
     # about 10 minuetes
-    if [ $retry_count -eq 60]
+    if [ $retry_count -eq 60 ]
     then
         echo "> Fastapi Server working failed"
         exit 1;
