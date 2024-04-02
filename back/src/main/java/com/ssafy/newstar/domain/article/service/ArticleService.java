@@ -24,6 +24,12 @@ public class ArticleService {
   public Record getArticles(Long articleId, Long memberId) {
     Article article = articleRepository.getReferenceById(articleId);
     Member member = memberRepository.getReferenceById(memberId);
+
+    // 해당 기사와 회원으로 만들어진 기록이 없다면 기록을 생성한다.
+    if (recordRepository.findByMemberAndArticle(member, article).isEmpty()) {
+      recordRepository.save(Record.createRecode(member, article));
+    }
+
     return recordRepository.findByArticleAndMember(article, member).orElseThrow(
         () -> new GlobalException(ErrorCode.ARTICLE_NOT_FOUND));
 

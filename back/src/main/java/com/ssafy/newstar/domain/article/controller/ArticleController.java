@@ -1,20 +1,17 @@
 package com.ssafy.newstar.domain.article.controller;
 
-import static com.ssafy.newstar.domain.article.dto.ArticleDetailResponse.*;
+import static com.ssafy.newstar.domain.article.dto.ArticleDetailResponse.createArticleDetailResponse;
 import static com.ssafy.newstar.domain.article.dto.ArticleResponse.createArticleResponse;
 import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseEntity;
 
-import com.ssafy.newstar.domain.article.dto.ArticleDetailResponse;
 import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.article.service.ArticleService;
-import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.service.RecordService;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
@@ -28,18 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ArticleController {
   private final ArticleService articleService;
-  private final RecordService recordService;
   @GetMapping("/articles/{articleId}")
   public ResponseEntity<?> getArticles(HttpServletRequest request,
           @PathVariable("articleId") Long articleId) {
     Long memberId = (Long) request.getAttribute("memberId");
-
-    boolean isNotExist = recordService.confirmRecord(memberId, articleId);
-
-    if(isNotExist) {
-      Record record = recordService.createRecordEntity(memberId, articleId);
-      recordService.createRecord(record);
-    }
 
     return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId, memberId)));
   }
