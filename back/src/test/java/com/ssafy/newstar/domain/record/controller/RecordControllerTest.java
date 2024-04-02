@@ -1,5 +1,8 @@
 package com.ssafy.newstar.domain.record.controller;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -11,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = true)
 class RecordControllerTest {
@@ -27,7 +31,7 @@ class RecordControllerTest {
   void getRecords() throws Exception {
     //given
     //when
-    mockMvc.perform(get("/records" )
+    mockMvc.perform(get("/records")
             .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb"))
         //then
         .andExpect(status().isOk())
@@ -38,10 +42,10 @@ class RecordControllerTest {
   }
 
   @Test
-  void getRecordLikes() throws Exception{
+  void getRecordLikes() throws Exception {
     //given
     //when
-    mockMvc.perform(get("/records/likes" )
+    mockMvc.perform(get("/records/likes")
             .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb"))
         //then
         .andExpect(status().isOk())
@@ -52,7 +56,7 @@ class RecordControllerTest {
   }
 
   @Test
-  void createRecord() throws Exception{
+  void createRecord() throws Exception {
     //given
     //when
     mockMvc.perform(post("/records")
@@ -62,7 +66,7 @@ class RecordControllerTest {
         //then
         .andExpect(status().isCreated())
         .andExpect(content().contentType("application/json"))
-        .andExpect(jsonPath("$.statusCode").value( 201))
+        .andExpect(jsonPath("$.statusCode").value(201))
         .andExpect(jsonPath("$.statusName").value("CREATED"))
         .andExpect(jsonPath("$.message").value("Created Success"));
   }
@@ -79,7 +83,7 @@ class RecordControllerTest {
         //then
         .andExpect(status().isOk())
         .andExpect(content().contentType("application/json"))
-        .andExpect(jsonPath("$.statusCode").value( 200))
+        .andExpect(jsonPath("$.statusCode").value(200))
         .andExpect(jsonPath("$.statusName").value("OK"))
         .andExpect(jsonPath("$.message").value("OK"));
   }

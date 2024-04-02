@@ -18,6 +18,7 @@ public class AnswerService {
   private final AnswerRepository answerRepository;
   private final MemberRepository memberRepository;
   private final QuestionRepository questionRepository;
+
   public boolean haveAnswer(Long memberId) {
     Member member = memberRepository.getReferenceById(memberId);
     Optional<Answer> answer = answerRepository.findFirstByMember(member);
@@ -26,7 +27,7 @@ public class AnswerService {
   }
 
   public void createAnswer(Long memberId, AnswerRequest[] requests) {
-    for(AnswerRequest answerRequest : requests) {
+    for (AnswerRequest answerRequest : requests) {
 
       Question question = questionRepository.getReferenceById(answerRequest.getQuestionId());
       Member member = memberRepository.getReferenceById(memberId);

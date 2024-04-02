@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class MemberCheckRequest {
-    private String pw;
+
+  private String pw;
 }

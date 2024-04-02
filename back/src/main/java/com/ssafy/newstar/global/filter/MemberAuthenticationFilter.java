@@ -6,16 +6,18 @@ import com.ssafy.newstar.domain.member.repository.MemberRepository;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.ErrorResponseEntity;
 import com.ssafy.newstar.util.response.exception.GlobalException;
-import jakarta.servlet.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
-
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
@@ -69,7 +71,7 @@ public class MemberAuthenticationFilter implements Filter {
       memberId = redisTemplate.opsForValue().get(pw);
 
       // DB 접근 (redis에 UUID로 만든 key가 없으면 DB에서 찾아오기 + redis에 저장하기)
-      if(memberId == null) {
+      if (memberId == null) {
         log.info("redis에 UUID 가 존재하지 않아 DB를 탐색합니다");
         Member member = memberRepository.findByPw(pw).orElseThrow(
             () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));

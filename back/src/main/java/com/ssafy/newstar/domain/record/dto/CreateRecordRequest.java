@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class CreateRecordRequest {
-    private Long articleId;
+
+  private Long articleId;
 }

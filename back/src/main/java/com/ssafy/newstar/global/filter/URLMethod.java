@@ -6,6 +6,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class URLMethod {
+
   String url;
   String method;
 }

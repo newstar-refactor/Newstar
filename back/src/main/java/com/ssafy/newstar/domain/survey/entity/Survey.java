@@ -15,6 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Survey {
+
   @Id
   @GeneratedValue
   @Column(name = "survey_id")

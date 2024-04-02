@@ -8,6 +8,7 @@ import lombok.ToString;
 @ToString
 @Getter
 public class RecordLikeRequest {
-    private Long articleId;
-    private Boolean likes;
+
+  private Long articleId;
+  private Boolean likes;
 }

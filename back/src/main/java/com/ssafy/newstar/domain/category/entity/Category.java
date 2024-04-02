@@ -1,6 +1,5 @@
 package com.ssafy.newstar.domain.category.entity;
 
-import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = "member")
 public class Category {
+
   @Id
   @GeneratedValue
   @Column(name = "category_id")
