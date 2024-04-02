@@ -44,11 +44,11 @@ else
 fi
 
 # Spring Server health checking
-for retry_count in {1..60};
+for retry_count in {1..60}
 do
     response=$(curl -s http://172.17.0.1:${AFTER_SPRING_PORT}/api/actuator/health)
-    up_count=$(echo $response | grep 'UP' | wc - l)
-    
+    up_count=$(echo $response | grep 'UP' | wc -l)
+
     if [ $up_count -ge 1 ]
     then
         echo "> Spring Server is working"
@@ -67,10 +67,10 @@ do
 done
 
 # Fastapi Server health checking
-for retry_count in {1..60};
+for retry_count in {1..60}
 do
     response=$(curl -s http://172.17.0.1:${AFTER_FASTAPI_PORT}/api/data/health)
-    up_count=$(echo $response | grep 'UP' | wc - l)
+    up_count=$(echo $response | grep 'UP' | wc -l)
 
     if [ $up_count -ge 1 ]
     then
