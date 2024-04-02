@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnswerController {
 
   private final AnswerService answerService;
+
   @GetMapping("/answers")
   public ResponseEntity<?> haveAnswer(HttpServletRequest request) {
     Long memberId = (Long) request.getAttribute("memberId");
@@ -34,9 +34,11 @@ public class AnswerController {
 
   @PostMapping("/answers")
   public ResponseEntity<?> createAnswer(HttpServletRequest request,
-    @Valid @RequestBody AnswerRequest[] answerRequest, BindingResult bindingResult) {
+      @Valid @RequestBody AnswerRequest[] answerRequest, BindingResult bindingResult) {
     Long memberId = (Long) request.getAttribute("memberId");
-    if (bindingResult.hasErrors()) throw new GlobalException(ErrorCode.INVALID_INPUT_VALUE);
+    if (bindingResult.hasErrors()) {
+      throw new GlobalException(ErrorCode.INVALID_INPUT_VALUE);
+    }
 
     answerService.createAnswer(memberId, answerRequest);
     return getResponseEntity(SuccessCode.CREATED);

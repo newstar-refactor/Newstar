@@ -38,7 +38,8 @@ class AnswerControllerTest {
     mockMvc.perform(post("/answers")
             .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb")
             .contentType("application/json")
-            .content("[{\"questionId\":1,\"response\":\"mobile\"},{\"questionId\":2,\"response\":\"적당합니다.\"},{\"questionId\":3,\"response\":\"만족\"},{\"questionId\":4,\"response\":\"매우 만족\"},{\"questionId\":5,\"response\":\"보통\"},{\"questionId\":6,\"response\": \"123\"},{\"questionId\":7,\"response\":\"010-9764-9784\"}]"))
+            .content(
+                "[{\"questionId\":1,\"response\":\"mobile\"},{\"questionId\":2,\"response\":\"적당합니다.\"},{\"questionId\":3,\"response\":\"만족\"},{\"questionId\":4,\"response\":\"매우 만족\"},{\"questionId\":5,\"response\":\"보통\"},{\"questionId\":6,\"response\": \"123\"},{\"questionId\":7,\"response\":\"010-9764-9784\"}]"))
         // then
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.statusCode").value(201))

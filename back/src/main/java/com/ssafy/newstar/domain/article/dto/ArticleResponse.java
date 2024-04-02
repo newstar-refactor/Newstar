@@ -9,6 +9,7 @@ import org.springframework.data.domain.Slice;
 @Data
 @ToString
 public class ArticleResponse {
+
   Long article_id;
 
   private String title;

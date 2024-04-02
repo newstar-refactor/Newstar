@@ -7,10 +7,7 @@ import com.ssafy.newstar.domain.member.repository.MemberRepository;
 import com.ssafy.newstar.domain.record.dto.RecordLikeRequest;
 import com.ssafy.newstar.domain.record.entity.Record;
 import com.ssafy.newstar.domain.record.repository.RecordRepository;
-import com.ssafy.newstar.util.response.ErrorCode;
-import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.transaction.Transactional;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -46,7 +43,7 @@ public class RecordService {
     Article article = articleRepository.getReferenceById(articleId);
 
     // 기존 기록  있다면 제거
-    if(recordRepository.findByMemberAndArticle(member, article).isPresent()) {
+    if (recordRepository.findByMemberAndArticle(member, article).isPresent()) {
       recordRepository.deleteByMemberAndArticle(member, article);
     }
 
@@ -59,7 +56,7 @@ public class RecordService {
     Article article = articleRepository.getReferenceById(request.getArticleId());
 
     // 기존 기록  있다면 제거
-    if(recordRepository.findByMemberAndArticle(member, article).isPresent()) {
+    if (recordRepository.findByMemberAndArticle(member, article).isPresent()) {
       recordRepository.deleteByMemberAndArticle(member, article);
     }
 

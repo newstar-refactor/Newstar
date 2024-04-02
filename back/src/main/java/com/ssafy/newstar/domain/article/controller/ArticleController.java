@@ -6,7 +6,6 @@ import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseE
 
 import com.ssafy.newstar.domain.article.dto.ArticleResponse;
 import com.ssafy.newstar.domain.article.service.ArticleService;
-import com.ssafy.newstar.domain.record.service.RecordService;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.SuccessCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
@@ -24,23 +23,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class ArticleController {
+
   private final ArticleService articleService;
+
   @GetMapping("/articles/{articleId}")
   public ResponseEntity<?> getArticles(HttpServletRequest request,
-          @PathVariable("articleId") Long articleId) {
+      @PathVariable("articleId") Long articleId) {
     Long memberId = (Long) request.getAttribute("memberId");
 
-    return getResponseEntity(SuccessCode.OK, createArticleDetailResponse(articleService.getArticles(articleId, memberId)));
+    return getResponseEntity(SuccessCode.OK,
+        createArticleDetailResponse(articleService.getArticles(articleId, memberId)));
   }
 
   @GetMapping("/articles/category")
   public ResponseEntity<?> getArticlesByCategory(Pageable pageable,
       @RequestParam(value = "bcategory", required = false, defaultValue = "") String bcategory,
       @RequestParam(value = "scategory", required = false, defaultValue = "") String scategory) {
-    if (StringUtils.hasText(bcategory) && StringUtils.hasText(scategory)) throw new GlobalException(ErrorCode.CATEGORY_NOT_ONE);
-    if (!StringUtils.hasText(bcategory) && !StringUtils.hasText(scategory)) throw new GlobalException(ErrorCode.CATEGORY_NOT_SELECTED);
+    if (StringUtils.hasText(bcategory) && StringUtils.hasText(scategory)) {
+      throw new GlobalException(ErrorCode.CATEGORY_NOT_ONE);
+    }
+    if (!StringUtils.hasText(bcategory) && !StringUtils.hasText(scategory)) {
+      throw new GlobalException(ErrorCode.CATEGORY_NOT_SELECTED);
+    }
 
-    Slice<ArticleResponse> response = createArticleResponse(articleService.getArticlesByCategory(pageable, bcategory, scategory));
+    Slice<ArticleResponse> response = createArticleResponse(
+        articleService.getArticlesByCategory(pageable, bcategory, scategory));
     return getResponseEntity(SuccessCode.OK, response);
   }
 }

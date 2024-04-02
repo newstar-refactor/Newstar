@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 @Data
 @Builder
 public class ErrorResponseEntity {
+
   private int statusCode;
   private String statusName;
   private String message;

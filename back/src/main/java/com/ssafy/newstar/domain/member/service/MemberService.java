@@ -21,6 +21,7 @@ public class MemberService {
 
   private final MemberRepository memberRepository;
   private final CategoryRepository categoryRepository;
+
   public Member getMember(Long memberId) {
     return memberRepository.findById(memberId).orElseThrow(
         () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));

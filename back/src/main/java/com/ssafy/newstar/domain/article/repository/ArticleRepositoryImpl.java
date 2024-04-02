@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 @RequiredArgsConstructor
 public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
+
   private final JPAQueryFactory queryFactory;
 
   @Override
@@ -22,12 +23,12 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 
     BooleanBuilder builder = new BooleanBuilder();
 
-  if(StringUtils.hasText(bcategory)) {
-    builder.and(article.bcategory.eq(Integer.valueOf(bcategory)));
-  }
-  if(StringUtils.hasText(scategory)) {
-    builder.and(article.scategory.eq(Integer.valueOf(scategory)));
-  }
+    if (StringUtils.hasText(bcategory)) {
+      builder.and(article.bcategory.eq(Integer.valueOf(bcategory)));
+    }
+    if (StringUtils.hasText(scategory)) {
+      builder.and(article.scategory.eq(Integer.valueOf(scategory)));
+    }
 
     List<Article> fetch = queryFactory
         .selectFrom(article)

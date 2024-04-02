@@ -1,6 +1,10 @@
 package com.ssafy.newstar.domain.article.entity;
-import jakarta.persistence.*;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,12 +15,8 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-//@Table(uniqueConstraints={
-//    @UniqueConstraint(
-//        name = "no_duplicate_url",
-//        columnNames = {"url"})
-//})
 public class Article {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "article_id")
@@ -34,13 +34,14 @@ public class Article {
 
   private String imageUrl;
 
-  @Column( length=10000 )
+  @Column(length = 10000)
   private String content;
 
-  @Column( length=2000 )
+  @Column(length = 2000)
   private String summary;
 
-  public static Article createArticle(String title, String url, LocalDateTime date, int Bcategory, int Scategory, String imageUrl, String content, String summary) {
+  public static Article createArticle(String title, String url, LocalDateTime date, int Bcategory,
+      int Scategory, String imageUrl, String content, String summary) {
     Article article = new Article();
     article.title = title;
     article.url = url;
