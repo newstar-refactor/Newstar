@@ -98,7 +98,7 @@
 
 ### 📝 ERD
 
-![ERD](./README_image/ERD.PNG)
+![ERD](./README_image/ERD.png)
 
 <br /><br />
 
