@@ -56,6 +56,14 @@ export default function ShortForm() {
     const [isImageLoad, setIsImageLoad] = useState(false);
     const { setIsOpen, isOpen } = useTour();
 
+    useEffect(() => {
+        if(surveyModalOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+    }, [surveyModalOpen])
+
     //뉴스 데이터 로드
     useEffect(() => {
         setLoading(true);
