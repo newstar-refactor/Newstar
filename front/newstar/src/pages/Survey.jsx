@@ -18,7 +18,7 @@ const customModal =  Modal.Styles = {
   },
   content: {
     width: "80%",
-    height: "90%",
+    height: "70%",
     zIndex: "150",
     position: "absolute",
     top: "50%",

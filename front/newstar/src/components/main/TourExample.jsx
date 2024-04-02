@@ -6,11 +6,12 @@ import MainNewsBody from './MainNewsBody';
 import swipeLottie from '../../assets/lottie/swipe.json'
 
 import { useTour } from "@reactour/tour";
+import { useEffect } from 'react';
 
 const MainNewsImage = styled.img`
     width: 100%;
     padding: 0px 15px;
-    /* border-radius: 20px; */
+    object-fit: certain;
 `;
 
 
