@@ -27,14 +27,16 @@ public class ArticleService {
     Article article = articleRepository.getReferenceById(articleId);
     Member member = memberRepository.getReferenceById(memberId);
 
-    // 해당 기사와 회원으로 만들어진 기록이 없다면 기록을 생성한다.
-    if (recordRepository.findByMemberAndArticle(member, article).isEmpty()) {
-      recordRepository.save(Record.createRecode(member, article));
+    // 해당 기사와 회원으로 만들어진 기록이 있다면 삭제한다 !
+    if (recordRepository.findByMemberAndArticle(member, article).isPresent()) {
+      recordRepository.deleteByMemberAndArticle(member, article);
     }
+
+    // 기록 생성 !
+    recordRepository.save(Record.createRecode(member, article));
 
     return recordRepository.findByArticleAndMember(article, member).orElseThrow(
         () -> new GlobalException(ErrorCode.ARTICLE_NOT_FOUND));
-
   }
 
   public Slice<Article> getArticlesByCategory(Pageable pageable, String bcategory,
