@@ -1,22 +1,19 @@
 // 메인 페이지 뉴스 카드
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import MainNewsHeader from './MainNewsHeader';
 import MainNewsBody from './MainNewsBody';
 import NotFoundImg from '../../assets/logo_dark.png';
-import LikeButton from '../../common/Like';
-
-import { BigCategory, SmallCategory } from '../../state/categoryData';
 
 import { likeNews } from '../../api/fetch';
-import { useTour } from "@reactour/tour";
 
 const MainNewsImage = styled.img`
     width: 100%;
-    padding: 0px 15px;
-    /* border-radius: 20px; */
+    height: 300px;
+    padding: 15px;
+    border-radius: 20px;
+    object-fit: contain;
 `;
 
 
@@ -25,13 +22,6 @@ const NewsContainer = styled.div`
     ::-webkit-scrollbar {
         display: none;
     }
-`;
-
-const MainNewsHeaderContainer = styled.div`
-    padding: 20px 20px;
-    display: flex;
-    flex-direction:column;
-    gap: 10px;
 `;
 
 function MainNewsCard({ newsData }) {
