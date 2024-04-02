@@ -36,11 +36,7 @@ public class RecordController {
     public ResponseEntity<?> createRecord(@RequestBody CreateRecordRequest createRecordRequest, HttpServletRequest request) {
         Long memberId = (Long) request.getAttribute("memberId");
 
-        // 사용자가 이미 시청한 기록이 있는지 확인
-        if(recordService.confirmRecord(memberId, createRecordRequest.getArticleId())) {
-            Record record = recordService.createRecordEntity(memberId, createRecordRequest.getArticleId());
-            recordService.createRecord(record);
-        }
+        recordService.createRecord(memberId, createRecordRequest.getArticleId());
         return getResponseEntity(SuccessCode.CREATED);
     }
 

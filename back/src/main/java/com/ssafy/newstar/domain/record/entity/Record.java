@@ -39,7 +39,11 @@ public class Record {
     return record;
   }
 
-  public void updateLikes(boolean likes) {
-    this.likes = likes;
+  public static Record createRecodeWithLike(Member member, Article article, Boolean likes) {
+    Record record = new Record();
+    record.member = member;
+    record.article = article;
+    record.likes = likes;
+    return record;
   }
 }
