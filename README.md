@@ -165,8 +165,9 @@
 
 <details>
   <summary>1차 배포 결과</summary>
-- `사용자 수` : 2024년 3월 29일(금) ~ 2024년 4월 1일(월) - 166명
-  ![service](./README_image/1_member.png)
+  
+  - `사용자 수` : 2024년 3월 29일(금) ~ 2024년 4월 1일(월) - 166명
+    ![service](./README_image/1_member.png)
 
 - `사용자 시청 기록`
 
