@@ -46,7 +46,7 @@ fi
 # Spring Server health checking
 for retry_count in {1...60};
 do
-    response=$(curl -s https://newstar.world/api/actuator/health)
+    response=$(curl -s http://localhost:${AFTER_SPRING_PORT}/api/actuator/health)
     up_count=$(echo $response | grep 'UP' | wc - l)
 
     if [ $up_count -ge 1]
@@ -69,7 +69,7 @@ done
 # Fastapi Server health checking
 for retry_count in {1...60};
 do
-    response=$(curl -s https://newstar.world/api/data/health)
+    response=$(curl -s http://localhost:${AFTER_FASTAPI_PORT}/api/data/health)
     up_count=$(echo $response | grep 'UP' | wc - l)
 
     if [ $up_count -ge 1]
