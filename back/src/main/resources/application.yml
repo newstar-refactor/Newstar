@@ -31,3 +31,8 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type: trace # log 단계에서 쿼리문 show
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
