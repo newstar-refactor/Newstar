@@ -9,7 +9,6 @@ import com.ssafy.newstar.domain.member.repository.MemberRepository;
 import com.ssafy.newstar.util.response.ErrorCode;
 import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.transaction.Transactional;
-import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class MemberService {
     return member;
   }
 
-  public Optional<Member> checkMember(MemberCheckRequest memberCheckRequest) {
-    return memberRepository.findByPw(memberCheckRequest.getPw());
+  public Boolean checkMember(MemberCheckRequest memberCheckRequest) {
+    return memberRepository.findByPw(memberCheckRequest.getPw()).isPresent();
   }
 }
