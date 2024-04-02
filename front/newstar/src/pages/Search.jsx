@@ -49,6 +49,7 @@ export default function Search() {
                 try {
                     // 성공 콜백
                     const response = await searchNews(searchWord);
+                    console.log(response)
                     setFilteredNews(response.data);
                     // 실패 콜백
                 } catch (error) {

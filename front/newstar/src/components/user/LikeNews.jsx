@@ -15,15 +15,10 @@ const LikeNewsContainer = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   padding: 10px;
-  position: relative;
-`
-
-const LikeNewsCards = styled.div`
-  min-width: 100%;
   display: flex;
   gap: 10px;
+  position: relative;
 `
-
 
 export default function LikeNews() {
 
@@ -65,19 +60,17 @@ export default function LikeNews() {
   }, [inView]);
 
   return (
-    <div>
+    <>
       <h2>좋아요 한 뉴스</h2>
       <LikeNewsContainer>
-        <LikeNewsCards>
           {likeNews && likeNews.map((likeData, idx) => (
             <LikeNewsCard
               key={`${idx}-${likeData.article_id}`}
               $background={idx % 2 === 0 ? "rgb(138, 192, 56)" : "rgb(100, 192, 86)"}
               likeData={likeData} />
           ))}
-        <div style={{ color: 'white' }} ref={ref}>n</div>
-        </LikeNewsCards>
+          <div ref={ref} />
       </LikeNewsContainer>
-    </div>
+    </>
   )
 }
