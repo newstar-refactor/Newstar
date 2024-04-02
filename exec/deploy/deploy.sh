@@ -1,25 +1,26 @@
 echo 'CI/CD Deploy Start'
 
 cd ../../back
-
+# spring Image build
 echo 'backend image build'
 docker build -t newstar_back .
 
 cd ../front/newstar
-
+# front Image build
 echo 'frontend image build'
 docker build -t newstar_front .
 
 cd ../../pydata
-
+# fastapi Image build
 echo 'fastapi image build'
 docker build -t fastapi_back .
 
 cd ../exec/deploy
-
+# Working container check
 EXIST_BLUE=$(docker compose -p deploy-blue -f docker-compose.blue.yaml ps | grep Up)
 
 if [ -z "$EXIST_BLUE" ]; then
+    # blue
     docker compose -p deploy-blue -f docker-compose.blue.yaml up -d
     BEFORE_COLOR="green"
     AFTER_COLOR="blue"
@@ -30,6 +31,7 @@ if [ -z "$EXIST_BLUE" ]; then
     AFTER_REACT_PORT=3000
     AFTER_FASTAPI_PORT=8000
 else
+    # green
     docker compose -p deploy-green -f docker-compose.green.yaml up -d
     BEFORE_COLOR="blue"
     AFTER_COLOR="green"
@@ -41,7 +43,52 @@ else
     AFTER_FASTAPI_PORT=8001
 fi
 
-sleep 10
+# Spring Server health checking
+for retry_count in {1...60};
+do
+    response=$(curl -s http://localhost:${AFTER_SPRING_PORT}/api/actuator/health)
+    up_count=$(echo $response | grep 'UP' | wc - l)
+
+    if [ $up_count -ge 1]
+    then
+        echo "> Spring Server is working"
+        break
+    else
+        echo "> Spring Health is not working: ${response}"
+    fi
+    # about 10 minuetes
+    if [ $retry_count -eq 60]
+    then
+        echo "> Spring Server working failed"
+        exit 1;
+    fi
+    # wating 10 seconds
+    sleep 10
+done
+
+# Fastapi Server health checking
+for retry_count in {1...60};
+do
+    response=$(curl -s http://localhost:${AFTER_FASTAPI_PORT}/api/data/health)
+    up_count=$(echo $response | grep 'UP' | wc - l)
+
+    if [ $up_count -ge 1]
+    then
+        echo "> Fastapi Server is working"
+        break
+    else
+        echo "> Fastapi Health is not working: ${response}"
+    fi
+    # about 10 minuetes
+    if [ $retry_count -eq 60]
+    then
+        echo "> Fastapi Server working failed"
+        exit 1;
+    fi
+    # wating 10 seconds
+    sleep 10
+done
+
 
 echo "${AFTER_COLOR} server up(spring_port:${AFTER_SPRING_PORT}, react_port:${AFTER_REACT_PORT}, fastapi_port:${AFTER_FASTAPI_PORT})"
 
@@ -59,6 +106,6 @@ fi
 EXIST_NONE_IMAGES=$(docker images -f "dangling=true" -q)
 
 if [ -n "$EXIST_NONE_IMAGE" ]; then
-    docker rmi $EXIST_NONE_IMAGES
+    docker rmi ${EXIST_NONE_IMAGES}
 fi
 
