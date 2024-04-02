@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo 'CI/CD Deploy Start'
 
 cd ../../back
