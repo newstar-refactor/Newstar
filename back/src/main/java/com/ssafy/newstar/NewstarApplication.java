@@ -7,7 +7,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication
 public class NewstarApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(NewstarApplication.class, args);
-	}
+
+  public static void main(String[] args) {
+    SpringApplication.run(NewstarApplication.class, args);
+  }
 }

@@ -7,13 +7,15 @@ import org.springframework.http.ResponseEntity;
 @Data
 @Builder
 public class SuccessResponseEntity {
+
   private int statusCode;
   private String statusName;
   private String message;
   private Object data;
 
   // 데이터 랜더링 있을때
-  public static ResponseEntity<SuccessResponseEntity> getResponseEntity(SuccessCode sc, Object data) {
+  public static ResponseEntity<SuccessResponseEntity> getResponseEntity(SuccessCode sc,
+      Object data) {
     return ResponseEntity
         .status(sc.getHttpStatus())
         .body(SuccessResponseEntity.builder()

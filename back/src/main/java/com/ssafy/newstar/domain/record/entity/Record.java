@@ -2,8 +2,13 @@ package com.ssafy.newstar.domain.record.entity;
 
 import com.ssafy.newstar.domain.article.entity.Article;
 import com.ssafy.newstar.domain.member.entity.Member;
-import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +20,7 @@ import org.hibernate.annotations.ColumnDefault;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = {"member", "article"})
 public class Record {
+
   @Id
   @GeneratedValue
   @Column(name = "record_id")
@@ -31,7 +37,7 @@ public class Record {
   @ColumnDefault("false")
   private Boolean likes;
 
-  public  static Record createRecode(Member member, Article article) {
+  public static Record createRecode(Member member, Article article) {
     Record record = new Record();
     record.member = member;
     record.article = article;
@@ -39,7 +45,11 @@ public class Record {
     return record;
   }
 
-  public void updateLikes(boolean likes) {
-    this.likes = likes;
+  public static Record createRecodeWithLike(Member member, Article article, Boolean likes) {
+    Record record = new Record();
+    record.member = member;
+    record.article = article;
+    record.likes = likes;
+    return record;
   }
 }

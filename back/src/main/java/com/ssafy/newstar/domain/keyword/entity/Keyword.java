@@ -1,7 +1,6 @@
 package com.ssafy.newstar.domain.keyword.entity;
 
 import com.ssafy.newstar.domain.article.entity.Article;
-import com.ssafy.newstar.domain.member.entity.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = "article")
 public class Keyword {
+
   @Id
   @GeneratedValue
   @Column(name = "keyword_id")

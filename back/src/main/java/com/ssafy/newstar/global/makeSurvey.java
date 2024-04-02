@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class makeSurvey {
+
   private final InitService initService;
+
   @PostConstruct
   public void init() {
     //initService.surveyOne();
@@ -23,6 +25,7 @@ public class makeSurvey {
   @Transactional
   @RequiredArgsConstructor
   static class InitService {
+
     private final EntityManager em;
 
     public void surveyOne() {

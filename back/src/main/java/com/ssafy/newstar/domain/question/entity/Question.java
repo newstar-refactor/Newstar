@@ -20,6 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = {"survey"})
 public class Question {
+
   @Id
   @GeneratedValue
   @Column(name = "question_id")
