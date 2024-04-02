@@ -53,7 +53,9 @@ do
 
     if [ $up_count -ge 1 ]
     then
+        echo "=========================="
         echo "> Spring Server is working"
+        echo "=========================="
         break
     else
         echo "> Spring Health is not working: ${response}"
@@ -62,6 +64,7 @@ do
     if [ $retry_count -eq 60 ]
     then
         echo "> Spring Server working failed"
+        docker compose -p deploy-${AFTER_COLOR} -f docker-compose.${AFTER_COLOR}.yaml down
         exit 1;
     fi
     # wating 10 seconds
@@ -76,7 +79,9 @@ do
 
     if [ $up_count -ge 1 ]
     then
+        echo "=========================="
         echo "> Fastapi Server is working"
+        echo "=========================="
         break
     else
         echo "> Fastapi Health is not working: ${response}"
@@ -85,13 +90,12 @@ do
     if [ $retry_count -eq 60 ]
     then
         echo "> Fastapi Server working failed"
+        docker compose -p deploy-${AFTER_COLOR} -f docker-compose.${AFTER_COLOR}.yaml down
         exit 1;
     fi
     # wating 10 seconds
-    sleep 10
+    sleep 20
 done
-
-# 실패시 다운 시켜야 할듯
 
 echo "${AFTER_COLOR} server up(spring_port:${AFTER_SPRING_PORT}, react_port:${AFTER_REACT_PORT}, fastapi_port:${AFTER_FASTAPI_PORT})"
 
@@ -108,7 +112,7 @@ fi
 
 EXIST_NONE_IMAGES=$(docker images -f "dangling=true" -q)
 
-if [ -n "$EXIST_NONE_IMAGE" ]; then
+if [ -n ${EXIST_NONE_IMAGE} ]; then
     docker rmi ${EXIST_NONE_IMAGES}
 fi
 
