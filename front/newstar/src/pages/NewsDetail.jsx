@@ -10,8 +10,10 @@ import NotfoundImg from '../assets/logo_dark.png';
 
 const DetailNewsImage = styled.img`
     width: 100%;
+    height: 300px;
     padding: 10px;
     border-radius: 20px;
+    object-fit: contain;
 `;
 
 const DetailNewsContainer = styled.div`
