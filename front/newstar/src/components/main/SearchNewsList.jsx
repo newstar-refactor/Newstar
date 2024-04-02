@@ -31,15 +31,18 @@ const EmptyContainer = styled.div`
 
 const SearchNewsCardImage = styled.img`
     width: 30%;
-    border-radius: 5px;
+    height: 65px;
+    border-radius: 2px;
 `;
 
 const SearchTitle = styled.div`
     font-size: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
     width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 `;
 
 const SearchNewsCardContainer = styled.div`
@@ -57,6 +60,7 @@ const SearchNewsList = ({ NewsData }) => {
         postRecords(
             mynews,
             (response) => {
+              
                 navigate(`/newstar/${articleId}`);
             },
             (error) => {
@@ -69,13 +73,14 @@ const SearchNewsList = ({ NewsData }) => {
         <SearchNewsCardContainer>
             {NewsData.length > 0 ? (
                 NewsData.map((newsItem, index) => (
-                    <>
-                    <BoxContainer key={newsItem.article_id} onClick={() => handleNewsClick(newsItem.article_id)}>
+                    <div key={newsItem.article_id}>
+                    <BoxContainer  onClick={() => handleNewsClick(newsItem.article_id)}>
                         <SearchNewsCardImage src={newsItem.image_url} alt="news image" />
                         <SearchTitle>{newsItem.title}</SearchTitle>
                     </BoxContainer>
+                    <br />
                     <hr color="lightgray" border-width="1px" />
-                    </>
+                    </div>
                 ))
             ) : (
                 <EmptyContainer>찾으시는 기사가 없습니다 😅</EmptyContainer>
