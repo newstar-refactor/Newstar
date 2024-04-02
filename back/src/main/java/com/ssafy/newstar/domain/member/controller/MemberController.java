@@ -24,15 +24,11 @@ import static com.ssafy.newstar.util.response.SuccessResponseEntity.getResponseE
 public class MemberController {
   private final MemberService memberService;
   private final RedisTemplate<String, Long> redisTemplate;
-
   // 사용자의 정보를 가져온다.
   @GetMapping("/members")
   public ResponseEntity<?> matchingMember(HttpServletRequest request) {
     Long memberId = (Long) request.getAttribute("memberId");
-    Member member = memberService.getMember(memberId).orElseThrow(
-        () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
-
-    return getResponseEntity(SuccessCode.OK, createMemberResponse(member));
+    return getResponseEntity(SuccessCode.OK, createMemberResponse(memberService.getMember(memberId)));
   }
 
   // 회원가입 로직

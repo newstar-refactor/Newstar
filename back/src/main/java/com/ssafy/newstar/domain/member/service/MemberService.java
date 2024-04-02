@@ -6,6 +6,8 @@ import com.ssafy.newstar.domain.member.dto.MemberCheckRequest;
 import com.ssafy.newstar.domain.member.dto.MemberRequest;
 import com.ssafy.newstar.domain.member.entity.Member;
 import com.ssafy.newstar.domain.member.repository.MemberRepository;
+import com.ssafy.newstar.util.response.ErrorCode;
+import com.ssafy.newstar.util.response.exception.GlobalException;
 import jakarta.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,8 +21,9 @@ public class MemberService {
 
   private final MemberRepository memberRepository;
   private final CategoryRepository categoryRepository;
-  public Optional<Member> getMember(Long memberId) {
-    return memberRepository.findById(memberId);
+  public Member getMember(Long memberId) {
+    return memberRepository.findById(memberId).orElseThrow(
+        () -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND));
   }
 
   public Member createMember(MemberRequest memberRequest) {
