@@ -86,10 +86,10 @@
 - 💾 Backend
 
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
-  <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=#6DB33F">
-  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=#4479A1">
+  <img src="https://img.shields.io/badge/spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=#005571">
-  <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=efastapih&logoColor=#009688">
+  <img src="https://img.shields.io/badge/fastapi-101010?style=for-the-badge&logo=fastapi&logoColor=#009688">
 
 ### 📑 기능 명세서
 
@@ -148,6 +148,11 @@
 
 ### - Algorithm
 
+사용자 맞춤 추천을 위해 gensim doc2vec 모델을 사용하고, 문서요약을 위해 kobart summarization 모델을 사용하였습니다.
+
+1. 사용자의 선호도에 따른 뉴스 추천이 과도한 편향성을 방지하기 위해 Exploration 기법을 사용하였습니다. Exploration 이란 더 많은 정보를 얻기 위해 사용자가 많이 소비할 것 같지 않은 불확실성이 높은 콘텐츠를 추천하는 방식입니다.
+2. 최신 뉴스를 더욱더 많이 추천하도록 시간에 대한 가중치를 적용하였습니다.
+3. 뉴스 크롤링 이후 문서 요약 모델을 통해 요약을 하여 프로젝트의 의도에 맞는 숏폼 형식의 뉴스데이터를 구축하였습니다. 
 ### - Crawling <br />
 
 메인 서버인 스프링 서버에서 매시 5분에 trriger를 발생시켜 네이버 뉴스 기사를 크롤링하였습니다.
@@ -290,7 +295,7 @@
 
 # 팀원 소개
 
-**B302 👨‍👨‍👧‍👧 : 박찬홍(팀짱), 최준영, 한셩현, 김수환(백짱), 박은미, 김유정**
+**B302 👨‍👨‍👧‍👧 : 박찬홍(팀짱), 최준영, 한성현, 김수환(백짱), 박은미, 김유정**
 
 **FRONTEND**
 
