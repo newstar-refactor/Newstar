@@ -9,10 +9,11 @@
 1. [개요](#개요)
 2. [프로젝트 소개](#프로젝트-소개)
 3. [서비스 화면](#서비스-화면)
-4. [기술 소개](#주요-기술)
+4. [기술 소개](#기술-소개)
 5. [서비스 개선](#서비스-개선)
-6. [협업 환경](#협업-환경)
-7. [팀원 소개](#팀원-소개)
+6. [최적화 및 성능 개선](#최적화-성능-개선)
+7. [협업 환경](#협업-환경)
+8. [팀원 소개](#팀원-소개)
 
 <br /><br />
 
@@ -146,13 +147,14 @@
 2. 확장성 및 성능 : 분산 아키텍처를 통해 데이터를 효울적으로 분사하여 처리하고, 클러스터의 확장성을 확보하여 서비스의 성능을 향상시켰습니다.
 3. 실시간 분석 기능 : 실시간 색인 기능을 활용하여 사용자 행동 및 데이터 흐름을 실시간으로 분석하고 시각화하는 기능을 제공할 수 있습니다.
 
-### - Algorithm
+### - Algorithm <br />
 
 사용자 맞춤 추천을 위해 gensim doc2vec 모델을 사용하고, 문서요약을 위해 kobart summarization 모델을 사용하였습니다.
 
 1. 사용자의 선호도에 따른 뉴스 추천이 과도한 편향성을 방지하기 위해 Exploration 기법을 사용하였습니다. Exploration 이란 더 많은 정보를 얻기 위해 사용자가 많이 소비할 것 같지 않은 불확실성이 높은 콘텐츠를 추천하는 방식입니다.
 2. 최신 뉴스를 더욱더 많이 추천하도록 시간에 대한 가중치를 적용하였습니다.
-3. 뉴스 크롤링 이후 문서 요약 모델을 통해 요약을 하여 프로젝트의 의도에 맞는 숏폼 형식의 뉴스데이터를 구축하였습니다. 
+3. 뉴스 크롤링 이후 문서 요약 모델을 통해 요약을 하여 프로젝트의 의도에 맞는 숏폼 형식의 뉴스데이터를 구축하였습니다.
+
 ### - Crawling <br />
 
 메인 서버인 스프링 서버에서 매시 5분에 trriger를 발생시켜 네이버 뉴스 기사를 크롤링하였습니다.
@@ -178,67 +180,181 @@
 
   - 총 5063개의 뉴스 시청 <br />
   - 인당 약 30개 시청 <br />
-    ![service](./README_image/1_recode.png)
+    ![service](./README_image/1_record.png)
 
 - `설문 결과` : 총 24명 참가
   <details>
-    <summary>1. 서비스를 이용한 환경이 무엇인가요?</summary>
-    - Mobile : 10명 <br />
-    - PC : 14명
+  <summary>1. 서비스를 이용한 환경이 무엇인가요?</summary> - Mobile : 10명 <br /> - PC : 14명
   </details>
   <details>
-    <summary>2. 뉴스 기사의 카테고리가 다양한가요?</summary>
-    - 네, 다양합니다 : 16명 <br />
-    - 부족한 것 같습니다. : 3명 <br />
-    - 적당합니다 : 5명
+  <summary>2. 뉴스 기사의 카테고리가 다양한가요?</summary> - 네, 다양합니다 : 16명 <br /> - 적당합니다 : 5명 <br /> - 부족한 것 같습니다. : 3명
   </details>
   <details>
-    <summary>3. 웹 사이트의 디자인은 괜찮나요?</summary>
-    - 매우 만족 : 13명 <br />
-    - 만족 : 8명 <br />
-    - 보통 : 2명 <br />
-    - 불만족 : 1명
+  <summary>3. 웹 사이트의 디자인은 괜찮나요?</summary> - 매우 만족 : 13명 <br /> - 만족 : 8명 <br /> - 보통 : 2명 <br /> - 불만족 : 1명
   </details>
   <details>
-    <summary>4. 웹 사이트의 로딩 속도에 만족하십니까?</summary>
-    - 매우 만족 : 1명 <br />
-    - 만족 : 20명 <br />
-    - 보통 : 2명 <br />
-    - 불만족 : 1명
+  <summary>4. 웹 사이트의 로딩 속도에 만족하십니까?</summary> - 매우 만족 : 1명 <br /> - 만족 : 20명 <br /> - 보통 : 2명 <br /> - 불만족 : 1명
   </details>
   <details>
-    <summary>5. 웹 사이트 사용자 경험(페이지 이동의 편의성, 버튼 및 링크의 명확성 등)에 만족하십니까?</summary>
-    - 매우 만족 : 10명 <br />
-    - 만족 : 5명 <br />
-    - 보통 : 5명 <br />
-    - 불만족 : 3명 <br />
-    - 매우 불만족 : 1명 
+  <summary>5. 웹 사이트 사용자 경험(페이지 이동의 편의성, 버튼 및 링크의 명확성 등)에 만족하십니까?</summary> - 매우 만족 : 10명 <br /> - 만족 : 5명 <br /> - 보통 : 5명 <br /> - 불만족 : 3명 <br /> - 매우 불만족 : 1명
   </details>
   <details>
-    <summary>6. 개선할 점이 있다면 적어주세요.</summary>
-    - 홈화면에서 오른쪽으로 넘길 수 있는거 몰랐어요 뭔가 표시가 있으면 좋곘어요  <br />
-    - 뉴스 이동 간 화살표 방향 제시 필요  <br />
-    - 스와이프로 이동 제시 필요  <br />
-    - 옆으로 넘기는 걸 몰랐습니다.  <br />
-    - 큐알코드 저장해서 어디에 사용할 수 있는지,,,? 안내 문구라도 있으면 좋을 듯. 뉴스 검색 시에 나오는 기준이 뭔지.... 검색한 키워드와 관련 없는 기사도 많이 보임. 
-    - 그리고 qr은 어떻게 사용하는 건가요 미구현인가요?
-    - QR 코드의 의도를 잘 이해하지 못하겠어요. 당연히 앱설친줄 알았습니다.
+  <summary>6. 개선할 점이 있다면 적어주세요.</summary> - 홈화면에서 오른쪽으로 넘길 수 있는거 몰랐어요 뭔가 표시가 있으면 좋곘어요 <br /> - 뉴스 이동 간 화살표 방향 제시 필요 <br /> - 스와이프로 이동 제시 필요 <br /> - 옆으로 넘기는 걸 몰랐습니다. <br /> - 큐알코드 저장해서 어디에 사용할 수 있는지,,,? 안내 문구라도 있으면 좋을 듯. 뉴스 검색 시에 나오는 기준이 뭔지.... 검색한 키워드와 관련 없는 기사도 많이 보임. - 그리고 qr은 어떻게 사용하는 건가요 미구현인가요? - QR 코드의 의도를 잘 이해하지 못하겠어요. 당연히 앱설친줄 알았습니다.
   </details>
+    </details>
+    <details>
+      <summary>1차 피드백 반영</summary>
+      1차 사용자 피드백 결과 서비스 사용 방법과 QR code 의도에 관한 피드백이 가장 많았습니다. <br /> <br />
+      1. QR code 역시 기존에는 사용자가 QR code 다운로드하고 사용하는 기능이 미구현이였지만, 2차배포때는 다운받은 QR code를 입력하면 저장된 사용자의 관심분야를 불러와서 사용자가 다시 재입력 할 필요가 없습니다.
+      <br />
+      <img src="./README_image/1_result1.png" width="800" height="500" />
+      <br /><br />
+      2. 이를 반영하여 2차 배포 때 Intro Page 이후 메인 서비스를 이용하기 전에 TourExample을 만들어 사용자에게 서비스 이용방법을 알려주었습니다.
+      <br />
+      <img src="./README_image/1_result2.png" width="800" height="500" />
+    </details>
+    <br />
+    <details>
+      <summary>2차 배포 결과</summary>
+
+  - `사용자 수` : 2024년 4월 1일(월) ~ 2024년 4월 3일(수) - 176명 <br />
+    ![service](./README_image/2_member.png)
+
+  - `사용자 시청 기록`
+
+    - 총 10287개의 뉴스 시청 <br />
+    - 인당 약 32개 시청 <br />
+      ![service](./README_image/2_record.png)
+
+  - `설문 결과` : 총 62명 참가
+      <details>
+        <summary>1. 서비스를 이용한 환경이 무엇인가요?</summary>
+        - Mobile : 30명 <br />
+        - PC : 32명
+      </details>
+      <details>
+        <summary>2. 뉴스 기사의 카테고리가 다양한가요?</summary>
+        - 네, 다양합니다 : 44명 <br />
+        - 적당합니다 : 14명 <br />
+        - 부족한 것 같습니다. : 4명
+      </details>
+      <details>
+        <summary>3. 웹 사이트의 디자인은 괜찮나요?</summary>
+        - 매우 만족 : 39명 <br />
+        - 만족 : 16명 <br />
+        - 보통 : 7명 <br />
+        - 불만족 : 3명
+      </details>
+      <details>
+        <summary>4. 웹 사이트의 로딩 속도에 만족하십니까?</summary>
+        - 매우 만족 : 46명 <br />
+        - 만족 : 14명 <br />
+        - 보통 : 2명 <br /> 
+        - 불만족 : 4명
+      </details>
+      <details>
+        <summary>5. 웹 사이트 사용자 경험(페이지 이동의 편의성, 버튼 및 링크의 명확성 등)에 만족하십니까?</summary>
+         - 매우 만족 : 32명 <br /> 
+         - 만족 : 17명 <br /> 
+         - 보통 : 10명 <br /> 
+         - 불만족 : 3명 <br /> 
+         - 매우 불만족 : 1명
+      </details>
+      <details>
+        <summary>6. 개선할 점이 있다면 적어주세요.</summary>
+         - 사진 크기때문에 웹에서 css가 깨지네요 고쳐주세요 <br /> 
+         - 로그인 없어도 되고 편리해요 추가 기능으로 백업 있으면 좋을거같아용 <br/> 
+         - UiI가 굉장히 직관적이고 좋습니다 <br /> 
+         - 없어요 그냥 완벽 <br />
+      </details>
+    </details>
+    <details>
+      <summary>2차 피드백 반영</summary>
+      2차 사용자의 설문 피드백을 반영하여 UI/UX를 수정하였습니다.  <br /> <br />
+
+    1. 일관된 UI를 제공하기 위해서 사율 비율 고정 <br />
+    2. 시청기록이 많아짐에 따라 시청기록 Pagination으로 성능 개선
+    </details>
+
+<br /><br />
+
+# 최적화 성능 개선
+
+<details>
+  <summary>1. Spring Test Code 작성</summary>
+  <img src="./README_image/spring_test_code.png" width="800" height="500" />
+
+```
+package com.ssafy.newstar.domain.article.controller;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+@SpringBootTest
+@AutoConfigureMockMvc(addFilters = true)
+class ArticleControllerTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @Test
+  void getArticles() throws Exception {
+    // given
+    // when
+    mockMvc.perform(get("/articles/{articleId}", 1)
+            .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb"))
+        // then
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json"))
+        .andExpect(jsonPath("$.statusCode").value(200))
+        .andExpect(jsonPath("$.statusName").value("OK"))
+        .andExpect(jsonPath("$.message").value("OK"));
+  }
+
+  @Test
+  void getArticlesByCategory() throws Exception {
+    // given
+    MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    params.add("bcategory", "100");
+    params.add("scategory", "");
+    params.add("size", "10");
+    params.add("page", "0");
+    // when
+    mockMvc.perform(get("/articles/category")
+            .header("X-User-Id", "feb91399-aaf3-40ef-856d-35e6ddf8befb")
+            .params(params))
+        // then
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json"))
+        .andExpect(jsonPath("$.statusCode").value(200))
+        .andExpect(jsonPath("$.statusName").value("OK"))
+        .andExpect(jsonPath("$.message").value("OK"));
+  }
+}
+```
+
 </details>
 <details>
-  <summary>1차 피드백 반영</summary>
-  1차 사용자 피드백 결과 서비스 사용 방법과 QR code 의도에 관한 피드백이 가장 많았습니다. <br /> <br />
-  1. QR code 역시 기존에는 사용자가 QR code 다운로드하고 사용하는 기능이 미구현이였지만, 2차배포때는 다운받은 QR code를 입력하면 저장된 사용자의 관심분야를 불러와서 사용자가 다시 재입력 할 필요가 없습니다.
-  <br />
-  <img src="./README_image/1_result1.png" width="800" height="500" />
-  <br /><br />
-  2. 이를 반영하여 2차 배포 때 Intro Page 이후 메인 서비스를 이용하기 전에 TourExample을 만들어 사용자에게 서비스 이용방법을 알려주었습니다.
-  <br />
-  <img src="./README_image/1_result2.png" width="800" height="500" />
+  <summary>2. Elastic Search를 활용한 검색 속도 향상</summary>
+  <img src="./README_image/elastic_search.png" width="800" height="500" />
 </details>
-<br />
 <details>
-  <summary>2차 피드백 결과</summary>
+  <summary>3. Redis 캐싱을 활용한 최적화</summary>
+  - 서비스를 이용하기 위해서는 유효한 PW 값이 필요하며, Filter에서 PW값을 검증하는 작업이 이루어진다. <br />
+  - MySQL의 부하를 줄이고 요청을 빠르게 처리하기 위해 Redis를 도입하였다.<br />
+  <img src="./README_image/mysql.png" width="800" height="500" />
+  <img src="./README_image/redis.png" width="800" height="500" />
 </details>
 
 <br /><br />
