@@ -44,10 +44,6 @@
 
 - Redis 3.2.3
 - MySQL 8.0
-- Kafka
-    - Kafka (wurstmeister) 2.8.1
-    - Zookeeper (wurstmeister) 3.4.13
-    - Kafka-ui 0.7.1
 
 ## 1.5. UI/UX
 
