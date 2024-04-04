@@ -23,6 +23,8 @@ services:
         ports:
           - 8001:8000
         restart: always
+        env_file:
+          - /env/.env
         environment:
           TZ: Asia/Seoul
 networks:
