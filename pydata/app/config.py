@@ -7,4 +7,7 @@ with open(os.path.dirname(os.path.abspath(__file__)) + '/application.yml', 'r') 
 
 class Config:
     DB = conf['DB']
+    if os.getenv("APP_ENV") == 'prod':
+        DB['user'] = os.getenv("MYSQL_USER_PROD_ID")
+        DB['password'] = os.getenv("MYSQL_USER_PROD_PASSWORD")
     ES = conf['ES']
