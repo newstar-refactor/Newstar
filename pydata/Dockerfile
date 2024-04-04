@@ -1,12 +1,22 @@
-FROM python:3.9.13
+FROM python:3.9.13-slim AS builder
 
-WORKDIR /app/
+RUN apt-get update && \
+    apt-get install git -y
 
-COPY . .
+RUN python -m venv /venv
 
-RUN pip install --upgrade pip
+WORKDIR /code
 
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+
+RUN /venv/bin/pip install -r requirements.txt
+
+FROM python:3.9.13-slim
+
+COPY --from=builder /venv/ /venv/
+
+COPY app /app
+ENV PATH=/venv/bin:$PATH
 
 RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN echo Asia/Seoul > /etc/timezone
