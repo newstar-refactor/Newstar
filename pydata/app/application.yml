@@ -1,18 +1,20 @@
 dev:
-    DB:
-        user: 'newstar'
-        password: 'newstar'
-        host: 'localhost'
-        port: 3306
-        database: 'newstar'
-    ES:
-        host: 'localhost:9200'
-    TEST:
-        member_pw: 'feb91399-aaf3-40ef-856d-35e6ddf8befb'
+  DB:
+    user: "newstar"
+    password: "newstar"
+    host: "localhost"
+    port: 3306
+    database: "newstar"
+  ES:
+    host: "localhost:9200"
+  TEST:
+    member_pw: "feb91399-aaf3-40ef-856d-35e6ddf8befb"
 prod:
-    DB:
-        host: 'mysql'
-        port: 3306
-        database: 'newstar'
-    ES:
-        host: 'elastic:9200'
+  DB:
+    user: "newstar"
+    password: "newstar!!"
+    host: "mysql"
+    port: 3306
+    database: "newstar"
+  ES:
+    host: "elastic:9200"
