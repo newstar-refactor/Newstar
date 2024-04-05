@@ -397,6 +397,9 @@ class ArticleControllerTest {
 
 <!-- ![branch_graph](./README_image/burndown_chart.PNG) -->
 
+개발 단계와 Domain을 분리하여 에픽을 설정하여, 애자일 형식 개발을 진행했습니다.
+![jira.png](README_image%2Fjira.png)
+
 ### Notion으로 협업하기
 
 회의록, 스크럼 회의, 발표 정리, 문서 정리, 기획서 등 자료들을 Notion을 통해 작성 및 관리하였습니다.
