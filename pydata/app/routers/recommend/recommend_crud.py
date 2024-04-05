@@ -9,7 +9,9 @@ from app.database import engine
 import pandas as pd
 
 def get_news_all(db : Session):
+    print("잘되냐?")
     news_df = pd.read_sql("SELECT * FROM article", con = engine)
+    print("엉 잘 돼!")
     return news_df
 
 def get_recommend_info(db: Session, li):
