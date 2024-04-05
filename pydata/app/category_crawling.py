@@ -116,7 +116,7 @@ def do_crawling():
         # 이중포문 빠져나오기
         if (flag == False):
           break
-
+  print(resultList)
   df = pandas.DataFrame(resultList)
   df.to_csv('category_articles.csv')
   df.to_excel('category_articles.xlsx')
