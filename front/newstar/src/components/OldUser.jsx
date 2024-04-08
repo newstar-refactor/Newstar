@@ -33,7 +33,7 @@ const GetFileButton = styled.label`
   color: white;
   padding: 7px 10px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 11px;
   cursor: pointer;
 `
 
