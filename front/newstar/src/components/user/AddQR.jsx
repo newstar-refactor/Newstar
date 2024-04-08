@@ -56,7 +56,7 @@ export default function AddQR() {
     <div>
       <h2>내정보 불러오기 </h2>
       <FileContainer>
-        <label className="input-file-button" htmlFor="input-file">
+        <label style={{fontSize: "12px" }} className="input-file-button" htmlFor="input-file">
           파일선택
         </label>
         <input type="file" id="input-file" style={{display:"none"}} onChange={handleReadQr}/>
