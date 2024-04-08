@@ -31,7 +31,7 @@ const FileContainer = styled.div`
 const GetFileButton = styled.label`
   background-color: rgb(138, 192, 56, 0.7);
   color: white;
-  padding: 7px 10px;
+  padding: 7px 7px;
   border-radius: 5px;
   font-size: 11px;
   cursor: pointer;
@@ -131,7 +131,7 @@ function AddQR() {
         <InputCode value={qrText} placeholder="첨부파일" />
         <GetFileButton className="input-file-button" htmlFor="input-file">
         <input type="file" id="input-file" style={{ display:"none" }} onChange={handleReadQr}/>
-          파일선택
+          선택
         </GetFileButton>
       </FileContainer>
         <StartButton onClick={registKey}>등록하고 시작하기</StartButton>
