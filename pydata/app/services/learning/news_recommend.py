@@ -29,8 +29,7 @@ def recomm(like_list, maxsize, views):
     views_set = set(views)
     filtered_doc_ids = [doc_id for doc_id in doc_ids if doc_id not in views_set]
 
-    # 최대 500개만 뽑기
-    filtered_doc_ids = filtered_doc_ids[ : 500]
+    filtered_doc_ids = filtered_doc_ids[100: 600]
 
     return filtered_doc_ids
 
@@ -43,7 +42,7 @@ def linear_weight(id, max_id):
     return id / max_id
 
 # 지수 스케일 가중치 계산 함수
-def exp_weight(id, max_id,factor=7):
+def exp_weight(id, max_id,factor=4):
     normalized_value = id / max_id
     # 정규화된 값에 factor를 곱한 후, 이 값을 지수 함수에 적용합니다.
     # factor 값은 가중치 증가율을 조절.
