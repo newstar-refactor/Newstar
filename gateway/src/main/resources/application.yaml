@@ -11,6 +11,10 @@ spring:
           uri: http://www.naver.com
           predicates:
             - Path=/test/**
+          filters:
+            - name: MemberFilter
+              args:
+                baseMessage: test filter 입니다.
 
 logging:
   level:
