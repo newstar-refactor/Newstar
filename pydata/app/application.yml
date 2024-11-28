@@ -1,7 +1,7 @@
 dev:
   DB:
-    user: "newstar"
-    password: "newstar"
+    user: "root"
+    password: "root"
     host: "localhost"
     port: 3306
     database: "newstar"
