@@ -1,0 +1,18 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: test
+          uri: http://www.naver.com
+          predicates:
+            - Path=/test/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
