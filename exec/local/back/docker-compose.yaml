@@ -1,0 +1,48 @@
+services:
+    mysql:
+        container_name: mysql
+        image: mysql:8.0
+        restart: always
+        ports:
+          - 3306:3306
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          TZ: Asia/Seoul
+          LC_ALL: C.UTF-8
+        command:
+          - --character-set-server=utf8mb4
+          - --collation-server=utf8mb4_unicode_ci
+        volumes:
+          - /mysql/:/var/lib/mysql
+          - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
+
+    redis:
+        container_name: redis
+        image: redis:latest
+        restart: always
+        ports:
+          - 6397:6397
+        environment:
+          TZ: Asia/Seoul
+        labels:
+          - "name=redis"
+          - "mode=standalone"
+
+    elastic:
+        container_name: elastic
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+        restart: always
+        ports:
+          - 9200:9200
+        environment:
+          - discovery.type=single-node
+    kibana:
+        container_name: kibana
+        image: docker.elastic.co/kibana/kibana:7.10.1
+        restart: always
+        ports:
+          - 5601:5601
+        environment:
+          ELASTICSEARCH_URL: http://elastic:9200
+          ELASTICSEARCH_HOSTS: http://elastic:9200
+          privileged: true
