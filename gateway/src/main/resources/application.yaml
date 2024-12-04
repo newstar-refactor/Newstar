@@ -16,15 +16,32 @@ spring:
               args:
                 baseMessage: test filter 입니다.
 
-  jpa:
-    hibernate:
-      ddl-auto: none
-
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/newstar?serverTimezone=Asia/Seoul
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/newstar
     username: root
     password: root
+    pool:
+      initial-size: 10
+      max-size: 10
+      max-life-time: 30m
+      max-create-connection-time: 3s
+  sql:
+    init:
+      platform: mysql  # 초기 스크립트 실행용 (Optional)
+  logging:
+    level:
+      org.springframework.r2dbc.core: DEBUG  # R2DBC SQL 쿼리 로깅
+
+
+
+  #  jpa:
+  #    hibernate:
+  #      ddl-auto: none
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/newstar?serverTimezone=Asia/Seoul
+#    username: root
+#    password: root
 
   data:
     redis:

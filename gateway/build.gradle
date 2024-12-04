@@ -24,7 +24,10 @@ ext {
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // r2dbc 사용
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'dev.miku:r2dbc-mysql:0.8.2.RELEASE' // 버전 추가
+
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -33,7 +36,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    runtimeOnly 'com.mysql:mysql-connector-j'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    runtimeOnly 'com.mysql:mysql-connector-j'
 }
 
 dependencyManagement {
