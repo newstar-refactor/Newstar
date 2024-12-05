@@ -51,5 +51,6 @@ spring:
 
 logging:
   level:
+    dev.miku.r2dbc.mysql: DEBUG
+    reactor.netty: DEBUG
     org.springframework.cloud.gateway: DEBUG
-
